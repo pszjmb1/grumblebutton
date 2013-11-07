@@ -16,7 +16,6 @@ if (Issues.find().count() === 0) {
 		shortdesc: 'temperature too cold',
 		details: 'Three of the radiators don\'t seem to be working.',
 		anonymous: 1,
-		uid: 'abcd1234',
 		user: '00002368'
 	});
 
@@ -32,7 +31,6 @@ if (Issues.find().count() === 0) {
 		shortdesc: 'dirty toilet',
 		details: 'Men\'s toilet 2 is dirty.',
 		anonymous: 1,
-		uid: 'defg4567',
 		user: '00003351'
 	});
 
@@ -47,7 +45,6 @@ if (Issues.find().count() === 0) {
 		shortdesc: 'missing equipment',
 		details: 'Cabinet 3 needs restocking.',
 		anonymous: 1,
-		uid: 'hijk3526',
 		user: '00008363'
 	});
 }
