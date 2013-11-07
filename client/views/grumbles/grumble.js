@@ -14,7 +14,11 @@ Template.grumble.events({
 			details: $(e.target).find('[name=details]').val(),
 			anonymous: $(e.target).find('[name=anonymous]').val(),
 		}
-		issue._id = Issues.insert(issue);
-		Meteor.Router.to('issuePage', issue);
+
+		Meteor.call('grumble', issue, function(error, id) {
+			if (error)
+				return alert(error.reason);
+			Meteor.Router.to('issuePage', id);
+		});
 	}
 });
