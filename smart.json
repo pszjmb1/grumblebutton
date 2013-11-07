@@ -1,5 +1,7 @@
 {
   "packages": {
-    "router": {}
+    "router": {},
+    "accounts-ui-bootstrap-dropdown": {},
+    "spin": {}
   }
 }
