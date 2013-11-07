@@ -1,6 +1,6 @@
-/*From Discover Meteor*/
+/*Based on CSS from Discover Meteor book*/
 
-grid-block, .main, .post, .comments li, .comment-form {
+grid-block, .main, .issue, .comments li, .comment-form {
 background: #fff;
 border-radius: 3px;
 padding: 10px;
@@ -16,7 +16,7 @@ color: #666666;
 border-radius: 0px 0px 3px 3px;
 }
 #spinner { height: 300px }
-.post {
+.issue {
 *zoom: 1;
 -webkit-transition: all 300ms 0ms;
 -webkit-transition-delay: ease-in;
@@ -26,35 +26,35 @@ transition: all 300ms 0ms ease-in;
 position: relative;
 opacity: 1;
 }
-.post:before, .post:after {
+.issue:before, .issue:after {
 content: "";
 display: table;
 }
-.post:after { clear: both }
-.post.invisible { opacity: 0 }
-.post .upvote {
+.issue:after { clear: both }
+.issue.invisible { opacity: 0 }
+.issue .upvote {
 display: block;
 margin: 7px 12px 0 0;
 float: left;
 }
-.post .post-content { float: left }
-.post .post-content h3 {
+.issue .issue-content { float: left }
+.issue .issue-content h3 {
 margin: 0;
 line-height: 1.4;
 font-size: 18px;
 }
-.post .post-content h3 a {
+.issue .issue-content h3 a {
 display: inline-block;
 margin-right: 5px;
 }
-.post .post-content h3 span {
+.issue .issue-content h3 span {
 font-weight: normal;
 font-size: 14px;
 display: inline-block;
 color: #aaaaaa;
 }
-.post .post-content p { margin: 0 }
-.post .discuss {
+.issue .issue-content p { margin: 0 }
+.issue .discuss {
 display: block;
 float: right;
 margin-top: 7px;
