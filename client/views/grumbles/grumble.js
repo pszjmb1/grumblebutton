@@ -17,8 +17,9 @@ Template.grumble.events({
 
 		Meteor.call('grumble', issue, function(error, id) {
 			if (error)
-				return alert(error.reason);
-			Meteor.Router.to('issuePage', id);
+				throwError(error.reason);
+			else
+				Meteor.Router.to('issuePage', id);
 		});
 	}
 });
