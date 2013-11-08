@@ -1,5 +1,5 @@
 /**
- * Template helper or issues
+ * Template helper for issues
  */
 
 Template.issues.helpers({

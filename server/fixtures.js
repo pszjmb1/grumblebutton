@@ -34,8 +34,8 @@ if (Issues.find().count() === 0) {
 		details: 'Three of the radiators don\'t seem to be working.',
 		anonymous: 1,
 		user: u1._id,
-		submitted: now * 3600 * 1000,
-		commentsCount: 2
+		submitted: now + 1 * 3600 * 1000,
+		commentsCount: 2,
 	});
 	Comments.insert({
 		issueId: issueId,
@@ -80,7 +80,9 @@ if (Issues.find().count() === 0) {
 		anonymous: 1,
 		user: u1._id,
 		submitted: now - 2 * 3600 * 1000,
-		commentsCount: 0
+		commentsCount: 0,
+		closed: now - 1 * 3600 * 1000,
+		closer: u2._id
 	});
 
 	for (var i = 3; i < 100; i++) {
