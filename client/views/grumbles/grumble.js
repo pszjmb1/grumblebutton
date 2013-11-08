@@ -23,3 +23,17 @@ Template.grumble.events({
 		});
 	}
 });
+
+Template.grumble.helpers({
+	date: function() {
+		var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth() + 1;
+    var y = date.getFullYear();
+    return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+	},
+	time: function(){
+		var date = new Date();
+		return '' + date.getHours() + ':' +date.getMinutes();
+	}
+});
