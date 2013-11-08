@@ -9,3 +9,23 @@
 		<a href="{{issuePagePath this}}" class="details btn">See Details</a>
 	</div>
 </template>
+
+<template name="fullIssue">
+	<div class="issue">
+		<div class="issue-content">
+			<h3>
+				{{shortdesc}}
+				<span>{{category}}</span> <span>{{subcategory}}</span>
+			</h3>
+			<b>Dept:</b>{{dept}} <b>Unit:</b> <span>{{unit}}</span>
+			<b>Room:</b>b> <span>{{room}}</span>
+			<br/>
+			<div>
+				{{details}}
+			</div>
+		</div>
+	</div>
+	<h4>
+		<a href="{{issuePagePath this}}">{{commentsCount}} comments</a>
+	</h4>
+</template>
