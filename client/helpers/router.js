@@ -3,6 +3,7 @@
  */
 Meteor.Router.add({
 	'/': 'issues',
+	'/issues': 'issues',
 	'/issues/:_id': {
 		to: 'issuePage',
 		and: function(id) { Session.set('currentIssueId', id); }
