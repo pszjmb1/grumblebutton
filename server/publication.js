@@ -5,8 +5,12 @@
 /**
  * Publish pagination limited number of issues
  */
-Meteor.publish('issues', function(limit) {
+Meteor.publish('newIssues', function(limit) {
 	return Issues.find({}, {sort: {submitted: -1}, limit: limit});
+});
+
+Meteor.publish('singleIssue', function(id) {
+	return id && Posts.find(id);
 });
 
 /**

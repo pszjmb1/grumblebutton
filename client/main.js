@@ -2,9 +2,11 @@
  * Main client subscription rules
  */
 
-issuesHandle = Meteor.subscribeWithPagination('issues',10);
+issuesHandle = Meteor.subscribeWithPagination('newIssues',10);
 
-// Comments subscription reacts when the current issue changes.
+// Single issue and Comments subscription reacts when the current issue
+// changes.
 Deps.autorun(function() {
+	Meteor.subscribe('singleIssue', Session.get('currentIssueId'));
 	Meteor.subscribe('comments', Session.get('currentIssueId'));
 });
