@@ -10,7 +10,7 @@ Meteor.publish('newIssues', function(limit) {
 });
 
 Meteor.publish('singleIssue', function(id) {
-	return id && Posts.find(id);
+	return id && Issues.find(id);
 });
 
 /**

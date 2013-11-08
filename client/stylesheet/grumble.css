@@ -95,3 +95,18 @@ margin-bottom: 10px;
 text-decoration: none;
 background: rgba(0, 0, 0, 0.1);
 }
+
+/*JB additions*/
+.container,
+  .navbar-static-top .container,
+  .navbar-fixed-top .container,
+  .navbar-fixed-bottom .container {
+    width: 98%;
+  }
+.navbar {
+	margin-top: 0.5%;
+}
+table {
+    border-spacing: 5px;
+    border-collapse: separate;
+}
