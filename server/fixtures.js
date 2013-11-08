@@ -34,19 +34,19 @@ if (Issues.find().count() === 0) {
 		details: 'Three of the radiators don\'t seem to be working.',
 		anonymous: 1,
 		user: u1._id,
-		submitted: now - 7 * 3600 * 1000,
+		submitted: now * 3600 * 1000,
 		commentsCount: 2
 	});
 	Comments.insert({
 		issueId: issueId,
 		userId: u2._id,
-		submitted: now - 5 * 3600 * 1000,
+		submitted: now + 3 * 3600 * 1000,
 		body: 'Maintenance has been alerted and these will be fixed this afternoon.'
 	});
 	Comments.insert({
 		issueId: issueId,
 		userId: u1._id,
-		submitted: now - 3 * 3600 * 1000,
+		submitted: now + 5 * 3600 * 1000,
 		body: 'Great!'
 	});
 
@@ -63,7 +63,7 @@ if (Issues.find().count() === 0) {
 		details: 'Men\'s toilet 2 is dirty.',
 		anonymous: 1,
 		user: u3._id,
-		submitted: now - 12 * 3600 * 1000,
+		submitted: now - 1 * 3600 * 1000,
 		commentsCount: 0
 	});
 
@@ -79,7 +79,25 @@ if (Issues.find().count() === 0) {
 		details: 'Cabinet 3 needs restocking.',
 		anonymous: 1,
 		user: u1._id,
-		submitted: now - 16 * 3600 * 1000,
+		submitted: now - 2 * 3600 * 1000,
 		commentsCount: 0
 	});
+
+	for (var i = 3; i < 100; i++) {
+		Issues.insert({
+			date: '01/01/2014',
+			time: '19:53',
+			dept: 'Lorem ipsum',
+			room: i,
+			urgency: 'high',
+			category: 'Lorem ipsum',
+			subcategory: 'Lorem ipsum',
+			shortdesc: 'test issue ' + i,
+			details: 'Lorem ipsum.',
+			anonymous: 1,
+			user: u1._id,
+			submitted: now - i * 3600 * 1000,
+			commentsCount: 0
+		});
+	}
 }

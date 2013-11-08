@@ -2,7 +2,7 @@
  * Main client subscription rules
  */
 
-Meteor.subscribe('issues');
+issuesHandle = Meteor.subscribeWithPagination('issues',10);
 
 // Comments subscription reacts when the current issue changes.
 Deps.autorun(function() {

@@ -3,10 +3,10 @@
  */
 
 /**
- * For now publish all issue data
+ * Publish pagination limited number of issues
  */
-Meteor.publish('issues', function() {
-	return Issues.find();
+Meteor.publish('issues', function(limit) {
+	return Issues.find({}, {sort: {submitted: -1}, limit: limit});
 });
 
 /**
