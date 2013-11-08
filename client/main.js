@@ -3,4 +3,8 @@
  */
 
 Meteor.subscribe('issues');
-Meteor.subscribe('comments');
+
+// Comments subscription reacts when the current issue changes.
+Deps.autorun(function() {
+	Meteor.subscribe('comments', Session.get('currentIssueId'));
+});

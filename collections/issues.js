@@ -6,7 +6,7 @@
 Issues = new Meteor.Collection('issues');
 
 /**
- * Server side function called by client to update the collection.
+ * Server side function called by client to update Issues.
  */
 Meteor.methods({
 	grumble:function(grumbleAttribs) {
@@ -45,7 +45,8 @@ Meteor.methods({
 			'category', 'subcategory', 'shortdesc', 'anonymous'
 			), {
 					userId: user._id,
-					submitted: new Date().getTime()
+					submitted: new Date().getTime(),
+					commentsCount: 0
 		});
 
 		var issueId = Issues.insert(issue);

@@ -23,6 +23,9 @@ Meteor.methods({
 			submitted: new Date().getTime()
 		});
 
+		// update the issue with the number of comments
+		Issues.update(comment.issueId, {$inc: {commentsCount: 1}});
+
 		return Comments.insert(comment);
 	}
 });

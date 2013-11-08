@@ -10,8 +10,8 @@ Meteor.publish('issues', function() {
 });
 
 /**
- * For now publish all comment data
+ * Publish comment data for the relevant issue
  */
-Meteor.publish('comments', function() {
-	return Comments.find();
+Meteor.publish('comments', function(issueId) {
+	return Comments.find({issueId: issueId});
 });

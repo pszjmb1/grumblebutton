@@ -34,7 +34,8 @@ if (Issues.find().count() === 0) {
 		details: 'Three of the radiators don\'t seem to be working.',
 		anonymous: 1,
 		user: u1._id,
-		submitted: now - 7 * 3600 * 1000
+		submitted: now - 7 * 3600 * 1000,
+		commentsCount: 2
 	});
 	Comments.insert({
 		issueId: issueId,
@@ -62,7 +63,8 @@ if (Issues.find().count() === 0) {
 		details: 'Men\'s toilet 2 is dirty.',
 		anonymous: 1,
 		user: u3._id,
-		submitted: now - 12 * 3600 * 1000
+		submitted: now - 12 * 3600 * 1000,
+		commentsCount: 0
 	});
 
 	Issues.insert({
@@ -77,6 +79,7 @@ if (Issues.find().count() === 0) {
 		details: 'Cabinet 3 needs restocking.',
 		anonymous: 1,
 		user: u1._id,
-		submitted: now - 16 * 3600 * 1000
+		submitted: now - 16 * 3600 * 1000,
+		commentsCount: 0
 	});
 }
