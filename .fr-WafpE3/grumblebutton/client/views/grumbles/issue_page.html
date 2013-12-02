@@ -1,0 +1,12 @@
+<template name="issuePage">
+	{{#with currentIssue}}
+		{{> fullIssue}}
+
+		<ul class="comments">
+			{{#each comments}}
+				{{> comment}}
+			{{/each}}
+		</ul>
+		{{> commentSubmit}}
+	{{/with}}
+</template>

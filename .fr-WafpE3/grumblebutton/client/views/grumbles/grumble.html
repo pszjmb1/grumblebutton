@@ -1,0 +1,73 @@
+<template name="grumble">
+	<form class="main">
+		<fieldset>
+    	<legend>New Grumble</legend>
+			<table border="0">
+				<tr>
+					<td>
+						<label class="control-label" for="shortdesc">Description</label>
+						<input name="shortdesc" type="text" value="" placeholder="Radiator not working"/>
+					</td>
+					<td>
+						<label class="control-label" for="date">Date</label>
+						<input name="date" type="date" value="{{date}}" />
+					</td>
+					<td>
+						<label class="control-label" for="time">Time</label>
+						<input name="time" type="time" value="{{time}}" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="control-label" for="dept">Department/Building</label>
+						<input name="dept" type="text" value="" placeholder="Physiotherapy"/>
+					</td>
+					<td>
+						<label class="control-label" for="unit">Unit</label>
+						<input name="unit" type="text" value="" placeholder="Occupational Therapy"/>
+					</td>
+					<td>
+						<label class="control-label" for="room">Room</label>
+						<input name="room" type="text" value="" placeholder="P2"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="control-label" for="urgency">Urgency</label>
+						<select name="urgency" >
+							<option value="high">High</option>
+							<option value="medium">Medium</option>
+							<option value="low">Low</option>
+						</select>
+					</td>
+					<td>
+						<label class="control-label" for="category">Category</label>
+						<input name="category" type="text" value="" placeholder="Utility"/>
+					</td>
+					<td>
+						<label class="control-label" for="subcategory">Subcategory</label>
+						<input name="subcategory" type="text" value="" placeholder="Heating"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="control-label" for="details">Details</label>
+						<textarea name="details" value="" placeholder="Broken radiator next to vending machine."/>
+					</td>
+					<td>
+						<label class="control-label" for="anonymous">Anonymity</label>
+						<select name="anonymous" >
+							<option value="anonymous">Anonymous</option>
+							<option value="identifiable">Identifiable</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<div class="control-group">
+				<div class="controls">
+					<input type="submit" value="Submit" class="btn btn-primary"/>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+</template>
