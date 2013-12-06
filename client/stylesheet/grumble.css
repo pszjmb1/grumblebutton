@@ -111,3 +111,28 @@ table {
     border-spacing: 1%;
     border-collapse: separate;
 }
+input[type=text],input[type=date],input[type=time]{
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  display: block;
+  margin: 0;
+  width:90%;
+  height: 40px;
+  line-height: 40px;
+  border: 1% solid;
+  font-size: large;
+}
+input[type=submit] {
+  font-size: large;
+  height: 40px;
+}
+select  {
+  height: 40px;
+  line-height: 40px;
+  font-size: large;
+}
+label  {
+  font-size: large;
+  font-weight: bold;
+  margin-top: 10%;
+}
