@@ -8,7 +8,8 @@ Meteor.Router.add({
 		to: 'issuePage',
 		and: function(id) { Session.set('currentIssueId', id); }
 	},
-	'/grumble': 'grumble'
+	'/grumble': 'grumble',
+	'/grumble2': 'grumble2'
 });
 
 Meteor.Router.filters({
