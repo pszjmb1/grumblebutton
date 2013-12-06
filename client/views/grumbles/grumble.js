@@ -9,7 +9,6 @@ Template.grumble.events({
 			room: $(e.target).find('[name=room]').val(),
 			urgency: $(e.target).find('[name=urgency]').val(),
 			category: $(e.target).find('[name=category]').val(),
-			subcategory: $(e.target).find('[name=subcategory]').val(),
 			shortdesc: $(e.target).find('[name=shortdesc]').val(),
 			details: $(e.target).find('[name=details]').val(),
 			anonymous: $(e.target).find('[name=anonymous]').val(),
@@ -34,6 +33,8 @@ Template.grumble.helpers({
 	},
 	time: function(){
 		var date = new Date();
-		return '' + date.getHours() + ':' +date.getMinutes();
+		var hours = date.getHours();
+		var min = date.getMinutes();
+		return '' + (hours<=9 ? '0' + hours : hours) + ':' + (min<=9 ? '0' + min : min);
 	}
 });

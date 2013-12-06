@@ -17,24 +17,24 @@ Meteor.methods({
 		// ensure the grumble has correct field values
 		if (!grumbleAttribs.shortdesc)
 			throw new Meteor.Error(422, 'Please fill in the short description.');
-		if (!grumbleAttribs.date)
-			throw new Meteor.Error(422, 'Please fill in the date.');
-		if (!grumbleAttribs.time)
-			throw new Meteor.Error(422, 'Please fill in the time.');
-		if (!grumbleAttribs.dept)
-			throw new Meteor.Error(422, 'Please fill in the department.');
-		if (!grumbleAttribs.unit)
-			throw new Meteor.Error(422, 'Please fill in the unit.');
-		if (!grumbleAttribs.room)
-			throw new Meteor.Error(422, 'Please fill in the room.');
-		if (!grumbleAttribs.urgency)
-			throw new Meteor.Error(422, 'Please fill in the urgency.');
-		if (!grumbleAttribs.category)
-			throw new Meteor.Error(422, 'Please fill in the category.');
-		if (!grumbleAttribs.subcategory)
-			throw new Meteor.Error(422, 'Please fill in the subcategory.');
-		if (!grumbleAttribs.anonymous)
-			throw new Meteor.Error(422, 'Please fill in the anonymity requirement.');
+		//if (!grumbleAttribs.date)
+		//	throw new Meteor.Error(422, 'Please fill in the date.');
+		//if (!grumbleAttribs.time)
+		//	throw new Meteor.Error(422, 'Please fill in the time.');
+		//if (!grumbleAttribs.dept)
+		//	throw new Meteor.Error(422, 'Please fill in the department.');
+		//if (!grumbleAttribs.unit)
+		//	throw new Meteor.Error(422, 'Please fill in the unit.');
+		//if (!grumbleAttribs.room)
+		//	throw new Meteor.Error(422, 'Please fill in the room.');
+		//if (!grumbleAttribs.urgency)
+		//	throw new Meteor.Error(422, 'Please fill in the urgency.');
+		//if (!grumbleAttribs.category)
+		//	throw new Meteor.Error(422, 'Please fill in the category.');
+		//if (!grumbleAttribs.subcategory)
+		//	throw new Meteor.Error(422, 'Please fill in the subcategory.');
+		//if (!grumbleAttribs.anonymous)
+		//	throw new Meteor.Error(422, 'Please fill in the anonymity requirement.');
 		// Add additional rules ...
 
 		// pick out the whitelisted keys
@@ -42,7 +42,7 @@ Meteor.methods({
 			_.pick(grumbleAttribs,
 			'date', 'time', 'dept',
 			'unit', 'room', 'urgency',
-			'category', 'subcategory', 'shortdesc', 'anonymous'
+			'category', 'shortdesc', 'anonymous'
 			), {
 					userId: user._id,
 					submitted: new Date().getTime(),
