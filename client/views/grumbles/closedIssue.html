@@ -1,0 +1,15 @@
+<template name="closedIssue">	
+	<div class="closedIssue" >
+		<div class="destroy"></div>
+			<div class="closedIssue-content">
+				<!-- <input class="check" name="markdone" type="checkbox" {{{done_checkbox}}} /> -->
+        			<h3>{{shortdesc}}- <span>{{dept}}</span> <span>{{unit}}</span> <span>{{room}}</span>
+        			<input type="button" value="Reopen" id="submit" class="det btn"></h3>
+					<p>
+						<a href="{{closedIssuePagePath this}}">{{commentsCount}} comments</a>
+					</p>
+				</div>
+				<a href="{{closedIssuePagePath this}}" class="details btn">See Details</a>
+			</div>
+	</div>
+</template>
