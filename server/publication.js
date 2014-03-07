@@ -19,3 +19,17 @@ Meteor.publish('singleIssue', function(id) {
 Meteor.publish('comments', function(issueId) {
 	return Comments.find({issueId: issueId});
 });
+
+Meteor.publish('notifications', function() {
+	return Notifications.find({userId: this.userId});
+});
+
+// To notify using emailid
+Meteor.publish('managers', function() {
+	return Managers.find();
+});
+
+Meteor.publish('closedIssues', function() {
+	return ClosedIssues.find();
+});
+

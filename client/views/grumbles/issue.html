@@ -1,21 +1,28 @@
-<template name="issue">
-	<div class="issue">
-		<div class="issue-content">
-			<h3>{{shortdesc}} - <span>{{dept}}</span> <span>{{unit}}</span> <span>{{room}}</span></h3>
-			<p>
-				<a href="{{issuePagePath this}}">{{commentsCount}} comments</a>
-			</p>
-		</div>
-		<a href="{{issuePagePath this}}" class="details btn">See Details</a>
+
+
+<template name="issue">	
+	<div class="issue" {{done_class}}>
+		<div class="destroy"></div>
+			<div class="issue-content">
+				<input class="check" name="markdone" type="checkbox" {{{done_checkbox}}} />
+        			<h3>{{shortdesc}}- <span>{{dept}}</span> <span>{{unit}}</span> <span>{{room}}</span></h3>
+					<p>
+						<a href="{{issuePagePath this}}">{{commentsCount}} comments</a>
+					</p>
+				</div>
+				<a href="{{issuePagePath this}}" class="details btn">See Details</a>
+			</div>
 	</div>
 </template>
+
+
 
 <template name="fullIssue">
 	<div class="issue">
 		<div class="issue-content">
 			<h3>
-				{{shortdesc}}
-				<span>{{category}}</span> 
+				{{shortdesc}} 
+				<span>submitted by {{author}}<!-- in {{category}}--></span> 
 			</h3>
 			<b>Dept:</b>{{dept}} <b>Unit:</b> <span>{{unit}}</span>
 			<b>Room:</b> <span>{{room}}</span>

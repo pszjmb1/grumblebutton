@@ -4,9 +4,14 @@
 Meteor.Router.add({
 	'/': 'issues',
 	'/issues': 'issues',
+	'/closedIssues': 'closedIssues',
 	'/issues/:_id': {
 		to: 'issuePage',
 		and: function(id) { Session.set('currentIssueId', id); }
+	},
+	'/closedIssues/:_id': {
+		to: 'closedIssuePage',
+		and: function(id) { Session.set('currentClosedIssueId', id); }
 	},
 	'/grumble': 'grumble',
 	'/grumble2': 'grumble2'

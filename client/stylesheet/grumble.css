@@ -5,7 +5,7 @@ body {
   color: #666666;
   font-size: large;
 }
-grid-block, .main, .issue, .comments li, .comment-form {
+grid-block, .main, .issue, .comments li, .comment-form, .closedIssue {
   background: #fff;
   border-radius: 1% ;
   padding: 0.5%;
@@ -18,7 +18,7 @@ grid-block, .main, .issue, .comments li, .comment-form {
   padding:0.5%;
 }
 #spinner { height: 300px }
-.issue {
+.issue, .closedIssue {
   *zoom: 1;
   -webkit-transition: all 300ms 0ms;
   -webkit-transition-delay: ease-in;
@@ -28,18 +28,51 @@ grid-block, .main, .issue, .comments li, .comment-form {
   position: relative;
   opacity: 1;
 }
-.issue:before, .issue:after {
+.issue:before, .issue:after, .closedIssue:after, .closedIssue:before {
   content: "";
   display: table;
 }
-.issue:after { clear: both }
-.issue.invisible { opacity: 0 }
+.issue:after, .closedIssue:after { clear: both }
+.issue.invisible, .closedIssue.invisible { opacity: 0 }
 .issue .upvote {
   display: block;
   margin: 1% 1% 0 0;
   float: left;
 }
+
 .issue .issue-content { float: left }
+
+.closedIssue .closedIssue-content { float: left }
+
+.closedIssue .closedIssue-content h3 {
+  margin: 0;
+  color: #880000;
+}
+.closedIssue .closedIssue-content h3 a {
+  display: inline-block;
+  margin-right: 1%;
+}
+
+.closedIssue .closedIssue-content h3 span {
+  font-weight: normal;
+  font-size: large;
+  /*display: inline-block;*/
+  color: #aaaaaa;
+}
+
+.closedIssue .closedIssue-content p { margin: 0 }
+.closedIssue  .closedIssue-content h3 .det {
+  display: block;
+  float: right;
+  margin-top: 1%;
+}
+
+.closedIssue .details {
+  display: block;
+  float: right;
+  margin-top: 1%;
+}
+
 .issue .issue-content h3 {
   margin: 0;
   color: #880000;
@@ -104,7 +137,7 @@ grid-block, .main, .issue, .comments li, .comment-form {
     width: 98%;
   }
 .navbar {
-	margin-top: 0.5%;
+  margin-top: 0.5%;
 }
 table, input[type=submit]{  
     margin-left: 2%;
@@ -141,3 +174,67 @@ label  {
 .btn{
   padding:1%;
 }
+
+
+
+
+.closedIssue .destroy {
+    cursor: pointer;
+    position: absolute;
+    left: 0.5px;
+    top: 15px;
+    height: 20px;
+    width: 20px;
+}
+
+.closedIssue .closedIssue-content {
+    margin-left: 30px;
+    height: 80%;
+    width: auto;
+    float: left;
+    padding-top: 18px;
+    line-height: 1;
+}
+
+ 
+.issue .destroy {
+    cursor: pointer;
+    position: absolute;
+    left: 1px;
+    top: 50px;
+    height: 20px;
+    width: 20px;
+}
+
+
+.closedIssue:hover .destroy {
+    background: url('/destroy.png') no-repeat 0 0;
+}
+
+.closedIssue .destroy:hover {
+    background-position: 10 10;
+}
+
+
+.issue:hover .destroy {
+    background: url('/destroy.png') no-repeat 0 0;
+}
+
+.issue .destroy:hover {
+    background-position: 10 10;
+}
+
+.issue .issue-content {
+    margin-left: 40px;
+    height: 100%;
+    width: auto;
+    float: left;
+    padding-top: 18px;
+    line-height: 1;
+}
+
+.issue .issue-content .check {
+    float: left;
+    width: 25px;
+}
+

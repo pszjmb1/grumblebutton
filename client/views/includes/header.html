@@ -6,7 +6,9 @@
 			</a>
 			<a class="details btn" href="{{grumblePath}}">Grumble</a>
 			{{#if currentUser}}
-				<a class="details btn" href="{{issuesPath}}">See Issues</a>
+					<a class="details btn" href="{{issuesPath}}">See Issues</a>
+					<a class="details btn" href="{{closedIssuesPath}}">Closed Issues</a>
+					{{> notifications}}
 			{{/if}}
 			<span class="nav pull-right">
 				<li>{{loginButtons}}</li>

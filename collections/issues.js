@@ -17,11 +17,13 @@ Meteor.methods({
 		// ensure the grumble has correct field values
 		if (!grumbleAttribs.shortdesc)
 			throw new Meteor.Error(422, 'Please fill in the short description.');
+		if (!grumbleAttribs.category)
+			throw new Meteor.Error(422, 'Please fill in the category.');	
 		//if (!grumbleAttribs.date)
 		//	throw new Meteor.Error(422, 'Please fill in the date.');
 		//if (!grumbleAttribs.time)
 		//	throw new Meteor.Error(422, 'Please fill in the time.');
-		//if (!grumbleAttribs.dept)
+		//  if (!grumbleAttribs.dept)
 		//	throw new Meteor.Error(422, 'Please fill in the department.');
 		//if (!grumbleAttribs.unit)
 		//	throw new Meteor.Error(422, 'Please fill in the unit.');
@@ -29,14 +31,23 @@ Meteor.methods({
 		//	throw new Meteor.Error(422, 'Please fill in the room.');
 		//if (!grumbleAttribs.urgency)
 		//	throw new Meteor.Error(422, 'Please fill in the urgency.');
-		//if (!grumbleAttribs.category)
-		//	throw new Meteor.Error(422, 'Please fill in the category.');
+		  
 		//if (!grumbleAttribs.subcategory)
 		//	throw new Meteor.Error(422, 'Please fill in the subcategory.');
-		//if (!grumbleAttribs.anonymous)
-		//	throw new Meteor.Error(422, 'Please fill in the anonymity requirement.');
+		  if (!grumbleAttribs.anonymous)
+			throw new Meteor.Error(422, 'Please fill in the anonymity requirement.');
 		// Add additional rules ...
+		var userName;
 
+		if(grumbleAttribs.anonymous == "anonymous")
+	        {
+		  	userName = '';	
+	        }
+		else
+		{
+		 	userName = user.username;
+		}
+		
 		// pick out the whitelisted keys
 		var issue = _.extend(
 			_.pick(grumbleAttribs,
@@ -45,6 +56,7 @@ Meteor.methods({
 			'category', 'shortdesc', 'anonymous'
 			), {
 					userId: user._id,
+					author: userName,
 					submitted: new Date().getTime(),
 					commentsCount: 0
 		});

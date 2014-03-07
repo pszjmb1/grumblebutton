@@ -20,12 +20,18 @@ Meteor.methods({
 
 		comment = _.extend(_.pick(commentAttributes, 'issueId', 'body'), {
 			userId: user._id,
+			author: user.username,
 			submitted: new Date().getTime()
 		});
 
 		// update the issue with the number of comments
 		Issues.update(comment.issueId, {$inc: {commentsCount: 1}});
 
-		return Comments.insert(comment);
-	}
+		// create the comment, save the id
+		comment._id = Comments.insert(comment);
+		// now create a notification, informing the user that there's been a comment
+		createCommentNotification(comment);
+		return comment._id;
+
+		}
 });

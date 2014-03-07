@@ -13,12 +13,33 @@ Template.grumble.events({
 			details: $(e.target).find('[name=details]').val(),
 			anonymous: $(e.target).find('[name=anonymous]').val(),
 		}
-
+		 
+		 var msg = document.querySelector('[name=shortdesc]').value;
+		 var category = document.querySelector('[name=category]').value; 
+         var fromEmail = 'grumblebutton@gmail.com';
+		 
+		 var managerName = Managers.findOne({category:category});
+		
+	       // alert(managerName.Name);
+	     var toEmail = Managers.findOne({category:category});
+	     var message = "Hello "+managerName.name+",\n\n"+msg+
+    ". Can you please look after the matter asap.\n\n"+
+       "The link for the concerned issue is :- http://localhost:3000/issues/";
+		//To call sendmessage() for sending email
+		var subject = "Notification of New Issue";
+		
 		Meteor.call('grumble', issue, function(error, id) {
 			if (error)
 				throwError(error.reason);
-			else
+			else {
+				Meteor.call('sendEmail',
+        	    		   	   toEmail.emailId,
+			                   fromEmail,
+			                   message,
+				           	   id,
+				           	   subject);
 				Meteor.Router.to('issuePage', id);
+			}
 		});
 	}
 });
