@@ -15,12 +15,12 @@ Template.closedIssue.events({
     ClosedIssues.remove(this._id);
 	}
 
- 'click #submit': function () {
+ /*'click #submit': function () {
  	//alert('before removing from closedIssues collection');
  	var id = ClosedIssues.findOne(this._id);
     ClosedIssues.remove(id);
     Issues.insert(id);
-	}
+	}*/
 });
    
 
