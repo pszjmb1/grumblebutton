@@ -40,12 +40,14 @@ Meteor.methods({
 		var userName;
 
 		if(grumbleAttribs.anonymous == "anonymous")
-	        {
+	    {
 		  	userName = '';	
-	        }
+		  	userPosted = user.username;
+	    }
 		else
 		{
 		 	userName = user.username;
+		 	userPosted = user.username;
 		}
 		
 		// pick out the whitelisted keys
@@ -57,6 +59,7 @@ Meteor.methods({
 			), {
 					userId: user._id,
 					author: userName,
+					postedUser:userPosted,
 					submitted: new Date().getTime(),
 					commentsCount: 0
 		});

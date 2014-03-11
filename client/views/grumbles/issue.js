@@ -131,53 +131,37 @@ Template.issue.events({
     },
 });
    
+// For getting user specific subscribed issues
 Template.issue.done_checkbox = function () {
 	
-	/*alert('inside done_checkbox');
-	var id =  Issues.findOne({issueId:this._id});
-	alert('before id');
-	if(id)
+	var a =  Issues.findOne(this._id);
+	var person =  a.subscribedUsers;
+	if(person && person.length)
 	{
-		var person = id.subscribedUsers;  
-		alert('before person');
-		if(person)
+		var j;
+		var ch='';
+		alert('user '+Meteor.user().username);
+		for(j= 0;j< person.length;j++)
 		{
-			alert('person -->'+person[0].username);
-			var count = person.length;
-			alert(count);
-			var j;
-			alert('before count');
-			if(count)
-			{
-				alert('before loop');
-				var ch='';
-				for(j= 0;j< count;j++)
-				{
-					alert(j);
-					alert('before comparison');
-					if(person[j].username == Meteor.user() && this.done)
-						{	
-							alert('returning values');
-							ch ="checked";
-							break;*/
-							return this.done?'checked="checked"':'';
-							/*
-						
-						}
-						
-				}
-				if(ch === 'checked')
-					return 'checked="checked"';
-				else		
-					return '';
+			alert(j);
+			alert('person '+person[j].username);
+			if(person[j].username === Meteor.user().username && this.done)
+			{	
+				ch ="checked";
+				alert('ch '+ch);
+				break; 
 			}
-			else
-				return '';
-			
 		}
-		else
-		return '';	
-	}*/
+		if(ch === 'checked')
+		{
+			return 'checked="checked"';
+		}
+		else		
+			return '';
+		
+	}
+	else
+		return '';
 
 };
 

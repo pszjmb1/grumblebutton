@@ -7,6 +7,7 @@ Template.issues.helpers({
 		return Issues.find({}, {sort: {submitted: -1},
 			limit: issuesHandle.limit()});
 	},
+	
 	// Determine if curent list of issues is ready
 	issuesReady: function() {
 		return !issuesHandle.loading();
@@ -19,9 +20,10 @@ Template.issues.helpers({
 });
 
 // Handle the load more event
+
 Template.issues.events({
 	'click .load-more': function(e) {
 		e.preventDefault();
 		issuesHandle.loadNextPage();
 	}
-});
+}); 

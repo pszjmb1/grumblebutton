@@ -4,7 +4,7 @@
 
 Template.closedIssues.helpers({
 	closedIssues: function() {
-		var i;
+		
 		
 		return ClosedIssues.find();
 	}	
