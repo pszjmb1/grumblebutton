@@ -3,9 +3,10 @@
  */
 
 Template.closedIssue.events({
+	/*
  'click .destroy': function () {
     ClosedIssues.remove(this._id);
-	},
+	}, */
 
  'click #gg': function () {
  	var id = ClosedIssues.findOne(this._id);

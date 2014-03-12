@@ -1,7 +1,6 @@
 /**
  * Template helpers for an issue
  */
-
 Template.issue.done_class = function () {
 	
   	return this.done ? 'done' : '';
@@ -124,31 +123,77 @@ Template.issue.events({
 				    this._id,
 				    subject);
 
-	alert('after sending email');
+//	alert('after sending email');
+//	alert('first time done value'+this.done);
     Issues.update(this._id, {$set: {done: !this.done}});
-    console.log('after updating done field');
-    Issues.update(this._id, {$addToSet: {subscribedUsers : Meteor.user()}});
-    },
+  //  alert('updating the done word '+this.done);
+   	Issues.update(this._id, {$addToSet: {subscribedUsers : Meteor.user()}});
+
+
+
+  /*  alert('before updating db, comparing the values'+this.done);
+    if(document.querySelector('.check:checked').checked)
+    {
+
+    	alert('adding subscriber name to db');
+    	alert('this.done '+ this.done);
+    	Issues.update(this._id, {$addToSet: {subscribedUsers : Meteor.user()}});
+    	alert('value updated to issue db in user subscription');	
+	}
+	else if(document.querySelector('.check:checked').checked === 'false') // if (this.done === 'true')
+	{
+		alert('while unsubscribing the issue');
+		alert('this.done '+ this.done);
+		//Issues.update(this._id, {$set: {done: !this.done}});
+		var a =  Issues.findOne(this._id);
+		var person =  a.subscribedUsers;
+		alert(person.length);
+		alert('value of done in unsubscription part'+ this.done);
+		if(person && person.length)
+		{
+			var j;
+			alert('before enetring loop in unsubscription part');
+			for(j= 0;j< person.length;j++)
+			{
+				alert(j);
+				alert('person '+person[j].username);
+				alert('id '+person[j]._id);
+				if(person[j].username === Meteor.user().username)
+				{	
+					
+					var personId=person[j]._id;
+					Issues.update(this._id,{$pull:{subscribedUsers:{_id:personId}}});
+		            break; 
+				}
+			}
+	
+		}
+	
+	}
+    */
+
+    }
 });
    
 // For getting user specific subscribed issues
 Template.issue.done_checkbox = function () {
 	
+	//alert('inside done_checkbox');
 	var a =  Issues.findOne(this._id);
 	var person =  a.subscribedUsers;
 	if(person && person.length)
 	{
 		var j;
 		var ch='';
-		alert('user '+Meteor.user().username);
+	//	alert('done_checkbox username '+Meteor.user().username);
 		for(j= 0;j< person.length;j++)
 		{
-			alert(j);
-			alert('person '+person[j].username);
-			if(person[j].username === Meteor.user().username && this.done)
+	//		alert(j);
+	//		alert('person '+person[j].username);
+			if(person[j].username === Meteor.user().username)
 			{	
 				ch ="checked";
-				alert('ch '+ch);
+	//			alert('value of ch that is checked'+ch);
 				break; 
 			}
 		}
