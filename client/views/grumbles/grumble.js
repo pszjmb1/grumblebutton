@@ -32,12 +32,12 @@ Template.grumble.events({
 			if (error)
 				throwError(error.reason);
 			else {
-				Meteor.call('sendEmail',
+			/*	Meteor.call('sendEmail',
         	    		   	   toEmail.emailId,
 			                   fromEmail,
 			                   message,
 				           	   id,
-				           	   subject);
+				           	   subject); */
 				Meteor.Router.to('issuePage', id);
 			}
 		});

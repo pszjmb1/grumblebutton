@@ -27,7 +27,7 @@ createCommentNotification = function(comment) {
 		var i;
 		for(i=0;i<subUsers.length;i++)
 		{
-			if(comment.userId !== subUsers[0].username)
+			if(comment.author !== subUsers[0].username)
 			{
 				console.log('entering values in notification Collection');
 				Notifications.insert({
@@ -53,7 +53,6 @@ createCommentNotification = function(comment) {
 	//var toEmail = Managers.findOne({category:category});  ** HARDCODED **
 	//var issueRaisedUser = Issues.findOne(this._id).postedUser;
 	var a = Issues.findOne({_id:issue._id});
-	//console.log('a-> '+a._id);
 	var issueManagerCategory = a.category;
 	var managerEmailId = Managers.findOne({category: issueManagerCategory}).emailId;
 	var managerName = Managers.findOne({category: issueManagerCategory}).name;
@@ -61,11 +60,11 @@ createCommentNotification = function(comment) {
     var managerMsg = "Hello "+ managerName +",\n\n"+
     	userName + ' has commented on the issue belonging to your category having issueId:- ';
 	var subject = 'Notification of comment on Issue';
-	Meteor.call('sendEmail',
+/*	Meteor.call('sendEmail',
         	    	managerEmailId,
 			        fromEmail,
 			        managerMsg,
 				    this._id,
-				    subject);	
+				    subject);	 */
 };
 

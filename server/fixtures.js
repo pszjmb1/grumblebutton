@@ -41,7 +41,7 @@ if (Issues.find().count() === 0) {
 	});
 	var u7 = Meteor.users.findOne(u7Id);
 	// Example issues and comments
-	/*var issueId = Issues.insert({
+	var issueId = Issues.insert({
 		date: '01/01/2014',
 		time: '11:52',
 		dept: 'Bone Densitometry',
@@ -78,9 +78,9 @@ if (Issues.find().count() === 0) {
 		submitted: now - 1 * 3600 * 1000,
 		body: 'Great!'
 	});
-*/	
 	
-	/*var issueId2 = Issues.insert({
+	
+	var issueId2 = Issues.insert({
 		date: '01/01/2014',
 		time: '14:23',
 		dept: 'Lung Function',
@@ -154,7 +154,7 @@ if (Issues.find().count() === 0) {
 
 		],
 		commentsCount : 0,
-	}); */
+	}); 
 
 	Managers.insert({
 		name: 'Manager1',
@@ -173,7 +173,7 @@ if (Issues.find().count() === 0) {
 	/*ClosedIssues.insert({
 		issueId:issueId
 	});*/
-/*
+
 	Issues.insert({
 		date: '01/01/2014',
 		time: '19:53',
@@ -197,9 +197,9 @@ if (Issues.find().count() === 0) {
 
 		],
 		closer: u2._id
-	});*/
+	});
 
-	/*for (var i = 3; i < 100; i++) {
+	for (var i = 3; i < 100; i++) {
 		Issues.insert({
 			date: '01/01/2014',
 			time: '19:53',
@@ -214,7 +214,7 @@ if (Issues.find().count() === 0) {
 			submitted: now - i -7 * 3600 * 1000,
 			commentsCount: 0
 		});
-	}*/
+	}
 
 	
 

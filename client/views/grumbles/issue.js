@@ -30,12 +30,12 @@ Template.issue.events({
         				". The following issue has been closed - "+msg +".\n\n"+
         				"The link for the concerned issue is :- http://localhost:3000/closedIssues/";
         // Mail to manager
-		Meteor.call('sendEmail',
+/*		Meteor.call('sendEmail',
         	    	toEmail.emailId,
 			        fromEmail,
 			        managerMessage,
 				    id,
-				    subject);
+				    subject); */
         /*if(managerName.name == Meteor.user().username)
 		{
 			Issues.remove(this._id)
@@ -50,12 +50,12 @@ Template.issue.events({
         				". The following issue has been closed - "+msg +".\n\n"+
         				"The link for the concerned issue is :- http://localhost:3000/closedIssues/";
         // Mail to user
-        Meteor.call('sendEmail',
+/*        Meteor.call('sendEmail',
         	   	   	"arora.priya4172@gmail.com",
 			        fromEmail,
 		            userMessage,
 				    id,
-				    subject);
+				    subject); */
 	    /*if(Meteor.user().username == docs1.author)
 	    {
 	    	Issues.remove(this._id)   // for issue to be closed by manager only
@@ -74,12 +74,12 @@ Template.issue.events({
 				var subscribedUserMessage = "Hello "+subscribedPerson[i].username+",\n\n"+
         				". The following issue has been closed - "+msg +".\n\n"+
         				"The link for the concerned issue is :- http://localhost:3000/closedIssues/";
-				Meteor.call('sendEmail',
+				 /* Meteor.call('sendEmail',
        	    	   	"arora.priya4172@gmail.com",
 		            fromEmail,
 		            subscribedUserMessage,
 			        this._id,
-			        subject);
+			        subject); */
 			}
 		}
 	}
@@ -105,7 +105,7 @@ Template.issue.events({
 	var subject = 'Notification of Subscribed Issue';
 	
 	
-	if(issueRaisedUser!='')
+	/*if(issueRaisedUser!='')
 	{ 
 	
 		Meteor.call('sendEmail',
@@ -121,7 +121,7 @@ Template.issue.events({
 			        fromEmail,
 			        managerMsg,
 				    this._id,
-				    subject);
+				    subject); */
 
 //	alert('after sending email');
 //	alert('first time done value'+this.done);
