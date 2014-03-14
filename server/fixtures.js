@@ -4,6 +4,36 @@
  */
 
 if (Issues.find().count() === 0) {
+
+	Accounts.createUser({
+  		'username'  : 'priya',
+  		'password'  : '123456' //encrypted automatically 
+	});
+
+	Accounts.createUser({
+  		'username'  : 'jatin',
+  		'password'  : '123456' //encrypted automatically 
+	});
+
+	Accounts.createUser({
+  		'username'  : 'sakshi',
+  		'password'  : '123456' //encrypted automatically 
+	});
+
+	Accounts.createUser({
+  		'username'  : 'tanuj',
+  		'password'  : '123456' //encrypted automatically 
+	});
+
+	Accounts.createUser({
+  		'username'  : 'vrinda',
+  		'password'  : '123456' //encrypted automatically 
+	});
+	Accounts.createUser({
+  		'username'  : 'priyank',
+  		'password'  : '123456' //encrypted automatically 
+	});
+		
 	var now = new Date().getTime();
 
 	// Example users
@@ -40,6 +70,16 @@ if (Issues.find().count() === 0) {
 		profile: { name: 'vrinda' }
 	});
 	var u7 = Meteor.users.findOne(u7Id);
+
+	var u8Id = Meteor.users.insert({
+		profile: { name: 'sakshi' }
+	});
+	var u8 = Meteor.users.findOne(u8Id);
+
+	var u9Id = Meteor.users.insert({
+		profile: { name: 'jatin' }
+	});
+	var u9 = Meteor.users.findOne(u9Id);
 	// Example issues and comments
 	var issueId = Issues.insert({
 		date: '01/01/2014',
@@ -51,8 +91,9 @@ if (Issues.find().count() === 0) {
 		category: 'utility',
 		shortdesc: 'temperature too cold',
 		details: 'Three of the radiators don\'t seem to be working.',
-		anonymous: 1,
-		user: u1._id,
+		anonymous: 'identifiable',
+		userId: u9._id,
+		author:'jatin',
 		submitted: now - 3 * 3600 * 1000,
 		SubscribedUsers:[ 
 		            {
@@ -63,7 +104,9 @@ if (Issues.find().count() === 0) {
 
 		],
 		commentsCount: 2,
-	}); 
+	});  
+
+	
 	Comments.insert({
 		issueId: issueId,
 		userId: u2._id,
@@ -78,6 +121,7 @@ if (Issues.find().count() === 0) {
 		submitted: now - 1 * 3600 * 1000,
 		body: 'Great!'
 	});
+
 	
 	
 	var issueId2 = Issues.insert({
@@ -90,8 +134,9 @@ if (Issues.find().count() === 0) {
 		category: 'facilities',
 		shortdesc: 'dirty toilet',
 		details: 'Men\'s toilet 2 is dirty.',
-		anonymous: 1,
-		user: u3._id,
+		anonymous: 'identifiable',
+		userId: u8._id,
+		author: 'sakshi',
 		submitted: now - 4 * 3600 * 1000,
 		SubscribedUsers:[ 
 		            {
@@ -117,8 +162,8 @@ if (Issues.find().count() === 0) {
 		details: 'Too crowded it is!',
 
 		anonymous: 'identifiable',
-		userId: u4._id,
-		author: u4.profile.name,
+		userId: u7._id,
+		author: u7.profile.name,
 		submitted: now - 3 * 3600 * 1000,
 		SubscribedUsers:[ 
 		            {
@@ -156,6 +201,7 @@ if (Issues.find().count() === 0) {
 		commentsCount : 0,
 	}); 
 
+
 	Managers.insert({
 		name: 'Manager1',
 		emailId: 'arora.priya4172@gmail.com',
@@ -170,6 +216,26 @@ if (Issues.find().count() === 0) {
 		designation: 'Head'
 	});
 
+	Managers.insert({
+		name: 'Manager3',
+		emailId: 'arora.priya4172@gmail.com',
+		category: 'Lorum ipsum' ,
+		designation: 'Head'
+	});
+
+	Managers.insert({
+		name: 'Manager4',
+		emailId: 'arora.priya4172@gmail.com',
+		category: 'utility' ,
+		designation: 'Head'
+	});
+
+	Managers.insert({
+		name: 'Manager5',
+		emailId: 'arora.priya4172@gmail.com',
+		category: 'facilities' ,
+		designation: 'Head'
+	});
 	/*ClosedIssues.insert({
 		issueId:issueId
 	});*/
@@ -215,9 +281,6 @@ if (Issues.find().count() === 0) {
 			commentsCount: 0
 		});
 	}
-
-	
-
 }
 
 

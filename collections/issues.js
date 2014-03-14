@@ -41,7 +41,7 @@ Meteor.methods({
 
 		if(grumbleAttribs.anonymous == "anonymous")
 	    {
-		  	userName = '';	
+		  	userName = 'anonymous';	
 		  	userPosted = user.username;
 	    }
 		else

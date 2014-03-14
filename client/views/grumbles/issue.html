@@ -1,8 +1,8 @@
 <template name="issue">	
-	<div class="issue" {{done_class}}>
+	<div class="issue" > <!--{{done_class}}-->
 		<div class="destroy"></div>
 			<div class="issue-content">
-				<input class="check" name="markdone" type="checkbox"  {{{done_checkbox}}} />
+				<input id='box' class="check" name="markdone" type="checkbox"  {{{done_checkbox}}} />
         			<h3>{{shortdesc}}- <span>{{dept}}</span> <span>{{unit}}</span> <span>{{room}}</span></h3>
 					<p>
 						<a href="{{issuePagePath this}}">{{commentsCount}} comments</a>

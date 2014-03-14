@@ -1,11 +1,11 @@
 /**
  * Template helpers for an issue
  */
-Template.issue.done_class = function () {
+/*Template.issue.done_class = function () {
 	
   	return this.done ? 'done' : '';
   					
-};
+};*/
 
 Template.issue.events({
  'click .destroy': function () {
@@ -123,41 +123,26 @@ Template.issue.events({
 				    this._id,
 				    subject); */
 
-//	alert('after sending email');
-//	alert('first time done value'+this.done);
-    Issues.update(this._id, {$set: {done: !this.done}});
-  //  alert('updating the done word '+this.done);
-   	Issues.update(this._id, {$addToSet: {subscribedUsers : Meteor.user()}});
+  	if(document.getElementById('box').checked)
+  	{
 
-
-
-  /*  alert('before updating db, comparing the values'+this.done);
-    if(document.querySelector('.check:checked').checked)
-    {
-
-    	alert('adding subscriber name to db');
-    	alert('this.done '+ this.done);
-    	Issues.update(this._id, {$addToSet: {subscribedUsers : Meteor.user()}});
-    	alert('value updated to issue db in user subscription');	
-	}
-	else if(document.querySelector('.check:checked').checked === 'false') // if (this.done === 'true')
-	{
-		alert('while unsubscribing the issue');
-		alert('this.done '+ this.done);
-		//Issues.update(this._id, {$set: {done: !this.done}});
-		var a =  Issues.findOne(this._id);
+//  		alert('element get added to the collection');
+   		Issues.update(this._id, {$addToSet: {subscribedUsers : Meteor.user()}});
+   	}
+   	else if (!(document.getElementById('box').checked))
+  	{
+//  		alert('element removed');
+  		var a =  Issues.findOne(this._id);
 		var person =  a.subscribedUsers;
-		alert(person.length);
-		alert('value of done in unsubscription part'+ this.done);
+//		alert('no of person '+person.length);
+		
 		if(person && person.length)
 		{
 			var j;
-			alert('before enetring loop in unsubscription part');
+//			alert('before enetring loop in unsubscription part');
 			for(j= 0;j< person.length;j++)
 			{
-				alert(j);
-				alert('person '+person[j].username);
-				alert('id '+person[j]._id);
+//				alert('j '+j);
 				if(person[j].username === Meteor.user().username)
 				{	
 					
@@ -166,17 +151,16 @@ Template.issue.events({
 		            break; 
 				}
 			}
-	
-		}
-	
-	}
-    */
+   		
+   		}
+   	}
+}
 
-    }
 });
    
 // For getting user specific subscribed issues
 Template.issue.done_checkbox = function () {
+	
 	
 	//alert('inside done_checkbox');
 	var a =  Issues.findOne(this._id);
@@ -185,15 +169,17 @@ Template.issue.done_checkbox = function () {
 	{
 		var j;
 		var ch='';
-	//	alert('done_checkbox username '+Meteor.user().username);
+
+//		alert('before loop in done_checkbox');
 		for(j= 0;j< person.length;j++)
 		{
-	//		alert(j);
-	//		alert('person '+person[j].username);
+//			alert(j);
+//			alert('person '+person[j].username);
 			if(person[j].username === Meteor.user().username)
 			{	
 				ch ="checked";
-	//			alert('value of ch that is checked'+ch);
+
+//				alert('value of ch that is checked'+ch);
 				break; 
 			}
 		}
