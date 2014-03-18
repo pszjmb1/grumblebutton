@@ -93,6 +93,15 @@ border-radius: 0px 0px 3px 3px;
   /*display: inline-block;*/
   color: #aaaaaa;
 }
+
+.issue .issue-content h3 span .check {
+  font-weight: normal;
+  font-size: large;
+  /*display: inline-block;*/
+  /*color: #aaaaaa;*/
+  float:right;
+}
+
 .issue .issue-content p { margin: 0 }
 .issue .details {
   display: block;

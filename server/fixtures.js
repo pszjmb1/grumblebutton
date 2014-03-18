@@ -124,7 +124,7 @@ if (Issues.find().count() === 0) {
 
 	
 	
-	var issueId2 = Issues.insert({
+/*	var issueId2 = Issues.insert({
 		date: '01/01/2014',
 		time: '14:23',
 		dept: 'Lung Function',
@@ -200,47 +200,78 @@ if (Issues.find().count() === 0) {
 		],
 		commentsCount : 0,
 	}); 
-
+*/
 
 	Managers.insert({
 		name: 'Manager1',
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'Finance' ,
-		designation: 'Head'
+		designation: 'Head',
+		categorySubscribedUsers:[
+						{
+							_id:u4._id,
+		              		username:u4.profile.name
+
+						}
+		]
 	});
 
 	Managers.insert({
 		name: 'Manager2',
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'HR Dept' ,
-		designation: 'Head'
+		designation: 'Head',
+		categorySubscribedUsers:[
+						{
+							_id:u4._id,
+		              		username:u4.profile.name
+						}
+		]
 	});
 
 	Managers.insert({
 		name: 'Manager3',
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'Lorum ipsum' ,
-		designation: 'Head'
+		designation: 'Head',
+		categorySubscribedUsers:[
+						{
+							_id:u4._id,
+		              		username:u4.profile.name
+		   				}
+		]
 	});
 
 	Managers.insert({
 		name: 'Manager4',
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'utility' ,
-		designation: 'Head'
+		designation: 'Head',
+		categorySubscribedUsers:[
+						{
+							_id:u4._id,
+		              		username:u4.profile.name
+						}
+		]
 	});
 
 	Managers.insert({
 		name: 'Manager5',
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'facilities' ,
-		designation: 'Head'
+		designation: 'Head',
+		categorySubscribedUsers:[
+						{
+							_id:u4._id,
+		              		username:u4.profile.name
+		  				}
+		]
 	});
 	/*ClosedIssues.insert({
 		issueId:issueId
 	});*/
 
-	Issues.insert({
+/*	Issues.insert({
 		date: '01/01/2014',
 		time: '19:53',
 		dept: 'Urology Centre',
@@ -280,7 +311,7 @@ if (Issues.find().count() === 0) {
 			submitted: now - i -7 * 3600 * 1000,
 			commentsCount: 0
 		});
-	}
+	} */
 }
 
 

@@ -5,6 +5,7 @@ Meteor.Router.add({
 	'/': 'issues',
 	'/issues': 'issues',
 	'/closedIssues': 'closedIssues',
+	'/subscribedKeywords': 'subscribedKeywords',
 	'/issues/:_id': {
 		to: 'issuePage',
 		and: function(id) { Session.set('currentIssueId', id); }
