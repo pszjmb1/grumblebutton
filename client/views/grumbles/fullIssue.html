@@ -1,0 +1,22 @@
+<template name="fullIssue">
+	<div class="issue">
+		<div class="issue-content">
+			<h3>
+				{{shortdesc}} 
+				<span>submitted by {{author}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input id='gg' class="check" name="markdone" type="checkbox"  {{{done_checkbox}}} />Get Notifications
+				<!--<input type="button" value="Get Notifications" id="gg" class="det btn" {{{done_checkbox}}}>-->
+				</span>
+			</h3>
+			<b>Dept:</b>{{dept}} <b>Unit:</b> <span>{{unit}}</span>
+			<b>Room:</b> <span>{{room}}</span>
+			<br/>
+			<div>
+				{{details}} 
+			</div>
+		</div>
+	</div>
+	<h4>
+		<a href="{{issuePagePath this}}">{{commentsCount}} comments</a>
+	</h4>
+</template>

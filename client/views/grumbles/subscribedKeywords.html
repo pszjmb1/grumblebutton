@@ -1,0 +1,16 @@
+<template name="subscribedKeywords">
+	<div class="issues">
+		{{#each subscribedKeywords}}
+			{{> subscribedKeyword}}
+		{{/each}}
+
+		<!--{{#if issuesReady}}
+			{{#unless allIssuesLoaded}}
+				<a class="load-more" href="#">See more issues</a>
+			{{/unless}}
+			{{else}}
+				<div>{{> spinner}}</div>
+		{{/if}}  -->
+		
+	</div>
+</template>
