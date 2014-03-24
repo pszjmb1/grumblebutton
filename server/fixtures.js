@@ -95,14 +95,7 @@ if (Issues.find().count() === 0) {
 		userId: u9._id,
 		author:'jatin',
 		submitted: now - 3 * 3600 * 1000,
-		SubscribedUsers:[ 
-		            {
-		            	_id:u4._id,
-		              	username:u4.profile.name
-		            }
-
-
-		],
+		subscribedUsers:[ ],
 		commentsCount: 2,
 	});  
 
@@ -138,14 +131,7 @@ if (Issues.find().count() === 0) {
 		userId: u8._id,
 		author: 'sakshi',
 		submitted: now - 4 * 3600 * 1000,
-		SubscribedUsers:[ 
-		            {
-		            	_id:u4._id,
-		              	username:u4.profile.name
-		            }
-
-
-		],
+		subscribedUsers:[ ],
 		commentsCount: 0
 	});
 
@@ -165,14 +151,7 @@ if (Issues.find().count() === 0) {
 		userId: u7._id,
 		author: u7.profile.name,
 		submitted: now - 3 * 3600 * 1000,
-		SubscribedUsers:[ 
-		            {
-		            	_id:u4._id,
-		              	username:u4.profile.name
-		            }
-
-
-		],
+		subscribedUsers:[ ],
 		commentsCount: 0,
 	});
 
@@ -190,14 +169,7 @@ if (Issues.find().count() === 0) {
 		userId : u5._id,
 		author : u5.profile.name,
 		submitted : now - 3 * 3600 * 1000 ,
-		SubscribedUsers:[ 
-		            {
-		            	_id:u4._id,
-		              	username:u4.profile.name
-		            }
-
-
-		],
+		subscribedUsers:[ ],
 		commentsCount : 0,
 	}); 
 */
@@ -208,11 +180,7 @@ if (Issues.find().count() === 0) {
 		category: 'Finance' ,
 		designation: 'Head',
 		categorySubscribedUsers:[
-						{
-							_id:u4._id,
-		              		username:u4.profile.name
-
-						}
+			
 		]
 	});
 
@@ -221,12 +189,7 @@ if (Issues.find().count() === 0) {
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'HR Dept' ,
 		designation: 'Head',
-		categorySubscribedUsers:[
-						{
-							_id:u4._id,
-		              		username:u4.profile.name
-						}
-		]
+		categorySubscribedUsers:[]
 	});
 
 	Managers.insert({
@@ -234,12 +197,7 @@ if (Issues.find().count() === 0) {
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'Lorum ipsum' ,
 		designation: 'Head',
-		categorySubscribedUsers:[
-						{
-							_id:u4._id,
-		              		username:u4.profile.name
-		   				}
-		]
+		categorySubscribedUsers:[]
 	});
 
 	Managers.insert({
@@ -247,12 +205,7 @@ if (Issues.find().count() === 0) {
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'utility' ,
 		designation: 'Head',
-		categorySubscribedUsers:[
-						{
-							_id:u4._id,
-		              		username:u4.profile.name
-						}
-		]
+		categorySubscribedUsers:[]
 	});
 
 	Managers.insert({
@@ -260,12 +213,15 @@ if (Issues.find().count() === 0) {
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'facilities' ,
 		designation: 'Head',
-		categorySubscribedUsers:[
-						{
-							_id:u4._id,
-		              		username:u4.profile.name
-		  				}
-		]
+		categorySubscribedUsers:[]
+	}); 
+
+	Managers.insert({
+		name: 'Manager6',
+		emailId: 'arora.priya4172@gmail.com',
+		category: 'Managerial' ,
+		designation: 'Head',
+		categorySubscribedUsers:[]
 	});
 	/*ClosedIssues.insert({
 		issueId:issueId
@@ -285,14 +241,7 @@ if (Issues.find().count() === 0) {
 		submitted: now - 6 * 3600 * 1000,
 		commentsCount: 0,
 		closed: now - 5 * 3600 * 1000,
-		SubscribedUsers:[ 
-		            {
-		            	_id:u4._id,
-		              	username:u4.profile.name
-		            }
-
-
-		],
+		subscribedUsers:[ ],
 		closer: u2._id
 	});
 
@@ -309,6 +258,8 @@ if (Issues.find().count() === 0) {
 			anonymous: 1,
 			user: u1._id,
 			submitted: now - i -7 * 3600 * 1000,
+			subscribedUsers:[ ],
+		         
 			commentsCount: 0
 		});
 	} */

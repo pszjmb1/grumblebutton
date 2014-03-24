@@ -10,14 +10,12 @@ Template.fullIssue.events({
 	var issueManagerCategory = Issues.findOne(this._id).category;
 	var managerEmailId = Managers.findOne({category: issueManagerCategory}).emailId;
 	var managerName = Managers.findOne({category: issueManagerCategory}).name;
-	//alert('2');
-
-	//if(document.getElementById('gg').value === 'Get Notifications')
+	
 	if(document.getElementById('gg').checked)
 	{
 		//alert('inserting of data in issues collection');
 		//alert('3');
-		//document.getElementById('gg').value="Unsubscribe Notifications";
+		
   		//alert('4');
   		Issues.update(this._id, {$addToSet: {subscribedUsers : Meteor.user()}});
   		//alert('5');
@@ -45,11 +43,11 @@ Template.fullIssue.events({
 			        managerSubscribedMsg,
 				    this._id,
 				    subOfSubscribedIssue); 
-	} //else if (document.getElementById('gg').value === 'Unsubscribe Notifications')
+	}
    	else if (!(document.getElementById('gg').checked))
   	{
   		//alert('pulling of data from issues collection');
-  	//	document.getElementById('gg').value = 'Get Notifications';
+  		
 	  	//alert('3');
   		var a =  Issues.findOne(this._id);
 		var person =  a.subscribedUsers;
@@ -98,44 +96,108 @@ Template.fullIssue.events({
 }
 
 });
-   
-// For getting user specific subscribed issues
+
 Template.fullIssue.done_checkbox = function () {
 	//alert('inside done_checkbox');
 	var a =  Issues.findOne(this._id);
+	//alert('a');
 	var person =  a.subscribedUsers;
+	//alert('before if block in done_checkbox person.length'+person.length);
 	if(person && person.length)
 	{
+	//	alert('inside if block of fullIssue');
 		var j;
 		var ch='';
 
-		//alert('before loop in done_checkbox');
+	//	alert('before loop in done_checkbox');
 		for(j= 0;j< person.length;j++)
 		{
-		//	alert('j '+j);
-		//	alert('person '+person[j].username);
+	//		alert('j '+j);
+	//		alert('person '+person[j].username);
 			if(person[j].username === Meteor.user().username)
 			{	
 				ch ="checked";
 
-		//		alert('value of ch that is set'+ch);
+	//			alert('value of ch that is set'+ch);
 				break; 
 			}
 		}
 		if(ch=== 'checked')
 		{
-		//	alert('while returning value in if block');
+	//		alert('while returning value in if block');
 			return 'checked="checked"';
 		}
 		else		
 		{
-		//	alert('while returning value in else block');
+	//		alert('while returning value in else block');
 			return '';
 		}
 		
 	}
 	else
+	{
+	//		alert('while returning value in else block');
+			return '';
+	}
+};   
+
+   
+// For getting user specific subscribed issues
+/*Template.fullIssue.done_checkbox = function () {
+	//alert('inside done_checkbox');
+	var mgr = Managers.find();
+	var ch='';
+	//alert('before forEach');
+	mgr.forEach( function(myDoc) {
+	//	alert('inside forEach');
+	//	alert('myDoc.category '+myDoc.category);
+	 	if(Issues.findOne(this._id).category === myDoc.category)
+		{
+	//		alert('inside if comparison');
+			var i;
+			var person = myDoc.categorySubscribedUsers;
+	//		alert('person count '+person.length);
+			for(i=0;i<person.length;i++)
+			{
+				if(Meteor.user().username === person[i].username)
+				{
+					ch="checked";
+	//				alert('value of ch that is set for managers collection'+ch);
+					break;
+				}
+
+
+			}
+		}
+	});
+	var a =  Issues.findOne(this._id);
+	var person =  a.subscribedUsers;
+	if(person && person.length)
+	{
+		var j;
+	//	alert('before loop in done_checkbox');
+		for(j= 0;j< person.length;j++)
+		{
+	//		alert('j '+j);
+	//		alert('person '+person[j].username);
+			if(person[j].username === Meteor.user().username)
+			{	
+				ch ="checked";
+	//			alert('value of ch that is set'+ch);
+				break; 
+			}
+		}
+	}	
+	
+	if(ch=== 'checked')
+	{
+	//	alert('while returning value in if block');
+		return 'checked="checked"';
+	}
+	else		
+	{
+	//	alert('while returning value in else block');
 		return '';
-
+	}
 };
-
+*/

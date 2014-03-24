@@ -4,7 +4,8 @@
 
 Template.subscribedKeywords.helpers({
 	subscribedKeywords: function() {
-		return Manager.find({})
+		//alert('inside subscribedKeywords');
+		return Managers.find();
 			//limit: issuesHandle.limit()});
 	}
 	/*,
