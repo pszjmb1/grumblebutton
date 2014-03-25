@@ -179,9 +179,7 @@ if (Issues.find().count() === 0) {
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'Finance' ,
 		designation: 'Head',
-		categorySubscribedUsers:[
-			
-		]
+		categorySubscribedUsers:[]
 	});
 
 	Managers.insert({

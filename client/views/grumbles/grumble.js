@@ -1,6 +1,6 @@
 Template.grumble.events({
 	'submit form': function(e) {
-		alert('grumble.js');
+		//alert('grumble.js');
 		e.preventDefault();
 		var issue = {
 			date: $(e.target).find('[name=date]').val(),
