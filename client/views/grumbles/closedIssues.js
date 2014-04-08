@@ -5,8 +5,8 @@
 Template.closedIssues.helpers({
 	closedIssues: function() {
 		
-		
-		return ClosedIssues.find();
+		alert('inside closedIssues template -> picking up the issues having issueClosed value as 1');
+		return Issues.find({issueClosed:1});
 	}	
 			//limit: issuesHandle.limit()
 });

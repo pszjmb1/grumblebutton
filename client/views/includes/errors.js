@@ -1,3 +1,7 @@
+/**
+*Template for error handling
+*/
+
 Template.errors.helpers({
 	errors: function() {
 		return Errors.find();

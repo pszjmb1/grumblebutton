@@ -9,7 +9,12 @@ Meteor.Router.add({
 	'/issues/:_id': {
 		to: 'issuePage',
 		and: function(id) { Session.set('currentIssueId', id); }
-	},
+	}, 
+	/*
+	'/fullIssue/:_id': {
+		to: 'issuePage',
+		and: function(id) { Session.set('currentIssueId', id); }
+	},*/
 	'/closedIssues/:_id': {
 		to: 'closedIssuePage',
 		and: function(id) { Session.set('currentClosedIssueId', id); }

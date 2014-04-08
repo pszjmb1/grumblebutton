@@ -95,6 +95,7 @@ if (Issues.find().count() === 0) {
 		userId: u9._id,
 		author:'jatin',
 		submitted: now - 3 * 3600 * 1000,
+		issueClosed:0,
 		subscribedUsers:[ ],
 		commentsCount: 2,
 	});  
@@ -131,6 +132,7 @@ if (Issues.find().count() === 0) {
 		userId: u8._id,
 		author: 'sakshi',
 		submitted: now - 4 * 3600 * 1000,
+		issueClosed:0,
 		subscribedUsers:[ ],
 		commentsCount: 0
 	});
@@ -151,6 +153,7 @@ if (Issues.find().count() === 0) {
 		userId: u7._id,
 		author: u7.profile.name,
 		submitted: now - 3 * 3600 * 1000,
+		issueClosed:0,
 		subscribedUsers:[ ],
 		commentsCount: 0,
 	});
@@ -169,61 +172,67 @@ if (Issues.find().count() === 0) {
 		userId : u5._id,
 		author : u5.profile.name,
 		submitted : now - 3 * 3600 * 1000 ,
+		issueClosed:0,
 		subscribedUsers:[ ],
 		commentsCount : 0,
 	}); 
 */
 
-	Managers.insert({
+	Subscribed.insert({
 		name: 'Manager1',
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'Finance' ,
 		designation: 'Head',
+		done: false,
 		categorySubscribedUsers:[]
 	});
 
-	Managers.insert({
+	Subscribed.insert({
 		name: 'Manager2',
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'HR Dept' ,
 		designation: 'Head',
+		done:false,
 		categorySubscribedUsers:[]
 	});
 
-	Managers.insert({
+/*
+	Subscribed.insert({
 		name: 'Manager3',
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'Lorum ipsum' ,
 		designation: 'Head',
+		done:'false',
 		categorySubscribedUsers:[]
 	});
 
-	Managers.insert({
+	Subscribed.insert({
 		name: 'Manager4',
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'utility' ,
 		designation: 'Head',
+		done:'false',
 		categorySubscribedUsers:[]
 	});
 
-	Managers.insert({
+	Subscribed.insert({
 		name: 'Manager5',
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'facilities' ,
 		designation: 'Head',
+		done:'false',
 		categorySubscribedUsers:[]
 	}); 
 
-	Managers.insert({
+	Subscribed.insert({
 		name: 'Manager6',
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'Managerial' ,
 		designation: 'Head',
+		done:'false',
 		categorySubscribedUsers:[]
 	});
-	/*ClosedIssues.insert({
-		issueId:issueId
-	});*/
+*/
 
 /*	Issues.insert({
 		date: '01/01/2014',
@@ -239,6 +248,7 @@ if (Issues.find().count() === 0) {
 		submitted: now - 6 * 3600 * 1000,
 		commentsCount: 0,
 		closed: now - 5 * 3600 * 1000,
+		issueClosed:0,
 		subscribedUsers:[ ],
 		closer: u2._id
 	});
@@ -256,6 +266,7 @@ if (Issues.find().count() === 0) {
 			anonymous: 1,
 			user: u1._id,
 			submitted: now - i -7 * 3600 * 1000,
+			issueClosed:0,
 			subscribedUsers:[ ],
 		         
 			commentsCount: 0

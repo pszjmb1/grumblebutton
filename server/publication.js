@@ -35,11 +35,12 @@ Meteor.publish('notifications', function() {
 });
 
 // To notify using emailid
-Meteor.publish('managers', function() {
-	return Managers.find();
+Meteor.publish('subscribed', function() {
+	return Subscribed.find();
 });
 
+/*
 Meteor.publish('closedIssues', function() {
 	return ClosedIssues.find();
-});
+}); */
 

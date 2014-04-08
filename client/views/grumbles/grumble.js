@@ -1,6 +1,5 @@
 Template.grumble.events({
 	'submit form': function(e) {
-		//alert('grumble.js');
 		e.preventDefault();
 		var issue = {
 			date: $(e.target).find('[name=date]').val(),
@@ -14,6 +13,7 @@ Template.grumble.events({
 			details: $(e.target).find('[name=details]').val(),
 			anonymous: $(e.target).find('[name=anonymous]').val(),
 		}
+		// Collecting all the fields value of the form in order to use for sending mails and for calling grumble()
 		var det = document.querySelector('[name=details]').value;
 		var detres = det.split(" ");
 		var shortdesc = document.querySelector('[name=shortdesc]').value;
@@ -21,8 +21,8 @@ Template.grumble.events({
 		var msg = document.querySelector('[name=shortdesc]').value;
 		var category = document.querySelector('[name=category]').value; 
 		var fromEmail = 'grumblebutton@gmail.com';
-		var a = Managers.findOne({category:category});
-		var toEmail = Managers.findOne({category:category});
+		var a = Subscribed.findOne({category:category});
+		var toEmail = Subscribed.findOne({category:category});
 	    var messageToManager = "Hello "+a.name+",\n\n"+"The new issue has been posted - "+msg+
     	". Can you please look after this matter asap.\n\n"+
         "The link for the concerned issue is :- http://localhost:3000/issues/"; 	
@@ -30,10 +30,12 @@ Template.grumble.events({
 		var dept = document.querySelector('[name=dept]').value;
 		var unit = document.querySelector('[name=unit]').value; 
 		var i,j, flag =0;
-		var listOfDomain = Managers.find();
+		var listOfDomain = Subscribed.find();
 
 		//var issuesId ='';
 		//alert('issuesId '+issuesId);
+
+		// Picking up each word of the descriptioon and details
 		/*for (var i=0; i < detres.length; i++)
  		   print(detres[i] + " / ");
 		}*/
@@ -48,6 +50,7 @@ Template.grumble.events({
 						throwError(error.reason); 
 					else
 					{
+						console.log('mail to manager');
 						Meteor.call('sendEmail',
 							toEmail.emailId,  // NEED TO BE CHANGED ACCORDING TO THE USER EMAIL ID
 			        		fromEmail,
@@ -56,6 +59,7 @@ Template.grumble.events({
 					        subject);
 						//Meteor.Router.to('issuePage', id);
 
+						// Checking whether keyword is present in details part of the form
 						listOfDomain.forEach( function(myDoc) 
 						{
 							
@@ -104,6 +108,7 @@ Template.grumble.events({
 									break;
 							}
 
+							// Checking whether keyword is present in shortdesc part of the form
 							if(flag ===0)
 							{
 								for (var i=0; i < shortdescres.length; i++)
@@ -116,7 +121,7 @@ Template.grumble.events({
 										{
 											for(j=0;j<person.length;j++)
 											{
-												//Meteor.Router.to('issuePage', id);
+
 			
 												var messageToSubscribedUsers = "Hello "+person[j].username+",\n\n"+ "The new issue has been raised - " +msg+
     												". The link for the concerned issue is :- http://localhost:3000/issues/";
@@ -153,7 +158,7 @@ Template.grumble.events({
 							}								
 
 
-							//if(category === nextCategory.category | dept === nextCategory.category | unit === nextCategory.category)
+							// Checking whether keyword is present in rest of the part of the form
 							if((category === myDoc.category || dept === myDoc.category || unit === myDoc.category) && flag ===0)
 							{
 					
@@ -162,8 +167,6 @@ Template.grumble.events({
 								{
 									for(j=0;j<person.length;j++)
 									{
-										//Meteor.Router.to('issuePage', id);
-		
 										var messageToSubscribedUsers = "Hello "+person[j].username+",\n\n"+ "The new issue has been raised - " +msg+
     											". The link for the concerned issue is :- http://localhost:3000/issues/";
 
@@ -194,8 +197,9 @@ Template.grumble.events({
 							}	 
 						});	
 
-											
+				//alert('before Meteor.Router.to() inside grumble.js');
 				Meteor.Router.to('issuePage', id);
+				//alert('after Meteor.Router.to() inside grumble.js');
 									
 				}	
 			});		

@@ -4,7 +4,21 @@
 
 Template.issues.helpers({
 	issues: function() {
-		return Issues.find({}, {sort: {submitted: -1},
+		
+		//alert('taking issues from Issues collection');
+		alert('inside issues.js');
+		/*return Issues.find({issueClosed:0}, {sort: {submitted: -1}, 
+			limit: issuesHandle.limit()}); */
+		//var val=Issues.find({issueClosed:0}, {sort: {submitted: -1}, 
+		//	limit: issuesHandle.limit()});
+		//for(var i =0;i<val.length;i++)
+		/*while(!val)
+		{
+			alert(val.issueClosed);	
+		}*/
+		
+
+		return  Issues.find({issueClosed:0}, {sort: {submitted: -1}, 
 			limit: issuesHandle.limit()});
 	},
 	

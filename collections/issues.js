@@ -4,7 +4,6 @@
  */
 
 Issues = new Meteor.Collection('issues');
-
 /**
  * Server side function called by client to update Issues.
  */
@@ -43,6 +42,7 @@ Meteor.methods({
 	    {
 		  	userName = 'anonymous';	
 		  	userPosted = user.username;
+
 	    }
 		else
 		{
@@ -55,12 +55,13 @@ Meteor.methods({
 			_.pick(grumbleAttribs,
 			'date', 'time', 'dept',
 			'unit', 'room', 'urgency',
-			'category', 'shortdesc', 'anonymous'
+			'category', 'shortdesc', 'details', 'anonymous'
 			), {
 					userId: user._id,
 					author: userName,
 					postedUser:userPosted,
 					submitted: new Date().getTime(),
+					issueClosed :0,
 					commentsCount: 0
 		});
 

@@ -1,3 +1,7 @@
+/**
+*Template for dealing with all the notifications
+*/
+
 Template.notifications.helpers({
 notifications: function() {
 	//alert('notifications for this user');
