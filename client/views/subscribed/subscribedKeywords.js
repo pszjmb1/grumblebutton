@@ -21,8 +21,6 @@ Template.subscribedKeywords.events({
 
 // Showing all the keywords present in the collection
 Template.subscribedKeywords.helpers({
-		
-
 	subscribedKeywords: function() {
 		return Subscribed.find();
 			//limit: issuesHandle.limit()});
@@ -46,4 +44,4 @@ Template.issues.events({
 	'click .load-more': function(e) {
 		e.preventDefault();
 		issuesHandle.loadNextPage();
-	} */
+} */

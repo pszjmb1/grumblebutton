@@ -34,13 +34,13 @@ Meteor.publish('notifications', function() {
 	return Notifications.find({userId: this.userId});
 });
 
-// To notify using emailid
 Meteor.publish('subscribed', function() {
 	return Subscribed.find();
 });
 
-/*
-Meteor.publish('closedIssues', function() {
-	return ClosedIssues.find();
-}); */
+Meteor.publish('trial', function() {
+	return Trial.find();
+});
+
+
 

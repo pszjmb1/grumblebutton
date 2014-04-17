@@ -6,18 +6,7 @@ Template.issues.helpers({
 	issues: function() {
 		
 		//alert('taking issues from Issues collection');
-		alert('inside issues.js');
-		/*return Issues.find({issueClosed:0}, {sort: {submitted: -1}, 
-			limit: issuesHandle.limit()}); */
-		//var val=Issues.find({issueClosed:0}, {sort: {submitted: -1}, 
-		//	limit: issuesHandle.limit()});
-		//for(var i =0;i<val.length;i++)
-		/*while(!val)
-		{
-			alert(val.issueClosed);	
-		}*/
-		
-
+		//alert('inside issues.js');
 		return  Issues.find({issueClosed:0}, {sort: {submitted: -1}, 
 			limit: issuesHandle.limit()});
 	},

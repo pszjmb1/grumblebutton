@@ -1,11 +1,22 @@
+/**
+* Add notification to Notification collection
+*/
+
 Notifications = new Meteor.Collection('notifications');
 
 createCommentNotification = function(comment) {
 
-	// Notification to user who has raised the issue
+	
+	// Id  of the issue which has been commented out
 	var issue = Issues.findOne(comment.issueId);
-/*	if(issue.userId)
-	{		
+	var senderEmail = 'grumblebutton@gmail.com';
+	var subjectOfEmail = 'Notification about comment';
+	var userMessage = "Hello "+ issue.author +",\n\n"+
+    		comment.author + ' has commented on your issue having issueId:- ';
+    
+	if(issue.userId)
+	{
+		// Notification to user who has raised the issue		
 		if (comment.userId !== issue.userId) {
 			Notifications.insert({
 			userId: issue.userId,
@@ -14,19 +25,28 @@ createCommentNotification = function(comment) {
 			commenterName: comment.author,
 			read: false
 		});	
+
+		Meteor.call('sendEmail',
+        	   	issue.authorEmailId,
+			    senderEmail,
+			    userMessage,
+				issue._id,
+				subjectOfEmail)
+
 		}
 	}
 
-	//Notification to all subscribed users
+	// Users who have subscribed to this particular issue
 	var subUsers = issue.subscribedUsers;
 	if(subUsers)
 	{		
-		//var person = Issues.findOne({issueId:issue._id}).subscribedUsers;
+	
 		//console.log(person.length);
 		var i;
 		for(i=0;i<subUsers.length;i++)
 		{
-			console.log('subuser '+i+'->'+subUsers[i].username);
+			//	console.log('subuser '+i+'->'+subUsers[i].username);
+			// Notification to all the users who have subscribed to this particular issue
 			if(comment.author !== subUsers[i].username)
 			{
 				console.log('entering values in notification Collection');
@@ -37,150 +57,199 @@ createCommentNotification = function(comment) {
 				commenterName: comment.author,
 				read: false
 				});
+
+				var subscribedUserMessage = "Hello "+ subUsers[i].username +",\n\n"+
+    				comment.author + ' has commented on your subscribed issue having issueId:- ';
+
+				Meteor.call('sendEmail',
+	        	   	subUsers[i].emails[0].address,
+				    senderEmail,
+				    subscribedUserMessage,
+					issue._id,
+					subjectOfEmail)
+
 			}
 		}
 
 	}
 
-	// Notification to manager
-	var fromEmail = 'grumblebutton@gmail.com';
+	// Notification to manager of the domain
+	var senderEmail = 'grumblebutton@gmail.com';
     var userId = Meteor.user();
     var userName = userId.username;
 	//var toEmail = Subscribed.findOne({category:category});  ** HARDCODED **
-	var a = Issues.findOne({_id:issue._id});
-	var issueManagerCategory = a.category;
+	var issueId = Issues.findOne({_id:issue._id});
+	var issueManagerCategory = issueId.category;
 	var managerEmailId = Subscribed.findOne({category: issueManagerCategory}).emailId;
 	var managerName = Subscribed.findOne({category: issueManagerCategory}).name;
 
     var managerMsg = "Hello "+ managerName +",\n\n"+
     	userName + ' has commented on the issue belonging to your category having issueId:- ';
-	var subject = 'Notification of comment on Issue';
+	var subjectOfEmail = 'Notification of comment on Issue';
 	Meteor.call('sendEmail',
         	    	managerEmailId,
-			        fromEmail,
+			        senderEmail,
 			        managerMsg,
 				    issue._id,
-				    subject);	 
+				    subjectOfEmail);	 
 
-*/
-	// Notification to users who have subscribed to that domain
-	var mgr = Subscribed.find();
-	var det = issue.details;
+
+	// Notification to users who have subscribed to the domain which is same as this issue's domain
+	var listOfDomain = Subscribed.find();
+	var details = issue.details;
+	var category = issue.category;
+	var dept = issue.dept;
+	var unit = issue.unit;
 	var shortdesc = issue.shortdesc;
-	var detres='', shortdescres='';
-	var ch='';
-	var flag=0;
-	console.log('***Notification to subscribed users***');
-	mgr.forEach( function(myDoc) {
-		console.log('myDoc '+myDoc._id);
-		var id= myDoc._id;
-		console.log('*******checking the category in detres******');
-		if(det)
-		{
-			detres = det.split(" ");
-	 		for (var i=0; i < detres.length; i++)
-			{
+	var doneValue='';
+	
+	listOfDomain.forEach( function(myDoc) 
+	{
+					//alert('myDoc._id '+myDoc._id);
 
-				if(detres[i] ===myDoc.category) 
-				{	
-					// find the value of that field of Subscribed collection
-					//var visited = myDoc.done;
-		//			console.log('matching  category found in detail part');
-					var doneValue=Subscribed.findOne({_id:id}).done;
-					if(doneValue === false)
+					// Creating regular expression to check all possible format in which user can enter domain name
+					var regEx = new RegExp("^.*"+myDoc.category+".*","gi"); 
+
+					// Checking whether domain name is present in the detils part of the form
+					if(details)
 					{
+						if(details.match(regEx))
+						{										
+							//alert('inside details regular expression');
+
+							//doneValue=Subscribed.findOne({_id:issue._id}).done;
+							//if(doneValue === false)
+							//{
 					
-						Subscribed.update(myDoc._id, {$set: {done: true}});
-		//				console.log('detres -> if -> if ->Subscribed update '+myDoc.designation);
-		//				console.log('detres -> if -> if ->Subscribed update '+myDoc.done);
-						var person = myDoc.categorySubscribedUsers;
-						if(person && person.length)
-						{
-							for(j=0;j<person.length;j++)
-							{
+								Subscribed.update({category: myDoc.category}, {$set: {done: true}});
+								//console.log('detres -> if -> if ->Subscribed update '+myDoc.designation);
+								//console.log('detres -> if -> if ->Subscribed update '+myDoc.done);
+								// Users who have subscribed to that domain, from Subscribed collection
+	 		 					person = myDoc.categorySubscribedUsers;
+
+	 		 					
+								//alert('before person loop in details part');
+								if(person && person.length)
+								{
+									for(j=0;j<person.length;j++)
+									{
+									
+										var subscribedUserMessage = "Hello "+ person[j].username +",\n\n"+
+    										comment.author + ' has commented on your subscribed issue having issueId:- ';
+
+										Notifications.insert({
+											userId: person[j]._id,
+											issueId: issue._id,
+											commentId: comment._id,
+											commenterName: comment.author,
+											read: false
+										});
+
+										Meteor.call('sendEmail',
+							        	   	person[j].emails[0].address,
+										    senderEmail,
+										    subscribedUserMessage,
+											issue._id,
+											subjectOfEmail);
+
+									}
+								}
+							}
+							
+							//}
+					}
 				
-		//						console.log('person.username '+j+' '+person[j].username);
-								Notifications.insert({
-								userId: person[j]._id,
-								issueId: issue._id,
-								commentId: comment._id,
-								commenterName: comment.author,
-								read: false
-								});
-							}
-						}
-					}
-				}
-			}
-		}
-
-		//console.log('*******category checked in detres part*********');
-		//console.log('*******checking the category in shortdescres part******');
-		if(shortdesc)
-		{
-			shortdescres = shortdesc.split(" ");
-			for (var i=0; i < shortdescres.length; i++)
-			{
-				if(shortdescres[i] ===myDoc.category)
-				{
-					//var visited = myDoc.done;
-		//			console.log('matching  category found in shortdesc part');
-					var doneValue=Subscribed.findOne({_id:id}).done;
-					if(doneValue === false)
+					// Checking whether keyword is present in shortdesc part of the form
+					myDocId = Subscribed.findOne(myDoc._id);							
+					doneValue = myDocId.done;
+					//alert('value of foundValue '+foundValue);
+					if(shortdesc)
 					{
-						// add value of field to true
-					
-						Subscribed.update(myDoc._id, {$set: {done: true}});
-		//				console.log('shortdesc -> if -> if ->Subscribed update '+myDoc.designation);
-		//				console.log('shortdescres -> if -> if ->Subscribed update '+myDoc.done);					
-						var person = myDoc.categorySubscribedUsers;
+						if(!doneValue)
+						{
+							//	alert('inside shortdesc part');
+							Subscribed.update({category: myDoc.category}, {$set: {done: true}});
+							if(shortdesc.match(regEx))
+							{
+								//alert('category matches with shortdesc part');
+
+								// Users who have subscribed to that domain, from Subscribed collection
+ 			 					person = myDoc.categorySubscribedUsers;
+ 			 					if(person && person.length)
+								{
+									//alert('before person loop in shortdesc part');
+									for(j=0;j<person.length;j++)
+									{
+
+										var subscribedUserMessage = "Hello "+ person[j].username +",\n\n"+
+    										comment.author + ' has commented on your subscribed issue having issueId:- ';
+
+										Notifications.insert({
+											userId: person[j]._id,
+											issueId: issue._id,
+											commentId: comment._id,
+											commenterName: comment.author,
+											read: false
+										});
+
+										Meteor.call('sendEmail',
+							        	   	person[j].emails[0].address,
+										    senderEmail,
+										    subscribedUserMessage,
+											issue._id,
+											subjectOfEmail);
+
+									}
+								}
+							}
+						}								
+					}
+					myDocId = Subscribed.findOne(myDoc._id);							
+					doneValue = myDocId.done;
+					// Checking whether keyword is present in rest of the part of the form
+					if((category.match(regEx) ||dept.match(regEx) || unit.match(regEx)) && !doneValue)
+					{
+						// Adding an extra field in the Subscribed collection so that inspite of having multiple occurences of a domain in the form, multiple time notification to the users can be prevented	
+						Subscribed.update({category: myDoc.category}, {$set: {done: true}});
+						person = myDoc.categorySubscribedUsers;
 						if(person && person.length)
 						{
 							for(j=0;j<person.length;j++)
 							{
-		//						console.log('person '+j+' '+person[j].username);						
+						
+								var subscribedUserMessage = "Hello "+ person[j].username +",\n\n"+
+    										comment.author + ' has commented on your subscribed issue having issueId:- ';
+
 								Notifications.insert({
-								userId: person[j]._id,
-								issueId: issue._id,
-								commentId: comment._id,
-								commenterName: comment.author,
-								read: false
+									userId: person[i]._id,
+									issueId: issue._id,
+									commentId: comment._id,
+									commenterName: comment.author,
+									read: false
 								});
+								// Notification to all subscribed Users
+								//alert('mail to subscribed users in rest of the form part');
+
+								Meteor.call('sendEmail',
+							       	person[j].emails[0].address,
+									senderEmail,
+									subscribedUserMessage,
+									issue._id,
+									subjectOfEmail);
 							}
 						}
 					}
-				}
-			}
-		}
-		//console.log('*******category checked in shortdescres part*******');
-		//console.log('******before rest of the form******');
-
-		//var visited = myDoc.done;
-		var doneValue=Subscribed.findOne({_id:id}).done;
-	 	if((issue.category === myDoc.category || issue.unit === myDoc.category || issue.dept === myDoc.category) && doneValue === false)
-		{
-
-		//	console.log('matching  category found in rest of the form part');
-			Subscribed.update({category: myDoc.category}, {$set: {done: true}});
-		//	console.log('rest of the form part -> if -> if ->Subscribed update '+myDoc.designation);											
-		//	console.log('rest of the form -> if -> Subscribed update -> visited '+ myDoc.done);						
-			var i;
-			var person = myDoc.categorySubscribedUsers;
-			
-			for(i=0;i<person.length;i++)
+						
+					
+			});
+			//console.log('making the done field false for next issue');
+			var domainList = Subscribed.find();
+			domainList.forEach( function(myDoc) 
 			{
-				// Notification
-				Notifications.insert({
-				userId: person[i]._id,
-				issueId: issue._id,
-				commentId: comment._id,
-				commenterName: comment.author,
-				read: false
-				});
-			}
-		}
-		//console.log('******category checked in rest of the form part******');
-	});
-
+				Subscribed.update(myDoc._id, {$set: {done: false}});
+				//var determine = Subscribed.findOne(myDoc._id);											
+				//console.log('value of found field after rest of the form field part '+determine.done);
+			});
+	
 };
 

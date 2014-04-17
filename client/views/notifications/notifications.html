@@ -8,22 +8,50 @@
 	</a>
 	<ul class="notification dropdown-menu">
 		{{#if notificationCount}}
+		<a class="marked" href="#">Mark as read</a>
 			{{#each notifications}}
 				{{> notification}}
 			{{/each}}
 		{{else}}
 			<li><span>No Notifications</span></li>
-			{{/if}}
-			</ul>
+		{{/if}}
+	</ul>
 	
 </template>
 
 
 <template name="notification">
 	<li>
-		<a href="{{issuePagePath issueId}}">
-		<strong>{{commenterName}}</strong> commented on the post related to you
-		</a>
+		{{#if openerName}}
+			<a href="{{issuePagePath issueId}}">
+			<strong>{{openerName}}</strong> has opened the post related to you
+			</a>
+		{{/if}}
+		{{#if subscribedUserName}}
+			<a href="{{issuePagePath issueId}}">
+			<strong>{{subscribedUserName}}</strong> has subscribed the post related to you
+			</a>
+		{{/if}}
+		{{#if unSubscribedUserName}}
+			<a href="{{issuePagePath issueId}}">
+			<strong>{{unSubscribedUserName}}</strong> has unsubscribed the post related to you
+			</a>
+		{{/if}}
+		{{#if postedUserName}}
+			<a href="{{issuePagePath issueId}}">
+			<strong>{{postedUserName}}</strong> has posted a new post
+			</a>
+		{{/if}}			
+		{{#if closerName}}
+			<a href="{{issuePagePath issueId}}">
+			<strong>{{closerName}}</strong> has closed the post related to you
+			</a>
+		{{/if}}
+		{{#if commenterName}}
+			<a href="{{issuePagePath issueId}}">
+			<strong>{{commenterName}}</strong> commented on the post related to you
+			</a>
+		{{/if}}
 	</li>
 </template>
 

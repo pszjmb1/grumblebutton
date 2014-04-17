@@ -13,8 +13,8 @@ Deps.autorun(function() {
 });
 
 Meteor.subscribe('notifications');
-/*Meteor.subscribe('closedIssues');*/
 Meteor.subscribe('subscribed');
+Meteor.subscribe('trial');
 
 
 

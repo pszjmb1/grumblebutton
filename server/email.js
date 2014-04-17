@@ -1,3 +1,7 @@
+/**
+* Email functionality for notification
+*/
+
 if (Meteor.isServer) {
 Meteor.methods({
   sendEmail: function (toEmail, fromEmail, msg, id, subject) {
@@ -12,7 +16,6 @@ Meteor.methods({
         text: msg+id+"\n\n\n\n."
       });
   
-	//console.log("email sent!");
   }
 });
 

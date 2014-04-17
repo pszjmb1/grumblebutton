@@ -7,31 +7,38 @@ if (Issues.find().count() === 0) {
 
 	Accounts.createUser({
   		'username'  : 'priya',
-  		'password'  : '123456' //encrypted automatically 
+  		'password'  : '123456', //encrypted automatically 
+  		 'email'    : 'priya@gmail.com'
 	});
 
 	Accounts.createUser({
   		'username'  : 'jatin',
-  		'password'  : '123456' //encrypted automatically 
+  		'password'  : '123456', //encrypted automatically 
+  		'email'     : 'jatin@gmail.com'
 	});
 
 	Accounts.createUser({
   		'username'  : 'sakshi',
-  		'password'  : '123456' //encrypted automatically 
+  		'password'  : '123456', //encrypted automatically 
+  		'email'     : 'sakshi@gmail.com'
 	});
 
 	Accounts.createUser({
   		'username'  : 'tanuj',
-  		'password'  : '123456' //encrypted automatically 
+  		'password'  : '123456', //encrypted automatically 
+  		'email'     : 'tanuj@gmail.com'
+
 	});
 
 	Accounts.createUser({
   		'username'  : 'vrinda',
-  		'password'  : '123456' //encrypted automatically 
+  		'password'  : '123456', //encrypted automatically 
+  		'email'     : 'vrinda@gmail.com'
 	});
 	Accounts.createUser({
   		'username'  : 'priyank',
-  		'password'  : '123456' //encrypted automatically 
+  		'password'  : '123456', //encrypted automatically 
+  		'email'     : 'priyank@gmail.com'
 	});
 		
 	var now = new Date().getTime();
@@ -178,13 +185,31 @@ if (Issues.find().count() === 0) {
 	}); 
 */
 
+
+
 	Subscribed.insert({
 		name: 'Manager1',
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'Finance' ,
 		designation: 'Head',
 		done: false,
-		categorySubscribedUsers:[]
+		
+		categorySubscribedUsers:[
+		{
+				_id: u4._id,
+				username: "priya",
+			    issuesNotToDisplay:[
+			    	
+			    ],
+			    emails : [
+				{
+					address : "priya@gmail.com",
+					verified : false
+				}
+			]
+		}
+	
+		]
 	});
 
 	Subscribed.insert({
@@ -193,7 +218,10 @@ if (Issues.find().count() === 0) {
 		category: 'HR Dept' ,
 		designation: 'Head',
 		done:false,
-		categorySubscribedUsers:[]
+		
+		categorySubscribedUsers:[
+		
+		]
 	});
 
 /*

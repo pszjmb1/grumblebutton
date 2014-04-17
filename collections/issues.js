@@ -42,12 +42,14 @@ Meteor.methods({
 	    {
 		  	userName = 'anonymous';	
 		  	userPosted = user.username;
+		  	userEmailId = user.emails[0].address;
 
 	    }
 		else
 		{
 		 	userName = user.username;
 		 	userPosted = user.username;
+		 	userEmailId = user.emails[0].address;
 		}
 		
 		// pick out the whitelisted keys
@@ -59,6 +61,7 @@ Meteor.methods({
 			), {
 					userId: user._id,
 					author: userName,
+					authorEmailId: userEmailId,
 					postedUser:userPosted,
 					submitted: new Date().getTime(),
 					issueClosed :0,

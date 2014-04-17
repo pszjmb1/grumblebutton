@@ -2,10 +2,10 @@
  * Grumble Button client configuration settings
  */
 
-// we want users to log-in via username rather than email
+// we want users to log-in via both username and email
 Accounts.ui.config({
 	
-	passwordSignupFields: 'USERNAME_ONLY'
+	passwordSignupFields: 'USERNAME_AND_EMAIL'
 });
 
 

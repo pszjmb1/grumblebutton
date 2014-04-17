@@ -4,7 +4,7 @@
 
 Template.issuePage.helpers({
 	currentIssue: function() {
-		alert('inside issuePage');
+		//alert('inside issuePage');
 		return Issues.findOne(Session.get('currentIssueId'));
 		//alert('after returning issue -> issue_page.js');
 
