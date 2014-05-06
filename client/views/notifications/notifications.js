@@ -12,17 +12,20 @@ notificationCount: function(){
 	return Notifications.find({userId: Meteor.userId(), read: false}).count();
 }
 });
+
+// Default mark all notifications to be read on clicking the 'mark all' link
 Template.notification.events({
 	'click a': function() {
 		Notifications.update(this._id, {$set: {read: true}});
 	}
 });
 
+// Default mark all notifications to be read on clicking the 'mark all' link
 Template.notifications.events({
 	'click .marked': function(e) {
 		e.preventDefault();
-		var i;
-		var count=Notifications.find().count();
+		//var i;
+		//var count=Notifications.find().count();
 		
 		var notices = Notifications.find();
 		notices.forEach( function(myDoc) {

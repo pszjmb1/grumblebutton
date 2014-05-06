@@ -17,12 +17,6 @@ Meteor.publish('singleIssue', function(id) {
 });
 
 
-/*
-Meteor.publish('issues', function() {
-	return Issues.find();
-	
-});*/
-
 /**
  * Publish comment data for the relevant issue
  */
@@ -38,9 +32,7 @@ Meteor.publish('subscribed', function() {
 	return Subscribed.find();
 });
 
-Meteor.publish('trial', function() {
-	return Trial.find();
-});
+
 
 
 

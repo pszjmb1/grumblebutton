@@ -1,1 +1,0 @@
-Trial = new Meteor.Collection('trial');

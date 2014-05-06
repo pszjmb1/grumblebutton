@@ -1,16 +1,42 @@
 <template name="issues">
 	<div class="issues">
+	<fieldset>
+		<form class="main">
+			<table>
+				<tr>
+					<td>
+						<!--<label class="control-label" for="keyword">&nbsp;Add Keyword</label>-->
+						<input id="textbox" name="keyword" type="text" value="" placeholder="search your Keyword"/>
+					</td>
+					<td>
+						<div class="control-group">
+							<div class="controls">
+								<input id = "search" type="submit" value="Search" class="btn btn-primary"/>
+							</div>
+						</div>
+					</td>
+					
+				</tr>
+			</table>
+		</form>
+	</fieldset>
+	{{#if findSeachedIssues}}
+		{{#each searchedIssues}}
+			{{> issue}}
+		{{/each}}
+	{{else}}
 		{{#each issues}}
 			{{> issue}}
 		{{/each}}
+	{{/if}}
 
-		{{#if issuesReady}}
-			{{#unless allIssuesLoaded}}
-				<a class="load-more" href="#">See more issues</a>
-			{{/unless}}
-			{{else}}
-				<div>{{> spinner}}</div>
-		{{/if}} 
+	{{#if issuesReady}}
+		{{#unless allIssuesLoaded}}
+			<a class="load-more" href="#">See more issues</a>
+		{{/unless}}
+		{{else}}
+			<div>{{> spinner}}</div>
+	{{/if}} 
 		
 	</div>
 </template>

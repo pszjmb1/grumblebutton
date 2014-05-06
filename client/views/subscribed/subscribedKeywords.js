@@ -2,12 +2,11 @@
  * Template helper for SubscribedKeywords
  */
 
- //Form to add new keyword in the colection to which user waants to subscribe
+// Form to add domain of user's choice
 Template.subscribedKeywords.events({
 	'submit form': function(e) {
 		//alert('inside subscribedKeywords.js');
 		e.preventDefault();
-		//var key = document.getElementById("keyword").value;
 		var key = document.querySelector('[name=keyword]').value;
 		document.querySelector('[name=keyword]').value = '';
 		//alert('keyword '+key)
@@ -26,7 +25,6 @@ Template.subscribedKeywords.helpers({
 			//limit: issuesHandle.limit()});
 	}
 	/*,
-	
 	// Determine if curent list of issues is ready
 	issuesReady: function() {
 		return !issuesHandle.loading();

@@ -103,6 +103,8 @@ if (Issues.find().count() === 0) {
 		author:'jatin',
 		submitted: now - 3 * 3600 * 1000,
 		issueClosed:0,
+		issueSearch:0,
+		closedIssueSearch:0,
 		subscribedUsers:[ ],
 		commentsCount: 2,
 	});  
@@ -140,6 +142,7 @@ if (Issues.find().count() === 0) {
 		author: 'sakshi',
 		submitted: now - 4 * 3600 * 1000,
 		issueClosed:0,
+		issueSearch:0,
 		subscribedUsers:[ ],
 		commentsCount: 0
 	});
@@ -161,10 +164,11 @@ if (Issues.find().count() === 0) {
 		author: u7.profile.name,
 		submitted: now - 3 * 3600 * 1000,
 		issueClosed:0,
+		issueSearch:0,
 		subscribedUsers:[ ],
 		commentsCount: 0,
 	});
-
+*/
 	var issueId4 = Issues.insert({
 		date: '01/01/2014',
 		time: '11:52',
@@ -180,12 +184,53 @@ if (Issues.find().count() === 0) {
 		author : u5.profile.name,
 		submitted : now - 3 * 3600 * 1000 ,
 		issueClosed:0,
+		issueSearch:0,
+		closedIssueSearch:0,
 		subscribedUsers:[ ],
 		commentsCount : 0,
 	}); 
-*/
 
+	var issueId5 = Issues.insert({
+		date: '01/01/2014',
+		time: '11:52',
+		dept: 'Bone Densitometry',
+		unit: 'Physiotherapy',
+		room: 'P4',
+		urgency: 'medium',
+		category: 'Finance',
+		shortdesc: 'Printer not working',
+		details: 'I think problem is there in catridge',
+		anonymous: 'identifiable',
+		userId : u5._id,
+		author : u5.profile.name,
+		submitted : now - 3 * 3600 * 1000 ,
+		issueClosed:0,
+		issueSearch:0,
+		closedIssueSearch:0,
+		subscribedUsers:[ ],
+		commentsCount : 0,
+	}); 
 
+	var issueId6 = Issues.insert({
+		date: '01/01/2014',
+		time: '11:52',
+		dept: 'Bone Densitometry',
+		unit: 'Physiotherapy',
+		room: 'P4',
+		urgency: 'medium',
+		category: 'Finance',
+		shortdesc: 'Printer not working',
+		details: 'I think problem is there in catridge',
+		anonymous: 'identifiable',
+		userId : u5._id,
+		author : u5.profile.name,
+		submitted : now - 3 * 3600 * 1000 ,
+		issueClosed:0,
+		issueSearch:0,
+		closedIssueSearch:0,
+		subscribedUsers:[ ],
+		commentsCount : 0,
+	}); 
 
 	Subscribed.insert({
 		name: 'Manager1',
@@ -196,9 +241,9 @@ if (Issues.find().count() === 0) {
 		
 		categorySubscribedUsers:[
 		{
-				_id: u4._id,
+			/*	_id: u4._id,
 				username: "priya",
-			    issuesNotToDisplay:[
+			    issueNotToDisplay:[
 			    	
 			    ],
 			    emails : [
@@ -206,7 +251,7 @@ if (Issues.find().count() === 0) {
 					address : "priya@gmail.com",
 					verified : false
 				}
-			]
+			] */
 		}
 	
 		]
@@ -224,8 +269,21 @@ if (Issues.find().count() === 0) {
 		]
 	});
 
-/*
 	Subscribed.insert({
+		name: 'Manager3',
+		emailId: 'arora.priya4172@gmail.com',
+		category: 'Building' ,
+		designation: 'Head',
+		done:false,
+		
+		categorySubscribedUsers:[
+		
+		]
+	});
+
+
+
+/*	Subscribed.insert({
 		name: 'Manager3',
 		emailId: 'arora.priya4172@gmail.com',
 		category: 'Lorum ipsum' ,
@@ -277,11 +335,12 @@ if (Issues.find().count() === 0) {
 		commentsCount: 0,
 		closed: now - 5 * 3600 * 1000,
 		issueClosed:0,
+		issueSearch:0,
 		subscribedUsers:[ ],
 		closer: u2._id
-	});
+	}); */
 
-	for (var i = 3; i < 100; i++) {
+	/*for (var i = 3; i < 100; i++) {
 		Issues.insert({
 			date: '01/01/2014',
 			time: '19:53',
@@ -295,11 +354,12 @@ if (Issues.find().count() === 0) {
 			user: u1._id,
 			submitted: now - i -7 * 3600 * 1000,
 			issueClosed:0,
+			issueSearch:0,
 			subscribedUsers:[ ],
 		         
 			commentsCount: 0
 		});
-	} */
+	}  */
 }
 
 

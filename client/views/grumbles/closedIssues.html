@@ -1,9 +1,34 @@
 <template name="closedIssues">
 	<div class="closedIssues">
-		
+	<fieldset>
+		<form class="main">
+			<table>
+				<tr>
+					<td>
+						<!--<label class="control-label" for="keyword">&nbsp;Add Keyword</label>-->
+						<input id="textbox" name="keyword" type="text" value="" placeholder="search your Keyword"/>
+					</td>
+					<td>
+						<div class="control-group">
+							<div class="controls">
+								<input id = "search" type="submit" value="Search" class="btn btn-primary"/>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</fieldset>
+	{{#if findSeachedIssues}}
+		{{#each searchedIssues}}
+			{{> closedIssue}}
+		{{/each}}
+	{{else}}
 		{{#each closedIssues}}
 			{{> closedIssue}}
 		{{/each}}
+	{{/if}}
+		
 		
 	</div>
 </template>
