@@ -4,17 +4,20 @@
 
 // issueClosed field denotes the closed status of issues
 // Set value of closedIssueSearch field denotes that user wants to search this issue
+var global='';
 Template.closedIssues.helpers({
 	closedIssues: function() {
 		// Returning closed issues 
 		return Issues.find({issueClosed:1, closedIssueSearch:0});
 	},
 	findSeachedIssues: function() {
-		var count = Issues.find({issueClosed:1, closedIssueSearch:1}).count();		
-		return count;
+
+		return Issues.find({issueClosed:1, closedIssueSearch:1}).count();		
+		
 	},
 	searchedIssues: function() {
 		//alert('inside searchedIssues');
+		//alert('session value searchedIssues'+global);
 		return Issues.find({issueClosed:1, closedIssueSearch:1}); //, {sort: {submitted: -1}});
 	}	
 			//limit: issuesHandle.limit()
@@ -43,6 +46,7 @@ Template.issues.events({
 Template.closedIssues.events({
 	'click #textbox': function(e) {
 		//alert('value is inside but changed');
+		//alert('global value '+global);
 		jQuery('#textbox').on('input', function() {
 		//alert('value gets changed');
 		issues = Issues.find();
@@ -63,19 +67,22 @@ Template.closedIssues.events({
 Template.closedIssues.events({
 	'click #search': function(e) {
 		//alert('search textbox');
-		var key = document.querySelector('[name=keyword]').value;
+		global = document.querySelector('[name=keyword]').value;
+		//Session.set("key",document.querySelector('[name=keyword]').value );
+		Session.set("key", global);
+		//alert('sesion value '+ Session.get("key"));
 		var issues = Issues.find({issueClosed:1});
 		var regEx='', unit='', dept='', shortdesc='', room='';
 
 		// Preventing the user to search without entering the search keyword
-		if(!key)
+		if(!Session.get("key"))
 		{
 			alert('Enter element to search');
 		}
-		if(key)
+		if(Session.get("key"))
 		{
 			//alert('value is inside but not changed');
-			regEx = new RegExp("^.*"+key+".*","gi");
+			regEx = new RegExp("^.*"+Session.get("key")+".*","gi");
 			//alert('key '+key);
 			if(issues)
 			{
@@ -102,7 +109,7 @@ Template.closedIssues.events({
 			}
 
 		}
-
+		return false;
 	}
 });
 

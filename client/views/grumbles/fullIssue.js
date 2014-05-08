@@ -33,7 +33,7 @@ Template.fullIssue.events({
 	// 2) OR  user wants to subscribed this issue only irrespective of domain of issue
 	if(document.getElementById('check').checked)
 	{
-		//alert('checked part');
+		alert('checked part');
 		//Adding the username in the collection if s/he has subscribed to that issue
 		// Flag indicates that the category of issue is present anywhere in the form
 		flag =0;
@@ -45,17 +45,18 @@ Template.fullIssue.events({
 		// Loop runs throughout all the issues to check subscription of domain by current user
 		listOfDomain.forEach( function(myDoc) 
 		{
+			alert('checking the issue whose domain already subscribed');
 			// checking for regular expression of the domain of the user
 			regEx = new RegExp("^.*"+myDoc.category+".*","gi"); 
 			details = issue.details;
-			//alert('myDoc.category '+myDoc.category);
+			alert('myDoc.category '+myDoc.category);
 			//Checking the presence of domain in details field
 			if(details)
 			{
 				if(details.match(regEx))
 				{
 	 			
-					//alert('details part');
+					alert('details part');
 					// Checking the presence of current user in the subscribed list
 					person = myDoc.categorySubscribedUsers;
 					if(person && person.length)
@@ -66,7 +67,7 @@ Template.fullIssue.events({
 							if(Meteor.user().username === person[j].username)
 							{
 								// update
-								//alert('loggedin user name is already there in domain collection');
+								alert('loggedin user name is already there in domain collection');
 								issueToBeUnMarked = person[j].issueNotToDisplay;
 								if(issueToBeUnmarked && issueToBeUnmarked.length)
 								{
@@ -77,17 +78,18 @@ Template.fullIssue.events({
 										{	
 											//alert('current issue need to be marked, so pulling from collection');
 											// Pulling of user name from unsubscibed issues list
-											Subscribed.update(
+											alert('checking the issue in details form part');
+											
+										/*	Subscribed.update(
 											{
-    											"category": myDoc.category,
-	    										"categorySubscribedUsers.username" : person[j].username
+    											"_id":Subscribed.findOne({"category": myDoc.category, "categorySubscribedUsers.username" :person[j].username})._id
 											},
 											{ 
     										"$pull": {
-        										"categorySubscribedUsers.$.issueNotToDisplay": issue
+        										categorySubscribedUsers[j].issueNotToDisplay: issue
     											}
 											}
-											)
+											)  */
 
 											// If user while posting the issue has shown is identity then send mail to him
 											if(issueRaisedUser!='anonymous')
@@ -159,18 +161,18 @@ Template.fullIssue.events({
 											{
 												//alert('issue matched to be marked, so pulling');
 												// Pulling of user name from unsubscibed issues list
-												Subscribed.update(
+												alert('checking the issue in shortdesc  form part');
+												//Subscribed.update({"_id":Subscribed.findOne({"category": myDoc.category, "categorySubscribedUsers.username" :person[j].username})._id},{ "$pull": {categorySubscribedUsers.j.issueNotToDisplay: issue}})
+											/*	Subscribed.update(
 												{
-    												"category": myDoc.category,
-    												"categorySubscribedUsers.username" : person[j].username
+    											"_id":Subscribed.findOne({"category": myDoc.category, "categorySubscribedUsers.username" :person[j].username})._id
 												},
-												{ 
-	    										"$pull": {
-		        									"categorySubscribedUsers.$.issueNotToDisplay": issue
+												{	 
+    											"$pull": {
+        											categorySubscribedUsers[j].issueNotToDisplay: issue
     												}
 												}
-												)
-
+												) */
 												// Set pulled and flag for finding the domain of user in the details part of issue
 												pulled=1;
 												flag =1;
@@ -236,17 +238,18 @@ Template.fullIssue.events({
 									{
 										//alert('issue found to be marked, so pulling');
 										// Pulling of user name from unsubscibed issues list
-										Subscribed.update(
+										alert('checking the issue in rest of the form part');
+										//Subscribed.update({"_id":Subscribed.findOne({"category": myDoc.category, "categorySubscribedUsers.username" :person[j].username})._id},{ "$pull": {categorySubscribedUsers.j.issueNotToDisplay: issue}})
+									/*	Subscribed.update(
 										{
-			    							"category": myDoc.category,
-	    									"categorySubscribedUsers.username" : person[j].username
+    										"_id":Subscribed.findOne({"category": myDoc.category, "categorySubscribedUsers.username" :person[j].username})._id
 										},
-										{ 
-    										"$pull": {
-	        								"categorySubscribedUsers.$.issueNotToDisplay": issue
+										{	 
+    									"$pull": {
+        									categorySubscribedUsers[j].issueNotToDisplay: issue
     										}
 										}
-										)
+										) */
 										// Set pulled and flag for finding the domain of user in the details part of issue
 										pulled=1;
 										flag =1;
@@ -288,19 +291,19 @@ Template.fullIssue.events({
 		// Checking if pulled is not set i.e. issue's domain has not been subscribed by user
 		if(pulled ===0)
 		{
-			//alert('issue not found in domain so should be added in issues collection');
+			alert('checking the issue not related to any domain');
   			Issues.update(this._id, {$addToSet: {subscribedUsers : Meteor.user()}});
 			// Send mail to the user who has posted the issue regarding subscription of issue
 			if(issueRaisedUser!='')
 			{ 
-				//alert('mail sent to user');
+				alert('mail sent to user');
 				Meteor.call('sendEmail',
         		    	issueRaisedUserEmailId,
 			    	    senderEmail,
 			        	raisedSubscribedUserMsg,
 					    this._id,
 					    subOfSubscribedIssue);
-				//alert('notification sent to user');
+				alert('notification sent to user');
 				Notifications.insert({
 						userId: issueRaisedUserId,
 						issueId: this._id,   
@@ -313,7 +316,7 @@ Template.fullIssue.events({
 
 			}
 			// Send mail to the manager
-			//alert('mail sent to manager');
+			alert('mail sent to manager');
 			Meteor.call('sendEmail',
         	    	managerEmailId,
 			        senderEmail,
@@ -326,7 +329,7 @@ Template.fullIssue.events({
 	}
 	else if (!(document.getElementById('check').checked))
   	{
-  		//alert('pulling of data in fullIssue.js');
+  		alert('pulling of data in fullIssue.js');
   		// If user wants to unsubscibe froom the issue
   		// Again there are two scenarios
   		// 1) Either user has subscibe to the issues domain and wants to unsubscibe from this issue
@@ -339,10 +342,10 @@ Template.fullIssue.events({
     			Meteor.user().username + ' has unsubscribed to the issue belonging to your category having issueId:- ';
 		var subOfUnSubscribedIssue = 'Notification of UnSubscribed Issue';
 
-		//alert('pulling -> for issues collection');
+		
 		if(person && person.length)
 		{
-			//alert('pulling -> issues ->person.length '+person.length);
+			alert('checking the checked issue in Issues collection');
 			var j;
 			//alert('5');
 			for(j= 0;j< person.length;j++)
@@ -352,9 +355,9 @@ Template.fullIssue.events({
 					//alert('pulling->issues->current user matched');
 					var personId=person[j]._id;
 					// Removing the username from the collection if s/he has unsubscribed to that issue
-					//alert('user wants to unsubscribe from this issue');
+					alert('user wants to unsubscribe from this issue');
 					Issues.update(this._id,{$pull:{subscribedUsers:{_id:personId}}});
-					//alert('pulling->issues->current user removed');
+					alert('pulling->issues->current user removed');
 					// Send mail to the user who has posted the issue regarding unsubscription by the user
 					if(issueRaisedUser!='anonymous')
 					{	 
@@ -391,7 +394,7 @@ Template.fullIssue.events({
    		} 
 		if(flag ===0)   			
 		{
-
+			alert('checking the checked issue in Managers collection as user has subscribed to the domain');
 			//alert('subscribed issue may be in managers collection');
 			//alert('pulling->domain');
 			
@@ -400,7 +403,7 @@ Template.fullIssue.events({
 			{
 				// Regular Expression
 				regEx = new RegExp("^.*"+myDoc.category+".*","gi"); 
-				//alert('pulling->domain->myDoc.category');
+				alert('pulling->domain->myDoc.category '+myDoc.category);
 				// Checking the presence of keyword in details field
 				details = issue.details;
 				if(details)
@@ -419,19 +422,20 @@ Template.fullIssue.events({
 								if(Meteor.user().username === person[j].username)
 								{
 									// update
-									//alert('pulling->domain->present user found in domain collection');
+									alert('removing the issue in details part');
 									// Showing uninterest of the current user in this particular issue of his interested domain
-									Subscribed.update(
-										{
-    										"category": myDoc.category,
-    										"categorySubscribedUsers.username" : person[j].username
-										},
-										{ 
-    									"$addToSet": {
-        									"categorySubscribedUsers.$.issueNotToDisplay": issue
-    										}
-										}
-									)
+									//Subscribed.update({"_id":Subscribed.findOne({"category": myDoc.category, "categorySubscribedUsers.username" :person[j].username})._id},{ "$addToSet": {categorySubscribedUsers.j.issueNotToDisplay: issue}})
+
+								/*	Subscribed.update(
+									{
+    									"_id":Subscribed.findOne({"category": myDoc.category, "categorySubscribedUsers.username" :person[j].username})._id
+									},
+									{	 
+    								"$addToSet": {
+        								categorySubscribedUsers[j].issueNotToDisplay: issue
+    									}
+									}
+									) */
 									//alert('pulling->domain->present issue stored in domain collection');
 									// Send mail to the user who has posted the issue regarding unsubscription by the user
 									if(issueRaisedUser!='anonymous')
@@ -494,17 +498,18 @@ Template.fullIssue.events({
 									// alert('before updating the subscribed collection about notto displayed issues in shortdesc part');
 									// alert('pulling->domain->shortdesc->current user found on domain collection ');
 									// Showing uninterest of the current user in this particular issue of his interested domain
-									Subscribed.update(
-										{
-    										"category": myDoc.category,
-    										"categorySubscribedUsers.username" : person[j].username
-										},
-										{ 
-    									"$addToSet": {
-        									"categorySubscribedUsers.$.issueNotToDisplay": issue
-    										}
-										}
-									)
+									alert('removing the issue in shortdesc part');
+									//Subscribed.update({"_id":Subscribed.findOne({"category": myDoc.category, "categorySubscribedUsers.username" :person[j].username})._id},{ "$addToSet": {categorySubscribedUsers.j.issueNotToDisplay: issue}})
+								/*	Subscribed.update(
+									{
+    									"_id":Subscribed.findOne({"category": myDoc.category, "categorySubscribedUsers.username" :person[j].username})._id
+									},
+									{	 
+    								"$addToSet": {
+        								categorySubscribedUsers[j].issueNotToDisplay: issue
+    									}
+									}
+									) */
 
 									// Send mail to the user who has posted the issue regarding unsubscription by the user
 									if(issueRaisedUser!='anonymous')
@@ -561,17 +566,18 @@ Template.fullIssue.events({
 								//update
 								//	alert('before updating the subscribed collection about not to displayed issues in rest of the form part');
 								// Showing uninterest of the current user in this particular issue of his interested domain
-								Subscribed.update(
+								alert('removing the issue in rest of the form part');
+								//Subscribed.update({"_id":Subscribed.findOne({"category": myDoc.category, "categorySubscribedUsers.username" :person[j].username})._id},{ "$addToSet": {categorySubscribedUsers.j.issueNotToDisplay: issue}})
+							/*	Subscribed.update(
 								{
-    								"category": myDoc.category,
-    								"categorySubscribedUsers.username" : person[j].username
+    								"_id":Subscribed.findOne({"category": myDoc.category, "categorySubscribedUsers.username" :person[j].username})._id
 								},
-								{ 
-    								"$addToSet": {
-    	    						"categorySubscribedUsers.$.issueNotToDisplay": cursor
-	    							}
+								{	 
+    							"$addToSet": {
+        							categorySubscribedUsers[j].issueNotToDisplay: issue
+    								}
 								}
-								)
+								) */
 								//alert('inside pulling->domain->rest of form->updated subscribed collection ');
 								// Send mail to the user who has posted the issue regarding unsubscription by the user
 								if(issueRaisedUser!='anonymous')							
@@ -671,7 +677,7 @@ Template.fullIssue.done_checkbox = function () {
 								{
 									if(issueToBeUnmarked[k] === issue)
 									{
-										// alert('issue matched not to be displayed');
+										 alert('issue matched not to be displayed in details');
 										unmarked=1;
 										// alert('value of unmarked in details is set');
 										break;
@@ -727,7 +733,7 @@ Template.fullIssue.done_checkbox = function () {
 											if(issueToBeUnmarked[k] === issue)
 											{
 												// Returning set value of unmarked to indicate that current user has unsubscibed from this issue not from it's domain
-												// alert('issue matche for not to be displayed in shortdesc');
+												 alert('issue matche for not to be displayed in shortdesc');
 												unmarked=1;
 												// alert('unmarked set to one in shortdesc');
 												break;
@@ -777,7 +783,7 @@ Template.fullIssue.done_checkbox = function () {
 									if(issueToBeUnmarked[k] === issue)
 									{
 										// Returning set value of unmarked to indicate that current user has unsubscibed from this issue not from it's domain
-										// alert('isue matched with not to be displayed in rest of the part');
+										alert('isue matched with not to be displayed in rest of the part');
 										unmarked=1;
 										// alert('unmarked set to one in rest of the form part');
 										break;

@@ -1,7 +1,7 @@
 /**
  * Helpers for rendering Issue detail pages.
  */
-
+var global='';
 Template.issuePage.helpers({
 	currentIssue: function() {
 		//alert('inside issuePage');
@@ -12,11 +12,12 @@ Template.issuePage.helpers({
 	},
 	findSeachedComments: function() {
 		// Returning the comments which user wants to search
-		var count = Comments.find({ commentSearch:1}).count();		
-		return count;
+		return Comments.find({ commentSearch:1}).count();		
+		
 	},
 	searchedComments: function() {
 		//alert('inside searchedIssues');
+		//alert('session value in searchedIssues'+global);
 		return Comments.find({commentSearch:1}); //, {sort: {submitted: -1}});
 	}
 });
@@ -25,6 +26,7 @@ Template.issuePage.helpers({
 Template.issuePage.events({
 	'click #textbox': function(e) {
 		//alert('value is inside but changed');
+		//alert('global value '+global);
 		jQuery('#textbox').on('input', function() {
 		comments = Comments.find();
 		if(comments)
@@ -44,19 +46,22 @@ Template.issuePage.events({
 Template.issuePage.events({
 	'click #search': function(e) {
 		//alert('search textbox');
-		var key = document.querySelector('[name=keyword]').value;
+		global = document.querySelector('[name=keyword]').value;
+		//Session.set("key",document.querySelector('[name=keyword]').value );
+		Session.set("key",global);
+		//alert('sesion value '+ Session.get("key"));
 		var comments = Comments.find();
 		var regEx='', body='';
 		// Showing error message when user clicked the search button without entering keyword to find
-		if(!key)
+		if(!Session.get("key"))
 		{
 			alert('Enter element to search');
 		}
-		if(key)
+		if(Session.get("key"))
 		{
 			//alert('value is inside but not changed');
 			// Able to search every format of keyword entered
-			regEx = new RegExp("^.*"+key+".*","gi");
+			regEx = new RegExp("^.*"+Session.get("key")+".*","gi");
 			//alert('key '+key);
 			if(comments)
 			{
@@ -75,7 +80,7 @@ Template.issuePage.events({
 				});
 			}	
 		}
-
+		return false;
 	}
 });
 

@@ -1,6 +1,7 @@
 /**
  * Template helper for issues
  */
+var global='';
 Template.issues.helpers({
 	issues: function() {
 		//alert('returning the value');
@@ -13,12 +14,12 @@ Template.issues.helpers({
 	},
 	// Retrieve the count of issues that has been searched
 	findSeachedIssues: function() {
-		var count = Issues.find({issueClosed:0, issueSearch:1}).count();		
-		return count;
+		return Issues.find({issueClosed:0, issueSearch:1}).count();		
 	},
 	// Retrieve the issues that has been searched
 	searchedIssues: function() {
 		//alert('inside searchedIssues');
+		//alert('session value in searchedIssues'+global);
 		return Issues.find({issueClosed:0, issueSearch:1}); //, {sort: {submitted: -1}});
 	},
 	// Determine if all issues have been loaded
@@ -40,6 +41,7 @@ Template.issues.events({
 Template.issues.events({
 	'click #textbox': function(e) {
 		//alert('value is inside but changed');
+		//alert('global value '+global);
 		jQuery('#textbox').on('input', function() {
 		//alert('value gets changed');
 		issues = Issues.find();
@@ -60,19 +62,22 @@ Template.issues.events({
 Template.issues.events({
 	'click #search': function(e) {
 		//alert('search textbox');
-		var key = document.querySelector('[name=keyword]').value;
+		global = document.querySelector('[name=keyword]').value;
+		//Session.set("key",document.querySelector('[name=keyword]').value );
+		Session.set("key", global);
+		//alert('sesion value '+ Session.get("key"));
 		var issues = Issues.find();
 		var regEx='', unit='', dept='', shortdesc='', room='';
 
 		//Preventing the user to search without entering the keyword
-		if(!key)
+		if(!Session.get("key"))
 		{
 			alert('Enter element to search');
 		}
-		if(key)
+		if(Session.get("key"))
 		{
 			//alert('value is inside but not changed');
-			regEx = new RegExp("^.*"+key+".*","gi");
+			regEx = new RegExp("^.*"+Session.get("key")+".*","gi");
 			//alert('key '+key);
 			issues.forEach( function(myDoc)
 			{
@@ -98,7 +103,7 @@ Template.issues.events({
 			});
 
 		}
-
+	return false;
 	}
 });
 

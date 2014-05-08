@@ -240,8 +240,8 @@ if (Issues.find().count() === 0) {
 		done: false,
 		
 		categorySubscribedUsers:[
-		{
-			/*	_id: u4._id,
+		/*{
+				_id: u4._id,
 				username: "priya",
 			    issueNotToDisplay:[
 			    	
@@ -251,8 +251,8 @@ if (Issues.find().count() === 0) {
 					address : "priya@gmail.com",
 					verified : false
 				}
-			] */
-		}
+			] 
+		}*/
 	
 		]
 	});
