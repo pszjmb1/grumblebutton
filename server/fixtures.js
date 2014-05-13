@@ -5,6 +5,14 @@
 
 if (Issues.find().count() === 0) {
 
+	Accounts.onCreateUser(function (options, user) {
+  	if (options.profile) {
+    	//want the users facebook pic and it is not provided by the facebook.service
+    	user.profile = options.profile;
+    	user.notified = false;
+  	}
+    return user;
+});
 	Accounts.createUser({
   		'username'  : 'priya',
   		'password'  : '123456', //encrypted automatically 

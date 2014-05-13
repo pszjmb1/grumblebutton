@@ -33,6 +33,31 @@ Meteor.publish('subscribed', function() {
 });
 
 
+/*Meteor.publish('users', function() {
+    return Meteor.users.find({}, {fields: {notified: 0}});
+}); */
+
+/*
+Meteor.publish(null, function () {
+  	var fields = {
+        notified:0
+      }
+
+  return Meteor.users.find({}, {fields: fields})
+}); */
+
+Meteor.publish("users", function () {
+  if (this.userId) {
+    return Meteor.users.find({_id: this.userId},
+        {fields: {'notified': 1}});
+  } else {
+    this.ready();
+  }
+});
+
+
+
+
 
 
 

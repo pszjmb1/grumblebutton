@@ -25,7 +25,7 @@ Template.grumble.events({
 		var shortdesc = document.querySelector('[name=shortdesc]').value;
 		// alert('shortdesc '+shortdesc);
 		var category = document.querySelector('[name=category]').value; 
-		// alert('category '+category);
+		 //alert('category '+category);
 		var senderEmail = 'grumblebutton@gmail.com';
 		
 		var user = Meteor.user();
@@ -52,10 +52,11 @@ Template.grumble.events({
 
 		// List of Domains present in the collection Subscribed
 		var listOfDomain = Subscribed.find();
+		var listOfUsers='';
 		// alert('everything is correct');
 
 		// alert('inside grumble.js');
-		// alert('before calling Meteor.call()');
+		//alert('before calling Meteor.call()');
 		Meteor.call('grumble', issue, function(error, id)
 		{
 			if (error)
@@ -65,7 +66,6 @@ Template.grumble.events({
 			}
 			else
 			{
-				
 				
 				var messageToUser = "Hello "+Meteor.user().username+",\n\n"+"Your issue - "+shortdesc+" has been posted successfully"+
     				". The link for the concerned issue is :- http://localhost:15000/issues/";
@@ -96,7 +96,7 @@ Template.grumble.events({
 				// alert('before loop of subscribed collection');
 				listOfDomain.forEach( function(myDoc) 
 				{
-					// alert('myDoc.category '+myDoc.category);
+					//alert('myDoc.category '+myDoc.category);
 					var managerCategory = myDoc.category;
 					var messageToManager = "Hello "+myDoc.name+",\n\n"+"The new issue has been posted - "+shortdesc+
     					". Can you please look after this matter asap.\n\n"+
@@ -106,13 +106,13 @@ Template.grumble.events({
 					var regEx = new RegExp("^.*"+myDoc.category+".*","gi"); 
 
 					// Checking whether domain name is present in the detils part of the form
-					if(details)
+					if(details || shortdesc || category|| dept || unit)
 					{
-						if(details.match(regEx))
+						if(details.match(regEx) || shortdesc.match(regEx) || category.match(regEx) ||dept.match(regEx) || unit.match(regEx))
 						{										
-							// alert('inside details regular expression');
+							//alert('inside regular expression');
 							// Mail to manager regarding pop up of new issue
-							// alert('mail to manager');
+							//alert('mail to manager');
 							Meteor.call('sendEmail',
 								receiverEmail.emailId,  
 			        			senderEmail,
@@ -123,190 +123,34 @@ Template.grumble.events({
 
 							// Users who have subscribed to that domain, from Subscribed collection
  		 					person = myDoc.categorySubscribedUsers;
-							// alert('before person loop in details part');
+							//alert('before person loop in details part');
 							if(person && person.length)
 							{
 								// alert('person.length'+person.length)
 								for(j=0;j<person.length;j++)
 								{
 									
-									// Meteor.Router.to('issuePage', id);
-								   	// alert('checking the validity of the person present');
 									if(person[j].username)
 									{
-										// alert('person[j].username '+person[j].username);
-										var messageToSubscribedUsers = "Hello "+person[j].username+",\n\n"+ "The new issue has been raised - " +shortdesc+
-    										". The link for the concerned issue is :- http://localhost:15000/issues/";
-
-										// Notification to all subscribed Users of that domain
-										// alert('mail to subscribed users in details part ');
-										// alert('senderEmail '+senderEmail);
-										// alert('person[j].emails[0].address '+person[j].emails[0].address);
-									    // alert('messageToSubscribedUsers '+messageToSubscribedUsers);
-										// alert('id '+id);
-										// alert('subjectOfEmail '+subjectOfEmail)
-										Meteor.call('sendEmail',
-        		 	   	   					person[j].emails[0].address,  
-	            	     					senderEmail,
-	              		    				messageToSubscribedUsers,
-						   		   			id,
-							        	   	subjectOfEmail); 
-						        		// alert('notification to subscribed user in details part');
-										Notifications.insert({
-											userId: person[j]._id, // users id who has posted the issue
-											issueId: this._id,   // issue id
-											//commentId: comment._id,
-											//commenterName: comment.author,
-											postedUserId:Meteor.user() ,
-											postedUserName: Meteor.user().username,
-											read: false
-										});	
-									
+										//alert('person[j].username '+person[j].username);
+										Meteor.call('user', person[j].username,person[j].emails[0].address,senderEmail, id, subjectOfEmail, person[j]._id, shortdesc, function(error, result)
+										{
+										
+										});
 										
 									}
-									// alert('before updating field');
-									// Adding an extra field in the Subscribed collection so that inspite of having multiple occurences of a domain in the form, multiple time notification to the users can be prevented
-									Subscribed.update(myDoc._id, {$set: {found: 1}});
-									//var determine = Subscribed.findOne(myDoc._id);
-									//alert('value of found field after details part ');
-
 								}
 							}
 						}
 					}
-					// Checking whether keyword is present in shortdesc part of the form
-					myDocId = Subscribed.findOne(myDoc._id);							
-					foundValue = myDocId.found;
-					// alert('value of foundValue '+foundValue);
-					if(shortdesc)
-					{
-						if(!foundValue)
-						{
-							// alert('inside shortdesc part');
-							if(shortdesc.match(regEx))
-							{
-								// alert('category matches with shortdesc part');
 
-								// alert('mail to manager');
-								// Mail to manager
-								Meteor.call('sendEmail',
-									receiverEmail.emailId,  
-			        				senderEmail,
-			        				messageToManager,
-				    				id,
-									subjectOfEmail);
-
-								// Users who have subscribed to that domain, from Subscribed collection
- 			 					person = myDoc.categorySubscribedUsers;
- 			 					if(person && person.length)
-								{
-									// alert('before person loop in shortdesc part');
-									for(j=0;j<person.length;j++)
-									{
-										// alert('checking the validity of the person present');
-										if(person[j].username)
-										{
-											var messageToSubscribedUsers = "Hello "+person[j].username+",\n\n"+ "The new issue has been raised - " +shortdesc+
-    											". The link for the concerned issue is :- http://localhost:15000/issues/";
-
-											// Notification to all subscribed Users
-											// alert('mail to subscribed users in shortdesc part');
-											Meteor.call('sendEmail',
-												person[j].emails[0].address,
-        	 		   	   						senderEmail,
-	              		    					messageToSubscribedUsers,
-					   		   					id,
-					        	   				subjectOfEmail); 
-
-											// alert('notification to subscribed users in shortdesc part');
-											Notifications.insert({
-												userId: person[j]._id, // users id who has posted the issue
-												issueId: this._id,   // issue id
-												//commentId: comment._id,
-												//commenterName: comment.author,
-												postedUserId:Meteor.user() ,
-												postedUserName: Meteor.user().username,
-												read: false
-											});	
-										}
-										// Adding an extra field in the Subscribed collection so that inspite of having multiple occurences of a domain in the form, multiple time notification to the users can be prevented	
-										Subscribed.update(myDoc._id, {$set: {found: 1}});
-										//var determine = Subscribed.findOne(myDoc._id);
-										//alert('value of found field after shortdesc part '+determine.found);
-									}
-								}
-							}
-						}								
-					}
-					myDocId = Subscribed.findOne(myDoc._id);							
-					foundValue = myDocId.found;
-					// alert('checking in rest of the form part');
-					// Checking whether keyword is present in rest of the part of the form
-					if((category.match(regEx) ||dept.match(regEx) || unit.match(regEx)) && !foundValue)
-					{
-					
-						// alert('inside rest of the form part');
-						//	alert('mail to manager');
-						// Mail to manager
-						Meteor.call('sendEmail',
-							receiverEmail.emailId,  
-			        		senderEmail,
-			        		messageToManager,
-				    		id,
-							subjectOfEmail);
-
-						person = myDoc.categorySubscribedUsers;
-						if(person && person.length)
-						{
-							for(j=0;j<person.length;j++)
-							{
-								// alert('checking the validity of the person present');
-								if(person[j].username)
-								{
-									var messageToSubscribedUsers = "Hello "+person[j].username+",\n\n"+ "The new issue has been raised - " +shortdesc+
-    									". The link for the concerned issue is :- http://localhost:15000/issues/";
-
-									// Notification to all subscribed Users
-									// alert('mail to subscribed users in rest of the form part');
-									Meteor.call('sendEmail',
-        		 	   	   				person[j].emails[0].address,  // NEED TO BE CHANGED ACCORDING TO THE USER EMAIL ID  person[j].emails[0].address
-	            	     				senderEmail,
-	              		    			messageToSubscribedUsers,
-					   		   			id,
-					        	   		subjectOfEmail); 
-									// alert('notification to subscribed users in rest of the form');
-									Notifications.insert({
-										userId: person[j]._id, // users id who has posted the issue
-										issueId: this._id,   // issue id
-										//commentId: comment._id,
-										//commenterName: comment.author,
-										postedUserId:Meteor.user() ,
-										postedUserName: Meteor.user().username,
-										read: false
-										});	
-								}
-								// Adding an extra field in the Subscribed collection so that inspite of having multiple occurences of a domain in the form, multiple time notification to the users can be prevented	
-								Subscribed.update(myDoc._id, {$set: {found: 1}});
-								//var determine = Subscribed.findOne(myDoc._id);											
-								//alert('value of found field after rest of the form field part '+determine.found);						
-							}
-						}
-					}
-				// alert('loop completed one round')	;
 					
 			});
 			
-		// alert('making the found field 0 for next issue');
-		// Unsetting the found field for it's usage in next form filling
-		domainList = Subscribed.find();
-		domainList.forEach( function(myDoc) 
+			//alert('unsetting the notified field');
+			Meteor.call('setDefaultValue', function(error,result)
 			{
-
-				Subscribed.update(myDoc._id, {$set: {found: 0}});
-				//var determine = Subscribed.findOne(myDoc._id);											
-				//alert('value of found field after rest of the form field part '+determine.found);
-
-			});
+			}); 
 			//alert('before Meteor.Router.to() inside grumble.js');
 			Meteor.Router.to('issuePage', id);
 			//alert('after Meteor.Router.to() inside grumble.js');
@@ -320,7 +164,7 @@ Template.grumble.events({
 
 Template.grumble.helpers({
 	date: function() {
-		var date = new Date();
+	var date = new Date();
     var d = date.getDate();
     var m = date.getMonth() + 1;
     var y = date.getFullYear();

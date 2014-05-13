@@ -9,11 +9,14 @@ Deps.autorun(function() {
 	Meteor.subscribe('singleIssue', Session.get('currentIssueId'));
 	//Meteor.subscribe('issues', Session.get('currentIssueId'));
 	Meteor.subscribe('comments', Session.get('currentIssueId'));
-	
+	//Meteor.subscribe('users');	
+	Meteor.subscribe('users');
+
 });
 
 Meteor.subscribe('notifications');
 Meteor.subscribe('subscribed');
+
 
 
 
