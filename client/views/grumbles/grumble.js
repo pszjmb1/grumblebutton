@@ -37,8 +37,13 @@ Template.grumble.events({
 		// alert('issueRaisedUserEmailId '+issueRaisedUserEmailId);
 
 		// Manager's Email Id
-		var receiverEmail = Subscribed.findOne({category:category}).emailId;
-
+		if(category)
+		{
+			if(Subscribed.findOne({category:category}).emailId)
+			{
+				var receiverEmail = Subscribed.findOne({category:category}).emailId;
+			}
+		}	
 		// alert('receiverEmail '+receiverEmail);
 	   
 

@@ -3,13 +3,15 @@
 		<!--<div class="destroy"></div>-->
 			<div class="closedIssue-content">
 				<!-- <input class="check" name="markdone" type="checkbox" {{{done_checkbox}}} /> -->
-        			<h3>{{shortdesc}}- <span>{{dept}}</span> <span>{{unit}}</span> <span>{{room}}</span>
-        			<input type="button" value="Reopen" id="press" class="det btn"></h3>
+        			<h3>{{shortdesc}}- <span>submitted by {{author}}</span> <span>{{dept}}</span> <span>{{unit}}</span> <span>{{room}}</span>
+        			</h3>
 					<p>
 						<a href="{{closedIssuePagePath this}}">{{commentsCount}} comments</a>
 					</p>
 				</div>
-				<a href="{{closedIssuePagePath this}}" class="details btn">See Details</a>
+
+				<a href="{{closedIssuePagePath this}}" class="details btn">See Details</a> &nbsp; &nbsp;
+				<input type="button" value="Reopen" id="press" class="det btn">&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
 			</div>
 	</div>
 </template>

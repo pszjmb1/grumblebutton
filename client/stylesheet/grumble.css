@@ -48,7 +48,7 @@ border-radius: 0px 0px 3px 3px;
 
 .issue .issue-content { float: left }
 
-.closedIssue .closedIssue-content { float: left }
+.closedIssue .closedIssue-contentSubscribed.findOne({category:category}).emailId { float: left }
 
 .closedIssue .closedIssue-content h3 {
   margin: 0;
@@ -67,10 +67,17 @@ border-radius: 0px 0px 3px 3px;
 }
 
 .closedIssue .closedIssue-content p { margin: 0 }
-.closedIssue  .closedIssue-content h3 .det {
+.closedIssue  .closedIssue-content h3 {
   display: block;
   float: right;
   margin-top: 1%;
+}
+
+.closedIssue .det {
+  display: block;
+  float: right;
+  margin-top: 1%;
+  margin-right: 1.5%;
 }
 
 .closedIssue .details {
@@ -131,14 +138,14 @@ border-radius: 0px 0px 3px 3px;
   white-space: nowrap;
 }
 
-/*.dropdown-menu span {
+.dropdown-menu span {
 display: block;
 padding: 3px 20px;
 clear: both;
 line-height: 20px;
 color: #bbb;
 white-space: nowrap;
-}*/
+}
 
 .load-more {
   display: block;
@@ -168,7 +175,7 @@ table, input[type=submit]{
     margin-left: 2%;
 }
 table {
-    border-spacing: 1%;
+    border-spacing: 0;
     border-collapse: separate;
     width: 50%;
 }
@@ -225,8 +232,8 @@ label  {
 .issue .destroy {
     cursor: pointer;
     position: absolute;
-    left: 1px;
-    top: 50px;
+    left: 4px;
+    top: 35px;
     height: 20px;
     width: 20px;
 }
@@ -241,7 +248,7 @@ label  {
 }
 
 
-.issue:hover .destroy {
+.issue .destroy {
     background: url('/destroy.png') no-repeat 0 0;
 }
 
