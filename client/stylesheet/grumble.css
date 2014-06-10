@@ -12,6 +12,13 @@ grid-block, .main, .issue, .comments li, .comment-form, .closedIssue {
   margin-bottom: 1%;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
 }
+.fill {
+  background: #fff;
+  border-radius: 1% ;
+  padding: 0.5%;
+  margin-bottom: 1%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+}
 
 /*
 .navbar .navbar-inner {
@@ -48,7 +55,7 @@ border-radius: 0px 0px 3px 3px;
 
 .issue .issue-content { float: left }
 
-.closedIssue .closedIssue-contentSubscribed.findOne({category:category}).emailId { float: left }
+.closedIssue .closedIssue-content { float: left }
 
 .closedIssue .closedIssue-content h3 {
   margin: 0;
@@ -129,14 +136,14 @@ border-radius: 0px 0px 3px 3px;
 }
 .comments li h4 a { font-size: large }
 .comments li p:last-child { margin-bottom: 0 }
-.dropdown-menu span {
+/*.dropdown-menu span {
   display: block;
   padding: 0.5% 3%;
   clear: both;
   line-height: 20px;
   color: #bbb;
   white-space: nowrap;
-}
+} */
 
 .dropdown-menu span {
 display: block;
@@ -179,7 +186,7 @@ table {
     border-collapse: separate;
     width: 50%;
 }
-input[type=text],input[type=date],input[type=time], input[type=submit], select, label, textarea, legend, h3, .btn{
+input[type=text],input[type=date],input[type=time], input[type=submit], select, label, textarea, legend, h3, .btn, .buton{
   font-size: x-large;
 }
 input[type=text],input[type=date],input[type=time]{
@@ -203,12 +210,14 @@ select  {
 label  {
   font-weight: bold;
 }
+
 .btn{
   padding:1%;
 }
 
-
-
+.buton{
+  padding:0.45%;
+}
 
 .closedIssue .destroy {
     cursor: pointer;
