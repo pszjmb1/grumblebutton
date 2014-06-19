@@ -6,12 +6,11 @@
         			<h3>{{shortdesc}}- <span>submitted by {{author}}</span> <span>{{dept}}</span> <span>{{unit}}</span> <span>{{room}}</span>
         			</h3>
 					<p>
-						<a href="{{closedIssuePagePath this}}">{{commentsCount}} comments</a>
+						<a href="{{pathFor 'closedIssuePage' params = this}}">{{commentsCount}} comments</a>
 					</p>
-				</div>
-
-				<a href="{{closedIssuePagePath this}}" class="details btn">See Details</a>
+				
+					</div>
+				<a href="{{pathFor 'closedIssuePage' params = this}}" class="details btn">See Details</a>
 				<input type="button" value="Reopen" id="press" class="det buton">
-			</div>
 	</div>
 </template>

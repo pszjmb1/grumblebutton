@@ -157,7 +157,7 @@ Template.grumble.events({
 			{
 			}); 
 			//alert('before Meteor.Router.to() inside grumble.js');
-			Meteor.Router.to('issuePage', id);
+			Router.go('issues', id);
 			//alert('after Meteor.Router.to() inside grumble.js');
 									
 		}

@@ -1,20 +1,20 @@
 <template name="header">
-	<header class="navbar">
-		<div class="navbar-inner">
-			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-coll
-		apse">
-			</a>
-			<a class="details btn" href="{{grumblePath}}">Grumble</a>
-			{{#if currentUser}}
-					<a class="details btn" href="{{issuesPath}}">See Issues</a>
-					<a class="details btn" href="{{closedIssuesPath}}">Closed Issues</a>
-					<a class="details btn" href="{{subscribedKeywordsPath}}">Watchlist</a>
-					{{> notifications}}
-					
-			{{/if}}
-			<span class="nav pull-right">
-				<li>{{loginButtons}}</li>
-			</span>
-		</div>
-	</header>
+    <header class="navbar">
+        <div class="navbar-inner">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-coll
+        apse">
+            </a>
+            <a class="details btn" href="{{pathFor 'grumble'}}">Grumble</a>
+            {{#if currentUser}}
+                    <a class="details btn" href="{{pathFor 'issues'}}">See Issues</a>
+                    <a class="details btn" href="{{pathFor 'closedIssues'}}">Closed Issues</a>
+                    <a class="details btn" href="{{pathFor 'subscribedKeywords'}}">Watchlist</a>
+                    {{> notifications}}
+
+            {{/if}}
+            <span class="nav pull-right">
+                <li>{{> loginButtons}}</li>   <!--should be {{> }} here in order to display login functionality-->
+            </span>
+        </div>
+    </header>
 </template>

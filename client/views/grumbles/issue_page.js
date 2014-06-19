@@ -4,7 +4,7 @@
 var global='';
 Template.issuePage.helpers({
 	currentIssue: function() {
-		//alert('inside issuePage');
+		alert('inside issuePage'+Issues.findOne(Session.get('currentIssueId')));
 		return Issues.findOne(Session.get('currentIssueId'));
 	},
 	comments: function() {

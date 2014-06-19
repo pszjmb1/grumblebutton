@@ -33,7 +33,7 @@ Template.fullIssue.events({
 	// 2) OR  user wants to subscribed this issue only irrespective of domain of issue
 	if(document.getElementById('check').checked)
 	{
-		alert('checked part');
+		//alert('checked part');
 		//Adding the username in the collection if s/he has subscribed to that issue
 		// Flag indicates that the category of issue is present anywhere in the form
 		flag =0;
