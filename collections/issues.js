@@ -55,9 +55,10 @@ Meteor.methods({
 		// pick out the whitelisted keys
 		var issue = _.extend(
 			_.pick(grumbleAttribs,
-			'date', 'time', 'dept',
+			'shortdesc','anonymous', 'date', 'time'
+			/*'dept',
 			'unit', 'room', 'urgency',
-			'category', 'shortdesc', 'details', 'anonymous'
+			'category',  'details', */
 			), {
 					userId: user._id,
 					author: userName,

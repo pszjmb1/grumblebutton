@@ -1,16 +1,14 @@
 <template name="header">
     <header class="navbar">
         <div class="navbar-inner">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-coll
-        apse">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             </a>
             <a class="details btn" href="{{pathFor 'grumble'}}">Sayit Today</a>
             {{#if currentUser}}
-                    <a class="details btn" href="{{pathFor 'issues'}}">See Issues</a>
-                    <a class="details btn" href="{{pathFor 'closedIssues'}}">Closed Issues</a>
-                    <a class="details btn" href="{{pathFor 'subscribedKeywords'}}">Watchlist</a>
-                    {{> notifications}}
-
+                <a class="details btn" href="{{pathFor 'issues'}}">See Issues</a>
+                <a class="details btn" href="{{pathFor 'closedIssues'}}">Closed Issues</a>
+                <a class="details btn" href="{{pathFor 'subscribedKeywords'}}">Watchlist</a>
+                {{> notifications}}
             {{/if}}
             <span class="nav pull-right">
                 <li>{{> loginButtons}}</li>   <!--should be {{> }} here in order to display login functionality-->

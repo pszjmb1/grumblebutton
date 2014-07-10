@@ -192,12 +192,22 @@ input[type=text],input[type=date],input[type=time], input[type=submit], select, 
 input[type=text],input[type=date],input[type=time]{
   -webkit-appearance: none; 
   -moz-appearance: none;
-  display: block;
-  margin-bottom: 5%;
-  width:90%;
+  /*margin-bottom: 5%;
+  width:90%;*/
+
   height: 50px;
   line-height: 50px;
   border: 1% solid;
+}
+input[type=text],
+textarea {
+  width: 445px;
+}
+textarea {
+  height: 100px;
+}
+fieldset{
+  display: inline;  
 }
 input[type=submit] {
   height: 50px;
@@ -209,6 +219,9 @@ select  {
 }
 label  {
   font-weight: bold;
+}
+#datetime .controls{
+  display: inline-block;
 }
 
 .btn{

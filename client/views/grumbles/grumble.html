@@ -1,92 +1,43 @@
 <template name="grumble">
+    <h1>Report Minor Issue</h1>
     <form class="main">
+        <div class="control-group">
+            <label class="control-label" for="anonymous">Anonymity</label>
+            <div class="controls">
+                <select name="anonymous" >
+                    <option value="anonymous">Anonymous</option>
+                    <option value="identifiable">Identifiable</option>
+                </select>
+            </div>
+        </div>
         <fieldset>
-            <legend>Report Minor Issue</legend>
-                <table border="0">
-                    <tr>
-                        <td>
-                            <label class="control-label" for="shortdesc"><span style="color:red;">*</span>&nbsp;    Description</label>
-                            <input name="shortdesc" type="text" value="" placeholder="Radiator not working"/>
-                        </td>
-                        <td>
-                            <label class="control-label" for="urgency">Urgency</label>
-                            <select name="urgency" >
-                                <option value="high">High</option>
-                                <option value="medium">Medium</option>
-                                <option value="low">Low</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label" for="date">Date</label>
-                            <input name="date" type="date" value="{{date}}" />
-                        </td>
-                        <td>
-                            <label class="control-label" for="time">Time</label>
-                            <input name="time" type="time" value="{{time}}" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label" for="dept">Department/Building</label>
-                            <input name="dept" type="text" value="" placeholder="Physiotherapy"/>
-                        </td>
-                        <td>
-                            <label class="control-label" for="unit">Unit</label>
-                            <input name="unit" type="text" value="" placeholder="Occupational Therapy"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label" for="room">Room</label>
-                            <input name="room" type="text" value="" placeholder="P2"/>
-                        </td>
-                        <td>
-                            <label class="control-label" for="category">Category</label>
-                            <input name="category" type="text" value="" placeholder="Utility"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label" for="details">Details</label>
-                            <textarea name="details" value="" placeholder="Broken radiator next to vending      machine."></textarea>
-                        </td>
-                        <td>
-                            <label class="control-label" for="anonymous">Anonymity</label>
-                            <select name="anonymous" >
-                                <option value="anonymous">Anonymous</option>
-                                <option value="identifiable">Identifiable</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-                <div class="control-group">
-                    <div class="controls">
-                    <input type="submit" value="Submit" class="btn btn-primary"/>
-                </div>
-                </div>
-            </fieldset>
-        </form>
-    </template> 
-
-<template name="grumble2">
-    <form class="main">
-        <fieldset>
-        <legend>New Grumble</legend>
-            <table border="0">
-                <tr>
-                    <td>
-                        <label class="control-label" for="details"><span style="color:red;">*</span>&nbsp;Description</label>
-                        <textarea name="details" value="" placeholder="Broken radiator next to vending machine."></textarea>
-                    </td>
-                </tr>
-            </table>
-            <div class="control-group">
+            <div class="control-group" id="datetime">
                 <div class="controls">
-                    <input type="submit" value="Submit" class="btn btn-primary"/>
+                    <label class="control-label" for="date">Date</label>
+                    <input name="date" type="date" value="{{date}}" />       
+                </div>
+                <div class="controls">                
+                    <label class="control-label" for="time">Time</label>
+                    <input name="time" type="time" value="{{time}}" />
                 </div>
             </div>
         </fieldset>
+        <div class="control-group">
+            <label class="control-label" for="location">Location</label>
+            <div class="controls">
+                <input name="location" type="text" value="" />    
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="details">Please describe the issue</label>
+            <div class="controls">
+                <textarea name="shortdesc" value=""></textarea>   
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" value="Submit" class="btn btn-primary"/>
+            </div>
+        </div>
     </form>
-</template>
+</template> 

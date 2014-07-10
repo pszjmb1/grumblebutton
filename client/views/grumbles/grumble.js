@@ -9,22 +9,22 @@ Template.grumble.events({
 		var issue = {
 			date: $(e.target).find('[name=date]').val(),
 			time: $(e.target).find('[name=time]').val(),
-			dept: $(e.target).find('[name=dept]').val(),
-			unit: $(e.target).find('[name=unit]').val(),
-			room: $(e.target).find('[name=room]').val(),
-			urgency: $(e.target).find('[name=urgency]').val(),
-			category: $(e.target).find('[name=category]').val(),
+			location: $(e.target).find('[name=location]').val(),
 			shortdesc: $(e.target).find('[name=shortdesc]').val(),
-			details: $(e.target).find('[name=details]').val(),
-			anonymous: $(e.target).find('[name=anonymous]').val(),
+			anonymous: $(e.target).find('[name=anonymous]').val()
+			//unit: $(e.target).find('[name=unit]').val(),
+			//room: $(e.target).find('[name=room]').val(),
+			//urgency: $(e.target).find('[name=urgency]').val(),
+			//category: $(e.target).find('[name=category]').val(),
+			//shortdesc: $(e.target).find('[name=shortdesc]').val(),
 		}
 		
 		// Getting all the field values of the form
-		var details = document.querySelector('[name=details]').value;
+		var details = null;//document.querySelector('[name=details]').value;
 		// alert('details '+details);
 		var shortdesc = document.querySelector('[name=shortdesc]').value;
 		// alert('shortdesc '+shortdesc);
-		var category = document.querySelector('[name=category]').value; 
+		//var category = document.querySelector('[name=category]').value; 
 		 //alert('category '+category);
 		var senderEmail = 'grumblebutton@gmail.com';
 		
@@ -37,20 +37,20 @@ Template.grumble.events({
 		// alert('issueRaisedUserEmailId '+issueRaisedUserEmailId);
 
 		// Manager's Email Id
-		if(category)
+		/*if(category)
 		{
 			if(Subscribed.findOne({category:category}).emailId)
 			{
 				var receiverEmail = Subscribed.findOne({category:category}).emailId;
 			}
-		}	
+		}	*/
 		// alert('receiverEmail '+receiverEmail);
 	   
 
 		var subjectOfEmail = "Notification of New Issue";
-		var dept = document.querySelector('[name=dept]').value;
-		// alert('dept '+dept);
-		var unit = document.querySelector('[name=unit]').value; 
+		var location = document.querySelector('[name=location]').value;
+		// alert('location '+location);
+		//var unit = document.querySelector('[name=unit]').value; 
 		var authorName = document.querySelector('[name=anonymous]').value; 
 		// alert('unit '+ unit);
 		var i,j, person='', myDocId=0, foundValue=0, domainList='';
@@ -111,9 +111,9 @@ Template.grumble.events({
 					var regEx = new RegExp("^.*"+myDoc.category+".*","gi"); 
 
 					// Checking whether domain name is present in the detils part of the form
-					if(details || shortdesc || category|| dept || unit)
+					if(shortdesc || location)// details || category || unit)
 					{
-						if(details.match(regEx) || shortdesc.match(regEx) || category.match(regEx) ||dept.match(regEx) || unit.match(regEx))
+						if(shortdesc.match(regEx) ||location.match(regEx))// || category.match(regEx) || details.match(regEx) || unit.match(regEx))
 						{										
 							//alert('inside regular expression');
 							// Mail to manager regarding pop up of new issue
