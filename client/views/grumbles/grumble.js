@@ -11,12 +11,12 @@ Template.grumble.events({
 			time: $(e.target).find('[name=time]').val(),
 			location: $(e.target).find('[name=location]').val(),
 			shortdesc: $(e.target).find('[name=shortdesc]').val(),
-			anonymous: $(e.target).find('[name=anonymous]').val()
+			anonymous: $(e.target).find('[name=anonymous]').val(),
+			device: navigator.userAgent
 			//unit: $(e.target).find('[name=unit]').val(),
 			//room: $(e.target).find('[name=room]').val(),
 			//urgency: $(e.target).find('[name=urgency]').val(),
 			//category: $(e.target).find('[name=category]').val(),
-			//shortdesc: $(e.target).find('[name=shortdesc]').val(),
 		}
 		
 		// Getting all the field values of the form

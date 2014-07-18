@@ -114,6 +114,7 @@ if (Issues.find().count() === 0) {
 		issueSearch:0,
 		closedIssueSearch:0,
 		subscribedUsers:[ ],
+		device: "Mozilla/5.0 (Windows NT 6.1; WOW64l rv:25.0) Gecko/20100101 Firefox/25.0",
 		commentsCount: 2,
 	});  
 
@@ -152,6 +153,7 @@ if (Issues.find().count() === 0) {
 		issueClosed:0,
 		issueSearch:0,
 		subscribedUsers:[ ],
+		device: "Mozilla/5.0 (Windows NT 6.1; WOW64l rv:25.0) Gecko/20100101 Firefox/25.0",
 		commentsCount: 0
 	});
 
@@ -174,6 +176,7 @@ if (Issues.find().count() === 0) {
 		issueClosed:0,
 		issueSearch:0,
 		subscribedUsers:[ ],
+		device: "Mozilla/5.0 (Windows NT 6.1; WOW64l rv:25.0) Gecko/20100101 Firefox/25.0",
 		commentsCount: 0,
 	});
 */
@@ -195,6 +198,7 @@ if (Issues.find().count() === 0) {
 		issueSearch:0,
 		closedIssueSearch:0,
 		subscribedUsers:[ ],
+		device: "Mozilla/5.0 (Windows NT 6.1; WOW64l rv:25.0) Gecko/20100101 Firefox/25.0",
 		commentsCount : 0,
 	}); 
 
@@ -216,6 +220,7 @@ if (Issues.find().count() === 0) {
 		issueSearch:0,
 		closedIssueSearch:0,
 		subscribedUsers:[ ],
+		device: "Mozilla/5.0 (Windows NT 6.1; WOW64l rv:25.0) Gecko/20100101 Firefox/25.0",
 		commentsCount : 0,
 	}); 
 
@@ -237,6 +242,7 @@ if (Issues.find().count() === 0) {
 		issueSearch:0,
 		closedIssueSearch:0,
 		subscribedUsers:[ ],
+		device: "Mozilla/5.0 (Windows NT 6.1; WOW64l rv:25.0) Gecko/20100101 Firefox/25.0",
 		commentsCount : 0,
 	}); 
 
@@ -345,6 +351,7 @@ if (Issues.find().count() === 0) {
 		issueClosed:0,
 		issueSearch:0,
 		subscribedUsers:[ ],
+		device: "Mozilla/5.0 (Windows NT 6.1; WOW64l rv:25.0) Gecko/20100101 Firefox/25.0",
 		closer: u2._id
 	}); */
 
@@ -364,7 +371,7 @@ if (Issues.find().count() === 0) {
 			issueClosed:0,
 			issueSearch:0,
 			subscribedUsers:[ ],
-		         
+		        agent: "Mozilla/5.0 (Windows NT 6.1; WOW64l rv:25.0) Gecko/20100101 Firefox/25.0', 
 			commentsCount: 0
 		});
 	}  */
