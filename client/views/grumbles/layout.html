@@ -1,6 +1,6 @@
 <template name="layout">
+	{{> header}}
 	<div class="container">
-		{{> header}}
 		{{> errors}}
 		<div id="main" class="row-fluid">
 			{{#if currentUser}}
@@ -9,5 +9,7 @@
 				{{> accessDenied}}
 			{{/if}}
 		</div>
+		<div class="push"></div>
 	</div>
+	{{> footer}}
 </template>

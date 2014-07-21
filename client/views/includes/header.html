@@ -1,16 +1,19 @@
 <template name="header">
     <header class="navbar">
         <div class="navbar-inner">
+		<div class="branding">
+			<h1 id="brand1">NHS</h1><h2 id="brand2"> Sayit.Today</h2>
+		</div>
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             </a>
-            <a class="details btn" href="{{pathFor 'report'}}">Sayit Today</a>
+            <a class="details btn" href="{{pathFor 'report'}}">New Issue</a>
             {{#if currentUser}}
-                <a class="details btn" href="{{pathFor 'issues'}}">See Issues</a>
+                <a class="details btn" href="{{pathFor 'issues'}}">Open Issues</a>
                 <a class="details btn" href="{{pathFor 'closedIssues'}}">Closed Issues</a>
                 <a class="details btn" href="{{pathFor 'subscribedKeywords'}}">Watchlist</a>
+		<a class="details btn" href="{{pathFor 'notifications'}}">Notifications</a>
 		<a class="details btn" href="{{pathFor 'studyInfo'}}">About Sayit</a>
-                {{> notifications}}
-            {{/if}}
+		{{/if}}
             <span class="nav pull-right">
                 <li>{{> loginButtons}}</li>   <!--should be {{> }} here in order to display login functionality-->
             </span>
