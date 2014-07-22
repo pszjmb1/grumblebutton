@@ -313,3 +313,18 @@ label  {
 #brand1, #brand2  {
 	display: inline;
 }
+
+.logoContainer {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	text-align: center;
+	padding: 1em;
+}
+
+.logo {
+	width: 250px;
+	height: 125px;
+	padding-left: 1em;
+	padding-right: 1em;
+}
