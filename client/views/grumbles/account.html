@@ -1,0 +1,16 @@
+<template name="account">
+	Username <input type="text" name="user" required="true"><br>
+	Email Address <input type="email" name="email" required="true"><br>
+	Password <input type="password" name="password" required="true"><br>
+	Confirm Password <input type="password" name="passwordConfirm" required="true"><br>
+	<!-- Security question <select name="securityQuestion">
+		<option value="">Please select a security question</option>
+		<option value="maidenName">Mother's maiden name</option>
+		<option value="petName">Name of pet</option>
+		<option value="primSch">Primary school name</option>
+	</select><br>
+	Answer <input type="text" name="answer" required="true"><br> -->
+	<input type="submit" value="Update">
+	<input type="reset" value="Reset">
+	<a class="details btn" href="{{pathFor 'home'}}">Cancel</a>
+</template>

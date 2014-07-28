@@ -13,14 +13,14 @@ Deps.autorun(function() {
 	//Meteor.subscribe('users');	
 	Meteor.subscribe('users');
 
-	if(!Meteor.userId()){
+	/*if(!Meteor.userId()){
 		if(loggedIn){
 			window.location.replace("/");
 		}
 		else{
 			loggedIn = true;
 		} 
-	}
+	}*/
 });
 
 Meteor.subscribe('notifications');

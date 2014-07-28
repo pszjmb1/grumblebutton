@@ -3,11 +3,7 @@
 	<div class="container">
 		{{> errors}}
 		<div id="main" class="row-fluid">
-			{{#if currentUser}}
-				{{> yield}}
-			{{else}}
-				{{> home}}
-			{{/if}}
+			{{> yield}}
 		</div>
 		<div class="push"></div>
 	</div>
