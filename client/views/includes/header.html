@@ -12,9 +12,12 @@
                 <a class="details btn" href="{{pathFor 'closedIssues'}}">Closed Issues</a>
                 <a class="details btn" href="{{pathFor 'subscribedKeywords'}}">Watchlist</a>
 		<a class="details btn" href="{{pathFor 'notifications'}}">Notifications</a>
-		<a class="details btn" href="{{pathFor 'studyInfo'}}">About Sayit</a>
+		<a class="details btn" href="{{pathFor 'modifyAccount'}}">Account Info</a>
 		{{/if}}
             <span class="nav pull-right">
+                {{#if currentUser}}
+                    <a class="logout details btn">Logout</a>
+                {{/if}}
                 <li>{{> loginButtons}}</li>   <!--should be {{> }} here in order to display login functionality-->
             </span>
         </div>

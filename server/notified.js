@@ -41,7 +41,7 @@ Meteor.methods({
 Meteor.methods({
 
   setDefaultValue: function(){
-  	console.log('noified value is unset again');
+  	console.log('notified value is unset again');
     Meteor.users.find().forEach( function(myUsers) 
       {
 	 Meteor.users.update(myUsers._id, {$set: {notified : 0}});	
