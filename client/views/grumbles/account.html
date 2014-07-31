@@ -1,7 +1,4 @@
 <template name="account">
-	{{#if currentUser}}
-		<h3>Account Details</h3><br>
-	{{/if}}
 	Username <input type="text" name="user" required="true" id="user" value="{{username}}"><br>
 	Email Address <input type="email" name="email" required="true" id="email" value="{{email}}"><br>
 	{{#if currentUser}}

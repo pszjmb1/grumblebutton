@@ -1,6 +1,21 @@
 <template name="modifyAccount">
 	{{> studyInfo}}
 	<form method="post">
-		{{> account}}
+		<h3 class="title">Account Details</h3><br>
+		<div class="leftColumn">
+			{{> account}}
+		</div>
+		<div class="rightColumn">
+			<h3>Profile Information</h3>
+			First Name<input type="text" name="firstName"><br>
+			Surname<input type="text" name="surname"><br>
+			Department<select>
+				<option></option>
+				<option>Maternity</option>
+				<option>Accident and Emergency</option>
+				<option>Cardiology</option>
+				<option>Intensive Care</option>
+			</select>
+		</div>
 	</form>
 </template>

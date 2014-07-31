@@ -332,3 +332,18 @@ label  {
 input[type='checkbox'] {
   margin: 1em;
 }
+
+.rightColumn {
+  float:right;
+  width:50%;
+}
+
+.leftColumn {
+  float:left;
+  width:50%;
+}
+
+.title {
+  text-align: center;
+  margin: 25px 0px 0px;
+}
