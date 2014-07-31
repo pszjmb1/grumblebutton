@@ -6,13 +6,13 @@
 if (Issues.find().count() === 0) {
 
 	Accounts.onCreateUser(function (options, user) {
-  	if (options.profile) {
-    	//want the users facebook pic and it is not provided by the facebook.service
-    	user.profile = options.profile;
-    	user.notified = false;
-  	}
-    return user;
-});
+  		if (options.profile) {
+    		//want the users facebook pic and it is not provided by the facebook.service
+    		user.profile = options.profile;
+    		user.notified = false;
+  		}
+    	return user;
+	});
 	Accounts.createUser({
   		'username'  : 'priya',
   		'password'  : '123456', //encrypted automatically 
@@ -375,8 +375,47 @@ if (Issues.find().count() === 0) {
 			commentsCount: 0
 		});
 	}  */
+
+	Notifications.insert({
+		userId: u1._id,
+		issueId: Issues.findOne()._id,   
+		subscribedUserId: u2._id,
+		subscribedUserName: u2.username,
+		read: false
+	});
+	Notifications.insert({
+		userId: u1._id,
+		issueId: Issues.findOne()._id,
+		openerId: u2._id,
+		openerName: u2.username,
+		read: false
+	});
+	Notifications.insert({
+		userId: u1._id,
+		issueId: Issues.findOne()._id,
+		unSubscribedUserId: u2._id,
+		unSubscribedUserName: u2.username,
+		read: false
+	});
+	Notifications.insert({
+		userId: u1._id,
+		issueId: Issues.findOne()._id,
+		postedUserId: u2._id,
+		postedUserName: u2.username,
+		read: false
+	});
+	Notifications.insert({
+		userId: u1._id,
+		issueId: Issues.findOne()._id,
+		closerId: u2._id,
+		closerName: u2.username,
+		read: false
+	});
+	Notifications.insert({
+		userId: u1._id,
+		issueId: Issues.findOne()._id,
+		commenterId: u2._id,
+		commenterName: u2.username,
+		read: false
+	})
 }
-
-
-
-

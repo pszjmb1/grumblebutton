@@ -87,11 +87,11 @@ Template.grumble.events({
 						subjectOfEmail);
 					// alert('notification to user itself');
 					Notifications.insert({
-						userId: Meteor.user(), // users id who has posted the issue
+						userId: Meteor.userId(), // users id who has posted the issue
 						issueId: id,   // issue id
 						//commentId: comment._id,
 						//commenterName: comment.author,
-						postedUserId:Meteor.user() ,
+						postedUserId:Meteor.userId() ,
 						postedUserName: Meteor.user().username,
 						read: false
 					});	 

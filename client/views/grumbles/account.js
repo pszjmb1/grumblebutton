@@ -16,20 +16,6 @@ Template.modifyAccount.events({
 			return;
 		}
 		else {
-			/*var user = {
-				'username' : $(e.target).find('[name=user]').val(),
-				'email' : $(e.target).find('[name=email]').val()*/
-				/*'question' : $(e.target).find('[name=securityQuestion]').val(),
-				'answer' : $(e.target).find('[name=answer]').val()*/
-			/*};
-			console.log(user);
-			Accounts.update({_id: Meteor.userId()}, {$set: {'username' : $(e.target).find('[name=user]').val(), 'email' : $(e.target).find('[name=email]').val()
-			}});
-			if($(e.target).find('[name=password]').val() !== ""){
-				var oldPassword = $(e.target).find('[name=oldPassword]').val();
-				var newPassword = $(e.target).find('[name=password]').val();
-				Accounts.changePassword(oldPassword, newPassword);
-			}*/
 			if($(e.target).find('[name=password]').val() == ""){
 				Meteor.call("modifyUser", Meteor.userId(), $(e.target).find('[name=user]').val(), $(e.target).find('[name=email]').val());
 			}else{
@@ -43,8 +29,6 @@ Template.modifyAccount.events({
 	
 	'click .reset' : function(e) {
 		setDetails();
-		//alert(Meteor.user().username);
-		//document.getElementById("user").value = userInfo.username;
 	}
 
 });
@@ -67,7 +51,3 @@ Template.account.helpers({
 		}
 	}
 });
-
-window.onload=function(){
-	setDetails();
-};

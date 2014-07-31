@@ -23,33 +23,33 @@
 <template name="notification">
 	<li>
 		{{#if openerName}}
-			<a href="{{pathFor 'issuePage' params = issueId}}">
-			<strong>{{openerName}}</strong> has opened the post related to you
+			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
+			<strong>{{openerName}}</strong> has opened a post related to you
 			</a>
 		{{/if}}
 		{{#if subscribedUserName}}
-			<a href="{{pathFor 'issuePage' params = issueId}}">
-			<strong>{{subscribedUserName}}</strong> has subscribed the post related to you
+			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
+			<strong>{{subscribedUserName}}</strong> has subscribed to a post related to you
 			</a>
 		{{/if}}
 		{{#if unSubscribedUserName}}
-			<a href="{{pathFor 'issuePage' params = issueId}}">
-			<strong>{{unSubscribedUserName}}</strong> has unsubscribed the post related to you
+			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
+			<strong>{{unSubscribedUserName}}</strong> has unsubscribed from a post related to you
 			</a>
 		{{/if}}
 		{{#if postedUserName}}
-			<a href="{{pathFor 'issuePage' params = issueId}}">
+			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
 			<strong>{{postedUserName}}</strong> has posted a new post
 			</a>
 		{{/if}}			
 		{{#if closerName}}
-			<a href="{{pathFor 'issuePage' params = issueId}}">
-			<strong>{{closerName}}</strong> has closed the post related to you
+			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
+			<strong>{{closerName}}</strong> has closed a post related to you
 			</a>
 		{{/if}}
 		{{#if commenterName}}
-			<a href="{{pathFor 'issuePage' params = issueId}}">
-			<strong>{{commenterName}}</strong> commented on the post related to you
+			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
+			<strong>{{commenterName}}</strong> commented on a post related to you
 			</a>
 		{{/if}}
 	</li>
