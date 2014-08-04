@@ -12,14 +12,11 @@ Template.signUp.events({
 			return;
 		}
 		else{
-			var user = {
-				'username' : $(e.target).find('[name=user]').val(),
-				'email' : $(e.target).find('[name=email]').val(),
-				'password' : $(e.target).find('[name=password]').val()
-				/*'question' : $(e.target).find('[name=securityQuestion]').val(),
-				'answer' : $(e.target).find('[name=answer]').val()*/
-			}
-			var userId = Accounts.createUser(user);
+			var options = {};
+			options.username = $(e.target).find('[name=user]').val();
+			options.password = $(e.target).find('[name=password]').val();
+			options.email = $(e.target).find('[name=email]').val();
+			var user = Accounts.createUser(options);
 			Router.go('/');
 		}
 	}

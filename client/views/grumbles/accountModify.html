@@ -1,21 +1,29 @@
 <template name="modifyAccount">
 	{{> studyInfo}}
-	<form method="post">
+	<form method="post" name="account" id="account">
 		<h3 class="title">Account Details</h3><br>
 		<div class="leftColumn">
 			{{> account}}
 		</div>
 		<div class="rightColumn">
 			<h3>Profile Information</h3>
-			First Name<input type="text" name="firstName"><br>
-			Surname<input type="text" name="surname"><br>
-			Department<select>
-				<option></option>
-				<option>Maternity</option>
-				<option>Accident and Emergency</option>
-				<option>Cardiology</option>
-				<option>Intensive Care</option>
+			<label for="firstName">First Name</label><input type="text" name="firstName" value="{{firstName}}"><br>
+			<label for="surname">Surname</label><input type="text" name="surname" value="{{surname}}"><br>
+			<label for="unit">Unit</label>
+			<select name="unit" id="unit">
+				<option value=""></option>
+				{{#each unitFill}}
+					<option value="{{value}}" {{unit value}}>{{text}}</option>
+				{{/each}}
 			</select>
+			<label for="department">Department/Ward</label>
+			<select name="department" id="department">
+				<option value=""></option>
+				{{#each deptFill}}
+					<option value="{{value}}" {{department value}}>{{text}}</option>
+				{{/each}}
+			</select><br>
+			<label for="room">Room</label><input type="text" name="room" value="{{room}}"><br>
 		</div>
 	</form>
 </template>

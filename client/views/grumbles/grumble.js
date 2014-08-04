@@ -9,12 +9,12 @@ Template.grumble.events({
 		var issue = {
 			date: $(e.target).find('[name=date]').val(),
 			time: $(e.target).find('[name=time]').val(),
-			location: $(e.target).find('[name=location]').val(),
+			dept: $(e.target).find('[name=department]').val(),
 			shortdesc: $(e.target).find('[name=shortdesc]').val(),
 			anonymous: $(e.target).find('[name=anonymous]').val(),
-			device: navigator.userAgent
-			//unit: $(e.target).find('[name=unit]').val(),
-			//room: $(e.target).find('[name=room]').val(),
+			device: navigator.userAgent,
+			unit: $(e.target).find('[name=unit]').val(),
+			room: $(e.target).find('[name=room]').val()
 			//urgency: $(e.target).find('[name=urgency]').val(),
 			//category: $(e.target).find('[name=category]').val(),
 		}
@@ -48,7 +48,7 @@ Template.grumble.events({
 	   
 
 		var subjectOfEmail = "Notification of New Issue";
-		var location = document.querySelector('[name=location]').value;
+		var location = document.querySelector('[name=unit]').value + " " + document.querySelector('[name=department]').value +" "+ document.querySelector('[name=room]').value;
 		// alert('location '+location);
 		//var unit = document.querySelector('[name=unit]').value; 
 		var authorName = document.querySelector('[name=anonymous]').value; 
@@ -180,5 +180,29 @@ Template.grumble.helpers({
 		var hours = date.getHours();
 		var min = date.getMinutes();
 		return '' + (hours<=9 ? '0' + hours : hours) + ':' + (min<=9 ? '0' + min : min);
+	},
+	unit: function(){
+		if(Meteor.user().profile){
+			return Meteor.user().profile.unitNm;
+		}
+		else{
+			return "";
+		}
+	},
+	department: function(){
+		if(Meteor.user().profile){
+			return Meteor.user().profile.deptNm;
+		}
+		else{
+			return "";
+		}
+	},
+	room: function(){
+		if(Meteor.user().profile){
+			return Meteor.user().profile.room;
+		}
+		else{
+			return "";
+		}
 	}
 });

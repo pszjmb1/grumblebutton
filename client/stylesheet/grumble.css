@@ -227,7 +227,7 @@ select  {
 label  {
   font-weight: bold;
 }
-#datetime .controls{
+#datetime .controls, #location .controls{
   display: inline-block;
 }
 
@@ -346,4 +346,8 @@ input[type='checkbox'] {
 .title {
   text-align: center;
   margin: 25px 0px 0px;
+}
+
+input[type="text"].location {
+  width:206px;
 }
