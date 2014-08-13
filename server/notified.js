@@ -27,7 +27,8 @@ Meteor.methods({
 			//commenterName: comment.author,
 			postedUserId:Meteor.user() ,
 			postedUserName: Meteor.user().username,
-			read: false
+			read: false,
+			timestamp: new Date()
 		});	
 		Meteor.users.update(myUsers._id, {$set: {notified : 1}});
 		return true;

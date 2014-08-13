@@ -1,24 +1,26 @@
 <template name="header">
     <header class="navbar">
         <div class="navbar-inner">
+            {{#if currentUser}}
             <div class="branding">
                 <h1 id="brand1">NHS</h1><h2 id="brand2"> Sayit.Today</h2>
+                <span class="nav pull-right">
+                    <a class="logout details btn">Logout</a><br>
+                    {{> notifications}}
+                    <!-- <li>{{> loginButtons}}</li>   should be {{> }} here in order to display login functionality-->
+                </span>
             </div>
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"></a>
-        {{#if currentUser}}
             <a class="details btn" href="{{pathFor 'report'}}">New Issue</a>
             <a class="details btn" href="{{pathFor 'issues'}}">Open Issues</a>
             <a class="details btn" href="{{pathFor 'closedIssues'}}">Closed Issues</a>
-            <a class="details btn" href="{{pathFor 'subscribedKeywords'}}">Watchlist</a>
+            <a class="details btn" href="{{pathFor 'notificationsPage'}}">Watchlist</a>
             <a class="details btn" href="{{pathFor 'modifyAccount'}}">Account</a>
+        {{else}}
+            <div class="branding">
+                <h1 id="brand1">NHS</h1><h2 id="brand2"> Sayit.Today</h2>
+            </div>
         {{/if}}
-            <span class="nav pull-right">
-                {{#if currentUser}}
-                    <a class="logout details btn">Logout</a><br>
-                    {{> notifications}}
-                {{/if}}
-                <!-- <li>{{> loginButtons}}</li>   should be {{> }} here in order to display login functionality-->
-            </span>
+
         </div>
     </header>
 </template>

@@ -103,11 +103,12 @@ Template.fullIssue.events({
 		
 												Notifications.insert({
 													userId: issueRaisedUserId, 
-													issueId: issue,   
+													issueId: issue._id,   
 													
 													subscribedUserId:userId ,
 													subscribedUserName:Meteor.user().username,
-													read: false
+													read: false,
+													timestamp: new Date()
 												});	
 											}
 	
@@ -188,11 +189,12 @@ Template.fullIssue.events({
 			
 													Notifications.insert({
 														userId: issueRaisedUserId, 
-														issueId: issue,   
+														issueId: issue._id,   
 														
 														subscribedUserId:userId ,
 														subscribedUserName:Meteor.user().username,
-														read: false
+														read: false,
+														timestamp: new Date()
 													});	
 												}
 			
@@ -265,11 +267,12 @@ Template.fullIssue.events({
 				
 											Notifications.insert({
 												userId: issueRaisedUserId, 
-												issueId: issue,   
+												issueId: issue._id,   
 														
 												subscribedUserId:userId,
 												subscribedUserName:Meteor.user().username,
-												read: false
+												read: false,
+												timestamp: new Date()
 											});		
 										}	
 										// Send mail to the manager
@@ -311,7 +314,8 @@ Template.fullIssue.events({
 						//commenterName: comment.author,
 						subscribedUserId:userId,
 						subscribedUserName: Meteor.user().username,
-						read: false
+						read: false,
+						timestamp: new Date()
 					});	
 
 			}
@@ -376,7 +380,8 @@ Template.fullIssue.events({
 							//commenterName: comment.author,
 							unSubscribedUserId:userId ,
 							unSubscribedUserName:Meteor.user().username,
-							read: false
+							read: false,
+							timestamp: new Date()
 						});	
 					}
 					// Send mail to the manager regarding unsubscription by the user
@@ -451,12 +456,13 @@ Template.fullIssue.events({
 									//	alert('pulling->domain->notification to user');
 										Notifications.insert({
 											userId: issueRaisedUserId, // users id who has posted the issue
-											issueId: issue,   // issue id
+											issueId: issue._id,   // issue id
 											//commentId: comment._id,
 											//commenterName: comment.author,
 											unSubscribedUserId:userId ,
 											unSubscribedUserName: Meteor.user().username,
-											read: false
+											read: false,
+											timestamp: new Date()
 										});	
 									}	
 					
@@ -525,12 +531,13 @@ Template.fullIssue.events({
 										//alert('pulling->domain->shortdesc->notification sent to user');
 										Notifications.insert({
 											userId: issueRaisedUserId, // users id who has posted the issue
-											issueId: issue,   // issue id
+											issueId: issue._id,   // issue id
 											//commentId: comment._id,
 											//commenterName: comment.author,
 											unSubscribedUserId:userId,
 											unSubscribedUserName: Meteor.user().username,
-											read: false
+											read: false,
+											timestamp: new Date()
 										});	
 									}
 					
@@ -593,12 +600,13 @@ Template.fullIssue.events({
 									//alert('inside pulling->domain->rest of form->notification sent to user ');
 									Notifications.insert({
 										userId: issueRaisedUserId, // users id who has posted the issue
-										issueId: issue,   // issue id
+										issueId: issue._id,   // issue id
 										//commentId: comment._id,
 										//commenterName: comment.author,
 										unSubscribedUserId:userId,
 										unSubscribedUserName:Meteor.user().username,
-										read: false
+										read: false,
+										timestamp: new Date()
 									});		
 								}	
 						

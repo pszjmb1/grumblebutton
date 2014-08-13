@@ -75,9 +75,10 @@ Template.closedIssue.events({
 			issueId: this._id,   // issue id
 			//commentId: comment._id,
 			//commenterName: comment.author,
-			openerId:Meteor.user() ,
+			openerId:Meteor.userId() ,
 			openerName: Meteor.user().username,
-			read: false
+			read: false,
+			timestamp: new Date()
 		});	
         // To make sure that user who has posted the issue can close it
 	    /*if(Meteor.user().username == docs1.author)
@@ -112,9 +113,10 @@ Template.closedIssue.events({
 					issueId: this._id,   // issue id
 					//commentId: comment._id,
 					//commenterName: comment.author,
-					openerId:Meteor.user() ,
+					openerId:Meteor.userId() ,
 					openerName: Meteor.user().username,
-					read: false
+					read: false,
+					timestamp: new Date()
 				});	
 			}
 		}
@@ -188,7 +190,8 @@ Template.closedIssue.events({
 								//commenterName: comment.author,
 								postedUserId:Meteor.user() ,
 								postedUserName: Meteor.user().username,
-								read: false
+								read: false,
+								timestamp: new Date()
 							});	
 						}
 						// Adding an extra field in the Subscribed collection so that inspite of having multiple occurences of a domain in the form, multiple time notification to the users can be prevented
@@ -258,7 +261,8 @@ Template.closedIssue.events({
 									//commenterName: comment.author,
 									postedUserId:Meteor.user() ,
 									postedUserName: Meteor.user().username,
-									read: false
+									read: false,
+									timestamp: new Date()
 								});	
 							}	
 							// Adding an extra field in the Subscribed collection so that inspite of having multiple occurences of a domain in the form, multiple time notification to the users can be prevented	
@@ -321,7 +325,8 @@ Template.closedIssue.events({
 							//commenterName: comment.author,
 							postedUserId:Meteor.user() ,
 							postedUserName: Meteor.user().username,
-							read: false
+							read: false,
+							timestamp: new Date()
 						});	
 					}			
 					// Adding an extra field in the Subscribed collection so that inspite of having multiple occurences of a domain in the form, multiple time notification to the users can be prevented	

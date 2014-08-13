@@ -10,48 +10,42 @@ Template.notifications.helpers({
 	notificationCount: function(){
 		//alert('notificationCount for the logged in user'+ Notifications.find({userId: Meteor.userId(), read: false}).count());
 		return Notifications.find({userId: Meteor.userId(), read: false}).count();
+	}
+});
+
+Template.notification.helpers({
+	getUser: function(name){
+		if(name == Meteor.user().username){
+			return "You";
+		}
+		else{
+			return name;
+		}
 	},
-	openerName: function(){
-		//getter for Notification openerName
-		if(this.openerName !== undefined)
-			return this.openerName;
+	displayDate: function(date){
+		var currentDate = new Date();
+		var dateString = "";
+		if(date.getFullYear() == currentDate.getFullYear()){
+			if(date.getMonth() == currentDate.getMonth()){
+				if(date.getDate() == currentDate.getDate()){
+					if(date.getHours() == currentDate.getHours){
+						if(date.getMinutes() == currentDate.getMinutes())
+							dateString = "Just now";
+						else
+							dateString = "About " + (currentDate.getMinutes() - date.getMinutes()) + " minute(s) ago";
+					}
+					else
+						dateString = "About " + (currentDate.getHours() - date.getHours()) + " hour(s) ago";
+				}
+				else
+					dateString = (currentDate.getDate() - date.getDate()) + " day(s) ago";
+			}
+			else
+				dateString = (currentDate.getMonth() - date.getMonth()) + " month(s) ago";
+		}
 		else
-			return false;
-	},
-	subscribedUserName: function(){
-		//getter for Notification subscribedUserName
-		if(this.subscribedUserName !== undefined)
-			return this.subscribedUserName;
-		else
-			return false;
-	},
-	unSubscribedUserName: function(){
-		//getter for Notification unSubscribedUserName
-		if(this.unSubscribedUserName !== undefined)
-			return this.unSubscribedUserName;
-		else
-			return false;
-	},
-	postedUserName: function(){
-		//getter for Notification postedUserName
-		if(this.postedUserName !== undefined)
-			return this.postedUserName;
-		else
-			return false;
-	},
-	closerName: function(){
-		//getter for Notification closerName
-		if(this.closerName !== undefined)
-			return this.closerName;
-		else
-			return false;
-	},
-	commenterName: function(){
-		//getter for Notification commenterName
-		if(this.commenterName !== undefined)
-			return this.commenterName;
-		else
-			return false;
+			dateString = (currentDate.getFullYear() - date.getFullYear()) + " year(s) ago";
+		return dateString;
 	}
 });
 
@@ -79,3 +73,10 @@ Template.notifications.events({
 		});
 	}
 }); 
+
+
+Template.notificationsPage.helpers({
+	NotificationList: function(){
+		return (Notifications.find({userId: Meteor.userId()}, {sort: {timestamp: -1}}));
+	}
+});

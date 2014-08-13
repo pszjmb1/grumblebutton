@@ -1,5 +1,21 @@
 Meteor.methods({
 	modifyUser: function(id, username, email, profile){
-		Meteor.users.update({_id: id},{$set: {'username': username, 'emails[0].address': email, 'profile': profile}});
+		var user = Meteor.users.findOne({_id: id});
+		Meteor.users.update({_id: id, 'emails.address': user.emails[0].address},{$set: {'username': username, 'emails.$.address': email, 'profile': profile}});
+	}
+});
+
+Meteor.methods({
+	getUserEmail: function(id){
+		// console.log(Meteor.users.findOne({'emails.address' : id}));
+		if(Meteor.users.findOne({'emails.address' : id}) !== undefined){
+			var user = Meteor.users.findOne({'emails.address' : id});
+			return user.emails[0].address;
+		}
+		else if(Meteor.users.findOne({username : id}) !== undefined){
+			var user = Meteor.users.findOne({username : id});
+			return user.emails[0].address;
+		}
+		else return "";
 	}
 });

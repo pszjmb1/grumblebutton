@@ -18,16 +18,16 @@ Meteor.methods({
 			throw new Meteor.Error(422, 'Please fill in the short description.');
 		//if (!grumbleAttribs.category)
 		//	throw new Meteor.Error(422, 'Please fill in the category.');	
-		//if (!grumbleAttribs.date)
-		//	throw new Meteor.Error(422, 'Please fill in the date.');
-		//if (!grumbleAttribs.time)
-		//	throw new Meteor.Error(422, 'Please fill in the time.');
-		//  if (!grumbleAttribs.dept)
-		//	throw new Meteor.Error(422, 'Please fill in the department.');
-		//if (!grumbleAttribs.unit)
-		//	throw new Meteor.Error(422, 'Please fill in the unit.');
-		//if (!grumbleAttribs.room)
-		//	throw new Meteor.Error(422, 'Please fill in the room.');
+		if (!grumbleAttribs.date)
+			throw new Meteor.Error(422, 'Please fill in the date.');
+		if (!grumbleAttribs.time)
+			throw new Meteor.Error(422, 'Please fill in the time.');
+		if (!grumbleAttribs.dept)
+			throw new Meteor.Error(422, 'Please fill in the department.');
+		if (!grumbleAttribs.unit)
+			throw new Meteor.Error(422, 'Please fill in the unit.');
+		if (!grumbleAttribs.room)
+			throw new Meteor.Error(422, 'Please fill in the room.');
 		//if (!grumbleAttribs.urgency)
 		//	throw new Meteor.Error(422, 'Please fill in the urgency.');
 		  

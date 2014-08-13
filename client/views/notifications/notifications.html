@@ -13,7 +13,7 @@
 				{{> notification}}
 			{{/each}}
 		{{else}}
-			<li><span>No Notifications</span></li>
+			<li><span>No new notifications</span></li>
 		{{/if}}
 	</ul>
 	
@@ -24,32 +24,32 @@
 	<li>
 		{{#if openerName}}
 			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
-			<strong>{{openerName}}</strong> has opened a post related to you
+			{{displayDate timestamp}}: <strong>{{getUser openerName}}</strong> opened a post related to you
 			</a>
 		{{/if}}
 		{{#if subscribedUserName}}
 			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
-			<strong>{{subscribedUserName}}</strong> has subscribed to a post related to you
+			{{displayDate timestamp}}: <strong>{{getUser subscribedUserName}}</strong> subscribed to a post related to you
 			</a>
 		{{/if}}
 		{{#if unSubscribedUserName}}
 			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
-			<strong>{{unSubscribedUserName}}</strong> has unsubscribed from a post related to you
+			{{displayDate timestamp}}: <strong>{{getUser unSubscribedUserName}}</strong> unsubscribed from a post related to you
 			</a>
 		{{/if}}
 		{{#if postedUserName}}
 			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
-			<strong>{{postedUserName}}</strong> has posted a new post
+			{{displayDate timestamp}}: <strong>{{getUser postedUserName}}</strong> posted a new post
 			</a>
 		{{/if}}			
 		{{#if closerName}}
 			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
-			<strong>{{closerName}}</strong> has closed a post related to you
+			{{displayDate timestamp}}: <strong>{{getUser closerName}}</strong> closed a post related to you
 			</a>
 		{{/if}}
 		{{#if commenterName}}
 			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
-			<strong>{{commenterName}}</strong> commented on a post related to you
+			{{displayDate timestamp}}: <strong>{{getUser commenterName}}</strong> commented on a post related to you
 			</a>
 		{{/if}}
 	</li>

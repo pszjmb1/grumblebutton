@@ -26,7 +26,8 @@ createCommentNotification = function(comment) {
 			issueId: issue,
 			commentId: comment._id,
 			commenterName: comment.author,
-			read: false
+			read: false,
+			timestamp: new Date()
 		});	
 
 		Meteor.call('sendEmail',
@@ -58,7 +59,8 @@ createCommentNotification = function(comment) {
 				issueId: issue,
 				commentId: comment._id,
 				commenterName: comment.author,
-				read: false
+				read: false,
+				timestamp: new Date()
 				});
 
 				var subscribedUserMessage = "Hello "+ subUsers[i].username +",\n\n"+
@@ -156,7 +158,8 @@ createCommentNotification = function(comment) {
 											issueId: issue,
 											commentId: comment._id,
 											commenterName: comment.author,
-											read: false
+											read: false,
+											timestamp: new Date()
 										});
 
 										Meteor.call('sendEmail',
@@ -227,7 +230,8 @@ createCommentNotification = function(comment) {
 									issueId: issue,
 									commentId: comment._id,
 									commenterName: comment.author,
-									read: false
+									read: false,
+									timestamp: new Date()
 								});
 
 								Meteor.call('sendEmail',
@@ -253,7 +257,7 @@ createCommentNotification = function(comment) {
 		myDocId = Subscribed.findOne(myDoc._id);							
 		doneValue = myDocId.done;
 		// Checking whether keyword is present in rest of the part of the form
-		if((category.match(regEx) ||dept.match(regEx) || unit.match(regEx)) && !doneValue)
+		if((/*category.match(regEx) ||*/dept.match(regEx) || unit.match(regEx)) && !doneValue)
 		{
 			// Adding an extra field in the Subscribed collection so that inspite of having multiple occurences of a domain in the form, multiple time notification to the users can be prevented	
 			//console.log('inside rest of the form part of notifcations');
@@ -289,7 +293,8 @@ createCommentNotification = function(comment) {
 							issueId: issue,
 							commentId: comment._id,
 							commenterName: comment.author,
-							read: false
+							read: false,
+							timestamp: new Date()
 						});
 						Meteor.call('sendEmail',
 					       	person[j].emails[0].address,

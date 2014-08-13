@@ -12,15 +12,28 @@ var setDetails = function() {
 Template.modifyAccount.events({
 	'submit form' : function(e) {
 		e.preventDefault();
+		if($(e.target).find('[name=user]').val().length < 4){
+			throwError("Your username is too short. Please enter a username that is at least 4 characters long.");
+			return;
+		}
+		if($(e.target).find('[name=password]').val().length < 6){
+			throwError("Your new password is too short. Please enter a password that is at least 6 characters long.");
+			return;
+		}
 		if($(e.target).find('[name=password]').val() !== $(e.target).find('[name=passwordConfirm]').val()){
-			alert("Your passwords do not match. Please reenter them.");
+			throwError("Your passwords do not match. Please reenter them.");
 			$(e.target).find('[name=passwordConfirm]').value = "";
 			$(e.target).find('[name=passwordConfirm]').focus();
 			return;
 		}
 		else {
 			if($(e.target).find('[name=password]').val() !== ""){
-				Accounts.changePassword($(e.target).find('[name=oldPassword]').val(), $(e.target).find('[name=password]').val());
+				Accounts.changePassword($(e.target).find('[name=oldPassword]').val(), $(e.target).find('[name=password]').val(), function(error){
+					if(error){
+						throwError(error.reason || "There was an unknown error in changing the password");
+						return;
+					}
+				});
 			}
 			var username = $(e.target).find('[name=user]').val();
 			var email = $(e.target).find('[name=email]').val();
@@ -151,6 +164,9 @@ var units = [
 ]
 
 var unitDepts = {
+	"": [
+		{text: "Reception", value: "REC"}
+	],
 	AMed: [
 		{text: "Acute Medicine Receiving Unit", value: "AMRU"},
 		{text: "Lynn Jarrett Unit", value: "LJU"},
@@ -158,7 +174,10 @@ var unitDepts = {
 		{text: "Ward D57", value: "D57"}
 	],
 	IC: [
-		{text: "", value: ""}
+		{text: "Adult Intensive Care", value: "AICU"},
+		{text: "Surgical High Dependency", value: "SHDU"},
+		{text: "Medical High Dependency", value: "MHDU"},
+		{text: "Critical Care department", value: "CCD"}
 	],
 	Mat: [
 		{text: "Ante-Natal Clinic City Hospital", value: "ANCH"},

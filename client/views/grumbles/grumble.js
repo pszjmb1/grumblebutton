@@ -93,7 +93,8 @@ Template.grumble.events({
 						//commenterName: comment.author,
 						postedUserId:Meteor.userId() ,
 						postedUserName: Meteor.user().username,
-						read: false
+						read: false,
+						timestamp: new Date()
 					});	 
 				}
 						
@@ -182,7 +183,7 @@ Template.grumble.helpers({
 		return '' + (hours<=9 ? '0' + hours : hours) + ':' + (min<=9 ? '0' + min : min);
 	},
 	unit: function(){
-		if(Meteor.user().profile){
+		if(Meteor.user().profile !== undefined){
 			return Meteor.user().profile.unitNm;
 		}
 		else{

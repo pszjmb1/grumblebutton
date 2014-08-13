@@ -1,8 +1,11 @@
 <template name="login">
 	<form>
-		Email Address <input type="text" name="id" required="true"><br>
-		Password <input type="password" name="password" required="true"><br>
-		<input type="submit" value="Login">
-		<!-- <a class="details btn">Forgot Password?</a> -->
+		<label for="id">Email Address or username</label>
+		<input type="text" name="id" id="id" required="true"><br>
+		<label for="password">Password</label>
+		<input type="password" name="password" required="true"><br>
+		<input type="submit" class="det buton" value="Login">
+		<a class="forgot details btn">Forgot Password?</a>
+		<a class="details btn" href="{{pathFor 'signup'}}">Create Account</a>
 	</form>
 </template>

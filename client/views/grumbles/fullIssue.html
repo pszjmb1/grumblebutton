@@ -1,26 +1,29 @@
 
-<template name="fullIssue">
-<p>inside fullIssue </p>
-	
-<!--	<div class="issue">
+<template name="fullIssue">	
+	<div class="issue">
 		<div class="issue-content">
 			<h3>
-				{{shortdesc}} 
-				
-				<span>submitted by {{author}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input id='check' class="check" name="markdone" type="checkbox"  {{done_checkbox}} />Get Notifications
-				<input type="button" value="Get Notifications" id="gg" class="det btn" {{{done_checkbox}}}
+				{{shortdesc}} &#09; <span>submitted by {{author}} &#09;
 				</span>
 			</h3>
-			<b>Dept:</b>{{dept}} <b>Unit:</b> <span>{{unit}}</span>
-			<b>Room:</b> <span>{{room}}</span>
-			<br/>
-			<div>
+			<div class="leftColumn">
+				<p>
+					<strong>Time:</strong> &#09; {{date}}, {{time}}<br><br> 
+					<strong>Dept:</strong> &#09; {{dept}}<br><br>
+					<strong>Unit:</strong> &#09; {{unit}}<br><br>
+					<strong>Room:</strong> &#09; {{room}}<br><br>
+				</p>
+			</div>
+			<div class="rightColumn">
+				<!-- <h4>Details</h4>
 				{{details}} 
+				<label for="markdone">Get Notifications</label>
+				<input id='check' class="check" name="markdone" type="checkbox"  {{done_checkbox}}>
+				<input type="button" value="Get Notifications" id="gg" class="det btn" {{{done_checkbox}}} -->
 			</div>
 		</div>
 	</div>
 	<h4>
-		<a href="{{pathFor 'issuePage' params = this}}">{{commentsCount}} comments</a>
-	</h4> -->
+		{{commentsCount}} comments
+	</h4> 
 </template>

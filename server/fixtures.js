@@ -381,41 +381,47 @@ if (Issues.find().count() === 0) {
 		issueId: Issues.findOne()._id,   
 		subscribedUserId: u2._id,
 		subscribedUserName: u2.username,
-		read: false
+		read: false,
+		timestamp: new Date()
 	});
 	Notifications.insert({
 		userId: u1._id,
 		issueId: Issues.findOne()._id,
 		openerId: u2._id,
 		openerName: u2.username,
-		read: false
+		read: false,
+		timestamp: new Date()
 	});
 	Notifications.insert({
 		userId: u1._id,
 		issueId: Issues.findOne()._id,
 		unSubscribedUserId: u2._id,
 		unSubscribedUserName: u2.username,
-		read: false
+		read: false,
+		timestamp: new Date()
 	});
 	Notifications.insert({
 		userId: u1._id,
 		issueId: Issues.findOne()._id,
 		postedUserId: u2._id,
 		postedUserName: u2.username,
-		read: false
+		read: false,
+		timestamp: new Date()
 	});
 	Notifications.insert({
 		userId: u1._id,
 		issueId: Issues.findOne()._id,
 		closerId: u2._id,
 		closerName: u2.username,
-		read: false
+		read: false,
+		timestamp: new Date()
 	});
 	Notifications.insert({
 		userId: u1._id,
 		issueId: Issues.findOne()._id,
 		commenterId: u2._id,
 		commenterName: u2.username,
-		read: false
+		read: false,
+		timestamp: new Date()
 	})
 }

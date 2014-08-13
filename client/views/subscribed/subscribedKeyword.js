@@ -6,8 +6,8 @@
 Template.subscribedKeyword.events({
 'click #check': function () {
 	var senderEmail = 'grumblebutton@gmail.com';
-	var userId = Meteor.user();
-	var userName = userId.username;
+	var userId = Meteor.userId();
+	var userName = Meteor.user().username;
    	var issueManagerCategory = Subscribed.findOne(this._id).category;
 	var managerEmailId = Subscribed.findOne({category: issueManagerCategory}).emailId;
 	var managerName = Subscribed.findOne({category: issueManagerCategory}).name;
@@ -24,7 +24,7 @@ Template.subscribedKeyword.events({
 			// alert('inserting of data in subscribed collection'+Subscribed.findOne({category: issueManagerCategory}).category);
 	
 			// Adding the loggedin user to the collection on checking the checkbox
-			Subscribed.update(id, {$addToSet: {categorySubscribedUsers : Meteor.user()}});
+			Subscribed.update(id, {$addToSet: {categorySubscribedUsers : userId}});
 			// alert('value added to the subscribed collection');
 			var msg = "Hello "+ managerName +",\n\n"+
     			userName + ' has subscribed to your category.'+'\n'+ "The link for the concerned issue is : http://localhost:15000/subscribedKeywords/";
@@ -53,14 +53,14 @@ Template.subscribedKeyword.events({
 				for(j= 0;j< subscribedPersons.length;j++)
 				{
                     // alert('subscribedPersons[j].username '+subscribedPersons[j].username);
-					if(subscribedPersons[j].username === Meteor.user().username)
+					if(subscribedPersons[j] === userId)
 					{	
 					
-						var personId=subscribedPersons[j]._id;
+						var personId = subscribedPersons[j];
 						// alert('personId '+personId);
 
 						// Removin the username from domain list
-						Subscribed.update(id,{$pull:{categorySubscribedUsers:{_id:personId}}});
+						Subscribed.update(id,{$pull:{categorySubscribedUsers: personId}});
 						// alert('data pulled from the subscribed collection');
 						var msg = "Hello "+ managerName +",\n\n"+
    							userName + ' has unsubscribed from your category.'+'\n'+ "The link for the concerned issue is : http://localhost:3000/subscribedKeywords/";
