@@ -32,7 +32,7 @@ Template.modifyAccount.events({
 				});
 			}
 		}
-		else if($(e.target).find('[name=user]').val().length < 4){
+		if($(e.target).find('[name=user]').val().length < 4){
 			throwError("Your username is too short. Please enter a username that is at least 4 characters long.");
 			return;
 		}
