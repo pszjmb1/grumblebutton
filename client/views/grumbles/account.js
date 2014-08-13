@@ -12,22 +12,18 @@ var setDetails = function() {
 Template.modifyAccount.events({
 	'submit form' : function(e) {
 		e.preventDefault();
-		if($(e.target).find('[name=user]').val().length < 4){
-			throwError("Your username is too short. Please enter a username that is at least 4 characters long.");
-			return;
-		}
-		if($(e.target).find('[name=password]').val().length < 6){
-			throwError("Your new password is too short. Please enter a password that is at least 6 characters long.");
-			return;
-		}
-		if($(e.target).find('[name=password]').val() !== $(e.target).find('[name=passwordConfirm]').val()){
-			throwError("Your passwords do not match. Please reenter them.");
-			$(e.target).find('[name=passwordConfirm]').value = "";
-			$(e.target).find('[name=passwordConfirm]').focus();
-			return;
-		}
-		else {
-			if($(e.target).find('[name=password]').val() !== ""){
+		if($(e.target).find('[name=password]').val() !== ""){
+			if($(e.target).find('[name=password]').val().length < 6){
+				throwError("Your new password is too short. Please enter a password that is at least 6 characters long.");
+				return;
+			}
+			else if($(e.target).find('[name=password]').val() !== $(e.target).find('[name=passwordConfirm]').val()){
+				throwError("Your passwords do not match. Please reenter them.");
+				$(e.target).find('[name=passwordConfirm]').value = "";
+				$(e.target).find('[name=passwordConfirm]').focus();
+				return;
+			}
+			else{
 				Accounts.changePassword($(e.target).find('[name=oldPassword]').val(), $(e.target).find('[name=password]').val(), function(error){
 					if(error){
 						throwError(error.reason || "There was an unknown error in changing the password");
@@ -35,6 +31,12 @@ Template.modifyAccount.events({
 					}
 				});
 			}
+		}
+		else if($(e.target).find('[name=user]').val().length < 4){
+			throwError("Your username is too short. Please enter a username that is at least 4 characters long.");
+			return;
+		}
+		else {
 			var username = $(e.target).find('[name=user]').val();
 			var email = $(e.target).find('[name=email]').val();
 			var profile = {
@@ -46,9 +48,16 @@ Template.modifyAccount.events({
 				deptNm: $(e.target).find('[name=department] option:selected').text(),
 				room: $(e.target).find('[name=room]').val()
 			};
-			Meteor.call("modifyUser", Meteor.userId(), username, email, profile);
-			alert("Account Information changed.");
-			Router.go('/');
+			Meteor.call("modifyUser", Meteor.userId(), username, email, profile, function(error){
+				if(error){
+					throwError(error.reason || "Unknown error with updating user information.");
+					return;
+				}
+				else{
+					alert("Account Information changed.");
+					Router.go('/');
+				}
+			});
 		}
 	},
 	

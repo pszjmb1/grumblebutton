@@ -1,7 +1,11 @@
 Meteor.methods({
 	modifyUser: function(id, username, email, profile){
 		var user = Meteor.users.findOne({_id: id});
-		Meteor.users.update({_id: id, 'emails.address': user.emails[0].address},{$set: {'username': username, 'emails.$.address': email, 'profile': profile}});
+		Meteor.users.update({_id: id, 'emails.address': user.emails[0].address},{$set: {'username': username, 'emails.$.address': email, 'profile': profile}}, function(error){
+			if(error){
+				throwError(error);
+			}
+		});
 	}
 });
 
