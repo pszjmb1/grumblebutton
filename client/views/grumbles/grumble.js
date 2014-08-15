@@ -9,12 +9,10 @@ Template.grumble.events({
 		var issue = {
 			date: $(e.target).find('[name=date]').val(),
 			time: $(e.target).find('[name=time]').val(),
-			dept: $(e.target).find('[name=department]').val(),
+			location: $(e.target).find('[name=location]').val(),
 			shortdesc: $(e.target).find('[name=shortdesc]').val(),
 			anonymous: $(e.target).find('[name=anonymous]').val(),
 			device: navigator.userAgent,
-			unit: $(e.target).find('[name=unit]').val(),
-			room: $(e.target).find('[name=room]').val()
 			//urgency: $(e.target).find('[name=urgency]').val(),
 			//category: $(e.target).find('[name=category]').val(),
 		}
@@ -48,10 +46,10 @@ Template.grumble.events({
 	   
 
 		var subjectOfEmail = "Notification of New Issue";
-		var location = document.querySelector('[name=unit]').value + " " + document.querySelector('[name=department]').value +" "+ document.querySelector('[name=room]').value;
+		var location = document.querySelector('[name=location]').value;
 		// alert('location '+location);
 		//var unit = document.querySelector('[name=unit]').value; 
-		var authorName = document.querySelector('[name=anonymous]').value; 
+		var author = document.querySelector('[name=anonymous]').value; 
 		// alert('unit '+ unit);
 		var i,j, person='', myDocId=0, foundValue=0, domainList='';
 
@@ -77,7 +75,7 @@ Template.grumble.events({
 
 				// Mail to user about confirmation of the issue created by him    									
 				// alert('mail to user itself');
-				if(authorName!='anonymous')
+				if(author!='anonymous')
 				{
 					Meteor.call('sendEmail',
         	   			issueRaisedUserEmailId, 
@@ -111,40 +109,48 @@ Template.grumble.events({
 					// Creating regular expression to check all possible format in which user can enter domain name
 					var regEx = new RegExp("^.*"+myDoc.category+".*","gi"); 
 
-					// Checking whether domain name is present in the detils part of the form
-					if(shortdesc || location)// details || category || unit)
+					// Checking whether domain name is present in the details part of the form
+					if(shortdesc || location)// details || category)
 					{
-						if(shortdesc.match(regEx) ||location.match(regEx))// || category.match(regEx) || details.match(regEx) || unit.match(regEx))
-						{										
-							//alert('inside regular expression');
+						if(issue.shortdesc.match(regEx) || issue.location.match(regEx))// || category.match(regEx) || details.match(regEx) )
+						{
+							// alert('inside regular expression');
 							// Mail to manager regarding pop up of new issue
 							//alert('mail to manager');
-							Meteor.call('sendEmail',
-								receiverEmail.emailId,  
+							/*Meteor.call('sendEmail',
+								receiverEmail.emailId,
 			        			senderEmail,
 			        			messageToManager,
 				    			id,
-								subjectOfEmail);
-
+								subjectOfEmail);*/
 
 							// Users who have subscribed to that domain, from Subscribed collection
- 		 					person = myDoc.categorySubscribedUsers;
+ 		 					people = myDoc.categorySubscribedUsers;
 							//alert('before person loop in details part');
-							if(person && person.length)
+							if(people && people.length)
 							{
-								// alert('person.length'+person.length)
-								for(j=0;j<person.length;j++)
+								// alert('people.length'+people.length)
+								for(j=0;j<people.length;j++)
 								{
-									
-									if(person[j].username)
-									{
-										//alert('person[j].username '+person[j].username);
-										Meteor.call('user', person[j].username,person[j].emails[0].address,senderEmail, id, subjectOfEmail, person[j]._id, shortdesc, function(error, result)
-										{
-										
-										});
-										
-									}
+									Meteor.call('getUser', people[j], function(error, person){
+										if(error){
+											throwError(error.reason);
+										}
+										else {
+											// alert(people[j]);
+											// alert(person);
+											if(person)
+											{
+												// alert('person.username '+person.username);
+												Meteor.call('user', person.username,person.emails[0].address,senderEmail, id, subjectOfEmail, person._id, shortdesc, author, function(error, result)
+												{
+													if(error){
+														throwError(error.reason);
+													}
+												});
+											}
+										}
+									});
 								}
 							}
 						}
@@ -182,7 +188,14 @@ Template.grumble.helpers({
 		var min = date.getMinutes();
 		return '' + (hours<=9 ? '0' + hours : hours) + ':' + (min<=9 ? '0' + min : min);
 	},
-	unit: function(){
+	location: function(){
+		if(Meteor.user().profile){
+			var profile = Meteor.user().profile;
+			var locationString = profile.unitNm + " " + profile.deptNm + " " + profile.room;
+			return locationString;
+		}
+	}
+	/*unit: function(){
 		if(Meteor.user().profile !== undefined){
 			return Meteor.user().profile.unitNm;
 		}
@@ -205,5 +218,5 @@ Template.grumble.helpers({
 		else{
 			return "";
 		}
-	}
+	}*/
 });

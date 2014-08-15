@@ -22,12 +22,14 @@ Meteor.methods({
 			throw new Meteor.Error(422, 'Please fill in the date.');
 		if (!grumbleAttribs.time)
 			throw new Meteor.Error(422, 'Please fill in the time.');
-		if (!grumbleAttribs.dept)
-			throw new Meteor.Error(422, 'Please fill in the department.');
-		if (!grumbleAttribs.unit)
-			throw new Meteor.Error(422, 'Please fill in the unit.');
-		if (!grumbleAttribs.room)
-			throw new Meteor.Error(422, 'Please fill in the room.');
+		if (!grumbleAttribs.location)
+			throw new Meteor.Error(422, 'Please fill in the location.');
+		// if (!grumbleAttribs.dept)
+		// 	throw new Meteor.Error(422, 'Please fill in the department.');
+		// if (!grumbleAttribs.unit)
+		// 	throw new Meteor.Error(422, 'Please fill in the unit.');
+		// if (!grumbleAttribs.room)
+		// 	throw new Meteor.Error(422, 'Please fill in the room.');
 		//if (!grumbleAttribs.urgency)
 		//	throw new Meteor.Error(422, 'Please fill in the urgency.');
 		  
@@ -41,28 +43,24 @@ Meteor.methods({
 		if(grumbleAttribs.anonymous == "anonymous")
 	    {
 		  	userName = 'anonymous';	
-		  	userPosted = user.username;
-		  	userEmailId = user.emails[0].address;
 
 	    }
 		else
 		{
 		 	userName = user.username;
-		 	userPosted = user.username;
-		 	userEmailId = user.emails[0].address;
 		}
 		
 		// pick out the whitelisted keys
 		var issue = _.extend(
 			_.pick(grumbleAttribs,
-			'shortdesc','anonymous', 'date', 'time', 'device', 'dept',
-			'unit', 'room'/*, 'urgency',
+			'shortdesc','anonymous', 'date', 'time', 'device', 'location'
+			/*, 'urgency',
 			'category',  'details', */
 			), {
 					userId: user._id,
 					author: userName,
-					authorEmailId: userEmailId,
-					postedUser:userPosted,
+					authorEmailId: user.emails[0].address,
+					postedUser:user.username,
 					submitted: new Date().getTime(),
 					// Field to know about closing of issue
 					issueClosed :0,
