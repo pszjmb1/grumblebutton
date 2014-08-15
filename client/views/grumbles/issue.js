@@ -16,18 +16,17 @@ Template.issue.events({
 	var shortdesc = msg;
 	var unit =  Issues.findOne(this._id).unit;
 	var dept =  Issues.findOne(this._id).dept;
-	var category =  Issues.findOne(this._id).category;
+	var room =  Issues.findOne(this._id).room;
 	var id = this._id;
 	var issueRaisedUser = Issues.findOne(this._id).author;
 	//alert('msg '+msg);
 	var senderEmail = 'grumblebutton@gmail.com';
-	var category = Issues.findOne(this._id).category; 
 	//alert('category '+category);
 	var subjectOfEmail = "Closing of Issue";
 	var person ='', issuesToBeUnmarked='', regEx='';
 	// Mail to manager regarding closing of issue
 	// alert('mail to manager regarding closing of Issue');
-	if(Subscribed.findOne({category:category}))
+	/*if(Subscribed.findOne({category:dept}))
 	{
 		var receiverEmail = Subscribed.findOne({category:category});	
 		var managerName = Subscribed.findOne({category:category});	
@@ -46,8 +45,8 @@ Template.issue.events({
 		{
 			Issues.remove(this._id)
 			ClosedIssues.insert(docs1)
-		}*/
-	}
+		}
+	}*/
 	// alert('author  '+author);
     // Mail to user
     // alert('mail to user regarding closing of Issue');

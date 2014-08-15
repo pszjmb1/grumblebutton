@@ -3,7 +3,7 @@
 		<div class="destroy"></div>
 			<div class="issue-content">
 				
-        			<h3>{{shortdesc}}- <span>{{dept}}</span> <span>{{unit}}</span> <span>{{room}}</span></h3>
+        			<h3><a href="{{pathFor 'issuePage' params = this}}">{{shortdesc}}</a>- <span>{{dept}}</span> <span>{{unit}}</span> <span>{{room}}</span></h3>
 					<p>
 						<a href="{{pathFor 'issuePage' params = this}}">{{commentsCount}} comments</a>
 					</p>

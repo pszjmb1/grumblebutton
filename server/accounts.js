@@ -21,5 +21,10 @@ Meteor.methods({
 			return user.emails[0].address;
 		}
 		else return "";
+	},
+
+	getUser: function(id){
+		var person = Meteor.users.findOne({_id: id}, {fields: {'username': 1, 'emails': 1, 'notified': 1}});
+		return(person);
 	}
 });

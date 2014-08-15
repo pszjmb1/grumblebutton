@@ -11,13 +11,8 @@ grid-block, .main, .issue, .comments li, .comment-form, .closedIssue {
   padding: 0.5%;
   margin-bottom: 1%;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
-}
-.fill {
-  background: #fff;
-  border-radius: 1% ;
-  padding: 0.5%;
-  margin-bottom: 1%;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+  width: auto;
+  margin-top: 1%;
 }
 
 /*
@@ -62,6 +57,7 @@ border-radius: 0px 0px 3px 3px;
 .closedIssue .closedIssue-content h3 a {
   display: inline-block;
   margin-right: 1%;
+  color: #880000
 }
 
 .closedIssue .closedIssue-content h3 span {
@@ -98,6 +94,7 @@ border-radius: 0px 0px 3px 3px;
 .issue .issue-content h3 a {
   display: inline-block;
   margin-right: 1%;
+  color: #880000;
 }
 .issue .issue-content h3 span {
   font-weight: normal;
@@ -313,6 +310,7 @@ label  {
 
 #brand1, #brand2  {
 	display: inline;
+  color: rgb(102,102,102);
 }
 
 .logoContainer {
@@ -370,4 +368,10 @@ input[type="text"].location {
 
 .reset{
   padding: 1%;
+}
+.control-group{
+  margin: 10px;
+}
+.btn-primary{
+  padding: 5px;
 }

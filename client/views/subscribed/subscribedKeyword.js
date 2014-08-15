@@ -102,22 +102,13 @@ Template.subscribedKeyword.done = function () {
 		{
 			//alert('j '+j);
 			//alert('person '+person[j].username);
-			if(subscribedPersons[j].username === Meteor.user().username)
+			var subscribedUsername = Meteor.users.findOne({_id: subscribedPersons[j]}).username;
+			if(subscribedUsername == Meteor.user().username)
 			{	
 				ch ="checked";
-				// alert('value of ch that is set'+ch);
-				break; 
+				// alert('value of ch that is set'+ch); 
 			}
-		}
-		if(ch=== 'checked')
-		{
-			// alert('while returning value in if block');
-			return 'checked="checked"';
-		}
-		else		
-		{
-			// alert('while returning value in else block');
-			return '';
+			return ch;
 		}
 		
 	}

@@ -3,7 +3,7 @@
         <div class="navbar-inner">
             {{#if currentUser}}
             <div class="branding">
-                <h1 id="brand1">NHS</h1><h2 id="brand2"> Sayit.Today</h2>
+                <h1 id="brand1">NHS </h1><a href="{{pathFor 'home'}}"><h2 id="brand2">Sayit.Today</h2></a>
                 <span class="nav pull-right">
                     <a class="logout details btn">Logout</a><br>
                     {{> notifications}}
@@ -13,11 +13,11 @@
             <a class="details btn" href="{{pathFor 'report'}}">New Issue</a>
             <a class="details btn" href="{{pathFor 'issues'}}">Open Issues</a>
             <a class="details btn" href="{{pathFor 'closedIssues'}}">Closed Issues</a>
-            <a class="details btn" href="{{pathFor 'notificationsPage'}}">Watchlist</a>
+            <a class="details btn" href="{{pathFor 'notificationsPage'}}">Subscriptions</a>
             <a class="details btn" href="{{pathFor 'modifyAccount'}}">Account</a>
         {{else}}
             <div class="branding">
-                <h1 id="brand1">NHS</h1><h2 id="brand2"> Sayit.Today</h2>
+                <h1 id="brand1">NHS </h1><a href="{{pathFor 'home'}}"><h2 id="brand2">Sayit.Today</h2></a>
             </div>
         {{/if}}
 
