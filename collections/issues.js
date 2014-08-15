@@ -41,15 +41,10 @@ Meteor.methods({
 		if(grumbleAttribs.anonymous == "anonymous")
 	    {
 		  	userName = 'anonymous';	
-		  	userPosted = user.username;
-		  	userEmailId = user.emails[0].address;
-
 	    }
 		else
 		{
 		 	userName = user.username;
-		 	userPosted = user.username;
-		 	userEmailId = user.emails[0].address;
 		}
 		
 		// pick out the whitelisted keys
@@ -61,8 +56,8 @@ Meteor.methods({
 			), {
 					userId: user._id,
 					author: userName,
-					authorEmailId: userEmailId,
-					postedUser:userPosted,
+					authorEmailId: user.emails[0].address,
+					postedUser:user.username,
 					submitted: new Date().getTime(),
 					// Field to know about closing of issue
 					issueClosed :0,

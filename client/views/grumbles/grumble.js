@@ -51,7 +51,7 @@ Template.grumble.events({
 		var location = document.querySelector('[name=unit]').value + " " + document.querySelector('[name=department]').value +" "+ document.querySelector('[name=room]').value;
 		// alert('location '+location);
 		//var unit = document.querySelector('[name=unit]').value; 
-		var authorName = document.querySelector('[name=anonymous]').value; 
+		var author = document.querySelector('[name=anonymous]').value; 
 		// alert('unit '+ unit);
 		var i,j, person='', myDocId=0, foundValue=0, domainList='';
 
@@ -77,7 +77,7 @@ Template.grumble.events({
 
 				// Mail to user about confirmation of the issue created by him    									
 				// alert('mail to user itself');
-				if(authorName!='anonymous')
+				if(author!='anonymous')
 				{
 					Meteor.call('sendEmail',
         	   			issueRaisedUserEmailId, 
@@ -128,23 +128,30 @@ Template.grumble.events({
 
 
 							// Users who have subscribed to that domain, from Subscribed collection
- 		 					person = myDoc.categorySubscribedUsers;
+ 		 					people = myDoc.categorySubscribedUsers;
 							//alert('before person loop in details part');
-							if(person && person.length)
+							if(people && people.length)
 							{
-								// alert('person.length'+person.length)
-								for(j=0;j<person.length;j++)
+								// alert('people.length'+people.length)
+								for(j=0;j<people.length;j++)
 								{
-									
-									if(person[j].username)
-									{
-										//alert('person[j].username '+person[j].username);
-										Meteor.call('user', person[j].username,person[j].emails[0].address,senderEmail, id, subjectOfEmail, person[j]._id, shortdesc, function(error, result)
-										{
-										
-										});
-										
-									}
+									Meteor.call('getUser', people[j], function(error, person){
+										if(error){
+											throwError(error.reason);
+										}
+										else {
+											// alert(people[j]);
+											// alert(person);
+											if(person) {
+												// alert('person.username '+person.username);
+												Meteor.call('user', person.username, person.emails[0].address, senderEmail, id, subjectOfEmail, person._id, shortdesc, author, function(error, result){
+													if(error){
+														throwError(error.reason);
+													}
+												});
+											}
+										}
+									});
 								}
 							}
 						}
