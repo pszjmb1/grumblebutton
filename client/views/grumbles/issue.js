@@ -4,7 +4,7 @@
 
 //Event to close the issue. 
 Template.issue.events({
-'click .destroy': function () {
+'click #close': function () {
 	//alert('inside issue.js -> destroy');
 
 	// Adding a field to differentiate the closed issue from rest of the issues

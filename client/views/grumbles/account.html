@@ -1,5 +1,5 @@
 <template name="account">
-	<label for="user">Username</label><input type="text" name="user" required="true" id="user" value="{{username}}"><br>
+	<label for="user">Username</label><input type="text" name="user" required="true" id="user" placeholder="Has to be at least 4 characters long" value="{{username}}"><br>
 	<label for="email">Email Address</label><input type="email" name="email" required="true" id="email" value="{{email}}"><br>
 	{{#if currentUser}}
 		<h4>Please fill in these fields if you want to change your password:</h4><br>
@@ -7,9 +7,9 @@
 		<input type="password" name="oldPassword" id="password"><br>
 	{{/if}}
 	<label for="password">Password</label> 
-	<input type="password" name="password" id="password"><br>
+	<input type="password" name="password" id="password" placeholder="Has to be at least 6 characters long"><br>
 	<label for="passwordConfirm">Confirm Password</label> 
-	<input type="password" name="passwordConfirm" id="passwordConfirm"><br>
+	<input type="password" name="passwordConfirm" id="passwordConfirm" placeholder="Has to match password"><br>
 	<!-- Security question <select name="securityQuestion">
 		<option value="">Please select a security question</option>
 		<option value="maidenName">Mother's maiden name</option>

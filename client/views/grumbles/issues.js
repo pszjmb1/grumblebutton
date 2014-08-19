@@ -5,12 +5,12 @@ var global='';
 Template.issues.helpers({
 	issues: function() {
 		//alert('returning the value');
-		return  Issues.find({issueClosed:0, issueSearch:0}, {sort: {submitted: -1}, 
-			limit: issuesHandle.limit()});
+		return  Issues.find({issueClosed:0}, {sort: {submitted: -1}, 
+			limit: openIssuesHandle.limit()});
 	},
 	// Determine if curent list of issues is ready
 	issuesReady: function() {
-		return !issuesHandle.loading();
+		return !openIssuesHandle.loading();
 	},
 	// Retrieve the count of issues that has been searched
 	findSeachedIssues: function() {
@@ -20,12 +20,12 @@ Template.issues.helpers({
 	searchedIssues: function() {
 		//alert('inside searchedIssues');
 		//alert('session value in searchedIssues'+global);
-		return Issues.find({issueClosed:0, issueSearch:1}); //, {sort: {submitted: -1}});
+		return Issues.find({issueClosed:0, issueSearch:1}, {sort: {submitted: -1}});
 	},
 	// Determine if all issues have been loaded
 	allIssuesLoaded: function() {
-		return !issuesHandle.loading() &&
-			Issues.find().count() < issuesHandle.loaded();
+		return !openIssuesHandle.loading() &&
+			Issues.find({issueClosed: 0}).count() < openIssuesHandle.loaded();
 	}
 }); 
 
@@ -33,7 +33,7 @@ Template.issues.helpers({
 Template.issues.events({
 	'click .load-more': function(e) {
 		e.preventDefault();
-		issuesHandle.loadNextPage();
+		openIssuesHandle.loadNextPage();
 	}
 });
 

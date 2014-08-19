@@ -1,4 +1,7 @@
 <template name="closedIssues">
+	<div class="main">
+		<h1>Closed Issues</h1>
+	</div>
 	<div class="closedIssues">
 	<fieldset>
 		<form class="main">
@@ -28,7 +31,13 @@
 			{{> closedIssue}}
 		{{/each}}
 	{{/if}}
-		
+	{{#if issuesReady}}
+		{{#unless allIssuesLoaded}}
+			<a class="load-more" href="#">See more issues</a>
+		{{/unless}}
+		{{else}}
+			<div>{{> spinner}}</div>
+	{{/if}} 	
 		
 	</div>
 </template>
