@@ -70,7 +70,7 @@ Template.grumble.events({
 			else
 			{
 				
-				var messageToUser = "Hello "+Meteor.user().username+",\n\n"+"Your issue - "+shortdesc+" has been posted successfully"+
+				var messageToUser = "Hello "+Meteor.call('getUserName', Meteor.userId())+",\n\n"+"Your issue - "+shortdesc+" has been posted successfully"+
     				". The link for the concerned issue is :- http://localhost:15000/issues/";
 
 				// Mail to user about confirmation of the issue created by him    									
@@ -90,7 +90,7 @@ Template.grumble.events({
 						//commentId: comment._id,
 						//commenterName: comment.author,
 						postedUserId:Meteor.userId() ,
-						postedUserName: Meteor.user().username,
+						postedUserName: Meteor.call('getUserName', Meteor.userId()),
 						read: false,
 						timestamp: new Date()
 					});	 
@@ -142,7 +142,7 @@ Template.grumble.events({
 											if(person)
 											{
 												// alert('person.username '+person.username);
-												Meteor.call('user', person.username,person.emails[0].address,senderEmail, id, subjectOfEmail, person._id, shortdesc, author, function(error, result)
+												Meteor.call('user', Meteor.call('getUserName', people[j]),person.emails[0].address,senderEmail, id, subjectOfEmail, person._id, shortdesc, author, function(error, result)
 												{
 													if(error){
 														throwError(error.reason);

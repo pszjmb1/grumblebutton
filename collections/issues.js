@@ -47,7 +47,7 @@ Meteor.methods({
 	    }
 		else
 		{
-		 	userName = user.username;
+		 	userName = Meteor.call('getUserName', user._id);
 		}
 		
 		// pick out the whitelisted keys
@@ -60,7 +60,7 @@ Meteor.methods({
 					userId: user._id,
 					author: userName,
 					authorEmailId: user.emails[0].address,
-					postedUser:user.username,
+					postedUser:Meteor.call('getUserName', user._id),
 					submitted: new Date().getTime(),
 					// Field to know about closing of issue
 					issueClosed :0,

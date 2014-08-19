@@ -51,7 +51,7 @@ createCommentNotification = function(comment) {
 		for(i=0;i<subUsers.length;i++)
 		{
 			// console.log('subuser '+i+'->'+subUsers[i].username);
-			if(comment.author !== subUsers[i].username)
+			if(comment.author !== Meteor.call('getUserName', subUsers[i]._id))
 			{
 				// console.log('entering values in notification Collection');
 				Notifications.insert({
@@ -63,7 +63,7 @@ createCommentNotification = function(comment) {
 				timestamp: new Date()
 				});
 
-				var subscribedUserMessage = "Hello "+ subUsers[i].username +",\n\n"+
+				var subscribedUserMessage = "Hello "+ Meteor.call('getUserName', subUsers[i]._id) +",\n\n"+
     				comment.author + ' has commented on your subscribed issue having issueId:- ';
 
 				Meteor.call('sendEmail',
@@ -80,8 +80,8 @@ createCommentNotification = function(comment) {
 
 	//console.log('Notification to concerned manager');
 	var senderEmail = 'grumblebutton@gmail.com';
-    var userId = Meteor.user();
-    var userName = userId.username;
+    var userId = Meteor.userId();
+    var userName = Meteor.call('getUserName', Meteor.userId());
 	var issueManagerCategory = issue.category;
 	var subjectOfEmail = 'Notification of comment on Issue';
 	var listOfDomain = Subscribed.find();
@@ -148,9 +148,9 @@ createCommentNotification = function(comment) {
 										} 
 									}
 									// Notification to user who has subscribed this issue domain
-									if(flag === 0 && person[j].username)
+									if(flag === 0 && Meteor.call('getUserName', subUsers[j]._id))
 									{
-										var subscribedUserMessage = "Hello "+ person[j].username +",\n\n"+
+										var subscribedUserMessage = "Hello "+ Meteor.call('getUserName', subUsers[j]._id) +",\n\n"+
     										comment.author + ' has commented on your subscribed issue having issueId:- ';
 
 										Notifications.insert({
@@ -220,9 +220,9 @@ createCommentNotification = function(comment) {
 								}
 							} 
 							// Notification to user who has subscribed this issue domain
-							if(flag === 0 && person[j].username)
+							if(flag === 0 && Meteor.call('getUserName', subUsers[j]._id))
 							{
-								var subscribedUserMessage = "Hello "+ person[j].username +",\n\n"+
+								var subscribedUserMessage = "Hello "+ Meteor.call('getUserName', subUsers[j]._id) +",\n\n"+
     								comment.author + ' has commented on your subscribed issue having issueId:- ';
 
 								Notifications.insert({
@@ -283,9 +283,9 @@ createCommentNotification = function(comment) {
 						}	 
 					}
 					// Notification to user who has subscribed this issue domain
-					if(flag === 0 && person[j].username)
+					if(flag === 0 && Meteor.call('getUserName', subUsers[j]._id))
 					{
-						var subscribedUserMessage = "Hello "+ person[j].username +",\n\n"+
+						var subscribedUserMessage = "Hello "+ Meteor.call('getUserName', subUsers[j]._id) +",\n\n"+
     						comment.author + ' has commented on your subscribed issue having issueId:- ';
 
 						Notifications.insert({

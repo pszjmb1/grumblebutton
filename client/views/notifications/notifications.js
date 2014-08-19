@@ -15,7 +15,7 @@ Template.notifications.helpers({
 
 Template.notification.helpers({
 	getUser: function(name){
-		if(name == Meteor.user().username){
+		if(name == Meteor.call('getUserName', Meteor.userId())){
 			return "You";
 		}
 		else{

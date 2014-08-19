@@ -20,7 +20,7 @@ Meteor.methods({
 
 		comment = _.extend(_.pick(commentAttributes, 'issueId', 'body'), {
 			userId: user._id,
-			author: user.username,
+			author: Meteor.call('getUserName', user._id),
 			// Field to know which comment user wants to display
 			commentSearch: 0,  
 			submitted: new Date().getTime()

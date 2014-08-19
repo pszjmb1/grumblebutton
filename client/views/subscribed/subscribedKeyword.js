@@ -7,7 +7,7 @@ Template.subscribedKeyword.events({
 'click #check': function () {
 	var senderEmail = 'grumblebutton@gmail.com';
 	var userId = Meteor.userId();
-	var userName = Meteor.user().username;
+	var userName = Meteor.call('getUserName', Meteor.userId());
    	var issueManagerCategory = Subscribed.findOne(this._id).category;
 	var managerEmailId = Subscribed.findOne({category: issueManagerCategory}).emailId;
 	var managerName = Subscribed.findOne({category: issueManagerCategory}).name;
@@ -102,8 +102,8 @@ Template.subscribedKeyword.done = function () {
 		{
 			//alert('j '+j);
 			//alert('person '+person[j].username);
-			var subscribedUsername = Meteor.users.findOne({_id: subscribedPersons[j]}).username;
-			if(subscribedUsername == Meteor.user().username)
+			var subscribedUsername = Meteor.call('getUserName', subscribedPersons[j]);
+			if(subscribedUsername == Meteor.call('getUserName', Meteor.userId()))
 			{	
 				ch ="checked";
 				// alert('value of ch that is set'+ch); 

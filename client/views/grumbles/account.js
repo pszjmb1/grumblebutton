@@ -1,7 +1,6 @@
 var setDetails = function() {
 	var userInfo = Meteor.user();
 	if(Meteor.user()){
-		document.getElementById("user").value = userInfo.username;
 		document.getElementById("email").value = userInfo.emails[0].address;
 		document.getElementById("firstName").value = userInfo.profile.firstName;
 		document.getElementById("surname").value = userInfo.profile.surname;
@@ -32,33 +31,26 @@ Template.modifyAccount.events({
 				});
 			}
 		}
-		if($(e.target).find('[name=user]').val().length < 4){
-			throwError("Your username is too short. Please enter a username that is at least 4 characters long.");
-			return;
-		}
-		else {
-			var username = $(e.target).find('[name=user]').val();
-			var email = $(e.target).find('[name=email]').val();
-			var profile = {
-				firstName: $(e.target).find('[name=firstName]').val(),
-				surname: $(e.target).find('[name=surname]').val(),
-				unit: $(e.target).find('[name=unit]').val(),
-				unitNm: $(e.target).find('[name=unit] option:selected').text(),
-				dept: $(e.target).find('[name=department]').val(),
-				deptNm: $(e.target).find('[name=department] option:selected').text(),
-				room: $(e.target).find('[name=room]').val()
-			};
-			Meteor.call("modifyUser", Meteor.userId(), username, email, profile, function(error){
-				if(error){
-					throwError(error.reason || "Unknown error with updating user information.");
-					return;
-				}
-				else{
-					alert("Account Information changed.");
-					Router.go('/');
-				}
-			});
-		}
+		var email = $(e.target).find('[name=email]').val();
+		var profile = {
+			firstName: $(e.target).find('[name=firstName]').val(),
+			surname: $(e.target).find('[name=surname]').val(),
+			unit: $(e.target).find('[name=unit]').val(),
+			unitNm: $(e.target).find('[name=unit] option:selected').text(),
+			dept: $(e.target).find('[name=department]').val(),
+			deptNm: $(e.target).find('[name=department] option:selected').text(),
+			room: $(e.target).find('[name=room]').val()
+		};
+		Meteor.call("modifyUser", Meteor.userId(), email, profile, function(error){
+			if(error){
+				throwError(error.reason || "Unknown error with updating user information.");
+				return;
+			}
+			else{
+				alert("Account Information changed.");
+				Router.go('/');
+			}
+		});
 	},
 	
 	'click .reset' : function(e) {
@@ -132,14 +124,6 @@ Template.modifyAccount.helpers({
 });
 
 Template.account.helpers({
-	username: function(){
-		if(Meteor.user() !== null){
-			return Meteor.user().username;
-		}
-		else {
-			return "";
-		}
-	},
 	email: function(){
 		if(Meteor.user() !== null){
 			return Meteor.user().emails[0].address;
