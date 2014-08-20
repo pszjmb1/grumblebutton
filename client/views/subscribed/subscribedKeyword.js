@@ -89,29 +89,24 @@ Template.subscribedKeyword.events({
 // For getting user specific subscribed issues
 Template.subscribedKeyword.done = function () {
 	// alert('inside done function');
-	var subscribedUsersOfThisDomain=  Subscribed.findOne(this._id);
+	var subscribedUsersOfThisDomain = Subscribed.findOne(this._id);
 	var subscribedPersons =  subscribedUsersOfThisDomain.categorySubscribedUsers;
 	// alert('before if block in done function');
 	if(subscribedPersons && subscribedPersons.length)
 	{
-		var j;
-		var ch='';
-
 		// alert('before loop in done function');
-		for(j= 0;j< subscribedPersons.length;j++)
+		for(var j = 0; j< subscribedPersons.length; j++)
 		{
 			//alert('j '+j);
 			//alert('person '+person[j].username);
 			if(subscribedPersons[j] == Meteor.userId())
-			{	
-				ch ="checked";
+			{
 				// alert('value of ch that is set'+ch); 
+				return "checked";
 			}
-			return ch;
 		}
 		
 	}
 	else
 		return '';
-
 };   

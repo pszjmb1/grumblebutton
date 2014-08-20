@@ -87,8 +87,7 @@ createCommentNotification = function(comment) {
 	var listOfDomain = Subscribed.find();
 	var details = issue.details;
 	var category = issue.category;
-	var dept = issue.dept;
-	var unit = issue.unit;
+	var location = issue.location;
 	var shortdesc = issue.shortdesc;
 
 	// Variable to retrieve the value of done field
@@ -257,7 +256,7 @@ createCommentNotification = function(comment) {
 		myDocId = Subscribed.findOne(myDoc._id);							
 		doneValue = myDocId.done;
 		// Checking whether keyword is present in rest of the part of the form
-		if((/*category.match(regEx) ||*/dept.match(regEx) || unit.match(regEx)) && !doneValue)
+		if(/*category.match(regEx) ||*/location.match(regEx) && !doneValue)
 		{
 			// Adding an extra field in the Subscribed collection so that inspite of having multiple occurences of a domain in the form, multiple time notification to the users can be prevented	
 			//console.log('inside rest of the form part of notifcations');

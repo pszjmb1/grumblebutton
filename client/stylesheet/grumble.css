@@ -301,7 +301,7 @@ label  {
 
 .footer {
   background-color: rgb(47,12,37);
-  background-image: linear-gradient(to bottom, rgb(12, 37, 190), rgb(47,12,37));
+  background-image: linear-gradient(to bottom, rgb(36, 97, 170), rgb(12,37,119));
   background-repeat: repeat-x;
   border: 1px solid rgb(212,212,212);
   box-shadow: 0px 1px 4px rgba(0,0,0,0.067);
@@ -333,6 +333,13 @@ label  {
 }
 #brand1, #brand2  {
   display: inline;
+  padding: 0px 5px 0px 5px;
+}
+#brand1 {
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 100, 183);
+}
+#brand2 {
   color: rgb(102,102,102);
 }
 .logoContainer {
@@ -346,6 +353,11 @@ label  {
   width: 25%;
   padding-left: 1em;
   padding-right: 1em;
+  color: rgb(102,102,102);
+  font-size: 31.5px;
+  font-weight: bold;
+  font-family: inherit;
+  line-height: 40px;
 }
 
 
@@ -368,7 +380,7 @@ input[type='checkbox'] {
 }
 
 input[type="text"].location {
-  width:206px;
+  width:445px;
 }
 
 .nav .pull-right {

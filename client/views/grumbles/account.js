@@ -55,6 +55,19 @@ var getAddressing = function(form) {
 Template.modifyAccount.events({
 	'submit form' : function(e) {
 		e.preventDefault();
+		var email = $(e.target).find('[name=email]').val();
+		var profile = {
+			title: $(e.target).find('[name=title]').val(),
+			firstName: $(e.target).find('[name=firstName]').val(),
+			surname: $(e.target).find('[name=surname]').val(),
+			addressing: getAddressing(e),
+			unit: $(e.target).find('[name=unit]').val(),
+			unitNm: (($(e.target).find('[name=unit]').val() !== "") ? $(e.target).find('[name=unit] option:selected').text() : ""),
+			dept: $(e.target).find('[name=department]').val(),
+			deptNm: (($(e.target).find('[name=department]').val() !== "") ? $(e.target).find('[name=department] option:selected').text() : ""),
+			room: $(e.target).find('[name=room]').val()
+		};
+		var passwdSuccess = true;
 		if($(e.target).find('[name=password]').val() !== ""){
 			if($(e.target).find('[name=password]').val().length < 6){
 				throwError("Your new password is too short. Please enter a password that is at least 6 characters long.");
@@ -70,33 +83,16 @@ Template.modifyAccount.events({
 				Accounts.changePassword($(e.target).find('[name=oldPassword]').val(), $(e.target).find('[name=password]').val(), function(error){
 					if(error){
 						throwError(error.reason || "There was an unknown error in changing the password");
-						return;
+						passwdSuccess = false;
+					}
+					else{
+						modify(email, profile);
 					}
 				});
 			}
+		}else{
+			modify(email, profile)
 		}
-		var email = $(e.target).find('[name=email]').val();
-		var profile = {
-			title: $(e.target).find('[name=title]').val(),
-			firstName: $(e.target).find('[name=firstName]').val(),
-			surname: $(e.target).find('[name=surname]').val(),
-			addressing: getAddressing(e),
-			unit: $(e.target).find('[name=unit]').val(),
-			unitNm: $(e.target).find('[name=unit] option:selected').text(),
-			dept: $(e.target).find('[name=department]').val(),
-			deptNm: $(e.target).find('[name=department] option:selected').text(),
-			room: $(e.target).find('[name=room]').val()
-		};
-		Meteor.call("modifyUser", Meteor.userId(), email, profile, function(error){
-			if(error){
-				throwError(error.reason || "Unknown error with updating user information.");
-				return;
-			}
-			else{
-				alert("Account Information changed.");
-				Router.go('/');
-			}
-		});
 	},
 	
 	'click .reset' : function(e) {
@@ -205,6 +201,19 @@ Template.modifyAccount.deptFill = function(){
 		return [];
 	}
 };
+
+var modify = function(email, profile){
+	Meteor.call("modifyUser", Meteor.userId(), email, profile, function(error){
+		if(error){
+			throwError(error.reason || "Unknown error with updating user information.");
+			return;
+		}
+		else{
+			alert("Account Information changed.");
+			Router.go('/');
+		}
+	});
+}
 
 var units = [
 	{text: "Acute Medicine", value: "AMed"},

@@ -12,8 +12,8 @@ Meteor.methods({
 Meteor.methods({
 	getUserEmail: function(email){
 		// console.log(Meteor.users.findOne({'emails.address' : id}));
-		if(Meteor.users.findOne({'emails.address' : id}) !== undefined){
-			var user = Meteor.users.findOne({'emails.address' : id});
+		if(Meteor.users.findOne({'emails.address' : email}) !== undefined){
+			var user = Meteor.users.findOne({'emails.address' : email});
 			return user.emails[0].address;
 		}
 		else return "";

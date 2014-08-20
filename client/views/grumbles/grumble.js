@@ -194,8 +194,14 @@ Template.grumble.helpers({
 	location: function(){
 		if(Meteor.user().profile){
 			var profile = Meteor.user().profile;
-			var locationString = profile.unitNm + " " + profile.deptNm + " " + profile.room;
-			return locationString;
+			var locationString = new Array();
+			if(profile.unitNm)
+				locationString.push(profile.unitNm);
+			if(profile.deptNm)
+				locationString.push(profile.deptNm);
+			if(profile.room)
+				locationString.push(profile.room);
+			return locationString.join(" ");
 		}
 	}
 	/*unit: function(){
