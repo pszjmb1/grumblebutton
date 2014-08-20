@@ -9,6 +9,15 @@
 		</div>
 		<div class="rightColumn">
 			<h2>Profile Information</h2>
+			<label for="title">Preferred Title</label>
+			<select name="title" id="title">
+				<option value="">Please choose your preferred title</option>
+				<option value="Mr" {{title "Mr"}}>Mr</option>
+				<option value="Ms" {{title "Ms"}}>Ms</option>
+				<option value="Miss" {{title "Miss"}}>Miss</option>
+				<option value="Mrs" {{title "Mrs"}}>Mrs</option>
+				<option value="Dr" {{title "Dr"}}>Dr</option>
+			</select>
 			<label for="firstName">First Name</label>
 			<input type="text" name="firstName" id="firstName" placeholder="Please enter your first name" value="{{firstName}}"><br>
 			<label for="surname">Surname</label>

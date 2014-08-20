@@ -6,8 +6,17 @@ var setDetails = function() {
 		document.getElementById("surname").value = userInfo.profile.surname;
 		document.getElementById("room").value = userInfo.profile.room
 
+		//reset the title
+		var select = document.getElementById("title");
+		for(var title = 0; title < select.options.length; title++){
+			if(select.options[title].value == userInfo.profile.title){
+				select.selectedIndex = title;
+				break;
+			}
+		}
+
 		//reset the unit
-		var select = document.getElementById("unit");
+		select = document.getElementById("unit");
 		for(var unit = 0; unit < select.options.length; unit++){
 			if(select.options[unit].value == userInfo.profile.unit){
 				select.selectedIndex = unit;
@@ -36,6 +45,7 @@ var setDetails = function() {
 
 var getAddressing = function(form) {
 	var address = new Array();
+	address.push($(form.target).find('[name=title]').val());
 	address.push($(form.target).find('[name=firstName]').val());
 	address.push($(form.target).find('[name=surname]').val());
 	address = address.filter(function() {return true;});
@@ -67,6 +77,7 @@ Template.modifyAccount.events({
 		}
 		var email = $(e.target).find('[name=email]').val();
 		var profile = {
+			title: $(e.target).find('[name=title]').val(),
 			firstName: $(e.target).find('[name=firstName]').val(),
 			surname: $(e.target).find('[name=surname]').val(),
 			addressing: getAddressing(e),
@@ -106,8 +117,21 @@ Template.modifyAccount.events({
 });
 
 Template.modifyAccount.helpers({
+	title: function(option) {
+		if(Meteor.user().profile){
+			if(option == Meteor.user().profile.title){
+				return 'selected';
+			}
+			else{
+				return '';
+			}
+		}
+		else{
+			return '';
+		}
+	},
 	firstName: function() {
-		if(Meteor.user().profile !== undefined){
+		if(Meteor.user().profile){
 			return Meteor.user().profile.firstName;
 		}
 		else{
@@ -115,7 +139,7 @@ Template.modifyAccount.helpers({
 		}
 	},
 	surname: function() {
-		if(Meteor.user().profile !== undefined){
+		if(Meteor.user().profile){
 			return Meteor.user().profile.surname;
 		}
 		else{
@@ -123,7 +147,7 @@ Template.modifyAccount.helpers({
 		}
 	},
 	unit: function(option){
-		if(Meteor.user().profile !== undefined){
+		if(Meteor.user().profile){
 			if(option == Meteor.user().profile.unit){
 				return 'selected';
 			}
@@ -136,7 +160,7 @@ Template.modifyAccount.helpers({
 		}
 	},
 	department: function(option){
-		if(Meteor.user().profile !== undefined){
+		if(Meteor.user().profile){
 			if(option == Meteor.user().profile.dept){
 				return 'selected';
 			}
@@ -149,7 +173,7 @@ Template.modifyAccount.helpers({
 		}
 	},
 	room: function(){
-		if(Meteor.user().profile !== undefined){
+		if(Meteor.user().profile){
 			return Meteor.user().profile.room;
 		}
 		else{
@@ -160,7 +184,7 @@ Template.modifyAccount.helpers({
 
 Template.account.helpers({
 	email: function(){
-		if(Meteor.user() !== null){
+		if(Meteor.user()){
 			return Meteor.user().emails[0].address;
 		}
 		else{
