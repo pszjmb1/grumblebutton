@@ -4,8 +4,7 @@
 
 // we want users to log-in via both username and email
 Accounts.ui.config({
-	
-	passwordSignupFields: 'EMAIL'
+	passwordSignupFields: 'EMAIL_ONLY'
 });
 
 

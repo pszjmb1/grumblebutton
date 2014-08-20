@@ -5,8 +5,42 @@ var setDetails = function() {
 		document.getElementById("firstName").value = userInfo.profile.firstName;
 		document.getElementById("surname").value = userInfo.profile.surname;
 		document.getElementById("room").value = userInfo.profile.room
+
+		//reset the unit
+		var select = document.getElementById("unit");
+		for(var unit = 0; unit < select.options.length; unit++){
+			if(select.options[unit].value == userInfo.profile.unit){
+				select.selectedIndex = unit;
+				break;
+			}
+		}
+
+		//reset the department based on the unit
+		select = document.getElementById("department");
+		var unit = document.getElementById("unit").options[document.getElementById("unit").selectedIndex].value;
+		//first have to populate the select with the correct options
+		select.options.length = 1;
+		for(var depts = 0; depts < unitDepts[unit].length; depts++){
+			var dept = unitDepts[unit][depts];
+			select.options.add(new Option(dept.text, dept.value));
+		}
+		//then find the correct option
+		for(var dept = 0; dept < select.options.length; dept++){
+			if(select.options[dept].value == userInfo.profile.dept){
+				select.selectedIndex = dept;
+				break;
+			}
+		}
 	}
 };
+
+var getAddressing = function(form) {
+	var address = new Array();
+	address.push($(form.target).find('[name=firstName]').val());
+	address.push($(form.target).find('[name=surname]').val());
+	address = address.filter(function() {return true;});
+	return address.join(" ");
+}
 
 Template.modifyAccount.events({
 	'submit form' : function(e) {
@@ -35,6 +69,7 @@ Template.modifyAccount.events({
 		var profile = {
 			firstName: $(e.target).find('[name=firstName]').val(),
 			surname: $(e.target).find('[name=surname]').val(),
+			addressing: getAddressing(e),
 			unit: $(e.target).find('[name=unit]').val(),
 			unitNm: $(e.target).find('[name=unit] option:selected').text(),
 			dept: $(e.target).find('[name=department]').val(),

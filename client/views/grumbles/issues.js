@@ -1,6 +1,9 @@
 /**
  * Template helper for issues
  */
+
+// issueClosed field denotes the closed status of issues
+// Set value of IssueSearch field denotes that user wants to search this issue
 var global='';
 Template.issues.helpers({
 	issues: function() {

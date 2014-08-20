@@ -28,7 +28,7 @@ Meteor.methods({
 		var user = Meteor.users.findOne({_id: id});
 		var name = "";
 		if(user.profile.firstName){
-			name += user.profile.firstName;
+			name += user.profile.firstName + " ";
 		}
 		if(user.profile.surname){
 			name += user.profile.surname;

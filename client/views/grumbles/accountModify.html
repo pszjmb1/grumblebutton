@@ -9,8 +9,10 @@
 		</div>
 		<div class="rightColumn">
 			<h2>Profile Information</h2>
-			<label for="firstName">First Name</label><input type="text" name="firstName" placeholder="Please enter your first name" value="{{firstName}}"><br>
-			<label for="surname">Surname</label><input type="text" name="surname" placeholder="Please enter your surname" value="{{surname}}"><br>
+			<label for="firstName">First Name</label>
+			<input type="text" name="firstName" id="firstName" placeholder="Please enter your first name" value="{{firstName}}"><br>
+			<label for="surname">Surname</label>
+			<input type="text" name="surname" id="surname" placeholder="Please enter your surname" value="{{surname}}"><br>
 			<label for="unit">Unit</label>
 			<select name="unit" id="unit">
 				<option value="">Please Select the unit you work in</option>
@@ -25,7 +27,8 @@
 					<option value="{{value}}" {{department value}}>{{text}}</option>
 				{{/each}}
 			</select><br>
-			<label for="room">Room</label><input type="text" name="room" placeholder="Please enter the room you work in" value="{{room}}" ><br>
+			<label for="room">Room</label>
+			<input type="text" name="room" id="room" placeholder="Please enter the room you work in" value="{{room}}" ><br>
 		</div>
 	</form>
 </template>

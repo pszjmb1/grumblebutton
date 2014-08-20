@@ -76,7 +76,7 @@ Template.closedIssue.events({
 			//commentId: comment._id,
 			//commenterName: comment.author,
 			openerId:Meteor.userId() ,
-			openerName: Meteor.call('getUserName', Meteor.userId()),
+			openerName: Meteor.user().profile.addressing || 'anonymous',
 			read: false,
 			timestamp: new Date()
 		});	
@@ -97,7 +97,7 @@ Template.closedIssue.events({
 		{
 			for(i=0;i<subscribedPerson.length;i++)
 			{
-				var subscribedUserMessage = "Hello "+Meteor.call('getUserName',subscribedPerson[i]._id)+",\n\n"+
+				var subscribedUserMessage = "Hello "+subscribedPerson[i].profile.addressing+",\n\n"+
         			". The following issue has been opened - "+msg +".\n\n"+
         			"The link for the concerned issue is :- http://localhost:15000/closedIssues/";
 				// alert('mail to subsribed user regarding opening of issue');
@@ -114,7 +114,7 @@ Template.closedIssue.events({
 					//commentId: comment._id,
 					//commenterName: comment.author,
 					openerId:Meteor.userId() ,
-					openerName: Meteor.call('getUserName', Meteor.userId()),
+					openerName: Meteor.user().profile.addressing || 'anonymous',
 					read: false,
 					timestamp: new Date()
 				});	
@@ -164,7 +164,7 @@ Template.closedIssue.events({
 						if(flag === 0)
 						{
 							//Meteor.Router.to('issuePage', id);
-							var subscribedUserMessage = "Hello "+Meteor.call('getUserName', person[j]._id)+",\n\n"+
+							var subscribedUserMessage = "Hello "+subscribedPerson[j].profile.addressing+",\n\n"+
     	    					". The following issue has been opened - "+msg +".\n\n"+
         						"The link for the concerned issue is :- http://localhost:15000/closedIssues/";
 										
@@ -189,7 +189,7 @@ Template.closedIssue.events({
 								//commentId: comment._id,
 								//commenterName: comment.author,
 								postedUserId:Meteor.user() ,
-								postedUserName: Meteor.call('getUserName', Meteor.userId()),
+								postedUserName: Meteor.user().profile.addressing || 'anonymous',
 								read: false,
 								timestamp: new Date()
 							});	
@@ -241,7 +241,7 @@ Template.closedIssue.events({
 							// alert('flag ==0 in shortdesc');
 							if(flag === 0)
 							{
-								var subscribedUserMessage = "Hello "+Meteor.call('getUserName', person[j]._id)+",\n\n"+
+								var subscribedUserMessage = "Hello "+subscribedPerson[j].profile.addressing+",\n\n"+
 				        			". The following issue has been opened - "+msg +".\n\n"+
         							"The link for the concerned issue is :- http://localhost:15000/closedIssues/";
 								// Notification to all subscribed Users
@@ -260,7 +260,7 @@ Template.closedIssue.events({
 									//commentId: comment._id,
 									//commenterName: comment.author,
 									postedUserId:Meteor.user() ,
-									postedUserName: Meteor.call('getUserName', Meteor.userId()),
+									postedUserName: Meteor.user().profile.addressing || 'anonymous',
 									read: false,
 									timestamp: new Date()
 								});	
@@ -304,7 +304,7 @@ Template.closedIssue.events({
 					// alert('flag ==0 in rest o fthe form')
 					if(flag === 0)
 					{
-						var subscribedUserMessage = "Hello "+Meteor.call('getUserName', person[j]._id)+",\n\n"+
+						var subscribedUserMessage = "Hello "+subscribedPerson[j].profile.addressing+",\n\n"+
         					". The following issue has been opened - "+msg +".\n\n"+
 	        				"The link for the concerned issue is :- http://localhost:15000/closedIssues/";
 
@@ -324,7 +324,7 @@ Template.closedIssue.events({
 							//commentId: comment._id,
 							//commenterName: comment.author,
 							postedUserId:Meteor.user() ,
-							postedUserName: Meteor.call('getUserName', Meteor.userId()),
+							postedUserName: Meteor.user().profile.addressing || 'anonymous',
 							read: false,
 							timestamp: new Date()
 						});	

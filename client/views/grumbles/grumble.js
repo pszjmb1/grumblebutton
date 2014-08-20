@@ -13,9 +13,11 @@ Template.grumble.events({
 			shortdesc: $(e.target).find('[name=shortdesc]').val(),
 			anonymous: $(e.target).find('[name=anonymous]').val(),
 			device: navigator.userAgent,
+			ongoing: $(e.target).find('[name=ongoing]').prop('checked')
 			//urgency: $(e.target).find('[name=urgency]').val(),
 			//category: $(e.target).find('[name=category]').val(),
 		}
+		console.log(issue);
 		
 		// Getting all the field values of the form
 		var details = null;//document.querySelector('[name=details]').value;
@@ -49,7 +51,8 @@ Template.grumble.events({
 		var location = document.querySelector('[name=location]').value;
 		// alert('location '+location);
 		//var unit = document.querySelector('[name=unit]').value; 
-		var author = document.querySelector('[name=anonymous]').value; 
+		var author = document.querySelector('[name=anonymous]').value;
+		var authorName = Meteor.user().profile.addressing || 'anonymous';
 		// alert('unit '+ unit);
 		var i,j, person='', myDocId=0, foundValue=0, domainList='';
 
@@ -70,7 +73,7 @@ Template.grumble.events({
 			else
 			{
 				
-				var messageToUser = "Hello "+Meteor.call('getUserName', Meteor.userId())+",\n\n"+"Your issue - "+shortdesc+" has been posted successfully"+
+				var messageToUser = "Hello "+authorName+",\n\n"+"Your issue - "+shortdesc+" has been posted successfully"+
     				". The link for the concerned issue is :- http://localhost:15000/issues/";
 
 				// Mail to user about confirmation of the issue created by him    									
@@ -89,8 +92,8 @@ Template.grumble.events({
 						issueId: id,   // issue id
 						//commentId: comment._id,
 						//commenterName: comment.author,
-						postedUserId:Meteor.userId() ,
-						postedUserName: Meteor.call('getUserName', Meteor.userId()),
+						postedUserId: Meteor.userId() ,
+						postedUserName: ((author !== 'anonymous') ? authorName : author),
 						read: false,
 						timestamp: new Date()
 					});	 
@@ -142,7 +145,7 @@ Template.grumble.events({
 											if(person)
 											{
 												// alert('person.username '+person.username);
-												Meteor.call('user', Meteor.call('getUserName', people[j]),person.emails[0].address,senderEmail, id, subjectOfEmail, person._id, shortdesc, author, function(error, result)
+												Meteor.call('user', person.emails[0].address,senderEmail, id, subjectOfEmail, person._id, shortdesc, author, function(error, result)
 												{
 													if(error){
 														throwError(error.reason);

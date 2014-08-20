@@ -12,13 +12,19 @@
         </div>
         <fieldset>
             <div class="control-group" id="datetime">
+                <h3>Please indicate whether the issue is ongoing or current</h3> 
+                <p>An example of an ongoing issue is that the coffee keeps running out in the break room, and an example current issue is that the coffee machine is broken. If ongoing, leave the data and time as is - otherwise enter the date/time the issue was discovered.</p>
                 <div class="controls">
                     <label class="control-label" for="date">Date</label>
                     <input name="date" type="date" value="{{date}}" />       
                 </div>
                 <div class="controls">                
                     <label class="control-label" for="time">Time</label>
-                    <input name="time" type="time" value="{{time}}" />
+                    <input name="time" type="time" value="{{time}}" /><br>
+                </div>
+                <div class="controls">
+                    <label for="ongoing">Ongoing issue</label>
+                    <input type="checkbox" name="ongoing">
                 </div>
             </div>
         </fieldset>

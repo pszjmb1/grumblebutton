@@ -682,7 +682,7 @@ Template.fullIssue.done_checkbox = function () {
 					{
 						// alert('person[j].username'+person[j].username);
 						// alert('Meteor.user().username '+Meteor.user().username);
-						if(Meteor.call('getUserName', Meteor.userId()) === Meteor.call('getUserName', person[j]._id))
+						if(Meteor.userId() === person[j]._id)
 						{									
 							// alert('value is matched with the loggedin user');
 							issueToBeUnmarked = person[j].issueNotToDisplay;
@@ -739,7 +739,7 @@ Template.fullIssue.done_checkbox = function () {
 							for(j=0;j<person.length;j++)
 							{
 
-								if(Meteor.call('getUserName', Meteor.userId()) === Meteor.call('getUserName', person[j]._id))
+								if(Meteor.userId() === person[j]._id)
 								{									
 									issueToBeUnmarked = person[j].issueNotToDisplay;
 									
@@ -789,7 +789,7 @@ Template.fullIssue.done_checkbox = function () {
 					// alert('person.length in rest of the part'+person.length);
 					for(j=0;j<person.length;j++)
 					{
-						if(Meteor.call('getUserName', Meteor.userId()) === Meteor.call('getUserName', person[j]._id))
+						if(Meteor.userId() === person[j]._id)
 						{	
 							issueToBeUnmarked = person[j].issueNotToDisplay;
 							
@@ -842,7 +842,7 @@ Template.fullIssue.done_checkbox = function () {
 				// alert('j '+j);
 				// alert('person '+person[j].username);
 				// If current user name is found in the subscibed user's name then return check
-				if(Meteor.call('getUserName', Meteor.userId()) === Meteor.call('getUserName', person[j]._id))
+				if(Meteor.userId() === person[j]._id)
 				{	
 					ch ="checked";
 					// alert('value of ch that is set of issues part'+ch);
