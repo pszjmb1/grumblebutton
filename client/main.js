@@ -2,7 +2,9 @@
  * Main client subscription rules
  */
 
-issuesHandle = Meteor.subscribeWithPagination('newIssues',10);
+openIssuesHandle = Meteor.subscribeWithPagination('newOpenIssues',10);
+closedIssuesHandle = Meteor.subscribeWithPagination('newClosedIssues', 10);
+
 // Single issue and Comments subscription reacts when the current issue
 // changes.
 var loggedIn = false;
