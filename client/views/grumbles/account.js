@@ -52,7 +52,21 @@ var getAddressing = function(form) {
 	return address.join(" ");
 }
 
+Template.account.events({
+	'blur fieldset.formField > input' : function(e){
+		if(e.currentTarget.value !== ""){
+			e.currentTarget.className = "filled";
+			$(e.currentTarget).parent().children('label').addClass("filled");
+		}
+		else{
+			e.currentTarget.className = "";
+			$(e.currentTarget).parent().children('label').removeClass();
+		}
+	}
+});
+
 Template.modifyAccount.events({
+
 	'submit form' : function(e) {
 		e.preventDefault();
 		var email = $(e.target).find('[name=email]').val();

@@ -226,6 +226,9 @@ select  {
 }
 label  {
   font-weight: bold;
+  float: left;
+  width: 10em;
+  margin-right: 1em;
 }
 #datetime .controls, #location .controls{
   display: inline-block;
@@ -443,4 +446,38 @@ input[type="text"].location {
 }
 .indent-left{
   width:90%;
+}
+
+.formField {
+  position: relative;
+  /*overflow: hidden;
+  height: 100%;*/
+}
+.formField input {
+  padding: 15px 8px 5px;
+}
+.formField label {
+  position: absolute;
+  top: 15px;
+  left: 8px;
+  -webkit-transform: translate(0, 0);
+  transform: translate(0,0);
+  transition: all 0.2s ease-in-out;
+  color: #909090;
+  font-weight: normal;
+}
+.formField input {
+  top: 0;
+  left: 0;
+}
+.formField input:focus, .formField input.filled {
+  /*padding: 22px 8px 10px;*/
+  background: rgba(255,255,255,1);
+} 
+.formField input:focus + label, .formField label.filled{
+  color: #000000;
+  font-weight: bold;
+  font-size: 12px;
+  transform: translate(0, -10px);
+  -webkit-transform: translate(0, -10px);
 }

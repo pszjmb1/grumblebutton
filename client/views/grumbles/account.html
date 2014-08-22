@@ -2,8 +2,10 @@
 	<label for="email">Email Address</label><input type="email" name="email" required="true" id="email" value="{{email}}"><br>
 	{{#if currentUser}}
 		<h4>Please fill in these fields if you want to change your password:</h4><br>
-		<label for="oldPassword">Old Password</label> 
-		<input type="password" name="oldPassword" id="password"><br>
+		<fieldset class="formField">
+			<input type="password" name="oldPassword" id="oldPassword" optional>
+			<label for="oldPassword">Old Password</label> 
+		</fieldset>
 	{{/if}}
 	<label for="password">Password</label> 
 	<input type="password" name="password" id="password" placeholder="Has to be at least 6 characters long"><br>
