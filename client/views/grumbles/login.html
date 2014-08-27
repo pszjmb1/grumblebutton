@@ -1,11 +1,21 @@
 <template name="login">
 	<form>
-		<label for="id">Email Address</label>
-		<input type="email" name="id" id="id" required="true"><br>
-		<label for="password">Password</label>
-		<input type="password" name="password" required="true"><br>
-		<input type="submit" class="details btn" value="Login">
-		<a class="forgot details btn">Forgot Password?</a>
-		<a class="details btn" href="{{pathFor 'signup'}}">Create Account</a>
+		<div class="control-group">
+			<div class="controls">
+				<fieldset class="formField">
+					<input type="email" name="id" id="id" required="true">
+					<label for="id">Email Address</label>
+				</fieldset>
+			</div>
+			<div class="controls">
+				<fieldset class="formField">
+					<input type="password" name="password" required="true">
+					<label for="password">Password</label>
+				</fieldset>
+			</div>
+			<input type="submit" class="details btn" value="Login">
+			<a class="forgot details btn">Forgot Password?</a>
+			<a class="details btn" href="{{pathFor 'signup'}}">Create Account</a>
+		</div>
 	</form>
 </template>

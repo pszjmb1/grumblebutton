@@ -1,13 +1,15 @@
 <template name="grumble">
     <form class="main">
         <div class="control-group">
-            <label class="control-label" for="anonymous">Anonymity</label>
             <div class="controls">
-                <select name="anonymous" >
-                    <option value="">Please choose whether to submit the issue anonymously or not</option>
-                    <option value="anonymous">Anonymous</option>
-                    <option value="identifiable">Identifiable</option>
-                </select>
+                <fieldset class="formField">
+                    <select name="anonymous" >
+                        <option value="">Please choose whether to submit the issue anonymously or not</option>
+                        <option value="anonymous">Anonymous</option>
+                        <option value="identifiable">Identifiable</option>
+                    </select>
+                    <label class="control-label" for="anonymous">Anonymity</label>
+                </fieldset>
             </div>
         </div>
         <fieldset>
@@ -15,12 +17,16 @@
                 <h3>Please indicate whether the issue is ongoing or current</h3> 
                 <p>An example of an ongoing issue is that the coffee keeps running out in the break room, and an example current issue is that the coffee machine is broken. If ongoing, leave the data and time as is - otherwise enter the date/time the issue was discovered.</p>
                 <div class="controls">
-                    <label class="control-label" for="date">Date</label>
-                    <input name="date" type="date" value="{{date}}" />       
+                    <fieldset class="formField">
+                        <input name="date" type="date" value="{{date}}">
+                        <label class="control-label" for="date">Date</label>
+                    </fieldset>
                 </div>
-                <div class="controls">                
-                    <label class="control-label" for="time">Time</label>
-                    <input name="time" type="time" value="{{time}}" /><br>
+                <div class="controls">
+                    <fieldset class="formField">
+                        <input name="time" type="time" value="{{time}}">
+                        <label class="control-label" for="time">Time</label>
+                    </fieldset>
                 </div>
                 <div class="controls">
                     <label for="ongoing">Ongoing issue</label>
@@ -30,8 +36,10 @@
         </fieldset>
         <div class="control-group" id="location">
             <div class="controls">
-                <label class="control-label" for="location">Location</label>
-                <input name="location" class="location" type="text" placeholder="Please enter the unit, department and room" value="{{location}}">
+                <fieldset class="formField">
+                    <input name="location" class="location" type="text" value="{{location}}">
+                    <label class="control-label" for="location" data-blur="Location" data-focus="Location - Please enter the unit, department and room">Location</label>
+                </fieldset>
             </div>
             <!-- <label class="control-label" for="location">Location</label>
             <div class="controls">
@@ -48,9 +56,11 @@
             </div> -->
         </div>
         <div class="control-group">
-            <label class="control-label" for="details">Please describe the issue</label>
             <div class="controls">
-                <textarea name="shortdesc" value=""></textarea>   
+                <fieldset class="formField">
+                    <textarea name="shortdesc" value=""></textarea>   
+                    <label class="control-label" for="details">Please describe the issue</label>
+                </fieldset>
             </div>
         </div>
         <div class="control-group">

@@ -202,16 +202,17 @@ input[type=text],input[type=date],input[type=time], input[type=email], input[typ
   -moz-appearance: none;
   /*margin-bottom: 5%;
   width:90%;*/
-
-  height: 50px;
   line-height: 50px;
   border: 1% solid;
 }
+input[type=text],input[type=date],input[type=time], input[type=email], input[type=password] {
+  height: 50px;
+}
+select {
+  height: 70px;
+}
 input[type=text], input[type=email], input[type=password], textarea, select{
   width: 445px;
-}
-textarea {
-  height: 100px;
 }
 fieldset{
   display: inline;  
@@ -220,10 +221,6 @@ fieldset{
   height: 50px;
   margin-top: 1%;
 }*/
-select  {
-  height: 50px;
-  line-height: 50px;
-}
 label  {
   font-weight: bold;
   float: left;
@@ -453,9 +450,6 @@ input[type="text"].location {
   /*overflow: hidden;
   height: 100%;*/
 }
-.formField input {
-  padding: 15px 8px 5px;
-}
 .formField label {
   position: absolute;
   top: 15px;
@@ -465,19 +459,27 @@ input[type="text"].location {
   transition: all 0.2s ease-in-out;
   color: #909090;
   font-weight: normal;
+  width: auto;
 }
-.formField input {
+.formField input, .formField textarea {
   top: 0;
   left: 0;
 }
-.formField input:focus, .formField input.filled {
+.formField input {
+  padding: 15px 8px 5px;
+}
+.formField textarea, .formField select {
+  padding: 25px 8px 5px;
+}
+.formField input:focus, .formField input.filled, .formField textarea:focus {
   /*padding: 22px 8px 10px;*/
   background: rgba(255,255,255,1);
 } 
-.formField input:focus + label, .formField label.filled{
+.formField input:focus + label, .formField label.filled, .formField textarea:focus + label, .formField select + label{
   color: #000000;
   font-weight: bold;
   font-size: 12px;
   transform: translate(0, -10px);
   -webkit-transform: translate(0, -10px);
+  display: inline;
 }

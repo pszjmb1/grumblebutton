@@ -179,16 +179,22 @@ Template.grumble.events({
 
 Template.grumble.helpers({
 	date: function() {
-	var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth() + 1;
-    var y = date.getFullYear();
-    return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+		var date = new Date();
+	    var d = date.getDate();
+	    var m = date.getMonth() + 1;
+	    var y = date.getFullYear();
+	    Meteor.defer(function () {
+	    	$(".formField:has(label[for='date'])").children().addClass("filled");
+	    });
+	    return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
 	},
 	time: function(){
 		var date = new Date();
 		var hours = date.getHours();
 		var min = date.getMinutes();
+		Meteor.defer(function () {
+			$(".formField:has(label[for='time'])").children().addClass("filled");
+		});
 		return '' + (hours<=9 ? '0' + hours : hours) + ':' + (min<=9 ? '0' + min : min);
 	},
 	location: function(){
@@ -201,6 +207,9 @@ Template.grumble.helpers({
 				locationString.push(profile.deptNm);
 			if(profile.room)
 				locationString.push(profile.room);
+			Meteor.defer(function () {
+				$(".formField:has(label[for='location'])").children().addClass("filled");
+			});
 			return locationString.join(" ");
 		}
 	}

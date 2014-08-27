@@ -52,18 +52,17 @@ var getAddressing = function(form) {
 	return address.join(" ");
 }
 
-Template.account.events({
-	'blur fieldset.formField > input' : function(e){
-		if(e.currentTarget.value !== ""){
-			e.currentTarget.className = "filled";
-			$(e.currentTarget).parent().children('label').addClass("filled");
-		}
-		else{
-			e.currentTarget.className = "";
-			$(e.currentTarget).parent().children('label').removeClass();
-		}
-	}
-});
+//Function that modifies the labels on fields if the template helper is blank - implemented in template header currently
+/*Template.modifyAccount.rendered = function(){
+	setTimeout(function (){
+		this.$(".formField").each(function() {
+			console.log("Object value: " + this.children[0].value);
+			if($(this).children().first().val() !== ""){
+				$(this).children().addClass("filled");
+			}
+		});
+	}, 2000);
+}*/
 
 Template.modifyAccount.events({
 
@@ -141,7 +140,10 @@ Template.modifyAccount.helpers({
 		}
 	},
 	firstName: function() {
-		if(Meteor.user().profile){
+		if(Meteor.user().profile.firstName){
+			Meteor.defer(function () {
+				$(".formField:has(label[for='firstName'])").children().addClass("filled")
+			});
 			return Meteor.user().profile.firstName;
 		}
 		else{
@@ -150,6 +152,9 @@ Template.modifyAccount.helpers({
 	},
 	surname: function() {
 		if(Meteor.user().profile){
+			Meteor.defer(function () {
+				$(".formField:has(label[for='surname'])").children().addClass("filled")
+			});
 			return Meteor.user().profile.surname;
 		}
 		else{
@@ -184,6 +189,9 @@ Template.modifyAccount.helpers({
 	},
 	room: function(){
 		if(Meteor.user().profile){
+			Meteor.defer(function () {
+				$(".formField:has(label[for='room'])").children().addClass("filled");
+			});
 			return Meteor.user().profile.room;
 		}
 		else{
@@ -195,6 +203,9 @@ Template.modifyAccount.helpers({
 Template.account.helpers({
 	email: function(){
 		if(Meteor.user()){
+			Meteor.defer(function () {
+				$(".formField:has(label[for='email'])").children().addClass("filled");
+			});
 			return Meteor.user().emails[0].address;
 		}
 		else{

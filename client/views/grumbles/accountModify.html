@@ -9,35 +9,47 @@
 		</div>
 		<div class="rightColumn">
 			<h2>Profile Information</h2>
-			<label for="title">Preferred Title</label>
-			<select name="title" id="title">
-				<option value="">Please choose your preferred title</option>
-				<option value="Mr" {{title "Mr"}}>Mr</option>
-				<option value="Ms" {{title "Ms"}}>Ms</option>
-				<option value="Miss" {{title "Miss"}}>Miss</option>
-				<option value="Mrs" {{title "Mrs"}}>Mrs</option>
-				<option value="Dr" {{title "Dr"}}>Dr</option>
-			</select>
-			<label for="firstName">First Name</label>
-			<input type="text" name="firstName" id="firstName" placeholder="Please enter your first name" value="{{firstName}}"><br>
-			<label for="surname">Surname</label>
-			<input type="text" name="surname" id="surname" placeholder="Please enter your surname" value="{{surname}}"><br>
-			<label for="unit">Unit</label>
-			<select name="unit" id="unit">
-				<option value="">Please Select the unit you work in</option>
-				{{#each unitFill}}
-					<option value="{{value}}" {{unit value}}>{{text}}</option>
-				{{/each}}
-			</select>
-			<label for="department">Department/Ward</label>
-			<select name="department" id="department">
-				<option value="">Please select the department or ward you work in</option>
-				{{#each deptFill}}
-					<option value="{{value}}" {{department value}}>{{text}}</option>
-				{{/each}}
-			</select><br>
-			<label for="room">Room</label>
-			<input type="text" name="room" id="room" placeholder="Please enter the room you work in" value="{{room}}" ><br>
+			<fieldset class="formField">
+				<select name="title" id="title">
+					<option value="">Please choose your preferred title</option>
+					<option value="Mr" {{title "Mr"}}>Mr</option>
+					<option value="Ms" {{title "Ms"}}>Ms</option>
+					<option value="Miss" {{title "Miss"}}>Miss</option>
+					<option value="Mrs" {{title "Mrs"}}>Mrs</option>
+					<option value="Dr" {{title "Dr"}}>Dr</option>
+				</select>
+				<label for="title">Preferred Title</label>
+			</fieldset>
+			<fieldset class="formField">
+				<input type="text" name="firstName" id="firstName" placeholder="Please enter your first name" value="{{firstName}}">
+				<label for="firstName">First Name</label>
+			</fieldset>
+			<fieldset class="formField">
+				<input type="text" name="surname" id="surname" placeholder="Please enter your surname" value="{{surname}}">
+				<label for="surname">Surname</label>
+			</fieldset>
+			<fieldset class="formField">	
+				<select name="unit" id="unit">
+					<option value="">Please Select the unit you work in</option>
+					{{#each unitFill}}
+						<option value="{{value}}" {{unit value}}>{{text}}</option>
+					{{/each}}
+				</select>
+				<label for="unit">Unit</label>
+			</fieldset>
+			<fieldset class="formField">
+				<select name="department" id="department">
+					<option value="">Please select the department or ward you work in</option>
+					{{#each deptFill}}
+						<option value="{{value}}" {{department value}}>{{text}}</option>
+					{{/each}}
+				</select>
+				<label for="department">Department/Ward</label>
+			</fieldset>
+			<fieldset class="formField">
+				<input type="text" name="room" id="room" placeholder="Please enter the room you work in" value="{{room}}" >
+				<label for="room">Room</label>
+			</fieldset>
 		</div>
 	</form>
 </template>
