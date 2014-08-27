@@ -15,31 +15,11 @@ var setDetails = function() {
 			}
 		}
 
-		//reset the unit
-		select = document.getElementById("unit");
-		for(var unit = 0; unit < select.options.length; unit++){
-			if(select.options[unit].value == userInfo.profile.unit){
-				select.selectedIndex = unit;
-				break;
-			}
-		}
+		//reset the department
+		document.getElementById("department").value = userInfo.profile.department;
 
 		//reset the department based on the unit
-		select = document.getElementById("department");
-		var unit = document.getElementById("unit").options[document.getElementById("unit").selectedIndex].value;
-		//first have to populate the select with the correct options
-		select.options.length = 1;
-		for(var depts = 0; depts < unitDepts[unit].length; depts++){
-			var dept = unitDepts[unit][depts];
-			select.options.add(new Option(dept.text, dept.value));
-		}
-		//then find the correct option
-		for(var dept = 0; dept < select.options.length; dept++){
-			if(select.options[dept].value == userInfo.profile.dept){
-				select.selectedIndex = dept;
-				break;
-			}
-		}
+		document.getElementById("ward").value = userInfo.profile.ward;
 	}
 };
 
@@ -76,10 +56,8 @@ Template.modifyAccount.events({
 			firstName: $(e.target).find('[name=firstName]').val(),
 			surname: $(e.target).find('[name=surname]').val(),
 			addressing: getAddressing(e),
-			unit: $(e.target).find('[name=unit]').val(),
-			unitNm: (($(e.target).find('[name=unit]').val() !== "") ? $(e.target).find('[name=unit] option:selected').text() : ""),
-			dept: $(e.target).find('[name=department]').val(),
-			deptNm: (($(e.target).find('[name=department]').val() !== "") ? $(e.target).find('[name=department] option:selected').text() : ""),
+			department: $(e.target).find('[name=department]').val(),
+			ward: $(e.target).find('[name=ward]').val(),
 			site: $(e.target).find('[name=site]').val()
 		};
 		var passwdSuccess = true;
@@ -112,17 +90,6 @@ Template.modifyAccount.events({
 	
 	'click .reset' : function(e) {
 		setDetails();
-	},
-
-	'change #unit' : function(e) {
-		var select = document.getElementById("department");
-		// console.log(document.getElementById("department"));
-		var unit = $(e.currentTarget).val();
-		select.options.length = 1;
-		for(var depts = 0; depts < unitDepts[unit].length; depts++){
-			var dept = unitDepts[unit][depts];
-			select.options.add(new Option(dept.text, dept.value));
-		}
 	}
 
 });
@@ -163,30 +130,26 @@ Template.modifyAccount.helpers({
 			return "";
 		}
 	},
-	unit: function(option){
-		if(Meteor.user().profile){
-			if(option == Meteor.user().profile.unit){
-				return 'selected';
-			}
-			else{
-				return '';
-			}
+	ward: function(option){
+		if(Meteor.user().profile.ward){
+			Meteor.defer(function () {
+				$(".formField:has(label[for='ward'])").children().addClass("filled")
+			});
+			return Meteor.user().profile.ward;
 		}
 		else{
-			return '';
+			return "";
 		}
 	},
-	department: function(option){
-		if(Meteor.user().profile){
-			if(option == Meteor.user().profile.dept){
-				return 'selected';
-			}
-			else{
-				return '';
-			}
+	department: function(){
+		if(Meteor.user().profile.department){
+			Meteor.defer(function () {
+				$(".formField:has(label[for='department'])").children().addClass("filled")
+			});
+			return Meteor.user().profile.department;
 		}
 		else{
-			return '';
+			return "";
 		}
 	},
 	site: function(){
@@ -215,19 +178,6 @@ Template.account.helpers({
 	}
 });
 
-Template.modifyAccount.unitFill = function(){
-	return units;
-}
-
-Template.modifyAccount.deptFill = function(){
-	if(Meteor.user().profile.unit){
-		return unitDepts[Meteor.user().profile.unit];
-	}
-	else{
-		return [];
-	}
-};
-
 var modify = function(email, profile){
 	Meteor.call("modifyUser", Meteor.userId(), email, profile, function(error){
 		if(error){
@@ -239,53 +189,4 @@ var modify = function(email, profile){
 			Router.go('/');
 		}
 	});
-}
-
-var units = [
-	{text: "Acute Medicine", value: "AMed"},
-	{text: "Intensive Care", value: "IC"},
-	{text: "Maternity", value: "Mat"},
-	{text: "Accident and Emergency", value: "ANE"},
-	{text: "Cardiology", value: "Card"},
-	{text: "Diagnostic Imaging", value: "DI"}
-]
-
-var unitDepts = {
-	"": [
-		{text: "Reception", value: "REC"}
-	],
-	AMed: [
-		{text: "Acute Medicine Receiving Unit", value: "AMRU"},
-		{text: "Lynn Jarrett Unit", value: "LJU"},
-		{text: "Ward B3", value: "B3"},
-		{text: "Ward D57", value: "D57"}
-	],
-	IC: [
-		{text: "Adult Intensive Care", value: "AICU"},
-		{text: "Surgical High Dependency", value: "SHDU"},
-		{text: "Medical High Dependency", value: "MHDU"},
-		{text: "Critical Care department", value: "CCD"}
-	],
-	Mat: [
-		{text: "Ante-Natal Clinic City Hospital", value: "ANCH"},
-		{text: "Ante-Natal Clinic QMC", value: "ANQM"}
-	],
-	ANE: [
-		{}
-	],
-	Card: [
-	],
-	DI: [
-		{text: "X-ray", value: "XR"},
-		{text: "Orthopaedic clinic", value: "Orth"},
-		{text: "MRI department", value: "MRI"},
-		{text: "CT Scanners", value: "CT"},
-		{text: "Emergency/fracture clinic", value: "EF"},
-		{text: "Ultrasound department", value: "US"},
-		{text: "Obstetric ultrasound", value: "Obs"},
-		{text: "Angiography and interventional suites", value: "AIS"},
-		{text: "PET CT Scanner", value: "PET"},
-		{text: "Lithotripsy suite", value: "Lith"},
-		{text: "Paediatric Department", value: "Paed"}
-	]
 }

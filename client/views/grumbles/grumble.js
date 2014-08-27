@@ -198,15 +198,15 @@ Template.grumble.helpers({
 		return '' + (hours<=9 ? '0' + hours : hours) + ':' + (min<=9 ? '0' + min : min);
 	},
 	location: function(){
-		if(Meteor.user().profile.deptNm){
+		if(Meteor.user().profile.department){
 			var profile = Meteor.user().profile;
 			var locationString = new Array();
 			if(profile.site)
 				locationString.push(profile.site);
-			if(profile.unitNm)
-				locationString.push(profile.unitNm);
-			if(profile.deptNm)
-				locationString.push(profile.deptNm);
+			if(profile.department)
+				locationString.push(profile.department);
+			if(profile.ward)
+				locationString.push(profile.ward);
 			Meteor.defer(function () {
 				$(".formField:has(label[for='location'])").children().addClass("filled");
 			});

@@ -29,22 +29,12 @@
 				<label for="surname">Surname</label>
 			</fieldset>
 			<fieldset class="formField">	
-				<select name="unit" id="unit">
-					<option value="">Please Select the unit you work in</option>
-					{{#each unitFill}}
-						<option value="{{value}}" {{unit value}}>{{text}}</option>
-					{{/each}}
-				</select>
-				<label for="unit">Unit</label>
+				<input type="text" name="department" id="department" value="{{department}}">
+				<label for="department" data-blur="Department/Unit" data-focus="Department/Unit - Please enter where you work">Department/Unit</label>
 			</fieldset>
 			<fieldset class="formField">
-				<select name="department" id="department">
-					<option value="">Please select the department or ward you work in</option>
-					{{#each deptFill}}
-						<option value="{{value}}" {{department value}}>{{text}}</option>
-					{{/each}}
-				</select>
-				<label for="department">Department/Ward</label>
+				<input type="text" name="ward" id="ward" value="{{ward}}">
+				<label for="ward" data-blur="Ward/Room" data-focus="Ward/Room - Please enter the ward or room you work in normally">Ward/Room</label>
 			</fieldset>
 			<fieldset class="formField">
 				<input type="text" name="site" id="site" value="{{site}}" >
