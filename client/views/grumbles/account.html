@@ -35,12 +35,12 @@
 		</select><br>
 		Answer <input type="text" name="answer" required="true"><br> -->
 		{{#if currentUser}}
-		<input type="submit" class="det btn" value="Update">
-		<input type="button" class="reset det btn" value="Reset">
+		<input type="submit" class="det btn buton" value="Update"><br>
+		<input type="button" class="reset det btn buton" value="Reset">
 		{{else}}
-		<input type="submit" class="det btn" value="Submit">
-		<input type="reset" class ="det btn" value="Clear">
-		<a class="details btn" href="{{pathFor 'home'}}">Cancel</a>
+		<input type="submit" class="det btn buton" value="Submit"><br>
+		<input type="reset" class ="det btn buton" value="Clear"><br>
+		<a class="details btn buton" href="{{pathFor 'home'}}">Cancel</a>
 		{{/if}}
 	</div>
 </template>

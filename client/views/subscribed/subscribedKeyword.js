@@ -7,7 +7,7 @@ Template.subscribedKeyword.events({
 'click #check': function () {
 	var senderEmail = 'grumblebutton@gmail.com';
 	var userId = Meteor.userId();
-	var userName = (Meteor.user().profile.addressing ? Meteor.user().profile.addressing : 'anonymous');
+	var userName = Meteor.user().profile.addressing;
    	var issueManagerCategory = Subscribed.findOne(this._id).category;
 	var managerEmailId = Subscribed.findOne({category: issueManagerCategory}).emailId;
 	var managerName = Subscribed.findOne({category: issueManagerCategory}).name;

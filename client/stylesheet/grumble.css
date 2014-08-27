@@ -224,7 +224,6 @@ fieldset{
 label  {
   font-weight: bold;
   float: left;
-  width: 10em;
   margin-right: 1em;
 }
 #datetime .controls, #location .controls{
@@ -234,9 +233,9 @@ label  {
 .btn{
   padding:1%;
 }
-
 .buton{
-  padding:0.45%;
+  padding:1% 10%;
+  margin: 0px 0px 1em 0px;
 }
 
 .closedIssue .destroy {
@@ -313,7 +312,7 @@ label  {
 .footer img {
   margin: 25px 10px 10px 0px;
   float: right;
-  width: 15%;
+  width: 150px;
 }
 .footer .footerContent {
   /*float: left;*/
@@ -360,7 +359,9 @@ label  {
   line-height: 40px;
 }
 
-
+input[type='checkbox'].spacing, input[type='radio'] {
+  margin: 1em 1em 0 50%;
+}
 input[type='checkbox'] {
   margin: 1em;
 }
@@ -398,9 +399,6 @@ input[type="text"].location {
   margin: 5px;
 }
 
-.reset{
-  padding: 1%;
-}
 .control-group{
   margin: 10px;
 }
@@ -432,9 +430,12 @@ input[type="text"].location {
   margin-top: 1%;
 }
 .floatRight {
-  /*float: right;*/
-  display:inline;
-  padding-top: 18px;
+  float: right;
+}
+.floatLeft {
+  line-height: 1;
+  overflow: hidden;
+  margin-bottom: 5px;
 }
 
 .indent {

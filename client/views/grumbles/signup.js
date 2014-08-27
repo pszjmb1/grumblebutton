@@ -21,8 +21,8 @@ Template.signUp.events({
 				if(error){
 					throwError(error.reason || "There was an unknown error creating your account. Please try again later.")
 				}
+				else Router.go('modifyAccount');					
 			});
-			Router.go('/');
 		}
 	}
 });

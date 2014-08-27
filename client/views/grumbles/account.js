@@ -151,7 +151,7 @@ Template.modifyAccount.helpers({
 		}
 	},
 	surname: function() {
-		if(Meteor.user().profile){
+		if(Meteor.user().profile.surname){
 			Meteor.defer(function () {
 				$(".formField:has(label[for='surname'])").children().addClass("filled")
 			});
@@ -188,7 +188,7 @@ Template.modifyAccount.helpers({
 		}
 	},
 	room: function(){
-		if(Meteor.user().profile){
+		if(Meteor.user().profile.room){
 			Meteor.defer(function () {
 				$(".formField:has(label[for='room'])").children().addClass("filled");
 			});

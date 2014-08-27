@@ -2,7 +2,7 @@
 *
 *Template for getting the values of the sayIt.today so that manager and subscribed users of that particular domain can be notified.
 */
-Template.grumble.events({
+Template.report.events({
 	'submit form': function(e) {
 		//alert('grumble.js');
 		e.preventDefault();
@@ -46,13 +46,12 @@ Template.grumble.events({
 		}	*/
 		// alert('receiverEmail '+receiverEmail);
 	   
-
 		var subjectOfEmail = "Notification of New Issue";
 		var location = document.querySelector('[name=location]').value;
 		// alert('location '+location);
 		//var unit = document.querySelector('[name=unit]').value; 
 		var author = document.querySelector('[name=anonymous]').value;
-		var authorName = Meteor.user().profile.addressing || 'anonymous';
+		var authorName = Meteor.user().profile.addressing;
 		// alert('unit '+ unit);
 		var i,j, person='', myDocId=0, foundValue=0, domainList='';
 
@@ -198,7 +197,7 @@ Template.grumble.helpers({
 		return '' + (hours<=9 ? '0' + hours : hours) + ':' + (min<=9 ? '0' + min : min);
 	},
 	location: function(){
-		if(Meteor.user().profile){
+		if(Meteor.user().profile.deptNm){
 			var profile = Meteor.user().profile;
 			var locationString = new Array();
 			if(profile.unitNm)

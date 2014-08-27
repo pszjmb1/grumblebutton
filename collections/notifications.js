@@ -15,7 +15,7 @@ createCommentNotification = function(comment) {
     		comment.author + ' has commented on your issue having issueId:- ';
     var flag =0;
     
-    console.log('Notification to user who has posted the issue');
+    // console.log('Notification to user who has posted the issue');
     // Mail to user who has posted the issue and revealed his identity
 	if(issue.author!='anonymous')
 	{

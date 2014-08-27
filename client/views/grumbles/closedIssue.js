@@ -2,6 +2,14 @@
  * Template helpers for a closed issue
  */
 
+Template.closedIssue.helpers({
+	notAnon: function(author){
+		if(author != 'anonymous')
+			return true;
+		else return false
+	}
+});
+
 Template.closedIssue.events({
  'click #press': function () {
  	
@@ -76,7 +84,7 @@ Template.closedIssue.events({
 			//commentId: comment._id,
 			//commenterName: comment.author,
 			openerId:Meteor.userId() ,
-			openerName: Meteor.user().profile.addressing || 'anonymous',
+			openerName: Meteor.user().profile.addressing,
 			read: false,
 			timestamp: new Date()
 		});	

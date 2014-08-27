@@ -6,10 +6,8 @@ Meteor.methods({
 				throwError(error);
 			}
 		});
-	}
-});
+	},
 
-Meteor.methods({
 	getUserEmail: function(email){
 		// console.log(Meteor.users.findOne({'emails.address' : id}));
 		if(Meteor.users.findOne({'emails.address' : email}) !== undefined){
@@ -34,5 +32,10 @@ Meteor.methods({
 			name += user.profile.surname;
 		}
 		return name;
-	}
+	},
 });
+
+Accounts.onCreateUser(function(options, user) {
+	user.profile = options.profile ? options.profile : {'addressing' : "anonymous"};
+	return user;
+})
