@@ -484,3 +484,7 @@ input[type="text"].location {
   -webkit-transform: translate(0, -10px);
   display: inline;
 }
+
+.issueDet {
+  overflow: auto;
+}

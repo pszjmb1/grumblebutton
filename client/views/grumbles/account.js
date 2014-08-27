@@ -4,7 +4,8 @@ var setDetails = function() {
 		document.getElementById("email").value = userInfo.emails[0].address;
 		document.getElementById("firstName").value = userInfo.profile.firstName;
 		document.getElementById("surname").value = userInfo.profile.surname;
-		
+		document.getElementById("site").value = userInfo.profile.site;
+
 		//reset the title
 		var select = document.getElementById("title");
 		for(var title = 0; title < select.options.length; title++){
@@ -44,10 +45,12 @@ var setDetails = function() {
 
 var getAddressing = function(form) {
 	var address = new Array();
-	address.push($(form.target).find('[name=title]').val());
-	address.push($(form.target).find('[name=firstName]').val());
-	address.push($(form.target).find('[name=surname]').val());
-	address = address.filter(function() {return true;});
+	if($(form.target).find('[name=title]').val())
+		address.push($(form.target).find('[name=title]').val());
+	if($(form.target).find('[name=firstName]').val())
+		address.push($(form.target).find('[name=firstName]').val());
+	if($(form.target).find('[name=surname]').val())
+		address.push($(form.target).find('[name=surname]').val());
 	return address.join(" ");
 }
 
@@ -76,7 +79,8 @@ Template.modifyAccount.events({
 			unit: $(e.target).find('[name=unit]').val(),
 			unitNm: (($(e.target).find('[name=unit]').val() !== "") ? $(e.target).find('[name=unit] option:selected').text() : ""),
 			dept: $(e.target).find('[name=department]').val(),
-			deptNm: (($(e.target).find('[name=department]').val() !== "") ? $(e.target).find('[name=department] option:selected').text() : "")
+			deptNm: (($(e.target).find('[name=department]').val() !== "") ? $(e.target).find('[name=department] option:selected').text() : ""),
+			site: $(e.target).find('[name=site]').val()
 		};
 		var passwdSuccess = true;
 		if($(e.target).find('[name=password]').val() !== ""){
@@ -184,6 +188,16 @@ Template.modifyAccount.helpers({
 		else{
 			return '';
 		}
+	},
+	site: function(){
+		if(Meteor.user().profile.site){
+			Meteor.defer(function (){
+				$(".formField:has(label[for='site'])").children().addClass("filled");
+			});
+			return Meteor.user().profile.site;
+		}
+		else
+			return "";
 	}
 });
 

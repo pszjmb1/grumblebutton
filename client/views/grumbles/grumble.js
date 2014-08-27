@@ -10,7 +10,8 @@ Template.report.events({
 			date: $(e.target).find('[name=date]').val(),
 			time: $(e.target).find('[name=time]').val(),
 			location: $(e.target).find('[name=location]').val(),
-			shortdesc: $(e.target).find('[name=shortdesc]').val(),
+			details: $(e.target).find('[name=description]').val(),
+			shortdesc: titleParse($(e.target).find('[name=description]').val()),
 			anonymous: $(e.target).find('[name=anonymous]').val(),
 			device: navigator.userAgent,
 			ongoing: $(e.target).find('[name=ongoing]').prop('checked')
@@ -20,9 +21,9 @@ Template.report.events({
 		console.log(issue);
 		
 		// Getting all the field values of the form
-		var details = null;//document.querySelector('[name=details]').value;
+		var details = document.querySelector('[name=description]').value;
 		// alert('details '+details);
-		var shortdesc = document.querySelector('[name=shortdesc]').value;
+		var shortdesc = titleParse(document.querySelector('[name=description]').value);
 		// alert('shortdesc '+shortdesc);
 		//var category = document.querySelector('[name=category]').value; 
 		 //alert('category '+category);
@@ -112,9 +113,9 @@ Template.report.events({
 					var regEx = new RegExp("^.*"+myDoc.category+".*","gi"); 
 
 					// Checking whether domain name is present in the details part of the form
-					if(shortdesc || location)// details || category)
+					if(shortdesc || location || details) //|| category)
 					{
-						if(issue.shortdesc.match(regEx) || issue.location.match(regEx))// || category.match(regEx) || details.match(regEx) )
+						if(issue.shortdesc.match(regEx) || issue.location.match(regEx) || details.match(regEx) )// || category.match(regEx))
 						{
 							// alert('inside regular expression');
 							// Mail to manager regarding pop up of new issue
@@ -144,7 +145,7 @@ Template.report.events({
 											if(person)
 											{
 												// alert('person.username '+person.username);
-												Meteor.call('user', person.emails[0].address,senderEmail, id, subjectOfEmail, person._id, shortdesc, author, function(error, result)
+												Meteor.call('user', person.profile.addressing, person.emails[0].address,senderEmail, id, subjectOfEmail, person._id, shortdesc, author, function(error, result)
 												{
 													if(error){
 														throwError(error.reason);
@@ -200,6 +201,8 @@ Template.grumble.helpers({
 		if(Meteor.user().profile.deptNm){
 			var profile = Meteor.user().profile;
 			var locationString = new Array();
+			if(profile.site)
+				locationString.push(profile.site);
 			if(profile.unitNm)
 				locationString.push(profile.unitNm);
 			if(profile.deptNm)
@@ -207,7 +210,7 @@ Template.grumble.helpers({
 			Meteor.defer(function () {
 				$(".formField:has(label[for='location'])").children().addClass("filled");
 			});
-			return locationString.join(" ");
+			return locationString.join(", ");
 		}
 	}
 	/*unit: function(){
@@ -228,3 +231,11 @@ Template.grumble.helpers({
 	},
 	}*/
 });
+
+var titleParse = function(string) {
+	if(string.split(" ")[0].length > 75)
+		return string.slice(0, 75);
+	var title = string.split(/[.!?,;:-]/, 1).join();
+	title = title.split(" ").slice(0, 15).join(" ");
+	return title;
+}

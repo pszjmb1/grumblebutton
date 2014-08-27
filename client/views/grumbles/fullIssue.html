@@ -14,15 +14,15 @@
 				</p>
 			</div>
 			<div class="rightColumn">
-				<!-- <h4>Details</h4>
-				{{details}} 
-				<label for="markdone">Get Notifications</label>
+				<h4>Details</h4>
+				<p class="issueDet">{{details}}</p>
+				<!-- <label for="markdone">Get Notifications</label>
 				<input id='check' class="check" name="markdone" type="checkbox"  {{done_checkbox}}>
 				<input type="button" value="Get Notifications" id="gg" class="det btn" {{{done_checkbox}}} -->
 				{{#if issueClosed}}
-					<input type="button" class="dt btn" id="reopen" value="Reopen Issue">
+					<input type="button" class="details btn buton" id="reopen" value="Reopen Issue">
 				{{else}}
-					<input type="button" class="dt btn" id="close" value="Close Issue">
+					<input type="button" class="details btn buton" id="close" value="Close Issue">
 				{{/if}}
 			</div>
 		</div>

@@ -14,8 +14,8 @@ Meteor.methods({
 		if (!user)
 			throw new Meteor.Error(401, "You need to login to grumble.");
 		// ensure the grumble has correct field values
-		if (!grumbleAttribs.shortdesc)
-			throw new Meteor.Error(422, 'Please fill in the short description.');
+		if (!grumbleAttribs.details)
+			throw new Meteor.Error(422, 'Please fill in the details.');
 		//if (!grumbleAttribs.category)
 		//	throw new Meteor.Error(422, 'Please fill in the category.');	
 		if (!grumbleAttribs.date)
@@ -51,9 +51,9 @@ Meteor.methods({
 		// pick out the whitelisted keys
 		var issue = _.extend(
 			_.pick(grumbleAttribs,
-			'shortdesc','anonymous', 'date', 'time', 'device', 'location', 'ongoing'
+			'details','shortdesc','anonymous', 'date', 'time', 'device', 'location', 'ongoing'
 			/*, 'urgency',
-			'category',  'details', */
+			'category',  , */
 			), {
 					userId: user._id,
 					author: Meteor.user().profile.addressing,
