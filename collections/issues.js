@@ -28,8 +28,6 @@ Meteor.methods({
 		// 	throw new Meteor.Error(422, 'Please fill in the department.');
 		// if (!grumbleAttribs.unit)
 		// 	throw new Meteor.Error(422, 'Please fill in the unit.');
-		// if (!grumbleAttribs.room)
-		// 	throw new Meteor.Error(422, 'Please fill in the room.');
 		//if (!grumbleAttribs.urgency)
 		//	throw new Meteor.Error(422, 'Please fill in the urgency.');
 		  

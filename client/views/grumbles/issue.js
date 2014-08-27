@@ -16,7 +16,6 @@ Template.issue.events({
 	var shortdesc = msg;
 	var unit =  Issues.findOne(this._id).unit;
 	var dept =  Issues.findOne(this._id).dept;
-	var room =  Issues.findOne(this._id).room;
 	var id = this._id;
 	var issueRaisedUser = Issues.findOne(this._id).author;
 	//alert('msg '+msg);

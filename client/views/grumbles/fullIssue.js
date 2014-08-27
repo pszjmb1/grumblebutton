@@ -344,7 +344,7 @@ Template.fullIssue.events({
 // 	else if (!(document.getElementById('check').checked))
 //   	{
 //   		alert('pulling of data in fullIssue.js');
-//   		// If user wants to unsubscibe froom the issue
+//   		// If user wants to unsubscibe from the issue
 //   		// Again there are two scenarios
 //   		// 1) Either user has subscibe to the issues domain and wants to unsubscibe from this issue
 // 		// 2) OR user only had subscibed this issue not it's domain 

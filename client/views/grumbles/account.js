@@ -4,8 +4,7 @@ var setDetails = function() {
 		document.getElementById("email").value = userInfo.emails[0].address;
 		document.getElementById("firstName").value = userInfo.profile.firstName;
 		document.getElementById("surname").value = userInfo.profile.surname;
-		document.getElementById("room").value = userInfo.profile.room
-
+		
 		//reset the title
 		var select = document.getElementById("title");
 		for(var title = 0; title < select.options.length; title++){
@@ -77,8 +76,7 @@ Template.modifyAccount.events({
 			unit: $(e.target).find('[name=unit]').val(),
 			unitNm: (($(e.target).find('[name=unit]').val() !== "") ? $(e.target).find('[name=unit] option:selected').text() : ""),
 			dept: $(e.target).find('[name=department]').val(),
-			deptNm: (($(e.target).find('[name=department]').val() !== "") ? $(e.target).find('[name=department] option:selected').text() : ""),
-			room: $(e.target).find('[name=room]').val()
+			deptNm: (($(e.target).find('[name=department]').val() !== "") ? $(e.target).find('[name=department] option:selected').text() : "")
 		};
 		var passwdSuccess = true;
 		if($(e.target).find('[name=password]').val() !== ""){
@@ -185,17 +183,6 @@ Template.modifyAccount.helpers({
 		}
 		else{
 			return '';
-		}
-	},
-	room: function(){
-		if(Meteor.user().profile.room){
-			Meteor.defer(function () {
-				$(".formField:has(label[for='room'])").children().addClass("filled");
-			});
-			return Meteor.user().profile.room;
-		}
-		else{
-			return "";
 		}
 	}
 });

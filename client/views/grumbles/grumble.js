@@ -204,8 +204,6 @@ Template.grumble.helpers({
 				locationString.push(profile.unitNm);
 			if(profile.deptNm)
 				locationString.push(profile.deptNm);
-			if(profile.room)
-				locationString.push(profile.room);
 			Meteor.defer(function () {
 				$(".formField:has(label[for='location'])").children().addClass("filled");
 			});
@@ -228,12 +226,5 @@ Template.grumble.helpers({
 			return "";
 		}
 	},
-	room: function(){
-		if(Meteor.user().profile){
-			return Meteor.user().profile.room;
-		}
-		else{
-			return "";
-		}
 	}*/
 });

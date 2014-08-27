@@ -70,7 +70,7 @@ Template.issues.events({
 		Session.set("key", global);
 		//alert('sesion value '+ Session.get("key"));
 		var issues = Issues.find();
-		var regEx='', unit='', dept='', shortdesc='', room='';
+		var regEx='', unit='', dept='', shortdesc='';
 
 		//Preventing the user to search without entering the keyword
 		if(!Session.get("key"))
@@ -91,11 +91,9 @@ Template.issues.events({
 				//alert('dept '+dept);
 				shortdesc = myDoc.shortdesc;
 				//alert('shortdesc '+shortdesc);
-				room = myDoc.room;
-				//alert('room '+room);
-
+				
 				// Checking in every part of the form where the search keyword can be found
-				if(shortdesc.match(regEx) || dept.match(regEx) || unit.match(regEx)|| room.match(regEx))
+				if(shortdesc.match(regEx) || dept.match(regEx) || unit.match(regEx))
 				{
 					
 					//alert('value matches with any of the field');
