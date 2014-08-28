@@ -1,51 +1,64 @@
 <template name="grumble">
-    <form class="main">
-        <div class="control-group">
-            <label class="control-label" for="anonymous">Anonymity</label>
-            <div class="controls">
-                <select name="anonymous" >
-                    <option value="anonymous">Anonymous</option>
-                    <option value="identifiable">Identifiable</option>
-                </select>
+    <div class="control-group">
+        <div class="controls">
+            <div class="floatLeft">
+                <label class="control-label" for="anonymous">Please choose whether to submit the issue anonymously or not</label>
+            </div>
+            <div>
+                <input type="radio" name="anonymous" value="anonymous" required>Anonymous
+                <input type="radio" name="anonymous" value="identifiable" required>Identifiable
             </div>
         </div>
-        <fieldset>
-            <div class="control-group" id="datetime">
-                <div class="controls">
+    </div>
+    <fieldset>
+        <div class="control-group" id="datetime">
+            <h3>Please indicate whether the issue is ongoing or current</h3> 
+            <p>An example of an ongoing issue is that the coffee keeps running out in the break room, and an example current issue is that the coffee machine is broken. If ongoing, leave the data and time as is - otherwise enter the date/time the issue was discovered.</p>
+            <div class="controls">
+                <fieldset class="formField">
+                    <input name="date" type="date" value="{{date}}">
                     <label class="control-label" for="date">Date</label>
-                    <input name="date" type="date" value="{{date}}" />       
-                </div>
-                <div class="controls">                
+                </fieldset>
+            </div>
+            <div class="controls">
+                <fieldset class="formField">
+                    <input name="time" type="time" value="{{time}}">
                     <label class="control-label" for="time">Time</label>
-                    <input name="time" type="time" value="{{time}}" />
+                </fieldset>
+            </div>
+            <div class="controls">
+                <div class="floatLeft">
+                    <label for="ongoing">Ongoing issue?</label>
+                </div>
+                <div>
+                    <input type="checkbox" class="spacing" name="ongoing">
                 </div>
             </div>
-        </fieldset>
-        <div class="control-group" id="location">
-            <label class="control-label" for="location">Location</label>
-            <div class="controls">
-                <label for="unit">Unit</label>
-                <input name="unit" type="text" value="{{unit}}" class="location">
-            </div>
-            <div class="controls">
-                <label for="department">Department/Ward</label>
-                <input name="department" type="text" value="{{department}}" class="location">
-            </div>
-            <div class="controls">
-                <label for="room">Room/Section (bed number, location in room etc.)</label>
-                <input name="room" type="text" value="{{room}}" class="location">    
-            </div>
         </div>
-        <div class="control-group">
-            <label class="control-label" for="details">Please describe the issue</label>
-            <div class="controls">
-                <textarea name="shortdesc" value=""></textarea>   
-            </div>
+    </fieldset>
+    <div class="control-group" id="location">
+        <div class="controls">
+            <fieldset class="formField">
+                <input name="location" class="location" type="text" value="{{location}}">
+                <label class="control-label" for="location" data-blur="Location" data-focus="Location - Please enter the unit, department and room">Location</label>
+            </fieldset>
         </div>
-        <div class="control-group">
-            <div class="controls">
-                <input type="submit" value="Submit" class="btn btn-primary"/>
-            </div>
+        <!-- <label class="control-label" for="location">Location</label>
+        <div class="controls">
+            <label for="unit">Unit</label>
+            <input name="unit" type="text" value="{{unit}}" class="location">
         </div>
-    </form>
+        <div class="controls">
+            <label for="department">Department/Ward</label>
+            <input name="department" type="text" value="{{department}}" class="location">
+        </div> -->
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <fieldset class="formField">
+                <textarea name="description" value=""></textarea>   
+                <label class="control-label" for="description">Please describe the issue</label>
+            </fieldset>
+        </div>
+    </div>
 </template> 

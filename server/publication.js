@@ -7,9 +7,12 @@
  */
 
 
-Meteor.publish('newIssues', function(limit) {
-	return Issues.find({}, {sort: {submitted: -1}, limit: limit});
-	
+Meteor.publish('newOpenIssues', function(limit) {
+	return Issues.find({issueClosed: 0}, {sort: {submitted: -1}, limit: limit});
+});
+
+Meteor.publish('newClosedIssues', function(limit) {
+  return Issues.find({issueClosed: 1}, {sort: {submitted: -1}, limit: limit});
 });
 
 Meteor.publish('singleIssue', function(id) {

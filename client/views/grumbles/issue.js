@@ -4,7 +4,7 @@
 
 //Event to close the issue. 
 Template.issue.events({
-'click .destroy': function () {
+'click #close': function () {
 	//alert('inside issue.js -> destroy');
 
 	// Adding a field to differentiate the closed issue from rest of the issues
@@ -16,7 +16,6 @@ Template.issue.events({
 	var shortdesc = msg;
 	var unit =  Issues.findOne(this._id).unit;
 	var dept =  Issues.findOne(this._id).dept;
-	var room =  Issues.findOne(this._id).room;
 	var id = this._id;
 	var issueRaisedUser = Issues.findOne(this._id).author;
 	//alert('msg '+msg);
@@ -69,7 +68,7 @@ Template.issue.events({
 			//commentId: comment._id,
 			//commenterName: comment.author,
 			closerId:Meteor.userId() ,
-			closerName: Meteor.user().username,
+			closerName: Meteor.user().profile.addressing || 'anonymous',
 			read: false,
 			timestamp: new Date()
 		});	
@@ -90,7 +89,7 @@ Template.issue.events({
 		{
 			for(i=0;i<subscribedPerson.length;i++)
 			{
-				var subscribedUserMessage = "Hello "+subscribedPerson[i].username+",\n\n"+
+				var subscribedUserMessage = "Hello "+subscribedPerson[i].profile.addressing+",\n\n"+
         			". The following issue has been closed - "+msg +".\n\n"+
         			"The link for the concerned issue is :- http://localhost:15000/closedIssues/";
         		//alert('mail to  subscribed user regarding closing of issue');
@@ -107,7 +106,7 @@ Template.issue.events({
 					//commentId: comment._id,
 					//commenterName: comment.author,
 					closerId:Meteor.userId() ,
-					closerName: Meteor.user().username,
+					closerName: Meteor.user().profile.addressing || 'anonymous',
 					read: false,
 					timestamp: new Date()
 				});	
@@ -156,7 +155,7 @@ Template.issue.events({
 						if(flag === 0)
 						{
 							//Meteor.Router.to('issuePage', id);
-							var subscribedUserMessage = "Hello "+person[j].username+",\n\n"+
+							var subscribedUserMessage = "Hello "+person[j].profile.addressing+",\n\n"+
     	    					". The following issue has been closed - "+msg +".\n\n"+
         						"The link for the concerned issue is :- http://localhost:15000/closedIssues/";
 										
@@ -181,7 +180,7 @@ Template.issue.events({
 								//commentId: comment._id,
 								//commenterName: comment.author,
 								postedUserId:Meteor.user() ,
-								postedUserName: Meteor.user().username,
+								postedUserName: Meteor.user().profile.addressing || anonymous,
 								read: false,
 								timestamp: new Date()
 							});	
@@ -235,7 +234,7 @@ Template.issue.events({
 							// alert('flag ==0 in shortdesc part');
 							if(flag === 0)
 							{
-								var subscribedUserMessage = "Hello "+person[j].username+",\n\n"+
+								var subscribedUserMessage = "Hello "+person[j].profile.addressing+",\n\n"+
 				        			". The following issue has been closed - "+msg +".\n\n"+
     	    						"The link for the concerned issue is :- http://localhost:15000/closedIssues/";
 								// Notification to all subscribed Users
@@ -254,7 +253,7 @@ Template.issue.events({
 									//commentId: comment._id,
 									//commenterName: comment.author,
 									postedUserId:Meteor.user() ,
-									postedUserName: Meteor.user().username,
+									postedUserName: Meteor.user().profile.addressing || 'anonymous',
 									read: false,
 									timestamp: new Date()
 								});	
@@ -297,7 +296,7 @@ Template.issue.events({
 					// alert('flag ==0 in rest of the part');
 					if(flag === 0)
 					{
-						var subscribedUserMessage = "Hello "+person[j].username+",\n\n"+
+						var subscribedUserMessage = "Hello "+person[j].profile.addressing+",\n\n"+
 	        				". The following issue has been closed - "+msg +".\n\n"+
     	    				"The link for the concerned issue is :- http://localhost:15000/closedIssues/";
 						// Notification to all subscribed Users
@@ -316,7 +315,7 @@ Template.issue.events({
 							//commentId: comment._id,
 							//commenterName: comment.author,
 							postedUserId:Meteor.user() ,
-							postedUserName: Meteor.user().username,
+							postedUserName: Meteor.user().profile.addressing || 'anonymous',
 							read: false,
 							timestamp: new Date()
 						});	

@@ -1,12 +1,17 @@
 <template name="closedIssues">
+	<div class="main">
+		<h1>Closed Issues</h1>
+	</div>
 	<div class="closedIssues">
 	<fieldset>
 		<form class="main">
 			<table>
 				<tr>
-					<td> 
-						<!--<label class="control-label" for="keyword">&nbsp;Add Keyword</label>-->
-						<input id="textbox" name="keyword" type="text" value="" placeholder="Search" />
+					<td>
+						<fieldset class="formField">
+							<input id="textbox" name="keyword" type="text" value="">
+							<label class="control-label" for="keyword">Search closed issues by keyword</label>
+						</fieldset>
 					</td>
 					<td> 
 						<div class="control-group">
@@ -28,7 +33,13 @@
 			{{> closedIssue}}
 		{{/each}}
 	{{/if}}
-		
+	{{#if issuesReady}}
+		{{#unless allIssuesLoaded}}
+			<a class="load-more" href="#">See more issues</a>
+		{{/unless}}
+		{{else}}
+			<div>{{> spinner}}</div>
+	{{/if}} 	
 		
 	</div>
 </template>

@@ -12,7 +12,15 @@ Template.subscribedKeywords.events({
 		//alert('keyword '+key)
 		if(key)
 		{
-			Subscribed.insert({category:key});
+			var subscriptionId = "";
+			if(Subscribed.findOne({category: key})){
+				subscriptionId = Subscribed.findOne({category: key})._id;
+				Subscribed.update({_id: subscriptionId}, {$push: {categorySubscribedUsers: Meteor.userId()}});
+			}
+			else{
+				subscriptionId = Subscribed.insert({category:key});
+				Subscribed.update({_id: subscriptionId}, {$push: {'categorySubscribedUsers': Meteor.userId()}});
+			}
 		}
 
 	}
@@ -21,7 +29,7 @@ Template.subscribedKeywords.events({
 // Showing all the keywords present in the collection
 Template.subscribedKeywords.helpers({
 	subscribedKeywords: function() {
-		return Subscribed.find();
+		return Subscribed.find({categorySubscribedUsers: Meteor.userId()});
 			//limit: issuesHandle.limit()});
 	}
 	/*,

@@ -14,20 +14,20 @@ Meteor.methods({
 		if (!user)
 			throw new Meteor.Error(401, "You need to login to grumble.");
 		// ensure the grumble has correct field values
-		if (!grumbleAttribs.shortdesc)
-			throw new Meteor.Error(422, 'Please fill in the short description.');
+		if (!grumbleAttribs.details)
+			throw new Meteor.Error(422, 'Please fill in the details.');
 		//if (!grumbleAttribs.category)
 		//	throw new Meteor.Error(422, 'Please fill in the category.');	
 		if (!grumbleAttribs.date)
 			throw new Meteor.Error(422, 'Please fill in the date.');
 		if (!grumbleAttribs.time)
 			throw new Meteor.Error(422, 'Please fill in the time.');
-		if (!grumbleAttribs.dept)
-			throw new Meteor.Error(422, 'Please fill in the department.');
-		if (!grumbleAttribs.unit)
-			throw new Meteor.Error(422, 'Please fill in the unit.');
-		if (!grumbleAttribs.room)
-			throw new Meteor.Error(422, 'Please fill in the room.');
+		if (!grumbleAttribs.location)
+			throw new Meteor.Error(422, 'Please fill in the location.');
+		// if (!grumbleAttribs.dept)
+		// 	throw new Meteor.Error(422, 'Please fill in the department.');
+		// if (!grumbleAttribs.unit)
+		// 	throw new Meteor.Error(422, 'Please fill in the unit.');
 		//if (!grumbleAttribs.urgency)
 		//	throw new Meteor.Error(422, 'Please fill in the urgency.');
 		  
@@ -44,20 +44,20 @@ Meteor.methods({
 	    }
 		else
 		{
-		 	userName = user.username;
+		 	userName = Meteor.user().profile.addressing;
 		}
 		
 		// pick out the whitelisted keys
 		var issue = _.extend(
 			_.pick(grumbleAttribs,
-			'shortdesc','anonymous', 'date', 'time', 'device', 'dept',
-			'unit', 'room'/*, 'urgency',
-			'category',  'details', */
+			'details','shortdesc','anonymous', 'date', 'time', 'device', 'location', 'ongoing'
+			/*, 'urgency',
+			'category',  , */
 			), {
 					userId: user._id,
-					author: userName,
+					author: Meteor.user().profile.addressing,
 					authorEmailId: user.emails[0].address,
-					postedUser:user.username,
+					postedUser: userName,
 					submitted: new Date().getTime(),
 					// Field to know about closing of issue
 					issueClosed :0,

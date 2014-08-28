@@ -1,16 +1,19 @@
 /**
  * Template helper for issues
  */
+
+// issueClosed field denotes the closed status of issues
+// Set value of IssueSearch field denotes that user wants to search this issue
 var global='';
 Template.issues.helpers({
 	issues: function() {
 		//alert('returning the value');
-		return  Issues.find({issueClosed:0, issueSearch:0}, {sort: {submitted: -1}, 
-			limit: issuesHandle.limit()});
+		return  Issues.find({issueClosed:0}, {sort: {submitted: -1}, 
+			limit: openIssuesHandle.limit()});
 	},
 	// Determine if curent list of issues is ready
 	issuesReady: function() {
-		return !issuesHandle.loading();
+		return !openIssuesHandle.loading();
 	},
 	// Retrieve the count of issues that has been searched
 	findSeachedIssues: function() {
@@ -20,12 +23,12 @@ Template.issues.helpers({
 	searchedIssues: function() {
 		//alert('inside searchedIssues');
 		//alert('session value in searchedIssues'+global);
-		return Issues.find({issueClosed:0, issueSearch:1}); //, {sort: {submitted: -1}});
+		return Issues.find({issueClosed:0, issueSearch:1}, {sort: {submitted: -1}});
 	},
 	// Determine if all issues have been loaded
 	allIssuesLoaded: function() {
-		return !issuesHandle.loading() &&
-			Issues.find().count() < issuesHandle.loaded();
+		return !openIssuesHandle.loading() &&
+			Issues.find({issueClosed: 0}).count() < openIssuesHandle.loaded();
 	}
 }); 
 
@@ -33,7 +36,7 @@ Template.issues.helpers({
 Template.issues.events({
 	'click .load-more': function(e) {
 		e.preventDefault();
-		issuesHandle.loadNextPage();
+		openIssuesHandle.loadNextPage();
 	}
 });
 
@@ -67,7 +70,7 @@ Template.issues.events({
 		Session.set("key", global);
 		//alert('sesion value '+ Session.get("key"));
 		var issues = Issues.find();
-		var regEx='', unit='', dept='', shortdesc='', room='';
+		var regEx='', unit='', dept='', shortdesc='';
 
 		//Preventing the user to search without entering the keyword
 		if(!Session.get("key"))
@@ -88,11 +91,9 @@ Template.issues.events({
 				//alert('dept '+dept);
 				shortdesc = myDoc.shortdesc;
 				//alert('shortdesc '+shortdesc);
-				room = myDoc.room;
-				//alert('room '+room);
-
+				
 				// Checking in every part of the form where the search keyword can be found
-				if(shortdesc.match(regEx) || dept.match(regEx) || unit.match(regEx)|| room.match(regEx))
+				if(shortdesc.match(regEx) || dept.match(regEx) || unit.match(regEx))
 				{
 					
 					//alert('value matches with any of the field');

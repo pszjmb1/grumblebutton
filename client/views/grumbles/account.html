@@ -1,28 +1,46 @@
 <template name="account">
-	<label for="user">Username</label><input type="text" name="user" required="true" id="user" value="{{username}}"><br>
-	<label for="email">Email Address</label><input type="email" name="email" required="true" id="email" value="{{email}}"><br>
-	{{#if currentUser}}
-		<h4>Please fill in these fields if you want to change your password:</h4><br>
-		<label for="oldPassword">Old Password</label> 
-		<input type="password" name="oldPassword" id="password"><br>
-	{{/if}}
-	<label for="password">Password</label> 
-	<input type="password" name="password" id="password"><br>
-	<label for="passwordConfirm">Confirm Password</label> 
-	<input type="password" name="passwordConfirm" id="passwordConfirm"><br>
-	<!-- Security question <select name="securityQuestion">
-		<option value="">Please select a security question</option>
-		<option value="maidenName">Mother's maiden name</option>
-		<option value="petName">Name of pet</option>
-		<option value="primSch">Primary school name</option>
-	</select><br>
-	Answer <input type="text" name="answer" required="true"><br> -->
-	{{#if currentUser}}
-	<input type="submit" class="det btn" value="Update">
-	<input type="button" class="reset det btn" value="Reset">
-	{{else}}
-	<input type="submit" class="det btn" value="Submit">
-	<input type="reset" class ="det btn" value="Clear">
-	<a class="details btn" href="{{pathFor 'home'}}">Cancel</a>
-	{{/if}}
+	<div class="control-group">
+		<div class="controls">
+			<fieldset class="formField">
+				<input type="email" name="email" required="true" id="email" value="{{email}}">
+				<label for="email">Email Address</label>
+			</fieldset>
+		</div>
+		{{#if currentUser}}
+			<div class="controls">
+				<h4>Please fill in these fields if you want to change your password:</h4><br>
+				<fieldset class="formField">
+					<input type="password" name="oldPassword" id="oldPassword" optional>
+					<label for="oldPassword" data-focus="Old Password" data-blur="Old Password">Old Password</label> 
+				</fieldset>
+			</div>
+		{{/if}}
+		<div class="controls">
+			<fieldset class="formField">
+				<input type="password" name="password" id="password">
+				<label for="password" data-focus="Password - Has to be at least 6 characters long" data-blur="Password">Password</label> 
+			</fieldset>
+		</div>
+		<div class="controls">
+			<fieldset class="formField">
+				<input type="password" name="passwordConfirm" id="passwordConfirm">
+				<label for="passwordConfirm" data-focus="Confirm Password - Has to match password" data-blur="Confirm Password">Confirm Password</label> 
+			</fieldset>
+		</div>
+		<!-- Security question <select name="securityQuestion">
+			<option value="">Please select a security question</option>
+			<option value="maidenName">Mother's maiden name</option>
+			<option value="petName">Name of pet</option>
+			<option value="primSch">Primary school name</option>
+		</select><br>
+		Answer <input type="text" name="answer" required="true"><br> -->
+		{{#if currentUser}}
+		<input type="submit" class="det btn buton" value="Update"><br>
+		<input type="button" class="reset det btn buton" value="Reset">
+		{{else}}
+		<input type="submit" class="det btn buton" value="Submit"><br>
+		<input type="reset" class ="det btn buton" value="Clear"><br>
+		<a class="details btn buton" href="{{pathFor 'home'}}">Cancel</a>
+		{{/if}}
+	</div>
 </template>

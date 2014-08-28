@@ -7,7 +7,7 @@ Template.subscribedKeyword.events({
 'click #check': function () {
 	var senderEmail = 'grumblebutton@gmail.com';
 	var userId = Meteor.userId();
-	var userName = Meteor.user().username;
+	var userName = Meteor.user().profile.addressing;
    	var issueManagerCategory = Subscribed.findOne(this._id).category;
 	var managerEmailId = Subscribed.findOne({category: issueManagerCategory}).emailId;
 	var managerName = Subscribed.findOne({category: issueManagerCategory}).name;
@@ -89,30 +89,24 @@ Template.subscribedKeyword.events({
 // For getting user specific subscribed issues
 Template.subscribedKeyword.done = function () {
 	// alert('inside done function');
-	var subscribedUsersOfThisDomain=  Subscribed.findOne(this._id);
+	var subscribedUsersOfThisDomain = Subscribed.findOne(this._id);
 	var subscribedPersons =  subscribedUsersOfThisDomain.categorySubscribedUsers;
 	// alert('before if block in done function');
 	if(subscribedPersons && subscribedPersons.length)
 	{
-		var j;
-		var ch='';
-
 		// alert('before loop in done function');
-		for(j= 0;j< subscribedPersons.length;j++)
+		for(var j = 0; j< subscribedPersons.length; j++)
 		{
 			//alert('j '+j);
 			//alert('person '+person[j].username);
-			var subscribedUsername = Meteor.users.findOne({_id: subscribedPersons[j]}).username;
-			if(subscribedUsername == Meteor.user().username)
-			{	
-				ch ="checked";
+			if(subscribedPersons[j] == Meteor.userId())
+			{
 				// alert('value of ch that is set'+ch); 
+				return "checked";
 			}
-			return ch;
 		}
 		
 	}
 	else
 		return '';
-
 };   

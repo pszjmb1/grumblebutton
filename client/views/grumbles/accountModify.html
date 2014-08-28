@@ -1,29 +1,45 @@
 <template name="modifyAccount">
 	{{> studyInfo}}
 	<form method="post" name="account" id="account">
-		<h1 class="title">Account Details</h1><br>
+		<div class="main">
+			<h1 class="title">Account Details</h1><br>
+		</div>
 		<div class="leftColumn">
 			{{> account}}
 		</div>
 		<div class="rightColumn">
 			<h2>Profile Information</h2>
-			<label for="firstName">First Name</label><input type="text" name="firstName" value="{{firstName}}"><br>
-			<label for="surname">Surname</label><input type="text" name="surname" value="{{surname}}"><br>
-			<label for="unit">Unit</label>
-			<select name="unit" id="unit">
-				<option value=""></option>
-				{{#each unitFill}}
-					<option value="{{value}}" {{unit value}}>{{text}}</option>
-				{{/each}}
-			</select>
-			<label for="department">Department/Ward</label>
-			<select name="department" id="department">
-				<option value=""></option>
-				{{#each deptFill}}
-					<option value="{{value}}" {{department value}}>{{text}}</option>
-				{{/each}}
-			</select><br>
-			<label for="room">Room</label><input type="text" name="room" value="{{room}}"><br>
+			<fieldset class="formField">
+				<select name="title" id="title">
+					<option value="">Please choose your preferred title</option>
+					<option value="Mr" {{title "Mr"}}>Mr</option>
+					<option value="Ms" {{title "Ms"}}>Ms</option>
+					<option value="Miss" {{title "Miss"}}>Miss</option>
+					<option value="Mrs" {{title "Mrs"}}>Mrs</option>
+					<option value="Dr" {{title "Dr"}}>Dr</option>
+				</select>
+				<label for="title">Preferred Title</label>
+			</fieldset>
+			<fieldset class="formField">
+				<input type="text" name="firstName" id="firstName" value="{{firstName}}">
+				<label for="firstName">First Name</label>
+			</fieldset>
+			<fieldset class="formField">
+				<input type="text" name="surname" id="surname" value="{{surname}}">
+				<label for="surname">Surname</label>
+			</fieldset>
+			<fieldset class="formField">	
+				<input type="text" name="department" id="department" value="{{department}}">
+				<label for="department" data-blur="Department/Unit" data-focus="Department/Unit - Please enter where you work">Department/Unit</label>
+			</fieldset>
+			<fieldset class="formField">
+				<input type="text" name="ward" id="ward" value="{{ward}}">
+				<label for="ward" data-blur="Ward/Room" data-focus="Ward/Room - Please enter the ward or room you work in normally">Ward/Room</label>
+			</fieldset>
+			<fieldset class="formField">
+				<input type="text" name="site" id="site" value="{{site}}" >
+				<label for="site" data-blur="Site" data-focus="Site - Please specify which site you work on">Site</label>
+			</fieldset>
 		</div>
 	</form>
 </template>

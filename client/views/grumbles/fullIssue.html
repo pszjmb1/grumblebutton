@@ -1,25 +1,29 @@
 
 <template name="fullIssue">	
 	<div class="issue">
-		<div class="issue-content">
+		<div class="fullIssue-content">
 			<h3>
 				{{shortdesc}} &#09; <span>submitted by {{author}} &#09;
 				</span>
 			</h3>
 			<div class="leftColumn">
 				<p>
-					<strong>Time:</strong> &#09; {{date}}, {{time}}<br><br> 
-					<strong>Dept:</strong> &#09; {{dept}}<br><br>
-					<strong>Unit:</strong> &#09; {{unit}}<br><br>
-					<strong>Room:</strong> &#09; {{room}}<br><br>
+					<strong>Time Reported:</strong> &#09; {{date}}, {{time}}<br><br> 
+					<strong>Location:</strong> &#09; {{location}}<br><br>
+					{{#if ongoing}}<strong>Ongoing Issue</strong><br><br>{{/if}}
 				</p>
 			</div>
 			<div class="rightColumn">
-				<!-- <h4>Details</h4>
-				{{details}} 
-				<label for="markdone">Get Notifications</label>
+				<h4>Details</h4>
+				<p class="issueDet">{{details}}</p>
+				<!-- <label for="markdone">Get Notifications</label>
 				<input id='check' class="check" name="markdone" type="checkbox"  {{done_checkbox}}>
 				<input type="button" value="Get Notifications" id="gg" class="det btn" {{{done_checkbox}}} -->
+				{{#if issueClosed}}
+					<input type="button" class="details btn buton" id="reopen" value="Reopen Issue">
+				{{else}}
+					<input type="button" class="details btn buton" id="close" value="Close Issue">
+				{{/if}}
 			</div>
 		</div>
 	</div>

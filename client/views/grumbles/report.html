@@ -1,7 +1,21 @@
 <template name = "report">
-	<h1>Report Minor Issue</h1>
-	<h3> Serious Incidents should be reported to Datix; this form is designed for minor issues</h3>
-	<p>This form can be used to report issues that may affect the quality of patient care and the maintenance of the hospital. By identifying normally unreported issues, this system hopes to reduce risk and save money.</p>
-	<p>It is recommended that you only write about one issue per report for simplicity reasons. You have the option of submitting this report anonymously. Whilst this information will not be visible to other staff members nor the manager who reviews the report, your name will still be recorded in the report database. For extra information about the study, please visit <a href="{{pathFor 'modifyAccount'}}">this</a> page.</p>
-	{{> grumble}}
+	<div class="main">
+		<h1>Report Minor Issue</h1>
+	</div>
+	<form class="main">
+		{{> grumble}}
+		<h3> Serious Incidents should be reported to Datix; this form is designed for minor issues</h3>
+		<div class="control-group">
+        	<div class="controls">
+            	<input type="submit" value="Submit" class="btn btn-primary"/>
+        	</div>
+    	</div>
+	</form>
+	<div class="main">
+		<h3>Information</h3>
+		<div class="indent">
+			<p>This form can be used to report issues that may affect the quality of patient care and the maintenance of the hospital. By identifying normally unreported issues, this system hopes to reduce risk and save money.</p>
+			<p>It is recommended that you only write about one issue per report for simplicity reasons (e.g., if you need to report about a puddle on the floor and a broken lightbulb in the same room, you would make one report for the puddle and another for the lightbulb). You have the option of submitting this report anonymously. Whilst using this option means that your personal information will not be visible on the site itself, it will be stored in the database for administrative purposes. For extra information about the study, please visit <a href="{{pathFor 'modifyAccount'}}">this</a> page.</p>
+		</div>
+	</div>
 </template>

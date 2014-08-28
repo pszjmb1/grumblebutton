@@ -8,42 +8,36 @@ var global='';
 Template.closedIssues.helpers({
 	closedIssues: function() {
 		// Returning closed issues 
-		return Issues.find({issueClosed:1, closedIssueSearch:0});
+		return Issues.find({issueClosed:1}, {sort: {submitted: -1}, 
+			limit: closedIssuesHandle.limit()});
 	},
 	findSeachedIssues: function() {
-
 		return Issues.find({issueClosed:1, closedIssueSearch:1}).count();		
 		
 	},
 	searchedIssues: function() {
 		//alert('inside searchedIssues');
 		//alert('session value searchedIssues'+global);
-		return Issues.find({issueClosed:1, closedIssueSearch:1}); //, {sort: {submitted: -1}});
-	}	
-			//limit: issuesHandle.limit()
-});
-	/*},
+		return Issues.find({issueClosed:1, closedIssueSearch:1}, {sort: {submitted: -1}});
+	},
 	// Determine if curent list of issues is ready
 	issuesReady: function() {
-		return !issuesHandle.loading();
+		return !closedIssuesHandle.loading();
 	},
 	// Determine if all issues have been loaded
 	allIssuesLoaded: function() {
-		return !issuesHandle.loading() &&
-			Issues.find().count() < issuesHandle.loaded();
+		return !closedIssuesHandle.loading() &&
+			Issues.find({issueClosed: 1}).count() < closedIssuesHandle.loaded();
 	}
 });
 
-// Handle the load more event
-Template.issues.events({
-	'click .load-more': function(e) {
-		e.preventDefault();
-		issuesHandle.loadNextPage();
-	}
-});*/
-
 // Unsetting the closedIssueSearch field to be use in next search
 Template.closedIssues.events({
+	// Handle the load more event
+	'click .load-more': function(e) {
+		e.preventDefault();
+		closedIssuesHandle.loadNextPage();
+	},
 	'click #textbox': function(e) {
 		//alert('value is inside but changed');
 		//alert('global value '+global);
@@ -72,7 +66,7 @@ Template.closedIssues.events({
 		Session.set("key", global);
 		//alert('sesion value '+ Session.get("key"));
 		var issues = Issues.find({issueClosed:1});
-		var regEx='', unit='', dept='', shortdesc='', room='';
+		var regEx='', unit='', dept='', shortdesc='';
 
 		// Preventing the user to search without entering the search keyword
 		if(!Session.get("key"))
@@ -95,9 +89,7 @@ Template.closedIssues.events({
 					//alert('dept '+dept);
 					shortdesc = myDoc.shortdesc;
 					//alert('shortdesc '+shortdesc);
-					room = myDoc.room;
-					//alert('room '+room);
-					if(shortdesc.match(regEx) || dept.match(regEx) || unit.match(regEx)|| room.match(regEx))
+					if(shortdesc.match(regEx) || dept.match(regEx) || unit.match(regEx))
 					{
 					
 						//alert('value matches with any of the field');

@@ -26,7 +26,7 @@ Template.login.events({
 		e.preventDefault();
 		var id = document.getElementById('id').value;
 		if(id == ""){
-			throwError("Please enter your username or email address.");
+			throwError("Please enter your email address.");
 			return;
 		}
 		
@@ -42,7 +42,7 @@ Template.login.events({
 					}
 				});
 			} else{
-				throwError("The username/email address you entered has not been found in the user database. Please double check that it has been entered correctly. If so, then your account does not exist and you will need to register with the button below.");
+				throwError("The email address you entered has not been found in the user database. Please double check that it has been entered correctly. If so, then your account does not exist and you will need to register with the button below.");
 			}
 		});
 		/*if(Meteor.users.findOne({"emails.address" : id})){

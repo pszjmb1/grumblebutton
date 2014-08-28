@@ -1,15 +1,16 @@
 <template name="issue">	
 	<div class="issue" > <!--{{done_class}}-->
-		<div class="destroy"></div>
-			<div class="issue-content">
-				
-        			<h3><a href="{{pathFor 'issuePage' params = this}}">{{shortdesc}}</a>- <span>{{dept}}</span> <span>{{unit}}</span> <span>{{room}}</span></h3>
-					<p>
-						<a href="{{pathFor 'issuePage' params = this}}">{{commentsCount}} comments</a>
-					</p>
-				</div>
-				<a href="{{pathFor 'issuePage' params = this}}" class="details btn">See Details</a>
-			
+		<!-- <div class="destroy"></div> -->
+		<div>
+			<a href="{{pathFor 'issuePage' params = this}}" class="details btn">See Details</a>
+			<input type="button" value="Close" id="close" class="det btn">
+		</div>
+		<div class="issue-content">
+			<h3><a href="{{pathFor 'issuePage' params = this}}">{{shortdesc}}</a>- <span>{{location}}</span></h3>
+			<p>
+				<a href="{{pathFor 'issuePage' params = this}}">{{commentsCount}} comments</a>
+			</p>
+		</div>
 	</div>
 </template>
 

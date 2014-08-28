@@ -14,37 +14,31 @@ if (Issues.find().count() === 0) {
     	return user;
 	});
 	Accounts.createUser({
-  		'username'  : 'priya',
   		'password'  : '123456', //encrypted automatically 
   		 'email'    : 'priya@gmail.com'
 	});
 
 	Accounts.createUser({
-  		'username'  : 'jatin',
   		'password'  : '123456', //encrypted automatically 
   		'email'     : 'jatin@gmail.com'
 	});
 
 	Accounts.createUser({
-  		'username'  : 'sakshi',
   		'password'  : '123456', //encrypted automatically 
   		'email'     : 'sakshi@gmail.com'
 	});
 
 	Accounts.createUser({
-  		'username'  : 'tanuj',
   		'password'  : '123456', //encrypted automatically 
   		'email'     : 'tanuj@gmail.com'
 
 	});
 
 	Accounts.createUser({
-  		'username'  : 'vrinda',
   		'password'  : '123456', //encrypted automatically 
   		'email'     : 'vrinda@gmail.com'
 	});
 	Accounts.createUser({
-  		'username'  : 'priyank',
   		'password'  : '123456', //encrypted automatically 
   		'email'     : 'priyank@gmail.com'
 	});
@@ -104,7 +98,7 @@ if (Issues.find().count() === 0) {
 		room: 'P4',
 		urgency: 'medium',
 		category: 'utility',
-		shortdesc: 'temperature too cold',
+		shortdesc: 'Three of the radiators don\'t seem to be working',
 		details: 'Three of the radiators don\'t seem to be working.',
 		anonymous: 'identifiable',
 		userId: u9._id,
@@ -144,7 +138,7 @@ if (Issues.find().count() === 0) {
 		room: 'N15',
 		urgency: 'low',
 		category: 'facilities',
-		shortdesc: 'dirty toilet',
+		shortdesc: 'Men\'s toilet 2 is dirty',
 		details: 'Men\'s toilet 2 is dirty.',
 		anonymous: 'identifiable',
 		userId: u8._id,
@@ -166,8 +160,7 @@ if (Issues.find().count() === 0) {
 		urgency: 'medium',
 		category: 'Finance',
 		shortdesc: 'Parking lot not free',
-
-		details: 'Too crowded it is!',
+		details: 'Parking lot not free',
 
 		anonymous: 'identifiable',
 		userId: u7._id,
@@ -189,7 +182,7 @@ if (Issues.find().count() === 0) {
 		urgency: 'medium',
 		category: 'Finance',
 		shortdesc: 'Printer not working',
-		details: 'I think problem is there in catridge',
+		details: 'Printer not working. I think problem is there in catridge',
 		anonymous: 'identifiable',
 		userId : u5._id,
 		author : u5.profile.name,
@@ -211,7 +204,7 @@ if (Issues.find().count() === 0) {
 		urgency: 'medium',
 		category: 'Finance',
 		shortdesc: 'Printer not working',
-		details: 'I think problem is there in catridge',
+		details: 'Printer not working. I think problem is there in catridge',
 		anonymous: 'identifiable',
 		userId : u5._id,
 		author : u5.profile.name,
@@ -233,7 +226,7 @@ if (Issues.find().count() === 0) {
 		urgency: 'medium',
 		category: 'Finance',
 		shortdesc: 'Printer not working',
-		details: 'I think problem is there in catridge',
+		details: 'Printer not working. I think problem is there in catridge',
 		anonymous: 'identifiable',
 		userId : u5._id,
 		author : u5.profile.name,
@@ -256,8 +249,7 @@ if (Issues.find().count() === 0) {
 		categorySubscribedUsers:[
 		/*{
 				_id: u4._id,
-				username: "priya",
-			    issueNotToDisplay:[
+				issueNotToDisplay:[
 			    	
 			    ],
 			    emails : [
@@ -341,7 +333,7 @@ if (Issues.find().count() === 0) {
 		room: 'N1a',
 		urgency: 'high',
 		category: 'utility',
-		shortdesc: 'missing equipment',
+		shortdesc: 'Cabinet 3 needs restocking',
 		details: 'Cabinet 3 needs restocking.',
 		anonymous: 1,
 		user: u1._id,
@@ -380,7 +372,7 @@ if (Issues.find().count() === 0) {
 		userId: u1._id,
 		issueId: Issues.findOne()._id,   
 		subscribedUserId: u2._id,
-		subscribedUserName: u2.username,
+		subscribedUserName: "def456",
 		read: false,
 		timestamp: new Date()
 	});
@@ -388,7 +380,7 @@ if (Issues.find().count() === 0) {
 		userId: u1._id,
 		issueId: Issues.findOne()._id,
 		openerId: u2._id,
-		openerName: u2.username,
+		openerName: "def456",
 		read: false,
 		timestamp: new Date()
 	});
@@ -396,7 +388,7 @@ if (Issues.find().count() === 0) {
 		userId: u1._id,
 		issueId: Issues.findOne()._id,
 		unSubscribedUserId: u2._id,
-		unSubscribedUserName: u2.username,
+		unSubscribedUserName: "def456",
 		read: false,
 		timestamp: new Date()
 	});
@@ -404,7 +396,7 @@ if (Issues.find().count() === 0) {
 		userId: u1._id,
 		issueId: Issues.findOne()._id,
 		postedUserId: u2._id,
-		postedUserName: u2.username,
+		postedUserName: "def456",
 		read: false,
 		timestamp: new Date()
 	});
@@ -412,7 +404,7 @@ if (Issues.find().count() === 0) {
 		userId: u1._id,
 		issueId: Issues.findOne()._id,
 		closerId: u2._id,
-		closerName: u2.username,
+		closerName: "def456",
 		read: false,
 		timestamp: new Date()
 	});
@@ -420,7 +412,7 @@ if (Issues.find().count() === 0) {
 		userId: u1._id,
 		issueId: Issues.findOne()._id,
 		commenterId: u2._id,
-		commenterName: u2.username,
+		commenterName: "def456",
 		read: false,
 		timestamp: new Date()
 	})

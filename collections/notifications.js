@@ -15,7 +15,7 @@ createCommentNotification = function(comment) {
     		comment.author + ' has commented on your issue having issueId:- ';
     var flag =0;
     
-    console.log('Notification to user who has posted the issue');
+    // console.log('Notification to user who has posted the issue');
     // Mail to user who has posted the issue and revealed his identity
 	if(issue.author!='anonymous')
 	{
@@ -51,7 +51,7 @@ createCommentNotification = function(comment) {
 		for(i=0;i<subUsers.length;i++)
 		{
 			// console.log('subuser '+i+'->'+subUsers[i].username);
-			if(comment.author !== subUsers[i].username)
+			if(comment.author !== Meteor.call('getUserName', subUsers[i]._id))
 			{
 				// console.log('entering values in notification Collection');
 				Notifications.insert({
@@ -63,7 +63,7 @@ createCommentNotification = function(comment) {
 				timestamp: new Date()
 				});
 
-				var subscribedUserMessage = "Hello "+ subUsers[i].username +",\n\n"+
+				var subscribedUserMessage = "Hello "+ Meteor.call('getUserName', subUsers[i]._id) +",\n\n"+
     				comment.author + ' has commented on your subscribed issue having issueId:- ';
 
 				Meteor.call('sendEmail',
@@ -80,15 +80,14 @@ createCommentNotification = function(comment) {
 
 	//console.log('Notification to concerned manager');
 	var senderEmail = 'grumblebutton@gmail.com';
-    var userId = Meteor.user();
-    var userName = userId.username;
+    var userId = Meteor.userId();
+    var userName = Meteor.call('getUserName', Meteor.userId());
 	var issueManagerCategory = issue.category;
 	var subjectOfEmail = 'Notification of comment on Issue';
 	var listOfDomain = Subscribed.find();
 	var details = issue.details;
 	var category = issue.category;
-	var dept = issue.dept;
-	var unit = issue.unit;
+	var location = issue.location;
 	var shortdesc = issue.shortdesc;
 
 	// Variable to retrieve the value of done field
@@ -148,9 +147,9 @@ createCommentNotification = function(comment) {
 										} 
 									}
 									// Notification to user who has subscribed this issue domain
-									if(flag === 0 && person[j].username)
+									if(flag === 0 && Meteor.call('getUserName', subUsers[j]._id))
 									{
-										var subscribedUserMessage = "Hello "+ person[j].username +",\n\n"+
+										var subscribedUserMessage = "Hello "+ Meteor.call('getUserName', subUsers[j]._id) +",\n\n"+
     										comment.author + ' has commented on your subscribed issue having issueId:- ';
 
 										Notifications.insert({
@@ -220,9 +219,9 @@ createCommentNotification = function(comment) {
 								}
 							} 
 							// Notification to user who has subscribed this issue domain
-							if(flag === 0 && person[j].username)
+							if(flag === 0 && Meteor.call('getUserName', subUsers[j]._id))
 							{
-								var subscribedUserMessage = "Hello "+ person[j].username +",\n\n"+
+								var subscribedUserMessage = "Hello "+ Meteor.call('getUserName', subUsers[j]._id) +",\n\n"+
     								comment.author + ' has commented on your subscribed issue having issueId:- ';
 
 								Notifications.insert({
@@ -257,7 +256,7 @@ createCommentNotification = function(comment) {
 		myDocId = Subscribed.findOne(myDoc._id);							
 		doneValue = myDocId.done;
 		// Checking whether keyword is present in rest of the part of the form
-		if((/*category.match(regEx) ||*/dept.match(regEx) || unit.match(regEx)) && !doneValue)
+		if(/*category.match(regEx) ||*/location.match(regEx) && !doneValue)
 		{
 			// Adding an extra field in the Subscribed collection so that inspite of having multiple occurences of a domain in the form, multiple time notification to the users can be prevented	
 			//console.log('inside rest of the form part of notifcations');
@@ -283,9 +282,9 @@ createCommentNotification = function(comment) {
 						}	 
 					}
 					// Notification to user who has subscribed this issue domain
-					if(flag === 0 && person[j].username)
+					if(flag === 0 && Meteor.call('getUserName', subUsers[j]._id))
 					{
-						var subscribedUserMessage = "Hello "+ person[j].username +",\n\n"+
+						var subscribedUserMessage = "Hello "+ Meteor.call('getUserName', subUsers[j]._id) +",\n\n"+
     						comment.author + ' has commented on your subscribed issue having issueId:- ';
 
 						Notifications.insert({
