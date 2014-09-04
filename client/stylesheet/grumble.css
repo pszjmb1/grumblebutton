@@ -193,9 +193,6 @@ table {
     border-collapse: separate;
     margin-left: 2%;
 }
-td {
-  width: auto;
-}
 
 input[type=text],input[type=date],input[type=time], input[type=email], input[type=password], input[type=submit], select, label, textarea, legend, h3, .btn, .buton{
   font-size: x-large;
@@ -203,10 +200,10 @@ input[type=text],input[type=date],input[type=time], input[type=email], input[typ
 input[type=text],input[type=date],input[type=time], input[type=email], input[type=password], select{
   -webkit-appearance: none; 
   -moz-appearance: none;
-  /*margin-bottom: 5%;
-  width:90%;*/
+  /*margin-bottom: 5%;*/
   line-height: 3rem;
   border: 1% solid;
+  width: 80%;
 }
 input[type=text],input[type=date],input[type=time], input[type=email], input[type=password] {
   height: 3rem;
@@ -216,7 +213,7 @@ select {
 }
 input[type=text], input[type=email], input[type=password], textarea, select{
   /*min-width: 100%;*/
-  width: auto;
+  width: 80%;
 }
 fieldset{
   display: inline;
@@ -446,6 +443,7 @@ input[type='checkbox'] {
 
 .formField {
   position: relative;
+  width: 100%;
   /*overflow: hidden;*/
   /*height: 100%;*/
 }
@@ -484,6 +482,15 @@ input[type='checkbox'] {
   -webkit-transform: translate(0, -0.625rem);
   display: inline;
   white-space: nowrap;
+}
+.formField .input.btn[type="submit"] {
+  /*float: right;*/
+  color: rgb(255, 255, 255);
+  font-weight: normal;
+  font-size: x-large;
+  display: inline-block;
+  position: absolute;
+  right: 0;
 }
 
 .issueDet {

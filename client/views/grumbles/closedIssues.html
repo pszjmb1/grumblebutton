@@ -3,27 +3,17 @@
 		<h1>Closed Issues</h1>
 	</div>
 	<div class="closedIssues">
-	<fieldset>
-		<form class="main">
-			<table>
-				<tr>
-					<td>
-						<fieldset class="formField">
-							<input id="textbox" name="keyword" type="text" value="">
-							<label class="control-label" for="textbox">Search closed issues by keyword</label>
-						</fieldset>
-					</td>
-					<td> 
-						<div class="control-group">
-							<div class="controls"> 
-								<input id = "search" type="submit" value="Search" class="btn btn-primary"/>
-							</div>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</form>
-	</fieldset>
+	<form class="main">
+		<fieldset class="formField">
+			<input id="textbox" name="keyword" type="text" value="">
+			<label class="control-label" for="textbox">Search closed issues by keyword</label>
+			<input id = "search" type="submit" value="Search" class="btn btn-primary"/>
+			<!-- <div class="control-group">
+				<div class="controls"> 
+				</div>
+			</div> -->
+		</fieldset>
+	</form>
 	{{#if findSeachedIssues}}
 		{{#each searchedIssues}}
 			{{> closedIssue}}

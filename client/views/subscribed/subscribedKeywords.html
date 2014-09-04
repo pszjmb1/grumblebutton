@@ -1,26 +1,12 @@
 <template name="subscribedKeywords">
 	<div class="issues">
-	<fieldset>
 		<form class="main">
-			<table>
-				<tr>
-					<td>
-						<fieldset class="formField">
-							<input name="keyword" id="keyword" type="text" value="">
-							<label class="control-label" for="keyword">Add your Keyword</label>
-						</fieldset>
-					</td>
-					<td>
-						<div class="control-group">
-							<div class="controls">
-								<input type="submit" value="Submit" class="btn btn-primary"/>
-							</div>
-						</div>
-					</td>
-				</tr>
-			</table>
+			<fieldset class="formField">
+				<input name="keyword" id="keyword" type="text" value="">
+				<label class="control-label" for="keyword">Add your Keyword</label>
+				<input type="submit" value="Submit" class="btn btn-primary"/>
+			</fieldset>
 		</form>
-	</fieldset>
 		{{#each subscribedKeywords}}
 			{{> subscribedKeyword}}
 		{{/each}}
