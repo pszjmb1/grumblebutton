@@ -379,10 +379,6 @@ input[type='checkbox'] {
   margin: 1.5rem 0 0;
 }
 
-input[type="text"].location {
-  width: auto;
-}
-
 .nav .pull-right {
   float: right;
   display: inline;
