@@ -18,7 +18,7 @@ Template.report.events({
 			//urgency: $(e.target).find('[name=urgency]').val(),
 			//category: $(e.target).find('[name=category]').val(),
 		}
-		console.log(issue);
+		// console.log(issue);
 		
 		// Getting all the field values of the form
 		var details = document.querySelector('[name=description]').value;
@@ -37,15 +37,15 @@ Template.report.events({
 
 		// alert('issueRaisedUserEmailId '+issueRaisedUserEmailId);
 
-		// Manager's Email Id
+		// Manager's Id
 		/*if(category)
 		{
-			if(Subscribed.findOne({category:category}).emailId)
+			if(Subscribed.findOne({category:category}).managerId)
 			{
-				var receiverEmail = Subscribed.findOne({category:category}).emailId;
+				var receiverId = Subscribed.findOne({category:category}).managerId;
 			}
 		}	*/
-		// alert('receiverEmail '+receiverEmail);
+		// alert('receiverId '+receiverId);
 	   
 		var subjectOfEmail = "Notification of New Issue";
 		var location = document.querySelector('[name=location]').value;
@@ -81,7 +81,7 @@ Template.report.events({
 				if(author!='anonymous')
 				{
 					Meteor.call('sendEmail',
-        	   			issueRaisedUserEmailId, 
+        	   			Meteor.userId(), 
 			        	senderEmail,
 			        	messageToUser,
 				    	id,
@@ -105,7 +105,7 @@ Template.report.events({
 				{
 					//alert('myDoc.category '+myDoc.category);
 					var managerCategory = myDoc.category;
-					var messageToManager = "Hello "+myDoc.name+",\n\n"+"The new issue has been posted - "+shortdesc+
+					var messageToManager = "Hello,\n\n"+"The new issue has been posted - "+shortdesc+
     					". Can you please look after this matter asap.\n\n"+
         				"The link for the concerned issue is :- http://localhost:15000/issues/"; 
 
@@ -121,7 +121,7 @@ Template.report.events({
 							// Mail to manager regarding pop up of new issue
 							//alert('mail to manager');
 							/*Meteor.call('sendEmail',
-								receiverEmail.emailId,
+								receiverId,
 			        			senderEmail,
 			        			messageToManager,
 				    			id,
@@ -135,23 +135,10 @@ Template.report.events({
 								// alert('people.length'+people.length)
 								for(j=0;j<people.length;j++)
 								{
-									Meteor.call('getUser', people[j], function(error, person){
+									Meteor.call('user', senderEmail, id, subjectOfEmail, people[j], shortdesc, author, function(error, result)
+									{
 										if(error){
 											throwError(error.reason);
-										}
-										else {
-											// alert(people[j]);
-											// alert(person);
-											if(person)
-											{
-												// alert('person.username '+person.username);
-												Meteor.call('user', person.profile.addressing, person.emails[0].address,senderEmail, id, subjectOfEmail, person._id, shortdesc, author, function(error, result)
-												{
-													if(error){
-														throwError(error.reason);
-													}
-												});
-											}
 										}
 									});
 								}
@@ -167,7 +154,7 @@ Template.report.events({
 			{
 			}); 
 			//alert('before Meteor.Router.to() inside grumble.js');
-			Router.go('issues', id);
+			Router.go('thankyou');
 			//alert('after Meteor.Router.to() inside grumble.js');
 									
 		}

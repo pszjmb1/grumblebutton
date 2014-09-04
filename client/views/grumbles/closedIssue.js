@@ -17,14 +17,14 @@ Template.closedIssue.events({
 	// Updating the issueClosed field to 0 while reopening the issue
    	Issues.update(this._id, {$set: {issueClosed: 0}});
   	var userId = Issues.findOne(this._id).userId;
-	var issueRaisedUserEmailId = Issues.findOne(this._id).authorEmailId;
+	var issueRaisedUserId = Issues.findOne(this._id).userId;
 	var msg = Issues.findOne(this._id).shortdesc; 
 	var id = this._id;
 	// alert('msg '+msg);
 	
    	var senderEmail = 'grumblebutton@gmail.com';
 	/*var category = docs1.category;*/
-	var category = Issues.findOne(this._id).category; 
+	/*var category = Issues.findOne(this._id).category;*/ 
 	var details = Issues.findOne(this._id).details;
 	var shortdesc = msg;
 	var unit = Issues.findOne(this._id).unit;
@@ -36,7 +36,7 @@ Template.closedIssue.events({
 
 	// Mail to manager regarding opening of issue
 	// alert('mail to manager regarding opening of issue');
-	if(Subscribed.findOne({category:category}))
+	/*if(Subscribed.findOne({category:category}))
 	{
 		var receiverEmail = Subscribed.findOne({category:category});	
 		var managerName = Subscribed.findOne({category:category});	
@@ -45,7 +45,7 @@ Template.closedIssue.events({
        		"The link for the concerned issue is :- http://localhost:15000/closedIssues/";
 		// alert('mail to mgr regarding opening of issue');
 		Meteor.call('sendEmail',
-        	receiverEmail.emailId,
+        	receiverEmail.managerId,
 		    senderEmail,
 		    managerMessage,
 		    id,
@@ -57,8 +57,8 @@ Template.closedIssue.events({
 		{
 			Issues.remove(this._id)
 			ClosedIssues.insert(docs1)
-		}*/
-	}
+		}
+	}*/
 	
     // alert('author  '+author);
     // Mail to user who has posted the issue regarding it's opening
@@ -71,7 +71,7 @@ Template.closedIssue.events({
         
 		// alert('mail to user regarding opening of issue');
         Meteor.call('sendEmail',
-           	issueRaisedUserEmailId,
+           	issueRaisedUserId,
 		    senderEmail,
 		    userMessage,
 		    id,
@@ -110,7 +110,7 @@ Template.closedIssue.events({
         			"The link for the concerned issue is :- http://localhost:15000/closedIssues/";
 				// alert('mail to subsribed user regarding opening of issue');
 				Meteor.call('sendEmail',
-       	    	   	subscribedPerson[i].emails[0].address,
+       	    	   	subscribedPerson[i]._id,
 		            senderEmail,
 		            subscribedUserMessage,
 			        this._id,
@@ -134,7 +134,7 @@ Template.closedIssue.events({
 	// Mail to user who has subscribed to domain but not to this issue
 	// alert('mail to subscribed users of domain regarding opening of issue');
 	var listOfDomain = Subscribed.find();
-	listOfDomain.forEach( function(myDoc) 
+	/*listOfDomain.forEach( function(myDoc) 
 	{
 		//alert('myDoc._id '+myDoc._id);
 		// Creating regular expression to check all possible format in which user can enter domain name
@@ -184,7 +184,7 @@ Template.closedIssue.events({
 							// alert('id '+id);
 							//alert('subjectOfEmail '+subjectOfEmail)
 							Meteor.call('sendEmail',
-        		 				person[j].emails[0].address,
+        		 				person[j]._id,
 	        	    	    	senderEmail,
 	            	  		    subscribedUserMessage,
 						   		id,
@@ -255,7 +255,7 @@ Template.closedIssue.events({
 								// Notification to all subscribed Users
 								//	alert('mail to subscribed users in shortdesc part opening of issue');
 								Meteor.call('sendEmail',
-									person[j].emails[0].address,
+									person[j]._id,
         		 	   	   			senderEmail,
 	        	      	    		subscribedUserMessage,
 						   	   		id,
@@ -319,7 +319,7 @@ Template.closedIssue.events({
 						// Notification to all subscribed Users
 						//	alert('mail to subscribed users in rest of the form part opening of issue');
 						Meteor.call('sendEmail',
-	        	 	   	    person[j].emails[0].address,  // NEED TO BE CHANGED ACCORDING TO THE USER EMAIL ID  person[j].emails[0].address
+	        	 	   	    person[j]._id,  // NEED TO BE CHANGED ACCORDING TO THE USER EMAIL ID  person[j].emails[0].address
 		                 	senderEmail,
 	    	          	    subscribedUserMessage,
 				 			id,
@@ -346,7 +346,7 @@ Template.closedIssue.events({
 			}
 		}
 						
-	});
+	});*/
 			
 	//	alert('making the found field 0 for next issue');
 

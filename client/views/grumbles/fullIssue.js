@@ -21,9 +21,8 @@ Template.fullIssue.events({
 //     var issue = Issues.findOne(this._id);
 //     var issueRaisedUserId= issue.userId;;
 //     var issueRaisedUser = issue.author;
-//     var issueRaisedUserEmailId = issue.authorEmailId;
 // 	var issueManagerCategory = issue.category;
-// 	var managerEmailId = Subscribed.findOne({category: issueManagerCategory}).emailId;
+// 	var managerId = Subscribed.findOne({category: issueManagerCategory}).managerId;
 // 	var managerName = Subscribed.findOne({category: issueManagerCategory}).name;
 // 	var listOfDomain = Subscribed.find();
 
@@ -105,7 +104,7 @@ Template.fullIssue.events({
 // 											if(issueRaisedUser!='anonymous')
 // 											{
 // 												Meteor.call('sendEmail',
-//     	    		    							issueRaisedUserEmailId,
+//     	    		    							issueRaisedUserId,
 // 				    		    					senderEmail,
 // 					        						raisedSubscribedUserMsg,
 // 							    					issue,
@@ -124,7 +123,7 @@ Template.fullIssue.events({
 	
 // 											// Send mail to the manager
 // 											Meteor.call('sendEmail',
-//         	    								managerEmailId,
+//         	    								managerId,
 // 				        						senderEmail,
 // 				        						managerSubscribedMsg,
 // 					    						issue,
@@ -191,7 +190,7 @@ Template.fullIssue.events({
 // 												if(issueRaisedUser!='anonymous')
 // 												{
 // 													Meteor.call('sendEmail',
-//         		    									issueRaisedUserEmailId,
+//         		    									issueRaisedUserId,
 // 			    		    							senderEmail,
 // 					        							raisedSubscribedUserMsg,
 // 							    						issue,
@@ -210,7 +209,7 @@ Template.fullIssue.events({
 			
 // 												// Send mail to the manager
 // 												Meteor.call('sendEmail',
-//         	    									managerEmailId,
+//         	    									managerId,
 // 				        							senderEmail,
 // 				        							managerSubscribedMsg,
 // 					    							issue,
@@ -269,7 +268,7 @@ Template.fullIssue.events({
 // 										if(issueRaisedUser!='anonymous')
 // 										{
 // 											Meteor.call('sendEmail',
-//         		    						issueRaisedUserEmailId,
+//         		    						issueRaisedUserId,
 // 				   			    			senderEmail,
 // 					       					raisedSubscribedUserMsg,
 // 						    				issue,
@@ -287,7 +286,7 @@ Template.fullIssue.events({
 // 										}	
 // 										// Send mail to the manager
 // 										Meteor.call('sendEmail',
-//         			    					managerEmailId,
+//         			    					managerId,
 // 						        			senderEmail,
 // 						        			managerSubscribedMsg,
 // 					    					issue,
@@ -311,7 +310,7 @@ Template.fullIssue.events({
 // 			{ 
 // 				alert('mail sent to user');
 // 				Meteor.call('sendEmail',
-//         		    	issueRaisedUserEmailId,
+//         		    	issueRaisedUserId,
 // 			    	    senderEmail,
 // 			        	raisedSubscribedUserMsg,
 // 					    this._id,
@@ -332,7 +331,7 @@ Template.fullIssue.events({
 // 			// Send mail to the manager
 // 			alert('mail sent to manager');
 // 			Meteor.call('sendEmail',
-//         	    	managerEmailId,
+//         	    	managerId,
 // 			        senderEmail,
 // 			        managerSubscribedMsg,
 // 				    this._id,
@@ -377,7 +376,7 @@ Template.fullIssue.events({
 // 					{	 
 // 						//alert('pulling->issues->mail to user');
 // 						Meteor.call('sendEmail',
-//         	    			issueRaisedUserEmailId,
+//         	    			issueRaisedUserId,
 // 			        		senderEmail,
 // 			        		raisedUnSubscribedUserMsg,
 // 				    		this._id,
@@ -397,7 +396,7 @@ Template.fullIssue.events({
 // 					// Send mail to the manager regarding unsubscription by the user
 // 					//alert('pulling->issues->mail to manager');
 // 					Meteor.call('sendEmail',
-//         	    		managerEmailId,
+//         	    		managerId,
 // 			        	senderEmail,
 // 			        	managerUnSubscribedMsg,
 // 				    	this._id,
@@ -457,7 +456,7 @@ Template.fullIssue.events({
 // 									{
 // 									//	alert('pulling->domain->mail to user');
 // 										Meteor.call('sendEmail',
-//         	    							issueRaisedUserEmailId,
+//         	    							issueRaisedUserId,
 // 			        						senderEmail,
 // 				        					raisedUnSubscribedUserMsg,
 // 					    					issue,
@@ -479,7 +478,7 @@ Template.fullIssue.events({
 // 									// Send mail to the manager regarding unsubscription by the user
 // 									//alert('pulling->domain->mail to manager');
 // 									Meteor.call('sendEmail',
-//         	    						managerEmailId,
+//         	    						managerId,
 // 			        					senderEmail,
 // 			        					managerUnSubscribedMsg,
 // 				    					issue,
@@ -532,7 +531,7 @@ Template.fullIssue.events({
 // 									{
 // 										//alert('pulling->domain->shortdesc->mail sent to user');
 // 										Meteor.call('sendEmail',
-//         	    							issueRaisedUserEmailId,
+//         	    							issueRaisedUserId,
 // 				        					senderEmail,
 // 				        					raisedUnSubscribedUserMsg,
 // 					    					issue,
@@ -554,7 +553,7 @@ Template.fullIssue.events({
 // 									// Send mail to the manager regarding unsubscription by the user
 // 									// alert('pulling->domain->shortdesc->mail sent to manager');
 // 									Meteor.call('sendEmail',
-//         	    						managerEmailId,
+//         	    						managerId,
 // 			        					senderEmail,
 // 			        					managerUnSubscribedMsg,
 // 				    					issue,
@@ -601,7 +600,7 @@ Template.fullIssue.events({
 // 								{
 // 									//alert('inside pulling->domain->rest of form->mail sent to user ');
 // 									Meteor.call('sendEmail',
-//         	    						issueRaisedUserEmailId,
+//         	    						issueRaisedUserId,
 // 					        			senderEmail,
 // 						        		raisedUnSubscribedUserMsg,
 // 							    		issue,
@@ -623,7 +622,7 @@ Template.fullIssue.events({
 // 								// Send mail to the manager regarding unsubscription by the user
 // 								//alert('inside pulling->domain->rest of form->mail sent to manager ');
 // 								Meteor.call('sendEmail',
-//         	    					managerEmailId,
+//         	    					managerId,
 // 			        				senderEmail,
 // 			        				managerUnSubscribedMsg,
 // 						    		issue,

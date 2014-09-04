@@ -1,22 +1,21 @@
 Meteor.methods({
-	user: function(personName, personEmailId, senderEmail, id, subjectOfEmail, personId, shortdesc, author) {
+	user: function(senderEmail, id, subjectOfEmail, personId, shortdesc, author) {
 		// console.log('inside user function');
-		// console.log('personName '+personName);
 		// console.log(personId);
    		//Meteor.users.find().forEach( function(myUsers)
    		// console.log(Meteor.users.findOne({_id: personId}));
 		var myUsers = Meteor.users.findOne({_id: personId});
    		// console.log('myUsers.username '+myUsers.username);
-		if(/*myUsers.username === personName &&*/ !myUsers.notified)
+		if(!myUsers.notified)
 		{
 			// console.log('value updated in users field');
-			var messageToSubscribedUsers = "Hello "+personName+",\n\n"+ "The new issue has been raised - " +shortdesc+
+			var messageToSubscribedUsers = "Hello "+myUsers.profile.addressing+",\n\n"+ "The new issue has been raised - " +shortdesc+
     						". The link for the concerned issue is :- http://localhost:15000/issues/";
 
 			// Notification to all subscribed Users
 			// console.log('mail to subscribed users in rest of the form part');
 			Meteor.call('sendEmail',
-        		personEmailId,  
+        		personId,
 				senderEmail,
 	        	messageToSubscribedUsers,
 				id,
@@ -35,19 +34,16 @@ Meteor.methods({
 			Meteor.users.update(myUsers._id, {$set: {notified : 1}});
 			return true;
 		}
+	},
+
+	setDefaultValue: function(){
+		// console.log('notified value is unset again');
+		Meteor.users.find().forEach( function(myUsers) 
+		{
+			Meteor.users.update(myUsers._id, {$set: {notified : 0}});	
+
+		});
 	}
-});
-
-Meteor.methods({
-
-  setDefaultValue: function(){
-  	// console.log('notified value is unset again');
-    Meteor.users.find().forEach( function(myUsers) 
-      {
-	 Meteor.users.update(myUsers._id, {$set: {notified : 0}});	
-
-      });
-  }
 });
 
 

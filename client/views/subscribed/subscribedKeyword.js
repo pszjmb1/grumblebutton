@@ -9,8 +9,7 @@ Template.subscribedKeyword.events({
 	var userId = Meteor.userId();
 	var userName = Meteor.user().profile.addressing;
    	var issueManagerCategory = Subscribed.findOne(this._id).category;
-	var managerEmailId = Subscribed.findOne({category: issueManagerCategory}).emailId;
-	var managerName = Subscribed.findOne({category: issueManagerCategory}).name;
+	var managerId = Subscribed.findOne({category: issueManagerCategory}).managerId;
 	var id = Subscribed.findOne({category: issueManagerCategory})._id;
 	// alert('this._id '+id);
 
@@ -26,7 +25,7 @@ Template.subscribedKeyword.events({
 			// Adding the loggedin user to the collection on checking the checkbox
 			Subscribed.update(id, {$addToSet: {categorySubscribedUsers : userId}});
 			// alert('value added to the subscribed collection');
-			var msg = "Hello "+ managerName +",\n\n"+
+			var msg = "Hello,\n\n"+
     			userName + ' has subscribed to your category.'+'\n'+ "The link for the concerned issue is : http://localhost:15000/subscribedKeywords/";
     	
     		var subOfSubscribedDomain = 'Notification of Subscribed Domain';
@@ -34,7 +33,7 @@ Template.subscribedKeyword.events({
     		// Mail to Manager
 			// alert('mail to mgr regarding subscription by user of domain');
    			Meteor.call('sendEmail',
-        	    	managerEmailId,
+        	    	managerId,
 			        senderEmail,
 			        msg,
 				    id,

@@ -240,8 +240,7 @@ if (Issues.find().count() === 0) {
 	}); 
 
 	Subscribed.insert({
-		name: 'Manager1',
-		emailId: 'arora.priya4172@gmail.com',
+		managerId: Meteor.users.findOne({'emails.address': "priya@gmail.com"})._id,
 		category: 'Finance' ,
 		designation: 'Head',
 		done: false,
@@ -264,8 +263,7 @@ if (Issues.find().count() === 0) {
 	});
 
 	Subscribed.insert({
-		name: 'Manager2',
-		emailId: 'arora.priya4172@gmail.com',
+		managerId: Meteor.users.findOne({'emails.address': "priya@gmail.com"})._id,
 		category: 'HR Dept' ,
 		designation: 'Head',
 		done:false,
@@ -276,8 +274,7 @@ if (Issues.find().count() === 0) {
 	});
 
 	Subscribed.insert({
-		name: 'Manager3',
-		emailId: 'arora.priya4172@gmail.com',
+		managerId: Meteor.users.findOne({'emails.address': "priya@gmail.com"})._id,
 		category: 'Building' ,
 		designation: 'Head',
 		done:false,
@@ -290,8 +287,7 @@ if (Issues.find().count() === 0) {
 
 
 /*	Subscribed.insert({
-		name: 'Manager3',
-		emailId: 'arora.priya4172@gmail.com',
+		managerId: Meteor.users.findOne({'emails.address': "priya@gmail.com"})._id,
 		category: 'Lorum ipsum' ,
 		designation: 'Head',
 		done:'false',
@@ -299,8 +295,7 @@ if (Issues.find().count() === 0) {
 	});
 
 	Subscribed.insert({
-		name: 'Manager4',
-		emailId: 'arora.priya4172@gmail.com',
+		managerId: Meteor.users.findOne({'emails.address': "priya@gmail.com"})._id,
 		category: 'utility' ,
 		designation: 'Head',
 		done:'false',
@@ -308,8 +303,7 @@ if (Issues.find().count() === 0) {
 	});
 
 	Subscribed.insert({
-		name: 'Manager5',
-		emailId: 'arora.priya4172@gmail.com',
+		managerId: Meteor.users.findOne({'emails.address': "priya@gmail.com"})._id,
 		category: 'facilities' ,
 		designation: 'Head',
 		done:'false',
@@ -317,8 +311,7 @@ if (Issues.find().count() === 0) {
 	}); 
 
 	Subscribed.insert({
-		name: 'Manager6',
-		emailId: 'arora.priya4172@gmail.com',
+		managerId: Meteor.users.findOne({'emails.address': "priya@gmail.com"})._id,
 		category: 'Managerial' ,
 		designation: 'Head',
 		done:'false',

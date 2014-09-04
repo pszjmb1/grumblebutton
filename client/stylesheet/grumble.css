@@ -191,9 +191,12 @@ white-space: nowrap;
 table {
     border-spacing: 0;
     border-collapse: separate;
-    width: 50%;
     margin-left: 2%;
 }
+td {
+  width: auto;
+}
+
 input[type=text],input[type=date],input[type=time], input[type=email], input[type=password], input[type=submit], select, label, textarea, legend, h3, .btn, .buton{
   font-size: x-large;
 }
@@ -212,15 +215,15 @@ select {
   height: 4rem;
 }
 input[type=text], input[type=email], input[type=password], textarea, select{
+  /*min-width: 100%;*/
   width: auto;
 }
 fieldset{
-  display: inline;  
+  display: inline;
 }
 label  {
-  font-weight: bold;
-  float: left;
   margin-right: 1rem;
+  display:inline-block;
 }
 #datetime .controls, #location .controls{
   display: inline-block;
@@ -400,6 +403,7 @@ input[type="text"].location {
 }
 .btn-primary{
   padding: 0.25rem;
+  margin: 0.25rem;
 }
 .fullIssue-content{
   float: left;
@@ -430,9 +434,10 @@ input[type="text"].location {
   width: 30%;
 }
 .floatLeft {
-  line-height: 1;
+  line-height: 1rem;
   overflow: hidden;
   margin-bottom: 0.25rem;
+  display: inline-block;
 }
 
 .indent {
@@ -445,8 +450,8 @@ input[type="text"].location {
 
 .formField {
   position: relative;
-  /*overflow: hidden;
-  height: 100%;*/
+  /*overflow: hidden;*/
+  /*height: 100%;*/
 }
 .formField label {
   position: absolute;
@@ -457,7 +462,9 @@ input[type="text"].location {
   transition: all 0.2s ease-in-out;
   color: #909090;
   font-weight: normal;
-  width: auto;
+  background-color: #ffffff;
+  overflow: hidden;
+  text-align: left;
 }
 .formField input, .formField textarea {
   top: 0;
@@ -480,8 +487,10 @@ input[type="text"].location {
   transform: translate(0, -0.625rem);
   -webkit-transform: translate(0, -0.625rem);
   display: inline;
+  white-space: nowrap;
 }
 
 .issueDet {
   overflow: auto;
+  line-height: 1.5rem;
 }

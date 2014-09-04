@@ -10,7 +10,6 @@ Template.issue.events({
 	// Adding a field to differentiate the closed issue from rest of the issues
    	Issues.update(this._id, {$set: {issueClosed: 1}});
    	var issueRaisedUserId = Issues.findOne(this._id).userId;
-  	var issueRaisedUserEmailId = Issues.findOne(this._id).authorEmailId;
 	var msg = Issues.findOne(this._id).shortdesc; 
 	var details =  Issues.findOne(this._id).details;
 	var shortdesc = msg;
@@ -34,7 +33,7 @@ Template.issue.events({
         	"The link for the concerned issue is :- http://localhost:15000/closedIssues/";
   		//alert('mail to mgr regarding closing of isue');
 		Meteor.call('sendEmail',
-        	receiverEmail.emailId,
+        	receiverEmail.managerId,
 		    senderEmail,
 		    managerMessage,
 		    id,
@@ -56,7 +55,7 @@ Template.issue.events({
         	"The link for the concerned issue is :- http://localhost:15000/closedIssues/";
         // alert('mail to user regarding closing of issue');
         Meteor.call('sendEmail',
-           	issueRaisedUserEmailId,
+           	issueRaisedUserId,
 		    senderEmail,
 		    userMessage,
 		    id,
@@ -94,7 +93,7 @@ Template.issue.events({
         			"The link for the concerned issue is :- http://localhost:15000/closedIssues/";
         		//alert('mail to  subscribed user regarding closing of issue');
 				Meteor.call('sendEmail',
-       	    	   	subscribedPerson[i].emails[0].address,
+       	    	   	subscribedPerson[i]._id,
 		            senderEmail,
 		            subscribedUserMessage,
 			        this._id,
@@ -168,7 +167,7 @@ Template.issue.events({
 							// alert('subjectOfEmail '+subjectOfEmail)
 							// alert('mail to subscribed domain user in details part');
 							Meteor.call('sendEmail',
-        			 	   	   	person[j].emails[0].address,  
+        			 	   	   	person[j]._id,  
 	        	    	     	senderEmail,
 	            	  		   	subscribedUserMessage,
 					 			id,
@@ -240,7 +239,7 @@ Template.issue.events({
 								// Notification to all subscribed Users
 								// alert('mail to subscribed users in shortdesc part');
 								Meteor.call('sendEmail',
-									person[j].emails[0].address,
+									person[j]._id,
     	    	 	   	   			senderEmail,
 	    	          	    		subscribedUserMessage,
 									id,
@@ -302,7 +301,7 @@ Template.issue.events({
 						// Notification to all subscribed Users
 						// alert('mail to subscribed users in rest of the form part');
 						Meteor.call('sendEmail',
-    	    	 	   	   	person[j].emails[0].address, 
+    	    	 	   	   	person[j]._id, 
 	    	             	senderEmail,
 	        	   			subscribedUserMessage,
 				  			id,

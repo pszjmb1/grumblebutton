@@ -23,15 +23,14 @@ createCommentNotification = function(comment) {
 		if (comment.userId !== issue.userId) {
 			Notifications.insert({
 			userId: issue.userId,
-			issueId: issue,
+			issueId: comment.issueId,
 			commentId: comment._id,
 			commenterName: comment.author,
 			read: false,
 			timestamp: new Date()
-		});	
-
+		});
 		Meteor.call('sendEmail',
-        	   	issue.authorEmailId,
+        	   	issue.userId,
 			    senderEmail,
 			    userMessage,
 				issue,
@@ -67,7 +66,7 @@ createCommentNotification = function(comment) {
     				comment.author + ' has commented on your subscribed issue having issueId:- ';
 
 				Meteor.call('sendEmail',
-	        	   	subUsers[i].emails[0].address,
+	        	   	subUsers[i]._id,
 				    senderEmail,
 				    subscribedUserMessage,
 					issue,
@@ -81,7 +80,7 @@ createCommentNotification = function(comment) {
 	//console.log('Notification to concerned manager');
 	var senderEmail = 'grumblebutton@gmail.com';
     var userId = Meteor.userId();
-    var userName = Meteor.call('getUserName', Meteor.userId());
+    var userName = Meteor.user().profile.addressing;
 	var issueManagerCategory = issue.category;
 	var subjectOfEmail = 'Notification of comment on Issue';
 	var listOfDomain = Subscribed.find();
@@ -100,10 +99,9 @@ createCommentNotification = function(comment) {
 	listOfDomain.forEach( function(myDoc) 
 	{
 		//alert('myDoc._id '+myDoc._id);
-		var managerEmailId = Subscribed.findOne({category: myDoc.category}).emailId;
-		var managerName = Subscribed.findOne({category: myDoc.category}).name;
-
-    	var managerMsg = "Hello "+ managerName +",\n\n"+
+		var managerId = Subscribed.findOne({category: myDoc.category}).managerId;
+		
+    	var managerMsg = "Hello,\n\n"+
     		userName + ' has commented on the issue belonging to your category having issueId:- ';
 
     	// Creating regular expression to check all possible format in which user can enter domain name
@@ -147,9 +145,9 @@ createCommentNotification = function(comment) {
 										} 
 									}
 									// Notification to user who has subscribed this issue domain
-									if(flag === 0 && Meteor.call('getUserName', subUsers[j]._id))
+									if(flag === 0)
 									{
-										var subscribedUserMessage = "Hello "+ Meteor.call('getUserName', subUsers[j]._id) +",\n\n"+
+										var subscribedUserMessage = "Hello,\n\n"+
     										comment.author + ' has commented on your subscribed issue having issueId:- ';
 
 										Notifications.insert({
@@ -162,7 +160,7 @@ createCommentNotification = function(comment) {
 										});
 
 										Meteor.call('sendEmail',
-							           		person[j].emails[0].address,
+							           		person[j]._id,
 										    senderEmail,
 										    subscribedUserMessage,
 											issue,
@@ -174,7 +172,7 @@ createCommentNotification = function(comment) {
 
 								// Mail to concerned manager
 								Meteor.call('sendEmail',
-        	    					managerEmailId,
+        	    					managerId,
 			        				senderEmail,
 			        				managerMsg,
 				    				issue,
@@ -234,7 +232,7 @@ createCommentNotification = function(comment) {
 								});
 
 								Meteor.call('sendEmail',
-								   	person[j].emails[0].address,
+								   	person[j]._id,
 								    senderEmail,
 								    subscribedUserMessage,
 									issue,
@@ -245,7 +243,7 @@ createCommentNotification = function(comment) {
 					}
 					// Mail to concerned manager
 					Meteor.call('sendEmail',
-        	    		managerEmailId,
+        	    		managerId,
 			        	senderEmail,
 			        	managerMsg,
 				    	issue,
@@ -296,7 +294,7 @@ createCommentNotification = function(comment) {
 							timestamp: new Date()
 						});
 						Meteor.call('sendEmail',
-					       	person[j].emails[0].address,
+					       	person[j]._id,
 							senderEmail,
 							subscribedUserMessage,
 							issue,
@@ -307,7 +305,7 @@ createCommentNotification = function(comment) {
 			}
 			// Mail to concerned manager
 			Meteor.call('sendEmail',
-        	   	managerEmailId,
+        	   	managerId,
 		  		senderEmail,
 		   		managerMsg,
 				issue,

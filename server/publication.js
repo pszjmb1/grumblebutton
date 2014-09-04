@@ -8,15 +8,24 @@
 
 
 Meteor.publish('newOpenIssues', function(limit) {
-	return Issues.find({issueClosed: 0}, {sort: {submitted: -1}, limit: limit});
+  if(this.userId)
+    return Issues.find({issueClosed: 0}, {sort: {submitted: -1}, limit: limit, fields: {'author':0, 'authorEmailId':0, 'device':0, 'submitted': 0}});
+  else
+    this.ready();
 });
 
 Meteor.publish('newClosedIssues', function(limit) {
-  return Issues.find({issueClosed: 1}, {sort: {submitted: -1}, limit: limit});
+  if(this.userId)
+    return Issues.find({issueClosed: 1}, {sort: {submitted: -1}, limit: limit, fields: {'author':0, 'authorEmailId':0, 'device':0, 'submitted': 0}});
+  else
+    this.ready();
 });
 
 Meteor.publish('singleIssue', function(id) {
-	return id && Issues.find(id);
+  if(this.userId)
+  	return id && Issues.find(id);
+  else
+    this.ready();
 });
 
 
@@ -24,15 +33,24 @@ Meteor.publish('singleIssue', function(id) {
  * Publish comment data for the relevant issue
  */
 Meteor.publish('comments', function(issueId) {
-	return Comments.find({issueId: issueId});
+  if(this.userId)
+  	return Comments.find({issueId: issueId});
+  else
+    this.ready();
 });
 
 Meteor.publish('notifications', function() {
-	return Notifications.find({userId: this.userId});
+  if(this.userId)
+  	return Notifications.find({userId: this.userId});
+  else
+    this.ready();
 });
 
 Meteor.publish('subscribed', function() {
-	return Subscribed.find();
+  if(this.userId)
+  	return Subscribed.find();
+  else
+    this.ready()
 });
 
 

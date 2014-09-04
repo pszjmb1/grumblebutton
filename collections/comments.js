@@ -8,7 +8,7 @@ Comments = new Meteor.Collection('comments');
 Meteor.methods({
 	comment: function(commentAttributes) {
 		var user = Meteor.user();
-		var issue = Issues.findOne(commentAttributes.issueId);
+		var issueId = Issues.findOne(commentAttributes.issueId);
 
 		// Error check
 		if (!user)
@@ -20,7 +20,7 @@ Meteor.methods({
 
 		comment = _.extend(_.pick(commentAttributes, 'issueId', 'body'), {
 			userId: user._id,
-			author: Meteor.call('getUserName', user._id),
+			author: user.profile.addressing,
 			// Field to know which comment user wants to display
 			commentSearch: 0,  
 			submitted: new Date().getTime()
