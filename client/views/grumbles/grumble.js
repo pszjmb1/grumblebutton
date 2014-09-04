@@ -185,7 +185,7 @@ Template.grumble.helpers({
 		return '' + (hours<=9 ? '0' + hours : hours) + ':' + (min<=9 ? '0' + min : min);
 	},
 	location: function(){
-		if(Meteor.user().profile.department){
+		if(Meteor.user().profile.site || Meteor.user().profile.department || Meteor.user().profile.ward){
 			var profile = Meteor.user().profile;
 			var locationString = new Array();
 			if(profile.site)
