@@ -11,6 +11,11 @@
 					<strong>Location:</strong> &#09; {{location}}<br><br>
 					{{#if ongoing}}<strong>Ongoing Issue</strong><br><br>{{/if}}
 				</p>
+				{{#if issueClosed}}
+					<a href="{{pathFor 'closedIssues'}}" class="details btn buton">Return to Issues</a>
+				{{else}}
+					<a href="{{pathFor 'issues'}}" class="details btn buton">Return to Issues</a>
+				{{/if}}
 			</div>
 			<div class="rightColumn">
 				<h4>Details</h4>
