@@ -49,7 +49,7 @@ Template.closedIssues.events({
 			issues.forEach(function (myDoc)
 			{
 				//alert('set issueSearch -> 0');
-				Issues.update(myDoc._id, {$set: {closedIssueSearch: 0}});
+				Meteor.call('toggleClosedSearch', myDoc._id, 0);
 				//alert(Issues.findOne({_id:myDoc._id}).issueSearch);
 				});
 		}		
@@ -66,7 +66,7 @@ Template.closedIssues.events({
 		Session.set("key", global);
 		//alert('sesion value '+ Session.get("key"));
 		var issues = Issues.find({issueClosed:1});
-		var regEx='', unit='', dept='', shortdesc='';
+		var regEx='', ward='', department='', shortdesc='', details='';
 
 		// Preventing the user to search without entering the search keyword
 		if(!Session.get("key"))
@@ -83,17 +83,19 @@ Template.closedIssues.events({
 				issues.forEach( function(myDoc)
 				{
 					//alert('inside issues loop');
-					unit = myDoc.unit;
-					//alert('unit '+unit);
-					dept = myDoc.dept;
-					//alert('dept '+dept);
+					ward = myDoc.ward;
+					//alert('ward '+ward);
+					department = myDoc.department;
+					//alert('department '+department);
 					shortdesc = myDoc.shortdesc;
 					//alert('shortdesc '+shortdesc);
-					if(shortdesc.match(regEx) || dept.match(regEx) || unit.match(regEx))
+					details = myDoc.details;
+					//alert('details '+details)
+					if(shortdesc.match(regEx) || department.match(regEx) || ward.match(regEx) || details.match(regEx))
 					{
 					
 						//alert('value matches with any of the field');
-						Issues.update(myDoc._id, {$set: {closedIssueSearch: 1}});
+						Meteor.call('toggleClosedSearch', myDoc._id, 1);
 						//alert('IssueSearch value '+Issues.findOne({_id:myDoc._id}).closedIssueSearch);
 					}
 				//alert('one loop completed');

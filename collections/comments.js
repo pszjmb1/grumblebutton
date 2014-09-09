@@ -6,9 +6,13 @@
 Comments = new Meteor.Collection('comments');
 
 Meteor.methods({
+	toggleCommentSearch : function (id, status) {
+		Comments.update(id, {$set: {commentSearch: status}});
+	},
+
 	comment: function(commentAttributes) {
 		var user = Meteor.user();
-		var issueId = Issues.findOne(commentAttributes.issueId);
+		var issueId = commentAttributes.issueId;
 
 		// Error check
 		if (!user)
@@ -17,10 +21,12 @@ Meteor.methods({
 			throw new Meteor.Error(422, 'Please write a comment.');
 		if (!commentAttributes.issueId)
 			throw new Meteor.Error(422, 'Please comment on an issue.');
+		if (!commentAttributes.action)
+			throw new Meteor.Error(422, 'Please add what type of comment this is.');
 
-		comment = _.extend(_.pick(commentAttributes, 'issueId', 'body'), {
+		comment = _.extend(_.pick(commentAttributes, 'issueId', 'body', 'action'), {
 			userId: user._id,
-			author: user.profile.addressing,
+			author: (commentAttributes.anonymous ? 'anonymous' : user.profile.addressing),
 			// Field to know which comment user wants to display
 			commentSearch: 0,  
 			submitted: new Date().getTime()
@@ -30,8 +36,10 @@ Meteor.methods({
 		Issues.update(comment.issueId, {$inc: {commentsCount: 1}});
 
 		// create the comment, save the id
+		// console.log(comment);
 		comment._id = Comments.insert(comment);
 		// now create a notification, informing the user that there's been a comment
+		// console.log(comment);
 		createCommentNotification(comment);
 		return comment._id;
 

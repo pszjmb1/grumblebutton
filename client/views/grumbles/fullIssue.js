@@ -2,15 +2,21 @@
 *Template to show issue details on the page
 *
 */
+Template.fullIssue.helpers({
+	notAnon: function(author){
+		if(author != 'anonymous')
+			return true;
+		else return false
+	}
+});
+
 Template.fullIssue.events({
 	'click #close': function() {
-		issueId = this._id;
-		Issues.update({_id: issueId}, {$set: {issueClosed: 1}});
+		Meteor.call('toggleIssueClosed', this._id, 1);
 		Router.go('closedIssues');
 	},
 	'click #reopen': function() {
-		issueId = this._id;
-		Issues.update({_id: issueId}, {$set: {issueClosed: 0}});
+		Meteor.call('toggleIssueClosed', this._id, 0);
 		Router.go('issues');
 	}
 // 'click #check': function () {
@@ -304,7 +310,7 @@ Template.fullIssue.events({
 // 		if(pulled ===0)
 // 		{
 // 			alert('checking the issue not related to any domain');
-//   			Issues.update(this._id, {$addToSet: {subscribedUsers : Meteor.user()}});
+//   			Issues.update(this._id, {$addToSet: {subscribedUsers : Meteor.userId()}});
 // 			// Send mail to the user who has posted the issue regarding subscription of issue
 // 			if(issueRaisedUser!='')
 // 			{ 

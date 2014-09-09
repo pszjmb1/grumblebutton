@@ -49,7 +49,7 @@
 		{{/if}}
 		{{#if commenterName}}
 			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
-			{{displayDate timestamp}}: <strong>{{getUser commenterId commenterName}}</strong> commented on a post related to you
+			{{displayDate timestamp}}: <strong>{{getUser commentId commenterName}}</strong> commented on a post related to you
 			</a>
 		{{/if}}
 	</li>

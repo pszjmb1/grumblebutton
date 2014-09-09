@@ -8,6 +8,18 @@ Issues = new Meteor.Collection('issues');
  * Server side function called by client to update Issues.
  */
 Meteor.methods({
+	toggleClosedSearch : function (id, status) {
+		Issues.update(id, {$set: {closedIssueSearch: status}});
+	},
+
+	toggleOpenSearch : function (id, status) {
+		Issues.update(id, {$set: {issueSearch: status}});
+	},
+
+	toggleIssueClosed : function (id, status) {
+		Issues.update(id, {$set: {issueClosed: status}});
+	},
+
 	grumble:function(grumbleAttribs) {
 		var user = Meteor.user();
 		// ensure the user is logged in

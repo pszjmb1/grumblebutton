@@ -179,7 +179,7 @@ Template.account.helpers({
 });
 
 var modify = function(email, profile){
-	Meteor.call("modifyUser", Meteor.userId(), email, profile, function(error){
+	Meteor.call("modifyUser", email, profile, function(error){
 		if(error){
 			throwError(error.reason || "Unknown error with updating user information.");
 			return;

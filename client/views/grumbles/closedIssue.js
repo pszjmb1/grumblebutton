@@ -15,7 +15,7 @@ Template.closedIssue.events({
  	
 	//alert('inside closedIssue -> resetting issueClosed field value');
 	// Updating the issueClosed field to 0 while reopening the issue
-   	Issues.update(this._id, {$set: {issueClosed: 0}});
+	Meteor.call('toggleIssueClosed', this._id, 0);
   	var userId = Issues.findOne(this._id).userId;
 	var issueRaisedUserId = Issues.findOne(this._id).userId;
 	var msg = Issues.findOne(this._id).shortdesc; 
@@ -77,8 +77,8 @@ Template.closedIssue.events({
 		    id,
 		    subjectOfEmail); 
 
-
-        Notifications.insert({
+        Meteor.call('createOpenNotification', userId, this._id);
+        /*Notifications.insert({
 			userId: userId, // users id who has posted the issue
 			issueId: this._id,   // issue id
 			//commentId: comment._id,
@@ -87,7 +87,7 @@ Template.closedIssue.events({
 			openerName: Meteor.user().profile.addressing,
 			read: false,
 			timestamp: new Date()
-		});	
+		});*/ //Should be unnecessary because of Meteor call above	
         // To make sure that user who has posted the issue can close it
 	    /*if(Meteor.user().username == docs1.author)
 	    {
@@ -116,16 +116,17 @@ Template.closedIssue.events({
 			        this._id,
 			        subjectOfEmail); 
 
-				Notifications.insert({
+				Meteor.call('createOpenNotification', subscribedPerson[i]._id, this._id);
+				/*Notifications.insert({
 					userId: subscribedPerson[i]._id, // users id who has posted the issue
 					issueId: this._id,   // issue id
 					//commentId: comment._id,
 					//commenterName: comment.author,
 					openerId:Meteor.userId() ,
-					openerName: Meteor.user().profile.addressing || 'anonymous',
+					openerName: Meteor.user().profile.addressing,
 					read: false,
 					timestamp: new Date()
-				});	
+				});*/	
 			}
 		}
 	}
@@ -204,7 +205,7 @@ Template.closedIssue.events({
 						}
 						// Adding an extra field in the Subscribed collection so that inspite of having multiple occurences of a domain in the form, multiple time notification to the users can be prevented
 						// alert('before updating field');
-						Subscribed.update(myDoc._id, {$set: {found: 1}});
+						Meteor.call('markUnfound', myDoc._id);
 						flag =0;
 						//var determine = Subscribed.findOne(myDoc._id);
 						//alert('value of found field after details part ');
@@ -274,7 +275,7 @@ Template.closedIssue.events({
 								});	
 							}	
 							// Adding an extra field in the Subscribed collection so that inspite of having multiple occurences of a domain in the form, multiple time notification to the users can be prevented	
-							Subscribed.update(myDoc._id, {$set: {found: 1}});
+							Meteor.call('markUnfound', myDoc._id);
 							flag =0;
 							//var determine = Subscribed.findOne(myDoc._id);
 							//alert('value of found field after shortdesc part '+determine.found);
@@ -338,7 +339,7 @@ Template.closedIssue.events({
 						});	
 					}			
 					// Adding an extra field in the Subscribed collection so that inspite of having multiple occurences of a domain in the form, multiple time notification to the users can be prevented	
-					Subscribed.update(myDoc._id, {$set: {found: 1}});
+					Meteor.call('markUnfound', myDoc._id);
 					flag =0;
 					//var determine = Subscribed.findOne(myDoc._id);											
 					//alert('value of found field after rest of the form field part '+determine.found);						
@@ -354,7 +355,7 @@ Template.closedIssue.events({
 	var domainList = Subscribed.find();
 	domainList.forEach( function(myDoc) 
 	{
-		Subscribed.update(myDoc._id, {$set: {found: 0}});
+		Meteor.call('markFound', myDoc._id);
 		//var determine = Subscribed.findOne(myDoc._id);											
 		//alert('value of found field after rest of the form field part '+determine.found);
 	}); 

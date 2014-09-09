@@ -12,7 +12,7 @@ Template.report.events({
 			location: $(e.target).find('[name=location]').val(),
 			details: $(e.target).find('[name=description]').val(),
 			shortdesc: titleParse($(e.target).find('[name=description]').val()),
-			anonymous: $(e.target).find('[name=anonymous]').val(),
+			anonymous: $(e.target).find('[name=anonymous]:checked').val(),
 			device: navigator.userAgent,
 			ongoing: $(e.target).find('[name=ongoing]').prop('checked')
 			//urgency: $(e.target).find('[name=urgency]').val(),
@@ -51,7 +51,7 @@ Template.report.events({
 		var location = document.querySelector('[name=location]').value;
 		// alert('location '+location);
 		//var unit = document.querySelector('[name=unit]').value; 
-		var author = document.querySelector('[name=anonymous]').value;
+		var author = document.querySelector('[name=anonymous]:checked').value;
 		var authorName = Meteor.user().profile.addressing;
 		// alert('unit '+ unit);
 		var i,j, person='', myDocId=0, foundValue=0, domainList='';
@@ -72,34 +72,21 @@ Template.report.events({
 			}
 			else
 			{
-				
+				var issueId = id;
 				var messageToUser = "Hello "+authorName+",\n\n"+"Your issue - "+shortdesc+" has been posted successfully"+
     				". The link for the concerned issue is :- http://localhost:15000/issues/";
 
 				// Mail to user about confirmation of the issue created by him    									
 				// alert('mail to user itself');
-				if(author!='anonymous')
-				{
-					Meteor.call('sendEmail',
-        	   			Meteor.userId(), 
-			        	senderEmail,
-			        	messageToUser,
-				    	id,
-						subjectOfEmail);
-					// alert('notification to user itself');
-					Notifications.insert({
-						userId: Meteor.userId(), // users id who has posted the issue
-						issueId: id,   // issue id
-						//commentId: comment._id,
-						//commenterName: comment.author,
-						postedUserId: Meteor.userId() ,
-						postedUserName: ((author !== 'anonymous') ? authorName : author),
-						read: false,
-						timestamp: new Date()
-					});	 
-				}
-						
-
+				Meteor.call('sendEmail',
+        	   		Meteor.userId(), 
+			       	senderEmail,
+			       	messageToUser,
+				   	issueId,
+					subjectOfEmail);
+				// alert('notification to user itself');
+				Meteor.call('createPostNotification', issueId, authorName, author);
+				
 				// alert('before loop of subscribed collection');
 				listOfDomain.forEach( function(myDoc) 
 				{
@@ -124,7 +111,7 @@ Template.report.events({
 								receiverId,
 			        			senderEmail,
 			        			messageToManager,
-				    			id,
+				    			issueId,
 								subjectOfEmail);*/
 
 							// Users who have subscribed to that domain, from Subscribed collection
@@ -135,7 +122,7 @@ Template.report.events({
 								// alert('people.length'+people.length)
 								for(j=0;j<people.length;j++)
 								{
-									Meteor.call('user', senderEmail, id, subjectOfEmail, people[j], shortdesc, author, function(error, result)
+									Meteor.call('user', senderEmail, issueId, subjectOfEmail, people[j], shortdesc, authorName, function(error, result)
 									{
 										if(error){
 											throwError(error.reason);

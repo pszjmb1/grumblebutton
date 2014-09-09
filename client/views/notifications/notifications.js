@@ -52,7 +52,8 @@ Template.notification.helpers({
 // Default mark all notifications to be read on clicking the 'mark all' link
 Template.notification.events({
 	'click a': function() {
-		Notifications.update(this._id, {$set: {read: true}});
+		Meteor.call('setReadNotification', this._id);
+		/*Notifications.update(this._id, {$set: {read: true}});*/
 	}
 });
 
@@ -68,7 +69,8 @@ Template.notifications.events({
 			//alert('myDoc._id '+myDoc._id);
 			if(myDoc.userId === Meteor.user()._id)
 			{
-				Notifications.update(myDoc._id, {$set: {read: true}});
+				Meteor.call('setReadNotification', myDoc._id);
+				/*Notifications.update(myDoc._id, {$set: {read: true}});*/
 			}
 		});
 	}

@@ -4,6 +4,8 @@ body {
   background: #fafafa;
   color: #666666;
   font-size: large;
+  font-size: 1rem;
+  line-height: 1.25rem;
 }
 grid-block, .main, .issue, .comments li, .comment-form, .closedIssue {
   background: #fff;
@@ -203,7 +205,7 @@ input[type=text],input[type=date],input[type=time], input[type=email], input[typ
   /*margin-bottom: 5%;*/
   line-height: 3rem;
   border: 1% solid;
-  width: 80%;
+  width: 90%;
 }
 input[type=text],input[type=date],input[type=time], input[type=email], input[type=password] {
   height: 3rem;
@@ -249,7 +251,7 @@ label  {
     width: auto;
     overflow: hidden;
     padding-top: 1rem;
-    line-height: 1;
+    line-height: 1.25rem;
 }
 
  
@@ -285,7 +287,7 @@ label  {
     margin-left: 2.5rem;
     height: auto;
     padding-top: 1rem;
-    line-height: 1;
+    line-height: 1.25rem;
     overflow: hidden;
 }
 
@@ -306,9 +308,11 @@ label  {
   overflow: hidden;
 }
 .footer img {
-  margin: 1.5rem 0.625rem 0.625rem 0;
+  margin: 1.5rem 3% 0.625rem 0;
   float: right;
   width: 30%;
+  font-size: small;
+  line-height: auto;
 }
 .footer .footerContent {
   /*float: left;*/
@@ -355,10 +359,10 @@ label  {
   line-height: 2.5rem;
 }
 
-input[type='checkbox'].spacing, input[type='radio'] {
+input[type='checkbox'].spacing, input[type='radio'].spacing {
   margin: 1rem 1rem 0 50%;
 }
-input[type='checkbox'] {
+input[type='checkbox'], input[type='radio'] {
   margin: 1rem;
 }
 
@@ -369,6 +373,12 @@ input[type='checkbox'] {
 .leftColumn {
   float:left;
   width:50%;
+}
+.comment.leftColumn {
+  width: 70%;
+}
+.comment.rightColumn {
+  width: 30%;
 }
 
 .title {
@@ -404,7 +414,7 @@ input[type='checkbox'] {
   margin-left: 2.5rem;
   height: 100%;
   padding-top: 1rem;
-  line-height: 1rem;
+  line-height: 1.25rem;
 }
 .fullIssue-content h3{
   margin: 0;
@@ -427,10 +437,14 @@ input[type='checkbox'] {
   width: 30%;
 }
 .floatLeft {
-  line-height: 1rem;
+  line-height: 1.25rem;
   overflow: hidden;
   margin-bottom: 0.25rem;
   display: inline-block;
+}
+h3.floatRight {
+  width: auto;
+  text-align: right;
 }
 
 .indent {

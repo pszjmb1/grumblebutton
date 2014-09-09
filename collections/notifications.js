@@ -4,6 +4,46 @@
 
 Notifications = new Meteor.Collection('notifications');
 
+Meteor.methods({
+	createOpenNotification : function(userId, issueId) {
+		Notifications.insert({
+			userId: userId, // users id who has posted the issue
+			issueId: issueId,   // issue id
+			openerId:Meteor.userId() ,
+			openerName: Meteor.user().profile.addressing,
+			read: false,
+			timestamp: new Date()
+		});	
+	},
+
+	createPostNotification : function(issueId, authorName, author) {
+		console.log(author, authorName);
+		Notifications.insert({
+			userId: Meteor.userId(), // users id who has posted the issue
+			issueId: issueId, // issue id
+			postedUserId: Meteor.userId() ,
+			postedUserName: (author == 'anonymous' ? author : authorName),
+			read: false,
+			timestamp: new Date()
+		});	 
+	},
+
+	createCloseNotification : function(userId, issueId) {
+		Notifications.insert({
+			userId: userId, // users id who has posted the issue
+			issueId: issueId,   // issue id
+			closerId:Meteor.userId() ,
+			closerName: Meteor.user().profile.addressing,
+			read: false,
+			timestamp: new Date()
+		});
+	},
+
+	setReadNotification : function(id) {
+		Notifications.update(id, {$set: {read: true}});
+	}
+});
+
 createCommentNotification = function(comment) {
 
 	
@@ -11,31 +51,30 @@ createCommentNotification = function(comment) {
 	var issue = Issues.findOne(comment.issueId);
 	var senderEmail = 'grumblebutton@gmail.com';
 	var subjectOfEmail = 'Notification about comment';
-	var userMessage = "Hello "+ issue.author +",\n\n"+
+	var userMessage = "Hello "+ issue.postedUser +",\n\n"+
     		comment.author + ' has commented on your issue having issueId:- ';
     var flag =0;
     
     // console.log('Notification to user who has posted the issue');
     // Mail to user who has posted the issue and revealed his identity
-	if(issue.author!='anonymous')
+	if(issue.postedUser!=='anonymous')
 	{
 		// Notification to user who has raised the issue		
 		if (comment.userId !== issue.userId) {
 			Notifications.insert({
 			userId: issue.userId,
 			issueId: comment.issueId,
-			commentId: comment._id,
+			commentId: comment.userId,
 			commenterName: comment.author,
 			read: false,
 			timestamp: new Date()
 		});
 		Meteor.call('sendEmail',
-        	   	issue.userId,
-			    senderEmail,
-			    userMessage,
-				issue,
-				subjectOfEmail)
-
+			issue.userId,
+			senderEmail,
+			userMessage,
+			issue,
+			subjectOfEmail);
 		}
 	}
 
@@ -50,23 +89,23 @@ createCommentNotification = function(comment) {
 		for(i=0;i<subUsers.length;i++)
 		{
 			// console.log('subuser '+i+'->'+subUsers[i].username);
-			if(comment.author !== Meteor.call('getUserName', subUsers[i]._id))
+			if(comment.userId !== subUsers[i])
 			{
 				// console.log('entering values in notification Collection');
 				Notifications.insert({
-				userId: subUsers[i]._id,
-				issueId: issue,
-				commentId: comment._id,
+				userId: subUsers[i],
+				issueId: comment.issueId,
+				commentId: comment.userId,
 				commenterName: comment.author,
 				read: false,
 				timestamp: new Date()
 				});
 
-				var subscribedUserMessage = "Hello "+ Meteor.call('getUserName', subUsers[i]._id) +",\n\n"+
+				var subscribedUserMessage = "Hello,\n\n"+
     				comment.author + ' has commented on your subscribed issue having issueId:- ';
 
 				Meteor.call('sendEmail',
-	        	   	subUsers[i]._id,
+	        	   	subUsers[i],
 				    senderEmail,
 				    subscribedUserMessage,
 					issue,
@@ -111,72 +150,72 @@ createCommentNotification = function(comment) {
 		if(details)
 		{
 			if(details.match(regEx))
-				{										
-							
-					//doneValue=Subscribed.findOne({_id:issue._id}).done;
-					//if(doneValue === false)
-						//{
-							//console.log('inside details part of notifcations');
-
-							// Setting the done field about presence of the current user's domain in the current issue
-							Subscribed.update({category: myDoc.category}, {$set: {done: true}});
-							//console.log('detres -> if -> if ->Subscribed update '+myDoc.designation);
-							//console.log('detres -> if -> if ->Subscribed update '+myDoc.done);
-							// Users who have subscribed to that domain, from Subscribed collection
-	 		 				person = myDoc.categorySubscribedUsers;
-							//alert('before person loop in details part');
-							if(person && person.length)
+			{													
+				//doneValue=Subscribed.findOne({_id:issue._id}).done;
+				//if(doneValue === false)
+				//{
+					//console.log('inside details part of notifcations');
+					// Setting the done field about presence of the current user's domain in the current issue
+				Subscribed.update({category: myDoc.category}, {$set: {done: true}});
+				//console.log('detres -> if -> if ->Subscribed update '+myDoc.designation);
+				//console.log('detres -> if -> if ->Subscribed update '+myDoc.done);
+				// Users who have subscribed to that domain, from Subscribed collection
+ 				person = myDoc.categorySubscribedUsers;
+				//alert('before person loop in details part');
+				if(person && person.length)
+				{
+					for(j=0;j<person.length;j++)
+					{
+						issuesToBeUnmarked = person[j].issuesNotToDisplay;
+						//alert('issuesToBeUnmarked.length '+issuesToBeUnmarked.length);
+						if(issuesToBeUnmarked && issuesToBeUnmarked.length)
+						{
+							for(var k=0;k<issuesToBeUnmarked.length;k++)
 							{
-								for(j=0;j<person.length;j++)
+								if(issuesToBeUnmarked[k] === Issues.findOne(this._id))
 								{
-									issuesToBeUnmarked = person[j].issuesNotToDisplay;
-									//alert('issuesToBeUnmarked.length '+issuesToBeUnmarked.length);
-									if(issuesToBeUnmarked && issuesToBeUnmarked.length)
-									{
-										for(var k=0;k<issuesToBeUnmarked.length;k++)
-										{
-											if(issuesToBeUnmarked[k] === Issues.findOne(this._id))
-											{
-												// Setting flag to mark that user does not want this issue to be checked
-												flag=1;     
-											
-												break;
-											}
-										} 
-									}
-									// Notification to user who has subscribed this issue domain
-									if(flag === 0)
-									{
-										var subscribedUserMessage = "Hello,\n\n"+
-    										comment.author + ' has commented on your subscribed issue having issueId:- ';
-
-										Notifications.insert({
-											userId: person[j]._id,
-											issueId: issue,
-											commentId: comment._id,
-											commenterName: comment.author,
-											read: false,
-											timestamp: new Date()
-										});
-
-										Meteor.call('sendEmail',
-							           		person[j]._id,
-										    senderEmail,
-										    subscribedUserMessage,
-											issue,
-											subjectOfEmail);
-										}
-										flag =0;
-									}	
+									// Setting flag to mark that user does not want this issue to be checked
+									flag=1;     
+									break;
 								}
+							} 
+						}
+						// Notification to user who has subscribed this issue domain
+						if(flag === 0)
+						{
+							var subscribedUserMessage = "Hello,\n\n"+
+								comment.author + ' has commented on your subscribed issue having issueId:- ';
 
-								// Mail to concerned manager
-								Meteor.call('sendEmail',
-        	    					managerId,
-			        				senderEmail,
-			        				managerMsg,
-				    				issue,
-				    				subjectOfEmail);
+							Notifications.insert({
+								userId: person[j],
+								issueId: comment.issueId,
+								commentId: comment.userId,
+								commenterName: comment.author,
+								read: false,
+								timestamp: new Date()
+							});
+
+							Meteor.call('sendEmail',
+				           		person[j],
+							    senderEmail,
+							    subscribedUserMessage,
+								issue,
+								subjectOfEmail);
+							}
+							flag =0;
+						}	
+					}
+
+					// Mail to concerned manager
+					if(managerId)
+					{
+						Meteor.call('sendEmail',
+							managerId,
+							senderEmail,
+							managerMsg,
+							issue,
+							subjectOfEmail);
+					}
 				}
 		}
 		// Checking whether keyword is present in shortdesc part of the form
@@ -217,22 +256,22 @@ createCommentNotification = function(comment) {
 								}
 							} 
 							// Notification to user who has subscribed this issue domain
-							if(flag === 0 && Meteor.call('getUserName', subUsers[j]._id))
+							if(flag === 0 && subUsers[j])
 							{
-								var subscribedUserMessage = "Hello "+ Meteor.call('getUserName', subUsers[j]._id) +",\n\n"+
+								var subscribedUserMessage = "Hello,\n\n"+
     								comment.author + ' has commented on your subscribed issue having issueId:- ';
 
 								Notifications.insert({
-									userId: person[j]._id,
-									issueId: issue,
-									commentId: comment._id,
+									userId: person[j],
+									issueId: comment.issueId,
+									commentId: comment.userId,
 									commenterName: comment.author,
 									read: false,
 									timestamp: new Date()
 								});
 
 								Meteor.call('sendEmail',
-								   	person[j]._id,
+								   	person[j],
 								    senderEmail,
 								    subscribedUserMessage,
 									issue,
@@ -242,12 +281,15 @@ createCommentNotification = function(comment) {
 						}
 					}
 					// Mail to concerned manager
-					Meteor.call('sendEmail',
-        	    		managerId,
-			        	senderEmail,
-			        	managerMsg,
-				    	issue,
-				    	subjectOfEmail);
+					if(managerId)
+					{
+						Meteor.call('sendEmail',
+							managerId,
+	        	    		senderEmail,
+				        	managerMsg,
+				        	issue,
+					    	subjectOfEmail);
+					}
 				}
 			}								
 		}
@@ -280,21 +322,21 @@ createCommentNotification = function(comment) {
 						}	 
 					}
 					// Notification to user who has subscribed this issue domain
-					if(flag === 0 && Meteor.call('getUserName', subUsers[j]._id))
+					if(flag === 0 && subUsers[j])
 					{
-						var subscribedUserMessage = "Hello "+ Meteor.call('getUserName', subUsers[j]._id) +",\n\n"+
+						var subscribedUserMessage = "Hello,\n\n"+
     						comment.author + ' has commented on your subscribed issue having issueId:- ';
 
 						Notifications.insert({
-							userId: person[i]._id,
-							issueId: issue,
-							commentId: comment._id,
+							userId: person[j],
+							issueId: comment.issueId,
+							commentId: comment.userId,
 							commenterName: comment.author,
 							read: false,
 							timestamp: new Date()
 						});
 						Meteor.call('sendEmail',
-					       	person[j]._id,
+					       	person[j],
 							senderEmail,
 							subscribedUserMessage,
 							issue,
@@ -304,12 +346,15 @@ createCommentNotification = function(comment) {
 				}
 			}
 			// Mail to concerned manager
-			Meteor.call('sendEmail',
-        	   	managerId,
-		  		senderEmail,
-		   		managerMsg,
-				issue,
-				subjectOfEmail);
+			if(managerId)
+			{
+				Meteor.call('sendEmail',
+					managerId,
+					senderEmail,
+					managerMsg,
+					issue,
+					subjectOfEmail);
+			}
 		}
 						
 	});

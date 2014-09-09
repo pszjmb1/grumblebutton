@@ -34,7 +34,7 @@ Template.issuePage.events({
 			comments.forEach(function (myDoc)
 			{
 				//alert('set issueSearch -> 0');
-				Comments.update(myDoc._id, {$set: {commentSearch: 0}});
+				Meteor.call('toggleCommentSearch', myDoc._id, 0);
 			});
 		}
 				
@@ -73,7 +73,7 @@ Template.issuePage.events({
 					{
 						
 						//alert('value matches with body of the comment');
-						Comments.update(myDoc._id, {$set: {commentSearch: 1}});
+						Meteor.call('toggleCommentSearch', myDoc._id, 1);
 						//alert(Comments.findOne({_id:myDoc._id}).commentSearch);
 					}
 				//alert('one loop completed');
