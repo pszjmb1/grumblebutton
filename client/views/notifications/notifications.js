@@ -23,26 +23,67 @@ Template.notification.helpers({
 	displayDate: function(date){
 		var currentDate = new Date();
 		var dateString = "";
-		if((currentDate.getFullYear() - date.getFullYear()) < 1){
-			if((currentDate.getMonth() - date.getMonth()) < 1){
-				if((currentDate.getDate() - date.getDate()) < 1){
-					if((currentDate.getHours() - date.getHours()) < 1){
-						if((currentDate.getMinutes() - date.getMinutes()) < 1)
-							dateString = "Just now";
-						else
-							dateString = "About " + (currentDate.getMinutes() - date.getMinutes()) + " minute(s) ago";
-					}
-					else
-						dateString = "About " + (currentDate.getHours() - date.getHours()) + " hour(s) ago";
-				}
-				else
-					dateString = "About " + (currentDate.getDate() - date.getDate()) + " day(s) ago";
-			}
+		var yearDiff = Math.floor((((currentDate.getFullYear() * 12) + currentDate.getMonth()) - ((date.getFullYear() * 12) + date.getMonth())) / 12);
+		if(yearDiff < 1){
+			var monthDiff;
+			if(currentDate.getMonth() < date.getMonth())
+				monthDiff = Math.floor(((((currentDate.getMonth() + 12) * getNumberOfDays(currentDate.getFullYear(), currentDate.getMonth())) + currentDate.getDate()) - ((date.getMonth() * getNumberOfDays(date.getFullYear(), date.getMonth())) + date.getDate())) / 28);
 			else
-				dateString = "About " + (currentDate.getMonth() - date.getMonth()) + " month(s) ago";
+				monthDiff = Math.floor((((currentDate.getMonth() * getNumberOfDays(currentDate.getFullYear(), currentDate.getMonth())) + currentDate.getDate()) - ((date.getMonth() * getNumberOfDays(date.getFullYear(), date.getMonth())) + date.getDate())) / 28);
+			if(monthDiff < 1){
+				var dayDiff;
+				if(currentDate.getDate() < date.getDate())
+					dayDiff = Math.floor(((((currentDate.getDate() + getNumberOfDays(currentDate.getFullYear(), currentDate.getMonth())) * 24) + currentDate.getHours()) - ((date.getDate() * 24) + date.getHours())) / 24);
+				else
+					dayDiff = Math.floor((((currentDate.getDate() * 24) + currentDate.getHours()) - ((date.getDate() * 24) + date.getHours())) / 24); 
+				if(dayDiff < 1){
+					var hourDiff;
+					if(currentDate.getHours() < date.getHours())
+						hourDiff = Math.floor(((((currentDate.getHours() + 24) * 60) + currentDate.getMinutes()) - ((date.getHours() * 60) + date.getMinutes())) / 60);
+					else
+						hourDiff = Math.floor((((currentDate.getHours() * 60) + currentDate.getMinutes()) - ((date.getHours() * 60) + date.getMinutes())) / 60);
+					if(hourDiff < 1){
+						var minuteDiff;
+						if(currentDate.getMinutes() < date.getMinutes())
+							minuteDiff = Math.floor(((((currentDate.getMinutes() + 60) * 60) + currentDate.getSeconds()) - ((date.getMinutes() * 60) + date.getSeconds())) / 60);
+						else
+							minuteDiff = Math.floor((((currentDate.getMinutes() * 60) + currentDate.getSeconds()) - ((date.getMinutes() * 60) + date.getSeconds())) / 60);
+						if(minuteDiff < 1){
+							dateString = "Just now";
+						}
+						else if(minuteDiff == 1){	
+							dateString = "About 1 minute ago";
+						}
+						else{
+							dateString = "About " + minuteDiff + " minutes ago";
+						}
+					}
+					else if(hourDiff == 1){
+						dateString = "About 1 hour ago";
+					}
+					else{
+						dateString = "About " + hourDiff + " hours ago";
+					}
+				}
+				else if(dayDiff == 1){
+					dateString = "About 1 day ago";
+				}
+				else{
+					dateString = "About " + dayDiff + " days ago";
+				}
+			}
+			else if(monthDiff == 1){
+				dateString = "About 1 month ago";
+			}
+			else{
+				dateString = "About " + monthDiff + " months ago";
+			}
 		}
-		else {
-			dateString = "About " + (currentDate.getFullYear() - date.getFullYear()) + " year(s) ago";
+		else if(yearDiff == 1){
+			dateString = "About 1 year ago";
+		}
+		else{
+			dateString = "About " + yearDiff + " year(s) ago";
 		}
 		return dateString;
 	}
@@ -75,3 +116,8 @@ Template.notificationsPage.helpers({
 		return (Notifications.find({userId: Meteor.userId()}, {sort: {timestamp: -1}}));
 	}
 });
+
+var getNumberOfDays = function(year, month) {
+	var isLeap = ((year % 4) == 0 && ((year % 100) != 0 || (year % 400) == 0));
+	return [31, (isLeap ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
+}
