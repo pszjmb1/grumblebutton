@@ -17,7 +17,7 @@ Meteor.methods({
 		Subscribed.update({_id : subscription}, {$addToSet: {categorySubscribedUsers : userId}});
 	},
 
-	removeSubsciber : function (subscription, userId) {
+	removeSubscriber : function (subscription, userId) {
 		Subscribed.update(subscription,{$pull:{categorySubscribedUsers: userId}});
 	}
 });

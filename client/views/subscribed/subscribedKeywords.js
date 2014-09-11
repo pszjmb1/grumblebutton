@@ -2,29 +2,25 @@
 
 // Form to add domain of user's choice
 Template.subscribedKeywords.events({
-	'submit form': function(e) {
-		//alert('inside subscribedKeywords.js');
+	'submit form': function(e) 
+	{
 		e.preventDefault();
 		var key = document.querySelector('[name=keyword]').value;
 		document.querySelector('[name=keyword]').value = '';
-		//alert('keyword '+key)
 		if(key)
 		{
 			var subscriptionId = "";
 			if(Subscribed.findOne({category: key})){
 				subscriptionId = Subscribed.findOne({category: key})._id;
 				Meteor.call('addNewSubcriber', subscriptionId, Meteor.userId());
-				/*Subscribed.update({_id: subscriptionId}, {$push: {categorySubscribedUsers: Meteor.userId()}});*/
 			}
 			else{
-				/*subscriptionId = Subscribed.insert({category:key});*/
 				Meteor.call('createNewSubscription', key, function(error, result) {
 					if(error){
 						throwError(error.reason || "Unknown subscription creation error");
 					} 
 					else{
 						Meteor.call('addNewSubcriber', result, Meteor.userId());
-						/*Subscribed.update({_id: result}, {$push: {'categorySubscribedUsers': Meteor.userId()}});*/
 					}
 				});
 			}

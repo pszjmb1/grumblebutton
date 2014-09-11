@@ -2,12 +2,12 @@ Template.layout.events({
 	'blur fieldset.formField > input, blur fieldset.formField > textarea' : function(e){
 		var label = $(e.currentTarget).parent().children('label');
 		if(e.currentTarget.value !== ""){
-			e.currentTarget.className = "filled";
+			$(e.currentTarget).addClass("filled");
 			label.addClass("filled");
 		}
 		else{
-			e.currentTarget.className = "";
-			label.removeClass();
+			$(e.currentTarget).removeClass("filled");
+			label.removeClass("filled");
 		}
 		label.html(label[0].dataset["blur"]);
 	},

@@ -4,11 +4,9 @@
 
 Template.notifications.helpers({
 	notifications: function() {
-		//alert('notifications for this user');
 		return Notifications.find({userId: Meteor.userId(), read: false});
 	},
 	notificationCount: function(){
-		//alert('notificationCount for the logged in user'+ Notifications.find({userId: Meteor.userId(), read: false}).count());
 		return Notifications.find({userId: Meteor.userId(), read: false}).count();
 	}
 });
@@ -25,11 +23,11 @@ Template.notification.helpers({
 	displayDate: function(date){
 		var currentDate = new Date();
 		var dateString = "";
-		if(date.getFullYear() == currentDate.getFullYear()){
-			if(date.getMonth() == currentDate.getMonth()){
-				if(date.getDate() == currentDate.getDate()){
-					if(date.getHours() == currentDate.getHours){
-						if(date.getMinutes() == currentDate.getMinutes())
+		if((currentDate.getFullYear() - date.getFullYear()) < 1){
+			if((currentDate.getMonth() - date.getMonth()) < 1){
+				if((currentDate.getDate() - date.getDate()) < 1){
+					if((currentDate.getHours() - date.getHours()) < 1){
+						if((currentDate.getMinutes() - date.getMinutes()) < 1)
 							dateString = "Just now";
 						else
 							dateString = "About " + (currentDate.getMinutes() - date.getMinutes()) + " minute(s) ago";
@@ -38,13 +36,14 @@ Template.notification.helpers({
 						dateString = "About " + (currentDate.getHours() - date.getHours()) + " hour(s) ago";
 				}
 				else
-					dateString = (currentDate.getDate() - date.getDate()) + " day(s) ago";
+					dateString = "About " + (currentDate.getDate() - date.getDate()) + " day(s) ago";
 			}
 			else
-				dateString = (currentDate.getMonth() - date.getMonth()) + " month(s) ago";
+				dateString = "About " + (currentDate.getMonth() - date.getMonth()) + " month(s) ago";
 		}
-		else
-			dateString = (currentDate.getFullYear() - date.getFullYear()) + " year(s) ago";
+		else {
+			dateString = "About " + (currentDate.getFullYear() - date.getFullYear()) + " year(s) ago";
+		}
 		return dateString;
 	}
 });
@@ -53,24 +52,18 @@ Template.notification.helpers({
 Template.notification.events({
 	'click a': function() {
 		Meteor.call('setReadNotification', this._id);
-		/*Notifications.update(this._id, {$set: {read: true}});*/
 	}
 });
 
 // Default mark all notifications to be read on clicking the 'mark all' link
 Template.notifications.events({
 	'click .marked': function(e) {
-		e.preventDefault();
-		//var i;
-		//var count=Notifications.find().count();
-		
+		e.preventDefault();		
 		var notices = Notifications.find();
 		notices.forEach( function(myDoc) {
-			//alert('myDoc._id '+myDoc._id);
-			if(myDoc.userId === Meteor.user()._id)
+			if(myDoc.userId === Meteor.userId())
 			{
 				Meteor.call('setReadNotification', myDoc._id);
-				/*Notifications.update(myDoc._id, {$set: {read: true}});*/
 			}
 		});
 	}

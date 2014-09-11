@@ -3,7 +3,7 @@ Template.header.events({
 		e.preventDefault();
 		Meteor.logout(function(err){
 			if(err){
-				throwError(err.reason || "Unknown Error.");
+				throwError(err.reason || "Unknown error logging out.");
 			}
 			else{
 				Router.go('home');

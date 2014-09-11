@@ -7,7 +7,6 @@
 var global='';
 Template.issues.helpers({
 	issues: function() {
-		//alert('returning the value');
 		return  Issues.find({issueClosed:0}, {sort: {submitted: -1}, 
 			limit: openIssuesHandle.limit()});
 	},
@@ -21,8 +20,6 @@ Template.issues.helpers({
 	},
 	// Retrieve the issues that has been searched
 	searchedIssues: function() {
-		//alert('inside searchedIssues');
-		//alert('session value in searchedIssues'+global);
 		return Issues.find({issueClosed:0, issueSearch:1}, {sort: {submitted: -1}});
 	},
 	// Determine if all issues have been loaded
@@ -41,36 +38,31 @@ Template.issues.events({
 });
 
 // Unsetting the issueSearch field to be use in next search
-Template.issues.events({
-	'click #textbox': function(e) {
-		//alert('value is inside but changed');
-		//alert('global value '+global);
-		jQuery('#textbox').on('input', function() {
-		//alert('value gets changed');
-		issues = Issues.find();
-		if(issues)
+Template.issues.events(
+{
+	'click #textbox': function(e) 
+	{
+		jQuery('#textbox').on('input', function() 
 		{
-			issues.forEach(function (myDoc)
+			issues = Issues.find();
+			if(issues)
 			{
-				//alert('set issueSearch -> 0');
-				Meteor.call('toggleOpenSearch', myDoc._id, 0);
-				//alert(Issues.findOne({_id:myDoc._id}).issueSearch);
-			});
-		}	
-	});
+				issues.forEach(function (myDoc)
+				{
+					Meteor.call('toggleOpenSearch', myDoc._id, 0);
+				});
+			}	
+		});
 	}
 });
 
 // Setting the issueSearch field to be use to return only required issues
 Template.issues.events({
 	'click #search': function(e) {
-		//alert('search textbox');
 		global = document.querySelector('[name=keyword]').value;
-		//Session.set("key",document.querySelector('[name=keyword]').value );
 		Session.set("key", global);
-		//alert('sesion value '+ Session.get("key"));
 		var issues = Issues.find();
-		var regEx='', ward='', department='', shortdesc='', details='';
+		var regEx='', location='', details='';
 
 		//Preventing the user to search without entering the keyword
 		if(!Session.get("key"))
@@ -79,34 +71,20 @@ Template.issues.events({
 		}
 		if(Session.get("key"))
 		{
-			//alert('value is inside but not changed');
 			regEx = new RegExp("^.*"+Session.get("key")+".*","gi");
-			//alert('key '+key);
 			issues.forEach( function(myDoc)
 			{
-				//alert('inside issues loop');
-				ward = myDoc.ward;
-				//alert('ward '+ward);
-				department = myDoc.department;
-				//alert('department '+department);
-				shortdesc = myDoc.shortdesc;
-				//alert('shortdesc '+shortdesc);
+				location = myDoc.location;
 				details = myDoc.details;
-				//alert('details '+details);
 				
 				// Checking in every part of the form where the search keyword can be found
-				if(shortdesc.match(regEx) || department.match(regEx) || ward.match(regEx) || details.match(regEx))
+				if(location.match(regEx) || details.match(regEx))
 				{
-					
-					//alert('value matches with any of the field');
 					Meteor.call('toggleOpenSearch', myDoc._id, 1);
-					//alert(Issues.findOne({_id:myDoc._id}).issueSearch);
 				}
-			//alert('one loop completed');
 			});
-
 		}
-	return false;
+		return false;
 	}
 });
 

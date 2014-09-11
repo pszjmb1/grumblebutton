@@ -11,18 +11,8 @@ Deps.autorun(function() {
 	closedIssuesHandle = Meteor.subscribeWithPagination('newClosedIssues', 10);
 	Meteor.subscribe('singleIssue', Session.get('currentIssueId'));
 	//Meteor.subscribe('issues', Session.get('currentIssueId'));
-	Meteor.subscribe('comments', Session.get('currentIssueId'));
-	//Meteor.subscribe('users');	
+	Meteor.subscribe('comments', Session.get('currentIssueId'));	
 	Meteor.subscribe('users');
-
-	/*if(!Meteor.userId()){
-		if(loggedIn){
-			window.location.replace("/");
-		}
-		else{
-			loggedIn = true;
-		} 
-	}*/
 });
 
 Meteor.subscribe('notifications');

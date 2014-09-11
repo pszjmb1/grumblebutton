@@ -36,11 +36,9 @@ Meteor.methods({
 		Issues.update(comment.issueId, {$inc: {commentsCount: 1}});
 
 		// create the comment, save the id
-		// console.log(comment);
 		comment._id = Comments.insert(comment);
 		// now create a notification, informing the user that there's been a comment
-		// console.log(comment);
-		createCommentNotification(comment);
+		Meteor.call('createCommentNotification', comment);
 		return comment._id;
 
 		}

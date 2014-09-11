@@ -28,24 +28,13 @@ Meteor.methods({
 		// ensure the grumble has correct field values
 		if (!grumbleAttribs.details)
 			throw new Meteor.Error(422, 'Please fill in the details.');
-		//if (!grumbleAttribs.category)
-		//	throw new Meteor.Error(422, 'Please fill in the category.');	
 		if (!grumbleAttribs.date)
 			throw new Meteor.Error(422, 'Please fill in the date.');
 		if (!grumbleAttribs.time)
 			throw new Meteor.Error(422, 'Please fill in the time.');
 		if (!grumbleAttribs.location)
 			throw new Meteor.Error(422, 'Please fill in the location.');
-		// if (!grumbleAttribs.dept)
-		// 	throw new Meteor.Error(422, 'Please fill in the department.');
-		// if (!grumbleAttribs.unit)
-		// 	throw new Meteor.Error(422, 'Please fill in the unit.');
-		//if (!grumbleAttribs.urgency)
-		//	throw new Meteor.Error(422, 'Please fill in the urgency.');
-		  
-		//if (!grumbleAttribs.subcategory)
-		//	throw new Meteor.Error(422, 'Please fill in the subcategory.');
-		  if (!grumbleAttribs.anonymous)
+		if (!grumbleAttribs.anonymous)
 			throw new Meteor.Error(422, 'Please fill in the anonymity requirement.');
 		// Add additional rules ...
 		var userName;
@@ -62,10 +51,9 @@ Meteor.methods({
 		// pick out the whitelisted keys
 		var issue = _.extend(
 			_.pick(grumbleAttribs,
-			'details','shortdesc','anonymous', 'date', 'time', 'device', 'location', 'ongoing'
-			/*, 'urgency',
-			'category',  , */
-			), {
+				'details','shortdesc','anonymous', 'date', 
+				'time', 'device', 'location', 'ongoing'), 
+				{
 					userId: user._id,
 					author: Meteor.user().profile.addressing,
 					authorEmailId: user.emails[0].address,
@@ -78,7 +66,8 @@ Meteor.methods({
 					// Field to know about searching of closed issue
 					closedIssueSearch:0,
 					commentsCount: 0
-		});
+				}
+			);
 
 		var issueId = Issues.insert(issue);
 		return issueId;

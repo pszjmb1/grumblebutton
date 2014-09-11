@@ -16,8 +16,6 @@ Template.closedIssues.helpers({
 		
 	},
 	searchedIssues: function() {
-		//alert('inside searchedIssues');
-		//alert('session value searchedIssues'+global);
 		return Issues.find({issueClosed:1, closedIssueSearch:1}, {sort: {submitted: -1}});
 	},
 	// Determine if curent list of issues is ready
@@ -34,25 +32,23 @@ Template.closedIssues.helpers({
 // Unsetting the closedIssueSearch field to be use in next search
 Template.closedIssues.events({
 	// Handle the load more event
-	'click .load-more': function(e) {
+	'click .load-more': function(e) 
+	{
 		e.preventDefault();
 		closedIssuesHandle.loadNextPage();
 	},
-	'click #textbox': function(e) {
-		//alert('value is inside but changed');
-		//alert('global value '+global);
-		jQuery('#textbox').on('input', function() {
-		//alert('value gets changed');
-		issues = Issues.find();
-		if(issues)
+	'click #textbox': function(e) 
+	{
+		jQuery('#textbox').on('input', function() 
 		{
-			issues.forEach(function (myDoc)
+			issues = Issues.find();
+			if(issues)
 			{
-				//alert('set issueSearch -> 0');
-				Meteor.call('toggleClosedSearch', myDoc._id, 0);
-				//alert(Issues.findOne({_id:myDoc._id}).issueSearch);
+				issues.forEach(function (myDoc)
+				{
+					Meteor.call('toggleClosedSearch', myDoc._id, 0);
 				});
-		}		
+			}		
 		});
 	}
 });
@@ -60,13 +56,12 @@ Template.closedIssues.events({
 // Updating the closedIssueSearch field to retrieve onlye the required one closed issues
 Template.closedIssues.events({
 	'click #search': function(e) {
-		//alert('search textbox');
+		e.preventDefault();
 		global = document.querySelector('[name=keyword]').value;
 		//Session.set("key",document.querySelector('[name=keyword]').value );
 		Session.set("key", global);
-		//alert('sesion value '+ Session.get("key"));
 		var issues = Issues.find({issueClosed:1});
-		var regEx='', ward='', department='', shortdesc='', details='';
+		var regEx='', location='', details='';
 
 		// Preventing the user to search without entering the search keyword
 		if(!Session.get("key"))
@@ -75,30 +70,17 @@ Template.closedIssues.events({
 		}
 		if(Session.get("key"))
 		{
-			//alert('value is inside but not changed');
 			regEx = new RegExp("^.*"+Session.get("key")+".*","gi");
-			//alert('key '+key);
 			if(issues)
 			{
 				issues.forEach( function(myDoc)
 				{
-					//alert('inside issues loop');
-					ward = myDoc.ward;
-					//alert('ward '+ward);
-					department = myDoc.department;
-					//alert('department '+department);
-					shortdesc = myDoc.shortdesc;
-					//alert('shortdesc '+shortdesc);
-					details = myDoc.details;
-					//alert('details '+details)
-					if(shortdesc.match(regEx) || department.match(regEx) || ward.match(regEx) || details.match(regEx))
+					location = myDoc.location || "";
+					details = myDoc.details || myDoc.shortdesc;
+					if(details.match(regEx) || location.match(regEx))
 					{
-					
-						//alert('value matches with any of the field');
 						Meteor.call('toggleClosedSearch', myDoc._id, 1);
-						//alert('IssueSearch value '+Issues.findOne({_id:myDoc._id}).closedIssueSearch);
 					}
-				//alert('one loop completed');
 				});
 			}
 

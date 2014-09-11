@@ -3,8 +3,7 @@
  * first server start up.
  */
 
-if (Issues.find().count() === 0) {
-
+/*if (Issues.find().count() === 0) {
 	Accounts.onCreateUser(function (options, user) {
   		if (options.profile) {
     		//want the users facebook pic and it is not provided by the facebook.service
@@ -172,7 +171,7 @@ if (Issues.find().count() === 0) {
 		device: "Mozilla/5.0 (Windows NT 6.1; WOW64l rv:25.0) Gecko/20100101 Firefox/25.0",
 		commentsCount: 0,
 	});
-*/
+
 	var issueId4 = Issues.insert({
 		date: '01/01/2014',
 		time: '11:52',
@@ -246,7 +245,7 @@ if (Issues.find().count() === 0) {
 		done: false,
 		
 		categorySubscribedUsers:[
-		/*{
+		{
 				_id: u4._id,
 				issueNotToDisplay:[
 			    	
@@ -257,7 +256,7 @@ if (Issues.find().count() === 0) {
 					verified : false
 				}
 			] 
-		}*/
+		}
 	
 		]
 	});
@@ -286,7 +285,7 @@ if (Issues.find().count() === 0) {
 
 
 
-/*	Subscribed.insert({
+	Subscribed.insert({
 		managerId: Meteor.users.findOne({'emails.address': "priya@gmail.com"})._id,
 		category: 'Lorum ipsum' ,
 		designation: 'Head',
@@ -359,7 +358,7 @@ if (Issues.find().count() === 0) {
 		        agent: "Mozilla/5.0 (Windows NT 6.1; WOW64l rv:25.0) Gecko/20100101 Firefox/25.0', 
 			commentsCount: 0
 		});
-	}  */
+	}
 
 	Notifications.insert({
 		userId: u1._id,
@@ -409,4 +408,4 @@ if (Issues.find().count() === 0) {
 		read: false,
 		timestamp: new Date()
 	})
-}
+}*/

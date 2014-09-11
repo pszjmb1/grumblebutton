@@ -34,18 +34,6 @@ var getAddressing = function(form) {
 	return address.join(" ");
 }
 
-//Function that modifies the labels on fields if the template helper is blank - implemented in template header currently
-/*Template.modifyAccount.rendered = function(){
-	setTimeout(function (){
-		this.$(".formField").each(function() {
-			console.log("Object value: " + this.children[0].value);
-			if($(this).children().first().val() !== ""){
-				$(this).children().addClass("filled");
-			}
-		});
-	}, 2000);
-}*/
-
 Template.modifyAccount.events({
 
 	'submit form' : function(e) {

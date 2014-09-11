@@ -3,11 +3,7 @@
  */
 
 Template.closedIssuePage.helpers({
-/*	currentClosedIssue: function() {
-		return ClosedIssues.findOne(Session.get('currentClosedIssueId'));
-	},*/
 	currentClosedIssue: function() {
-		//alert('returning closed issue' + Issues.findOne(Session.get('currentClosedIssueId')));
 		return Issues.findOne(Session.get('currentClosedIssueId'));
 	},
 	comments: function() {
