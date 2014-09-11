@@ -114,6 +114,23 @@ Template.notifications.events({
 Template.notificationsPage.helpers({
 	NotificationList: function(){
 		return (Notifications.find({userId: Meteor.userId()}, {sort: {timestamp: -1}}));
+	},
+	// Determine if curent list of issues is ready
+	notificationsReady: function() {
+		return !notificationHandle.loading();
+	},
+	// Determine if all issues have been loaded
+	allNotificationsLoaded: function() {
+		return !notificationHandle.loading() &&
+			Notifications.find().count() < notificationHandle.loaded();
+	}
+});
+
+// Handle the load more event
+Template.notificationsPage.events({
+	'click .load-more': function(e) {
+		e.preventDefault();
+		notificationHandle.loadNextPage();
 	}
 });
 

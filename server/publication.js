@@ -5,8 +5,6 @@
 /**
  * Publish pagination limited number of issues
  */
-
-
 Meteor.publish('newOpenIssues', function(limit) {
   if(this.userId)
     return Issues.find({issueClosed: 0}, {sort: {submitted: -1}, limit: limit, fields: {'author':0, 'authorEmailId':0, 'device':0, 'submitted': 0}});
@@ -17,6 +15,13 @@ Meteor.publish('newOpenIssues', function(limit) {
 Meteor.publish('newClosedIssues', function(limit) {
   if(this.userId)
     return Issues.find({issueClosed: 1}, {sort: {submitted: -1}, limit: limit, fields: {'author':0, 'authorEmailId':0, 'device':0, 'submitted': 0}});
+  else
+    this.ready();
+});
+
+Meteor.publish('notifications', function(limit) {
+  if(this.userId)
+    return Notifications.find({userId: this.userId}, {sort: {timestamp: -1}, limit: limit});
   else
     this.ready();
 });
@@ -39,33 +44,12 @@ Meteor.publish('comments', function(issueId) {
     this.ready();
 });
 
-Meteor.publish('notifications', function() {
-  if(this.userId)
-  	return Notifications.find({userId: this.userId});
-  else
-    this.ready();
-});
-
 Meteor.publish('subscribed', function() {
   if(this.userId)
   	return Subscribed.find();
   else
     this.ready()
 });
-
-
-/*Meteor.publish('users', function() {
-    return Meteor.users.find({}, {fields: {notified: 0}});
-}); */
-
-/*
-Meteor.publish(null, function () {
-  	var fields = {
-        notified:0
-      }
-
-  return Meteor.users.find({}, {fields: fields})
-}); */
 
 Meteor.publish("users", function () {
   if (this.userId) {
@@ -75,6 +59,20 @@ Meteor.publish("users", function () {
     this.ready();
   }
 });
+
+/*Meteor.publish('users', function() {
+    return Meteor.users.find({}, {fields: {notified: 0}});
+}); */
+
+/*
+Meteor.publish(null, function () {
+    var fields = {
+        notified:0
+      }
+
+  return Meteor.users.find({}, {fields: fields})
+}); */
+
 
 
 

@@ -15,5 +15,13 @@
 				{{> notification}}
 			</div>
 		{{/each}}
+
+		{{#if notificationsReady}}
+			{{#unless allNotificationsLoaded}}
+				<a class="load-more" href="#">See more notifications</a>
+			{{/unless}}
+		{{else}}
+			<div>{{> spinner}}</div>
+		{{/if}} 
 	</ul>
 </template>
