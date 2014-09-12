@@ -6,7 +6,11 @@
 Template.issue.events({
 	'click #close': function () {
 		// Adding a field to differentiate the closed issue from rest of the issues
-	   	Meteor.call('toggleIssueClosed', this._id, 1);
+	   	Meteor.call('toggleIssueClosed', this._id, 1, function(error) {
+			if(error){
+				throwError(error.reason || "Unknown error closing issue");
+			}
+		});
 	   	var issueUserId = Issues.findOne(this._id).userId;
 		var shortdesc = Issues.findOne(this._id).shortdesc; 
 		var details =  Issues.findOne(this._id).details;
@@ -27,9 +31,18 @@ Template.issue.events({
 		    senderEmail,
 		    userMessage,
 		    id,
-			subjectOfEmail); 
+			subjectOfEmail, 
+			function(error) {
+				if(error){
+					throwError(error.reason || "Unknown error sending email");
+				}
+			}); 
 
-        Meteor.call('createCloseNotification', issueUserId, this._id);
+        Meteor.call('createCloseNotification', issueUserId, this._id, function(error) {
+			if(error){
+				throwError(error.reason || "Unknown error creating notifcation");
+			}
+		});
 
 		// Mail to subscribed users
 		/*if(Issues.findOne(this._id).subscribedUsers)
@@ -90,19 +103,40 @@ Template.issue.events({
         	    	     	senderEmail,
             	  		   	subscribedUserMessage,
 				 			id,
-				    		subjectOfEmail); 
+				    		subjectOfEmail, 
+				    		function(error) {
+								if(error){
+									throwError(error.reason || "Unknown error sending email");
+								}
+							}); 
 
-						Meteor.call('createCloseNotification', person[j], id);
+						Meteor.call('createCloseNotification', person[j], id, function(error) {
+							if(error){
+								throwError(error.reason || "Unknown error creating notifcation");
+							}
+						});
 					}		
 					// Adding an extra field in the Subscribed collection so that inspite of having multiple occurences of a domain in the form, multiple time notification to the users can be prevented
-					Meteor.call('markUnfound', myDoc._id);
+					Meteor.call('markUnfound', myDoc._id, function(error) {
+						if(error){
+							throwError(error.reason || "Unknown error markUnfound");
+						}
+					});
 				}
 			}
 		});
 		listOfDomain.forEach( function(myDoc) 
 		{
-			Meteor.call('markFound', myDoc._id);
+			Meteor.call('markFound', myDoc._id, function(error) {
+				if(error){
+					throwError(error.reason || "Unknown error markFound");
+				}
+			});
 		});
-		Meteor.call('setDefaultValue');
+		Meteor.call('setDefaultValue', function(error) {
+			if(error){
+				throwError(error.reason || "Unknown error resetting values");
+			}
+		});
 	}
 });

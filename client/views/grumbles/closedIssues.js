@@ -46,7 +46,11 @@ Template.closedIssues.events({
 			{
 				issues.forEach(function (myDoc)
 				{
-					Meteor.call('toggleClosedSearch', myDoc._id, 0);
+					Meteor.call('toggleClosedSearch', myDoc._id, 0, function(error) {
+						if(error){
+							throwError(error.reason || "Unknown error resetting search field");
+						}
+					});
 				});
 			}		
 		});
@@ -79,7 +83,11 @@ Template.closedIssues.events({
 					details = myDoc.details || myDoc.shortdesc;
 					if(details.match(regEx) || location.match(regEx))
 					{
-						Meteor.call('toggleClosedSearch', myDoc._id, 1);
+						Meteor.call('toggleClosedSearch', myDoc._id, 1, function(error) {
+							if(error){
+								throwError(error.reason || "Unknown error setting search field");
+							}
+						});
 					}
 				});
 			}

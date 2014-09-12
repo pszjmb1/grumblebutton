@@ -28,7 +28,11 @@ Template.issuePage.events({
 		{
 			comments.forEach(function (myDoc)
 			{
-				Meteor.call('toggleCommentSearch', myDoc._id, 0);
+				Meteor.call('toggleCommentSearch', myDoc._id, 0, function(error) {
+					if(error){
+						throwError(error.reason || "Unknown error resetting search field");
+					}
+				});
 			});
 		}
 				
@@ -56,7 +60,11 @@ Template.issuePage.events({
 					body = myDoc.body;
 					if(body.match(regEx))
 					{
-						Meteor.call('toggleCommentSearch', myDoc._id, 1);
+						Meteor.call('toggleCommentSearch', myDoc._id, 1, function(error) {
+							if(error){
+								throwError(error.reason || "Unknown error setting search field");
+							}
+						});
 					}
 				});
 			}	

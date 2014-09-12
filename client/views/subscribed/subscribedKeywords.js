@@ -12,7 +12,11 @@ Template.subscribedKeywords.events({
 			var subscriptionId = "";
 			if(Subscribed.findOne({category: key})){
 				subscriptionId = Subscribed.findOne({category: key})._id;
-				Meteor.call('addNewSubcriber', subscriptionId, Meteor.userId());
+				Meteor.call('addNewSubcriber', subscriptionId, Meteor.userId(), function(error) {
+					if(error){
+						throwError(error.reason || "Unknown error adding subscriber");
+					}
+				});
 			}
 			else{
 				Meteor.call('createNewSubscription', key, function(error, result) {
@@ -20,7 +24,11 @@ Template.subscribedKeywords.events({
 						throwError(error.reason || "Unknown subscription creation error");
 					} 
 					else{
-						Meteor.call('addNewSubcriber', result, Meteor.userId());
+						Meteor.call('addNewSubcriber', result, Meteor.userId(), function(error) {
+							if(error){
+								throwError(error.reason || "Unknown error adding subscriber");
+							}
+						});
 					}
 				});
 			}

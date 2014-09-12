@@ -15,7 +15,7 @@ Template.commentSubmit.events({
 		};
 		Meteor.call('comment', comment, function(error, commentId) {
 			if (error){
-				throwError(error.reason);
+				throwError(error.reason || "Unknown error creating comment");
 			} else {
 				$body.val('');
 			}

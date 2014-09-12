@@ -86,7 +86,12 @@ Meteor.methods({
 			senderEmail,
 			userMessage,
 			issue,
-			subjectOfEmail);
+			subjectOfEmail, 
+			function(error) {
+				if(error){
+					throwError(error.reason || "Unknown error sending email");
+				}
+			});
 		}
 		
 		/*// Notification to subscribed users of this issue not to the domain related to issue
@@ -176,7 +181,12 @@ Meteor.methods({
 								    senderEmail,
 								    subscribedUserMessage,
 									issue,
-									subjectOfEmail
+									subjectOfEmail, 
+									function(error) {
+										if(error){
+											throwError(error.reason || "Unknown error sending email");
+										}
+									}
 								);
 								Meteor.users.update({_id: person[j]}, {$set : {notified: 1}});
 							}
@@ -190,7 +200,12 @@ Meteor.methods({
 							senderEmail,
 							managerMsg,
 							issue,
-							subjectOfEmail
+							subjectOfEmail, 
+							function(error) {
+								if(error){
+									throwError(error.reason || "Unknown error sending email");
+								}
+							}
 						);
 					}
 				}
@@ -198,7 +213,11 @@ Meteor.methods({
 		});
 					
 		// Unsetting the notified field to be used next time
-		Meteor.call('setDefaultValue');
+		Meteor.call('setDefaultValue', function(error) {
+			if(error){
+				throwError(error.reason || "Unknown error resetting values");
+			}
+		});
 	}
 });
 

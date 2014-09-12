@@ -13,7 +13,11 @@ Template.closedIssue.helpers({
 Template.closedIssue.events({
 	'click #press': function () {
 		// Updating the issueClosed field to 0 while reopening the issue
-		Meteor.call('toggleIssueClosed', this._id, 0);
+		Meteor.call('toggleIssueClosed', this._id, 0, function(error) {
+			if(error){
+				throwError(error.reason || "Unknown error opening issue");
+			}
+		});
 		var issueUserId = Issues.findOne(this._id).userId;
 		var id = this._id;
 		var senderEmail = 'grumblebutton@gmail.com';
@@ -33,9 +37,18 @@ Template.closedIssue.events({
 		    senderEmail,
 		    userMessage,
 		    id,
-		    subjectOfEmail); 
+		    subjectOfEmail, function(error) {
+				if(error){
+					throwError(error.reason || "Unknown error sending email");
+				}
+			}
+		); 
 
-        Meteor.call('createOpenNotification', issueUserId, id);
+        Meteor.call('createOpenNotification', issueUserId, id, function(error) {
+			if(error){
+				throwError(error.reason || "Unknown error creating notification");
+			}
+		});
 
 		// Mail to users who have subscribed to this issue
 		/*if(Issues.findOne(this._id).subscribedUsers)
@@ -53,9 +66,18 @@ Template.closedIssue.events({
 			            senderEmail,
 		    	        subscribedUserMessage,
 			    	    this._id,
-						subjectOfEmail); 
+						subjectOfEmail, function(error) {
+							if(error){
+								throwError(error.reason || "Unknown error sending email");
+							}
+						}
+					); 
 
-					Meteor.call('createOpenNotification', subscribedPerson[i], this._id);
+					Meteor.call('createOpenNotification', subscribedPerson[i], this._id, function(error) {
+						if(error){
+							throwError(error.reason || "Unknown error creating notification");
+						}
+					});
 				}
 			}
 		}*/
@@ -85,20 +107,41 @@ Template.closedIssue.events({
 							senderEmail,
 							subscribedUserMessage,
 							id,
-							subjectOfEmail); 
+							subjectOfEmail, function(error) {
+								if(error){
+									throwError(error.reason || "Unknown error sending email");
+								}
+							}
+						); 
 						
-						Meteor.call('createOpenNotification', person[j], id);
+						Meteor.call('createOpenNotification', person[j], id, function(error) {
+							if(error){
+								throwError(error.reason || "Unknown error creating notification");
+							}
+						});
 					}
 					// Adding an extra field in the Subscribed collection so that inspite of having multiple occurences of a domain in the form, multiple time notification to the users can be prevented
-					Meteor.call('markUnfound', myDoc._id);
+					Meteor.call('markUnfound', myDoc._id, function(error) {
+						if(error){
+							throwError(error.reason || "Unknown error markUnfound");
+						}
+					});
 				}
 			}
 		});			
 		// Making the found field to be 0 for to be use next time
 		listOfDomain.forEach( function(myDoc) 
 		{
-			Meteor.call('markFound', myDoc._id);
+			Meteor.call('markFound', myDoc._id, function(error) {
+				if(error){
+					throwError(error.reason || "Unknown error markFound");
+				}
+			});
 		});
-		Meteor.call('setDefaultValue');
+		Meteor.call('setDefaultValue', function(error) {
+			if(error){
+				throwError(error.reason || "Unknown error resetting values");
+			}
+		});
 	}
 });

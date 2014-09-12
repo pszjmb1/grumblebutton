@@ -18,7 +18,11 @@ Template.subscribedKeyword.events({
 			if($(this).prop('checked'))
 			{
 				// Adding the loggedin user to the collection on checking the checkbox
-				Meteor.call('addNewSubcriber', id, userId);
+				Meteor.call('addNewSubcriber', id, userId, function(error) {
+					if(error){
+						throwError(error.reason || "Unknown error adding new subscriber");
+					}
+				});
 				var msg = "Hello,\n\n"+
 					userName + ' has subscribed to your category.'+'\n'+ "The link for the concerned issue is : http://localhost:15000/subscribedKeywords/";
 
@@ -30,12 +34,20 @@ Template.subscribedKeyword.events({
 					senderEmail,
 					msg,
 					id,
-					subOfSubscribedDomain); 
+					subOfSubscribedDomain, function(error) {
+						if(error){
+							throwError(error.reason || "Unknown error sending email");
+						}
+					}); 
 			} 
 			else {
 				// If user wants to unsubscribe from the domain
 				// Removing the user from domain list
-				Meteor.call('removeSubscriber', id, userId);
+				Meteor.call('removeSubscriber', id, userId, function(error) {
+					if(error){
+						throwError(error.reason || "Unknown error removing subscriber");
+					}
+				});
 				
 				var msg = "Hello "+ managerName +",\n\n"+
 					userName + ' has unsubscribed from your category.'+'\n'+ "The link for the concerned issue is : http://localhost:3000/subscribedKeywords/";
@@ -47,7 +59,11 @@ Template.subscribedKeyword.events({
 					senderEmail,
 					msg,
 					id,
-					subOfUnSubscribedDomain); 
+					subOfUnSubscribedDomain, function(error) {
+						if(error){
+							throwError(error.reason || "Unknown error sending email");
+						}
+					}); 
 			}
 		});
 	}

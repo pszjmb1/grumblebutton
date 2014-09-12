@@ -92,7 +92,12 @@ Template.notification.helpers({
 // Default mark all notifications to be read on clicking the 'mark all' link
 Template.notification.events({
 	'click a': function() {
-		Meteor.call('setReadNotification', this._id);
+		Meteor.call('setReadNotification', this._id, function(error) {
+			if(error)
+			{
+				throwError(error.reason || "Unknown error setting notification to read");
+			}
+		});
 	}
 });
 

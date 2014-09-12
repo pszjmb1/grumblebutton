@@ -49,7 +49,11 @@ Template.issues.events(
 			{
 				issues.forEach(function (myDoc)
 				{
-					Meteor.call('toggleOpenSearch', myDoc._id, 0);
+					Meteor.call('toggleOpenSearch', myDoc._id, 0, function(error) {
+						if(error){
+							throwError(error.reason || "Unknown error toggleSearch");
+						}
+					});
 				});
 			}	
 		});
@@ -80,7 +84,11 @@ Template.issues.events({
 				// Checking in every part of the form where the search keyword can be found
 				if(location.match(regEx) || details.match(regEx))
 				{
-					Meteor.call('toggleOpenSearch', myDoc._id, 1);
+					Meteor.call('toggleOpenSearch', myDoc._id, 1, function(error) {
+						if(error){
+							throwError(error.reason || "Unknown error toggleSearch");
+						}
+					});
 				}
 			});
 		}

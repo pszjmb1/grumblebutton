@@ -12,7 +12,10 @@ Meteor.methods({
 				senderEmail,
 	        	messageToSubscribedUsers,
 				id,
-				subjectOfEmail); 
+				subjectOfEmail,
+				function(error) {
+					if(error) throwError(error.reason || "Unknown error sending mail");
+				}); 
 
 			Notifications.insert({
 				userId: personId, // users id who has posted the issue

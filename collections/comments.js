@@ -38,7 +38,11 @@ Meteor.methods({
 		// create the comment, save the id
 		comment._id = Comments.insert(comment);
 		// now create a notification, informing the user that there's been a comment
-		Meteor.call('createCommentNotification', comment);
+		Meteor.call('createCommentNotification', comment, function(error) {
+			if(error){
+				throwError(error.reason || "Unknown error creating notification");
+			}
+		});
 		return comment._id;
 
 		}

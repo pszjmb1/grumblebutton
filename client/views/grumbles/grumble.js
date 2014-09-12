@@ -20,25 +20,19 @@ Template.report.events({
 		var shortdesc = titleParse(document.querySelector('[name=description]').value);
 		var senderEmail = 'grumblebutton@gmail.com';		
 		var user = Meteor.user();
-
-		// Email Id of user who has posted the issue
-		var issueRaisedUserEmailId = user.emails[0].address;
-	   
 		var subjectOfEmail = "Notification of New Issue";
 		var location = document.querySelector('[name=location]').value;
 		var author = document.querySelector('[name=anonymous]:checked').value;
 		var authorName = Meteor.user().profile.addressing;
-		var i,j, person='', myDocId=0, foundValue=0, domainList='';
-
+		var j, people='';
 		// List of Domains present in the collection Subscribed
 		var listOfDomain = Subscribed.find();
-		var listOfUsers='';
 
 		Meteor.call('grumble', issue, function(error, id)
 		{
 			if (error)
 			{
-				throwError(error.reason); 
+				throwError(error.reason || "Unknown error submitting issue"); 
 			}
 			else
 			{
@@ -52,9 +46,18 @@ Template.report.events({
 			       	senderEmail,
 			       	messageToUser,
 				   	issueId,
-					subjectOfEmail);
+					subjectOfEmail, function(error) {
+						if(error){
+							throwError(error.reason || "Unknown error sending email");
+						}
+					}
+				);
 
-				Meteor.call('createPostNotification', issueId, authorName, author);
+				Meteor.call('createPostNotification', issueId, authorName, author, function(error) {
+					if(error){
+						throwError(error.reason || "Unknown error creating notification");
+					}
+				});
 				
 				listOfDomain.forEach( function(myDoc) 
 				{
@@ -64,11 +67,10 @@ Template.report.events({
 					// Checking whether domain name is present in the details part of the form
 					if(shortdesc || location || details) //|| category)
 					{
-						if(issue.shortdesc.match(regEx) || issue.location.match(regEx) || details.match(regEx) )// || category.match(regEx))
+						if(shortdesc.match(regEx) || location.match(regEx) || details.match(regEx) )
 						{
 							// Users who have subscribed to that domain, from Subscribed collection
  		 					people = myDoc.categorySubscribedUsers;
-						
 							if(people && people.length)
 							{
 								for(j=0;j<people.length;j++)
@@ -76,7 +78,7 @@ Template.report.events({
 									Meteor.call('user', senderEmail, issueId, subjectOfEmail, people[j], shortdesc, authorName, function(error, result)
 									{
 										if(error){
-											throwError(error.reason);
+											throwError(error.reason || "Unknown error informing other users");
 										}
 									});
 								}
@@ -84,7 +86,11 @@ Template.report.events({
 						}
 					}
 				});
-				Meteor.call('setDefaultValue');
+				Meteor.call('setDefaultValue', function(error) {
+					if(error){
+						throwError(error.reason || "Unknown error resetting defaults");
+					}
+				});
 				Router.go('thankyou');									
 			}
 		});
@@ -113,8 +119,9 @@ Template.grumble.helpers({
 		return '' + (hours<=9 ? '0' + hours : hours) + ':' + (min<=9 ? '0' + min : min);
 	},
 	location: function(){
-		if(Meteor.user().profile.site || Meteor.user().profile.department || Meteor.user().profile.ward){
-			var profile = Meteor.user().profile;
+		var user = Meteor.user();
+		var profile = user.profile;
+		if(profile.site || profile.department || profile.ward){
 			var locationString = new Array();
 			if(profile.site)
 				locationString.push(profile.site);
