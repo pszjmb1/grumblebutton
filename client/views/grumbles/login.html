@@ -2,20 +2,15 @@
 	<form>
 		<div class="control-group">
 			<div class="controls">
-				<fieldset class="formField">
-					<input type="email" name="id" id="id" required="true">
-					<label for="id">Email Address</label>
+				<a class="details btn buton" href="{{pathFor 'signup'}}">Create Account</a><br>
+				<fieldset style="">
+  				<legend>Login:</legend>
+					email:<br><input type="email" name="id" id="id" required="true">
+					<br>
+					password:<br><input type="password" name="password" id="password" required="true">	<input type="submit" class="details btn buton" value="Login">
+					<a class="forgot details btn buton">Forgot Password?</a><br>
 				</fieldset>
 			</div>
-			<div class="controls">
-				<fieldset class="formField">
-					<input type="password" name="password" id="password" required="true">
-					<label for="password">Password</label>
-				</fieldset>
-			</div>
-			<input type="submit" class="details btn buton" value="Login"><br>
-			<a class="forgot details btn buton">Forgot Password?</a><br>
-			<a class="details btn buton" href="{{pathFor 'signup'}}">Create Account</a>
 		</div>
 	</form>
 </template>

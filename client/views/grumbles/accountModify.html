@@ -1,14 +1,13 @@
-<template name="modifyAccount">
-	{{> studyInfo}}
+<template name="modifyAccount">	
+	<a href="{{pathFor 'studyInfo'}}">Click here to review study information sheet.</a>
 	<form method="post" name="account" id="account">
 		<div class="main">
-			<h1 class="title">Account Details</h1><br>
-		</div>
-		<div class="leftColumn">
-			{{> account}}
+			<h1>Profile Details</h1><br>
 		</div>
 		<div class="rightColumn">
-			<h2>Profile Information</h2>
+			{{> account}}
+		</div>
+		<div class="leftColumn">
 			<fieldset class="formField">
 				<select name="title" id="title">
 					<option value="">Please choose your preferred title</option>
@@ -42,4 +41,5 @@
 			</fieldset>
 		</div>
 	</form>
+
 </template>

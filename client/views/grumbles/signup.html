@@ -3,16 +3,11 @@
 	<form>
 		<div class="main">
 			<div class="floatLeft">
-				<label for="readInfo">I have read and understood the participation information sheet</label>
+				<input type="checkbox" class="spacing" name="readInfo" id="readInfo" required="true"> <label for="readInfo">I have read and understood the participation information sheet.</label>
 			</div>
-			<div>
-				<input type="checkbox" class="spacing" name="readInfo" id="readInfo" required="true">
-			</div><br>
+			<br>
 			<div class="floatLeft">
-				<label for="consent">I consent to allowing the information that I provide whilst using Sayit. Today to be stored and utilised for the purposes outlined in the information sheet</label>
-			</div>
-			<div>
-				<input type="checkbox" class="spacing" name="consent" id="consent" required="true">
+				<input type="checkbox" class="spacing" name="consent" id="consent" required="true"> <label for="consent">I allow the information that I provide using Sayit.Today to be stored and utilised for the purposes outlined in the information sheet.</label> 
 			</div><br>
 		</div>
 		{{> account}}
