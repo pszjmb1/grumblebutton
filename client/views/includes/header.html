@@ -3,21 +3,21 @@
         <div class="navbar-inner">
             {{#if currentUser}}
             <div class="branding">
-                <a href="{{pathFor 'home'}}"><h2 id="brand2">Sayit.Today</h2></a>
+                <a href="{{pathFor 'home'}}"><!--<h2 id="brand2">Sayit.Today</h2>--><img style="margin-right:10px; padding-top:10px" src="/logo.png" alt="Sayit.Today"></a>
                 <span class="nav pull-right">
                     <a class="logout details btn">Logout</a><br>
                     {{> notifications}}
                     <!-- <li>{{> loginButtons}}</li>   should be {{> }} here in order to display login functionality-->
                 </span>
+                <a class="details btn" href="{{pathFor 'report'}}">New Issue</a>
+                <a class="details btn" href="{{pathFor 'issues'}}">Open Issues</a>
+                <a class="details btn" href="{{pathFor 'closedIssues'}}">Closed Issues</a>
+                <a class="details btn" href="{{pathFor 'notificationsPage'}}">Your Interests</a>
+                <a class="details btn" href="{{pathFor 'modifyAccount'}}">Account</a>
             </div>
-            <a class="details btn" href="{{pathFor 'report'}}">New Issue</a>
-            <a class="details btn" href="{{pathFor 'issues'}}">Open Issues</a>
-            <a class="details btn" href="{{pathFor 'closedIssues'}}">Closed Issues</a>
-            <a class="details btn" href="{{pathFor 'notificationsPage'}}">Your Interests</a>
-            <a class="details btn" href="{{pathFor 'modifyAccount'}}">Account</a>
         {{else}}
             <div class="branding">
-                <a href="{{pathFor 'home'}}"><h2 id="brand2">Sayit.Today</h2></a>
+                <a href="{{pathFor 'home'}}"><!--<h2 id="brand2">Sayit.Today</h2>--><img style="margin-right:10px; padding-top:10px" src="/logo.png" alt="Sayit.Today"></a>
             </div>
         {{/if}}
 
