@@ -7,7 +7,7 @@
 var global='';
 Template.issues.helpers({
 	issues: function() {
-		return  Issues.find({issueClosed:0}, {sort: {submitted: -1}, 
+		return  Issues.find({issueClosed:0}, {sort: {date: -1, time:-1}, 
 			limit: openIssuesHandle.limit()});
 	},
 	// Determine if curent list of issues is ready
@@ -20,7 +20,7 @@ Template.issues.helpers({
 	},
 	// Retrieve the issues that has been searched
 	searchedIssues: function() {
-		return Issues.find({issueClosed:0, issueSearch:1}, {sort: {submitted: -1}});
+		return Issues.find({issueClosed:0, issueSearch:1}, {sort: {date: -1, time:-1}});
 	},
 	// Determine if all issues have been loaded
 	allIssuesLoaded: function() {
