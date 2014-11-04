@@ -21,10 +21,10 @@ Meteor.methods({
 			throw new Meteor.Error(422, 'Please write a comment.');
 		if (!commentAttributes.issueId)
 			throw new Meteor.Error(422, 'Please comment on an issue.');
-		if (!commentAttributes.action)
-			throw new Meteor.Error(422, 'Please add what type of comment this is.');
+		//if (!commentAttributes.action)
+		//	throw new Meteor.Error(422, 'Please add what type of comment this is.');
 
-		comment = _.extend(_.pick(commentAttributes, 'issueId', 'body', 'action'), {
+		comment = _.extend(_.pick(commentAttributes, 'issueId', 'body'),{// 'action'), {
 			userId: user._id,
 			author: (commentAttributes.anonymous ? 'anonymous' : user.profile.addressing),
 			// Field to know which comment user wants to display

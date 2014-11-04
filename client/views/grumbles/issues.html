@@ -8,9 +8,9 @@
 			<fieldset class="formField">
 				<input id="textbox" name="keyword" type="text" value="">
 				<label class="control-label" for="textbox">Search issues by keyword</label>
+				<input id="search" type="submit" value="Search" class="btn btn-primary"/>
 			</fieldset>
 		</div>
-		<input id = "search" type="submit" value="Search" class="btn btn-primary"/>
 	</form>
 	{{#if findSeachedIssues}}
 		{{#each searchedIssues}}
