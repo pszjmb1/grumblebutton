@@ -7,7 +7,7 @@
 		</div>
 		<div class="closedIssue-content">
 			<!-- <input class="check" name="markdone" type="checkbox" {{{done_checkbox}}} /> -->
-        	<h3><a href="{{pathFor 'issuePage' params = this}}">{{shortdesc}}</a>- {{#if notAnon postedUser}}<span>submitted by {{postedUser}}, </span>{{/if}} <span>{{location}}</span>
+        	<h3><a href="{{pathFor 'issuePage' params = this}}">{{shortdesc}}</a>- {{#if notAnon postedUser}}<span>submitted by {{postedUser}}, </span>{{/if}} <span>{{location}}</span><br><span>Submitted {{whenSubmitted}}</span>
         	</h3>
 			<p>
 				<a href="{{pathFor 'closedIssuePage' params = this}}">{{commentsCount}} comments</a>

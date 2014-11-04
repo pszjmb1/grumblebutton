@@ -1,12 +1,19 @@
 /**
  * Template helpers for a closed issue
  */
+//milliseconds to day
+var millisInDay=1000*60*60*24;
 
 Template.closedIssue.helpers({
 	notAnon: function(author){
 		if(author != 'anonymous')
 			return true;
 		else return false
+	},
+	'whenSubmitted': function(){
+		var issueDate = Issues.findOne(this._id).date;
+		var issueTime = Issues.findOne(this._id).time;
+		return getDaysSince(issueDate, issueTime);
 	}
 });
 

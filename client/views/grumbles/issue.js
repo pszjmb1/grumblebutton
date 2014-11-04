@@ -140,3 +140,11 @@ Template.issue.events({
 		});
 	}
 });
+
+Template.issue.helpers({
+	'whenSubmitted': function(){
+		var issueDate = Issues.findOne(this._id).date;
+		var issueTime = Issues.findOne(this._id).time;
+		return getDaysSince(issueDate, issueTime);
+	}
+});

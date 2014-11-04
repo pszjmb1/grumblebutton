@@ -18,6 +18,7 @@ Meteor.methods({
 
 	toggleIssueClosed : function (id, status) {
 		Issues.update(id, {$set: {issueClosed: status}});
+		Issues.update(id, {$set: {lastClosed: new Date().getTime()}});
 	},
 
 	grumble:function(grumbleAttribs) {
