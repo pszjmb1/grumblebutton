@@ -488,7 +488,7 @@ input.floatRight {
 }
 .formField input:focus, .formField input.filled, .formField textarea:focus {
   /*padding: 1.25rem 0.5rem 0.625rem;*/
-  background: rgba(255,255,255,1);
+  /*background: rgba(255,255,255,1);*/
 } 
 .formField input:focus + label, .formField label.filled, .formField textarea:focus + label, .formField select + label{
   color: #000000;
