@@ -6,7 +6,7 @@
 			<a href="{{pathFor 'issuePage' params = this}}" class="details btn" style="margin-right:5px">See Details</a>
 		</div>
 		<div class="issue-content">
-			<h3><a href="{{pathFor 'issuePage' params = this}}">{{shortdesc}}</a>- <span>{{location}}</span><br><span>Submitted {{whenSubmitted}}</span></h3>
+			<h3><a href="{{pathFor 'issuePage' params = this}}">{{shortdesc}}</a>{{#if notAnon postedUser}}&nbsp;<span>submitted by {{postedUser}}, </span>{{/if}}<span>{{location}}</span><br><span>Submitted {{whenSubmitted}}</span></h3>
 			<p>
 				<a href="{{pathFor 'issuePage' params = this}}">{{commentsCount}} comments</a>
 			</p>

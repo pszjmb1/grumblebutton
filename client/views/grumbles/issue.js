@@ -146,5 +146,9 @@ Template.issue.helpers({
 		var issueDate = Issues.findOne(this._id).date;
 		var issueTime = Issues.findOne(this._id).time;
 		return getDaysSince(issueDate, issueTime);
+	},notAnon: function(author){
+		if(author != 'anonymous')
+			return true;
+		else return false
 	}
 });

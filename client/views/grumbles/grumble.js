@@ -40,7 +40,8 @@ Template.report.events({
 				var messageToUser = "Hello "+authorName+",\n\n"+"Your issue - "+shortdesc+" has been posted successfully"+
     				". The link for the concerned issue is :- http://localhost:15000/issues/";
 
-				// Mail to user about confirmation of the issue created by him    									
+				// Mail to user about confirmation of the issue created by him    		
+
 				Meteor.call('sendEmail',
         	   		Meteor.userId(), 
 			       	senderEmail,
@@ -52,7 +53,6 @@ Template.report.events({
 						}
 					}
 				);
-
 				Meteor.call('createPostNotification', issueId, authorName, author, function(error) {
 					if(error){
 						throwError(error.reason || "Unknown error creating notification");

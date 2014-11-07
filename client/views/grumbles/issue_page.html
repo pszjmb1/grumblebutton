@@ -1,11 +1,13 @@
 
 <template name="issuePage">
-<fieldset>
+	{{#with currentIssue}}
+		{{> fullIssue}}
+
+	<fieldset style="width:100%">
 		<form class="main">
 			<table>
 				<tr>
 					<td>
-						<!--<label class="control-label" for="keyword">&nbsp;Add Keyword</label>-->
 						<input id="textbox" name="keyword" type="text" value="" placeholder="Search comments"/>
 					</td>
 					<td>
@@ -20,9 +22,6 @@
 			</table>
 		</form>
 	</fieldset>
-
-	{{#with currentIssue}}
-		{{> fullIssue}}
 
 		<ul class="comments">
 			{{#if findSeachedComments}}

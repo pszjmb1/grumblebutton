@@ -1,9 +1,6 @@
 <template name="notifications">
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-		Notifications
-		{{#if notificationCount}}
-			<span class="badge badge-inverse">{{notificationCount}}</span>
-		{{/if}}
+		{{notificationCount}} notifications.
 		<b class="caret"></b>
 	</a>
 	<ul class="notification dropdown-menu">
@@ -24,32 +21,22 @@
 	<li>
 		{{#if openerName}}
 			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
-			{{displayDate timestamp}}: <strong>{{getUser openerId openerName}}</strong> opened a post related to you
-			</a>
-		{{/if}}
-		{{#if subscribedUserName}}
-			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
-			{{displayDate timestamp}}: <strong>{{getUser subscribedUserId subscribedUserName}}</strong> subscribed to a post related to you
-			</a>
-		{{/if}}
-		{{#if unSubscribedUserName}}
-			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
-			{{displayDate timestamp}}: <strong>{{getUser unSubscribedUserId unSubscribedUserName}}</strong> unsubscribed from a post related to you
+			{{issueShortDesc}} was <b>opened</b> {{displayDate timestamp}}.
 			</a>
 		{{/if}}
 		{{#if postedUserName}}
 			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
-			{{displayDate timestamp}}: <strong>{{getUser postedUserId postedUserName}}</strong> posted a new post
+			{{issueShortDesc}} was <b>reported</b> {{displayDate timestamp}}.
 			</a>
 		{{/if}}			
 		{{#if closerName}}
 			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
-			{{displayDate timestamp}}: <strong>{{getUser closerId closerName}}</strong> closed a post related to you
+			{{issueShortDesc}} was <b>closed</b> {{displayDate timestamp}}.
 			</a>
 		{{/if}}
 		{{#if commenterName}}
 			<a href="{{pathFor 'referIssuePage' _id = this.issueId}}">
-			{{displayDate timestamp}}: <strong>{{getUser commentId commenterName}}</strong> commented on a post related to you
+			{{issueShortDesc}} <b>received a new comment</b> {{displayDate timestamp}}.
 			</a>
 		{{/if}}
 	</li>

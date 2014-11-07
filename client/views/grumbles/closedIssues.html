@@ -1,17 +1,16 @@
 <template name="closedIssues">
-	<div class="main">
-		<h1>Closed Issues</h1>
-	</div>
-	<div class="closedIssues">
-	<form class="main" method="post">
-		<div class="searchBar">
-			<fieldset class="formField">
-				<input id="close_search_textbox" name="keyword" type="text" value="{{keyphrase}}">
-				<label class="control-label" for="close_search_textbox">Search closed issues by keyword</label>
-				<input id = "search" type="submit" value="Search" class="btn btn-primary"/>
-			</fieldset>
-		</div>
-	</form>
+	
+	<table class="main" style="margin-left: 0; width:100%"><tr>
+		<td><h1>Closed Issues</h1></td>
+		<td>
+			<form method="post">
+				<fieldset class="formField">
+					<input id="close_search_textbox" name="keyword" type="text" value="{{keyphrase}}">
+					<label class="control-label" for="close_search_textbox">Search closed issues by keyphrase</label>
+					<input id="search" type="submit" value="Search" class="btn btn-primary"/>
+				</fieldset>
+		</form>
+	</td></tr></table>
 	{{#if findSeachedIssues}}
 		{{#each searchedIssues}}
 			{{> closedIssue}}
@@ -27,7 +26,5 @@
 		{{/unless}}
 		{{else}}
 			<div>{{> spinner}}</div>
-	{{/if}} 	
-		
-	</div>
+	{{/if}} 
 </template>

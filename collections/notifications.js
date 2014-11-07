@@ -27,14 +27,17 @@ Meteor.methods({
 	},
 
 	createPostNotification : function(issueId, authorName, author) {
-		Notifications.insert({
-			userId: Meteor.userId(), // users id who has posted the issue
-			issueId: issueId, // issue id
-			postedUserId: Meteor.userId() ,
-			postedUserName: (author == 'anonymous' ? author : authorName),
-			read: false,
-			timestamp: new Date()
-		});	 
+		if(!Notifications.find({"issueId":issueId})){
+			console.log('here');
+			Notifications.insert({
+				userId: Meteor.userId(), // users id who has posted the issue
+				issueId: issueId, // issue id
+				postedUserId: Meteor.userId() ,
+				postedUserName: (author == 'anonymous' ? author : authorName),
+				read: false,
+				timestamp: new Date()
+			});	 
+		}
 	},
 
 	createCloseNotification : function(userId, issueId) {

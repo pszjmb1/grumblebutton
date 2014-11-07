@@ -3,14 +3,14 @@ Meteor.methods({
 		var myUsers = Meteor.users.findOne({_id: personId});
 		if(!myUsers.notified)
 		{
-			var messageToSubscribedUsers = "Hello "+myUsers.profile.addressing+",\n\n"+ "The new issue has been raised - " +shortdesc+
-				". The link for the concerned issue is :- http://localhost:15000/issues/";
+			var messageToSubscribedUsers = "Hello "+myUsers.profile.addressing+",\n\n"+ "A new Sayit.Today issue has been raised: " +shortdesc+
+				". \n\nRead more here: http://localhost:15000/issues/.";
 
 			// Notification to all subscribed Users
 			Meteor.call('sendEmail',
-        		personId,
+        personId,
 				senderEmail,
-	        	messageToSubscribedUsers,
+	      messageToSubscribedUsers,
 				id,
 				subjectOfEmail,
 				function(error) {

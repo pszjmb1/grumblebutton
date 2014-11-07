@@ -49,43 +49,46 @@ Template.notification.helpers({
 						else
 							minuteDiff = Math.floor((((currentDate.getMinutes() * 60) + currentDate.getSeconds()) - ((date.getMinutes() * 60) + date.getSeconds())) / 60);
 						if(minuteDiff < 1){
-							dateString = "Just now";
+							dateString = "just now";
 						}
 						else if(minuteDiff == 1){	
-							dateString = "About 1 minute ago";
+							dateString = "about 1 minute ago";
 						}
 						else{
-							dateString = "About " + minuteDiff + " minutes ago";
+							dateString = "about " + minuteDiff + " minutes ago";
 						}
 					}
 					else if(hourDiff == 1){
-						dateString = "About 1 hour ago";
+						dateString = "about 1 hour ago";
 					}
 					else{
-						dateString = "About " + hourDiff + " hours ago";
+						dateString = "about " + hourDiff + " hours ago";
 					}
 				}
 				else if(dayDiff == 1){
-					dateString = "About 1 day ago";
+					dateString = "about 1 day ago";
 				}
 				else{
-					dateString = "About " + dayDiff + " days ago";
+					dateString = "about " + dayDiff + " days ago";
 				}
 			}
 			else if(monthDiff == 1){
-				dateString = "About 1 month ago";
+				dateString = "about 1 month ago";
 			}
 			else{
-				dateString = "About " + monthDiff + " months ago";
+				dateString = "about " + monthDiff + " months ago";
 			}
 		}
 		else if(yearDiff == 1){
-			dateString = "About 1 year ago";
+			dateString = "about 1 year ago";
 		}
 		else{
-			dateString = "About " + yearDiff + " year(s) ago";
+			dateString = "about " + yearDiff + " year(s) ago";
 		}
 		return dateString;
+	},
+	issueShortDesc: function(){
+		return Issues.findOne(this.issueId).shortdesc
 	}
 });
 

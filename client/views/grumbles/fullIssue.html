@@ -5,23 +5,15 @@
 			<h3>
 				{{shortdesc}} &#09; {{#if notAnon postedUser}}<span>submitted by {{postedUser}}, </span>{{/if}}
 			</h3>
-			<div class="leftColumn">
-				<p>
-					<strong>Time Reported:</strong> &#09; {{date}}, {{time}}<br><br> 
-					<strong>Location:</strong> &#09; {{location}}<br><br>
-					{{#if ongoing}}<strong>Ongoing Issue</strong><br><br>{{/if}}
-				</p>
-			</div>
-			<div>
-				<h4>Details</h4>
-				<p class="issueDet">{{details}}</p>
-				<br>
-				{{#if issueClosed}}
-					<input type="button" class="btn buton" id="reopen" value="Reopen Issue">
-				{{else}}
-					<input type="button" class="btn buton" id="close" value="Close Issue">
-				{{/if}}
-			</div>
+			<p>
+					<strong>Time Reported:</strong> {{date}}, {{time}} {{#if ongoing}}&nbsp;(ongoing issue){{/if}}&nbsp;<strong>Location:</strong> {{location}}
+			</p>
+			<p><strong>Details: </strong>{{details}}</p>
+			{{#if issueClosed}}
+				<input type="button" class="btn buton" id="reopen" value="Reopen Issue" style="float: right;">
+			{{else}}
+					<input type="button" class="btn buton" id="close" value="Close Issue" style="float: right; padding:1%">
+			{{/if}}
 		</div>
 	</div>
 	<h4>
