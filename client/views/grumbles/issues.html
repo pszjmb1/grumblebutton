@@ -1,17 +1,17 @@
 <template name="issues">
-	<div class="main">
-		<h1>Current Issues</h1>
-	</div>
+	<table class="main" style="margin-left: 0; width:100%"><tr>
+		<td><h1>Current Issues</h1></td>
+		<td>
+			<form method="post">
+				<fieldset class="formField">
+					<input id="search_textbox" name="keyword" type="text" value="{{keyphrase}}">
+					<label class="control-label" for="search_textbox">Search issues by keyphrase</label>
+					<input id="search" type="submit" value="Search" class="btn btn-primary"/>
+				</fieldset>
+		</form>
+	</td></tr></table>
 	<div class="issues">
-	<form class="main" method="post">
-		<div class="searchBar">
-			<fieldset class="formField">
-				<input id="search_textbox" name="keyword" type="text" value="{{keyphrase}}">
-				<label class="control-label" for="search_textbox">Search issues by keyword</label>
-				<input id="search" type="submit" value="Search" class="btn btn-primary"/>
-			</fieldset>
-		</div>
-	</form>
+	
 	{{#if findSeachedIssues}}
 		{{#each searchedIssues}}
 			{{> issue}}

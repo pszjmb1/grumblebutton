@@ -400,9 +400,9 @@ input[type='checkbox'], input[type='radio'] {
   margin: 0.25rem;
 }
 
-.control-group{
+/*.control-group{
   margin: 0.625rem;
-}
+}*/
 
 .fullIssue-content{
   float: left;

@@ -1,22 +1,20 @@
 <template name="grumble">
     <div class="control-group">
         <div class="controls">
-            <div class="floatLeft">
-                <h3>Please choose whether to submit the issue anonymously or not</h3>
-                <p>You have the option of submitting this report anonymously. Whilst using this option means that your personal information will not be visible on the site itself, it will be stored in the database for administrative purposes.</p>
-            </div>
-            <div>
-                <input type="radio" class="spacing" name="anonymous" id="anonymous" value="anonymous" required>
-                <label for="anonymous" style="padding-bottom:5px">Anonymous</label><br >
+            <fieldset>
+                <legend>Issue identification</legend>
+                <p>When the issue is displayed, you may show or hide to others that your username is associated with the issue. Please note that choosing to hide your identity still associates your username with the report for administrative purposes and will allow you to be notified of any changes to the issue.</p>
                 <input type="radio" class="spacing" name="anonymous" id="identify" value="identifiable" required>
-                <label for="identify">Identifiable</label>
-            </div>
+                <label for="identify">Show your identity</label>
+                <br>
+                <input type="radio" class="spacing" name="anonymous" id="anonymous" value="anonymous" required>
+                <label for="anonymous" style="padding-bottom:5px">Hide your identity</label>
+            </fieldset>
         </div>
     </div>
     <fieldset>
+        <legend>Date, Time, and Location of Issue</legend>
         <div class="control-group" id="datetime">
-            <h3>Please indicate whether the issue is ongoing or current</h3> 
-            <p>An example of an ongoing issue is that the coffee keeps running out in the break room, and an example current issue is that the coffee machine is broken. If ongoing, leave the data and time as is - otherwise enter the date/time the issue was discovered.</p>
             <div class="controls">
                 <fieldset class="formField">
                     <input name="date" id="date" type="date" value="{{date}}">
@@ -31,34 +29,24 @@
             </div>
             <div class="controls">
                 <div class="floatLeft">
-                    <label for="ongoing">Ongoing issue?</label>
+                    <label for="ongoing">&nbsp;Is this an ongoing issue?</label>
                     <input type="checkbox" class="spacing" name="ongoing" id="ongoing">
                 </div>
             </div>
+            <br>
         </div>
-    </fieldset>
-    <div class="control-group">
         <div class="controls">
             <fieldset class="formField">
                 <input name="location" id="location" class="location" type="text" value="{{location}}">
                 <label class="control-label" for="location" data-blur="Location" data-focus="Location - Please enter the unit, department and room">Location</label>
             </fieldset>
         </div>
-        <!-- <label class="control-label" for="location">Location</label>
-        <div class="controls">
-            <label for="unit">Unit</label>
-            <input name="unit" type="text" value="{{unit}}" class="location">
-        </div>
-        <div class="controls">
-            <label for="department">Department/Ward</label>
-            <input name="department" type="text" value="{{department}}" class="location">
-        </div> -->
-    </div>
+    </fieldset>
     <div class="control-group">
         <div class="controls">
             <fieldset class="formField">
-                <textarea class="issueDet" name="description" id="description" value=""></textarea>   
-                <label class="control-label" for="description">Please describe the issue</label>
+                <legend>Issue Description</legend>
+                <textarea class="issueDet" name="description" id="description" rows="4" cols="50"></textarea>  
             </fieldset>
         </div>
     </div>
