@@ -8,9 +8,9 @@
 			<fieldset class="formField">
 				<input id="close_search_textbox" name="keyword" type="text" value="{{keyphrase}}">
 				<label class="control-label" for="close_search_textbox">Search closed issues by keyword</label>
+				<input id = "search" type="submit" value="Search" class="btn btn-primary"/>
 			</fieldset>
 		</div>
-		<input id = "search" type="submit" value="Search" class="btn btn-primary"/>
 	</form>
 	{{#if findSeachedIssues}}
 		{{#each searchedIssues}}

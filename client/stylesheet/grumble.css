@@ -403,10 +403,7 @@ input[type='checkbox'], input[type='radio'] {
 .control-group{
   margin: 0.625rem;
 }
-.btn-primary{
-  padding: 0.25rem;
-  margin: 0.25rem;
-}
+
 .fullIssue-content{
   float: left;
   width: 90%; 
@@ -517,4 +514,9 @@ input.floatRight {
 .searchBar {
   width: 85%;
   display: inline-block;
+}
+
+#search, #keyword_submit, .btn-primary {
+  padding: 1.25rem;
+  margin-top: -0.125em;
 }
