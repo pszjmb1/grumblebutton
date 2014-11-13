@@ -11,7 +11,7 @@ Template.issue.events({
 				throwError(error.reason || "Unknown error closing issue");
 			}
 		});
-	   	var issueUserId = Issues.findOne(this._id).userId;
+	  var issueUserId = Issues.findOne(this._id).userId;
 		var shortdesc = Issues.findOne(this._id).shortdesc; 
 		var details =  Issues.findOne(this._id).details;
 		var shortdesc = shortdesc;

@@ -517,6 +517,6 @@ input.floatRight {
 }
 
 #search, #keyword_submit, .btn-primary {
-  padding: 1.25rem;
-  margin-top: -0.125em;
+  padding: 1.5rem;
+  margin-top: -0.5rem;
 }

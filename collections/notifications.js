@@ -28,7 +28,6 @@ Meteor.methods({
 
 	createPostNotification : function(issueId, authorName, author) {
 		if(!Notifications.find({"issueId":issueId})){
-			console.log('here');
 			Notifications.insert({
 				userId: Meteor.userId(), // users id who has posted the issue
 				issueId: issueId, // issue id

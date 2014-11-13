@@ -88,7 +88,9 @@ Template.notification.helpers({
 		return dateString;
 	},
 	issueShortDesc: function(){
-		return Issues.findOne(this.issueId).shortdesc
+		if(Issues.findOne(this.issueId)){
+			return Issues.findOne(this.issueId).shortdesc
+		}
 	}
 });
 
