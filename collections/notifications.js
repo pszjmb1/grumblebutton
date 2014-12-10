@@ -69,30 +69,16 @@ Meteor.methods({
 		var issue = Issues.findOne(comment.issueId);
 		var senderEmail = 'grumblebutton@gmail.com';
 		var subjectOfEmail = 'Notification about comment';
-		var userMessage = "Hello "+ issue.postedUser +",\n\n"+
-			comment.author + ' has commented on your issue having issueId:- ';
-	    var flag =0;
 	    
 	    // Notification and Mail to user who has posted the issue
 		if (comment.userId !== issue.userId) {
 			Notifications.insert({
-			userId: issue.userId,
-			issueId: comment.issueId,
-			commentId: comment.userId,
-			commenterName: comment.author,
-			read: false,
-			timestamp: new Date()
-		});
-		Meteor.call('sendEmail',
-			issue.userId,
-			senderEmail,
-			userMessage,
-			issue,
-			subjectOfEmail, 
-			function(error) {
-				if(error){
-					throwError(error.reason || "Unknown error sending email");
-				}
+				userId: issue.userId,
+				issueId: comment.issueId,
+				commentId: comment.userId,
+				commenterName: comment.author,
+				read: false,
+				timestamp: new Date()
 			});
 		}		
 		
