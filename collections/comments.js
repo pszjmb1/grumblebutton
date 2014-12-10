@@ -40,7 +40,8 @@ Meteor.methods({
 		// now create a notification, informing the user that there's been a comment
 		Meteor.call('createCommentNotification', comment, function(error) {
 			if(error){
-				throwError(error.reason || "Unknown error creating notification");
+				//console.log(error);
+				throwError(error.reason || error.message || "Unknown error creating notification");
 			}
 		});
 		return comment._id;

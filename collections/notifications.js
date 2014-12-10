@@ -9,7 +9,7 @@ Meteor.methods({
 		if(Meteor.isServer)
 		{
 			var user = Meteor.users.findOne({_id : userId});
-			if(!user.notified)
+			if(user && !user.notified)
 			{
 				Notifications.insert({
 					userId: userId, // users id who has posted the issue
@@ -43,7 +43,7 @@ Meteor.methods({
 		if(Meteor.isServer)
 		{
 			var user = Meteor.users.findOne(userId);
-			if(!user.notified)
+			if(user && !user.notified)
 			{
 				Notifications.insert({
 					userId: userId, // users id who has posted the issue
@@ -163,7 +163,7 @@ Meteor.methods({
 						for(j=0;j<person.length;j++)
 						{
 							var user = Meteor.users.findOne({_id: person[j]});
-							if(!user.notified)
+							if(user && !user.notified)
 							{
 								var subscribedUserMessage = "Hello,\n\n"+
 									comment.author + ' has commented on your subscribed issue having issueId:- ';
