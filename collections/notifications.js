@@ -94,42 +94,11 @@ Meteor.methods({
 					throwError(error.reason || "Unknown error sending email");
 				}
 			});
-		}
+		}		
 		
-		/*// Notification to subscribed users of this issue not to the domain related to issue
-		var subUsers = issue.subscribedUsers;
-		if(subUsers)
-		{		
-			var i;
-			for(i=0;i<subUsers.length;i++)
-			{
-				if(comment.userId !== subUsers[i])
-				{
-					Notifications.insert({
-					userId: subUsers[i],
-					issueId: comment.issueId,
-					commentId: comment.userId,
-					commenterName: comment.author,
-					read: false,
-					timestamp: new Date()
-					});
-
-					var subscribedUserMessage = "Hello,\n\n"+
-	    				comment.author + ' has commented on your subscribed issue having issueId:- ';
-
-					Meteor.call('sendEmail',
-		        	   	subUsers[i],
-					    senderEmail,
-					    subscribedUserMessage,
-						issue,
-						subjectOfEmail)
-				}
-			}
-		}*/
-
 		var senderEmail = 'grumblebutton@gmail.com';
-	    var userId = Meteor.userId();
-	    var userName = Meteor.user().profile.addressing;
+	  var userId = Meteor.userId();
+	  var userName = Meteor.user().profile.addressing;
 		var subjectOfEmail = 'Notification of comment on Issue';
 		var listOfDomain = Subscribed.find();
 		var details = issue.details;
@@ -165,9 +134,6 @@ Meteor.methods({
 							var user = Meteor.users.findOne({_id: person[j]});
 							if(user && !user.notified)
 							{
-								var subscribedUserMessage = "Hello,\n\n"+
-									comment.author + ' has commented on your subscribed issue having issueId:- ';
-
 								// Notification to user who has subscribed this issue domain
 								Notifications.insert({
 									userId: person[j],
@@ -178,18 +144,7 @@ Meteor.methods({
 									timestamp: new Date()
 								});
 
-								Meteor.call('sendEmail',
-					           		person[j],
-								    senderEmail,
-								    subscribedUserMessage,
-									issue,
-									subjectOfEmail, 
-									function(error) {
-										if(error){
-											throwError(error.reason || "Unknown error sending email");
-										}
-									}
-								);
+								
 								Meteor.users.update({_id: person[j]}, {$set : {notified: 1}});
 							}
 						}

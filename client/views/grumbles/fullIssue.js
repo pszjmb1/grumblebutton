@@ -385,31 +385,6 @@ var notifySubscribed = function(type, issueId){
 	var subjectOfEmail = "Opening of Issue";
 	var person='', regEx='';
 
-    // Mail to user who has posted the issue regarding it's opening
-	var userMessage = "";
-	if(type =="open") {
-		userMessage = "Hello,\n\n"+   
-			". The following issue has been opened - "+shortdesc +".\n\n"+
-			"The link for the concerned issue is :- http://localhost:15000/issues/";
-	} else {
-		userMessage = "Hello,\n\n"+   
-			". The following issue has been closed - "+shortdesc +".\n\n"+
-			"The link for the concerned issue is :- http://localhost:15000/closedIssues/";
-	}
-       
-	Meteor.call('sendEmail',
-		issueUserId,
-	    senderEmail,
-	    userMessage,
-	    id,
-	    subjectOfEmail, 
-	    function(error) {
-			if(error){
-				throwError(error.reason || "Unknown error sending email");
-			}
-		}
-	); 
-
 	if (type == "open"){ 
 		Meteor.call('createOpenNotification', issueUserId, id, function(error) {
 			if(error){
@@ -425,27 +400,7 @@ var notifySubscribed = function(type, issueId){
 		});
 	}
 
-	// Mail to users who have subscribed to this issue
-	/*if(Issues.findOne(this._id).subscribedUsers)
-	{
-		var subscribedPerson = Issues.findOne(this._id).subscribedUsers;
-		if(subscribedPerson && subscribedPerson.length)
-		{
-			for(i=0;i<subscribedPerson.length;i++)
-			{
-				var subscribedUserMessage = "Hello "+subscribedPerson[i].profile.addressing+",\n\n"+
-					". The following issue has been opened - "+shortdesc +".\n\n"+
-					"The link for the concerned issue is :- http://localhost:15000/closedIssues/";
-				Meteor.call('sendEmail',
-       	    	   	subscribedPerson[i],
-		            senderEmail,
-	    	        subscribedUserMessage,
-		    	    this._id,
-					subjectOfEmail); 
-					Meteor.call('createOpenNotification', subscribedPerson[i], this._id);
-			}
-		}
-	}*/
+	
 	// Mail to user who has subscribed to domain but not to this issue
 	var listOfDomain = Subscribed.find();
 	listOfDomain.forEach( function(myDoc) 
@@ -461,20 +416,6 @@ var notifySubscribed = function(type, issueId){
 			{
 				for(j=0;j<person.length;j++)
 				{
-					// Notification to all subscribed Users of that domain
-					Meteor.call('sendEmail',
-						person[j],
-						senderEmail,
-						userMessage,
-						id,
-						subjectOfEmail, 
-						function(error) {
-							if(error){
-								throwError(error.reason || "Unknown error sending email");
-							}
-						}
-					); 
-						
 					if(type == "open")
 						Meteor.call('createOpenNotification', person[j], id, function(error) {
 							if(error){
