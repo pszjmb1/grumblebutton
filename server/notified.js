@@ -2,7 +2,7 @@ Meteor.methods({
 	user: function(senderEmail, id, subjectOfEmail, personId, shortdesc, author) {
 		var myUsers = Meteor.users.findOne({_id: personId});
 		if(!myUsers.notified)
-		{
+		{/*
 			var messageToSubscribedUsers = "Hello "+myUsers.profile.addressing+",\n\n"+ "A new Sayit.Today issue has been raised: " +shortdesc+
 				". \n\nRead more here: http://localhost:15000/issues/.";
 
@@ -15,7 +15,7 @@ Meteor.methods({
 				subjectOfEmail,
 				function(error) {
 					if(error) throwError(error.reason || "Unknown error sending mail");
-				}); 
+				}); */
 
 			Notifications.insert({
 				userId: personId, // users id who has posted the issue
